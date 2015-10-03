@@ -1,0 +1,36 @@
+{
+    "name": "woohoolabs/yang",
+    "description": "Woohoo Labs. Yang",
+    "type": "library",
+    "keywords": ["Woohoo Labs.", "Yang", "HATEOAS", "JSON API", "PSR-7"],
+    "homepage": "http://yang.woohoolabs.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":"Máté Kocsis",
+            "email":"kocsismate@woohoolabs.com"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/woohoolabs/yang/issues",
+        "source": "https://github.com/woohoolabs/yang"
+    },
+    "require": {
+        "php":">=5.5.0",
+        "guzzlehttp/guzzle": "^6.0.0"
+    },
+    "require-dev": {
+        "phpunit/PHPUnit": "^4.4.0",
+        "squizlabs/php_codesniffer": "^2.3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "WoohooLabs\\Yang\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WoohooLabsTest\\Yang\\": "tests/"
+        }
+    }
+}
