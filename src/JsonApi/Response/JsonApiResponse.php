@@ -1,8 +1,9 @@
 <?php
-namespace WoohooLabs\Yang\JsonApi;
+namespace WoohooLabs\Yang\JsonApi\Response;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
+use WoohooLabs\Yang\JsonApi\Schema\Document;
 
 class JsonApiResponse implements ResponseInterface
 {
@@ -12,7 +13,7 @@ class JsonApiResponse implements ResponseInterface
     protected $response;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Document
+     * @var \WoohooLabs\Yang\JsonApi\Schema\Document
      */
     protected $document;
 
@@ -25,7 +26,7 @@ class JsonApiResponse implements ResponseInterface
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Document
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Document
      */
     public function getDocument()
     {

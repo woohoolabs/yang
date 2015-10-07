@@ -1,5 +1,5 @@
 <?php
-namespace WoohooLabs\Yang\JsonApi;
+namespace WoohooLabs\Yang\JsonApi\Schema;
 
 class Document
 {
