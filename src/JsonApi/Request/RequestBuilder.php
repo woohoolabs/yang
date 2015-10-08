@@ -28,6 +28,11 @@ class RequestBuilder
     /**
      * @var string
      */
+    protected $port;
+
+    /**
+     * @var string
+     */
     protected $path;
 
     /**
@@ -103,6 +108,41 @@ class RequestBuilder
     }
 
     /**
+     * @param string $uri
+     * @return $this
+     */
+    public function uri($uri)
+    {
+        $parsedUrl = parse_url($uri);
+
+        if ($parsedUrl === false) {
+            return $this;
+        }
+
+        if (empty($parsedUrl["scheme"]) === false) {
+            $this->scheme = $parsedUrl["scheme"];
+        }
+
+        if (empty($parsedUrl["port"]) === false) {
+            $this->port = $parsedUrl["port"];
+        }
+
+        if (empty($parsedUrl["host"]) === false) {
+            $this->host = $parsedUrl["host"];
+        }
+
+        if (empty($parsedUrl["path"]) === false) {
+            $this->path = $parsedUrl["path"];
+        }
+
+        if (empty($parsedUrl["query"]) === false) {
+            parse_str($parsedUrl["query"], $this->queryString);
+        }
+
+        return $this;
+    }
+
+    /**
      * @return $this
      */
     public function http()
@@ -145,6 +185,17 @@ class RequestBuilder
     }
 
     /**
+     * @param string $port
+     * @return $this
+     */
+    public function port($port)
+    {
+        $this->port = $port;
+
+        return $this;
+    }
+
+    /**
      * @param string $path
      * @return $this
      */
@@ -156,7 +207,7 @@ class RequestBuilder
     }
 
     /**
-     * @param array|string $fields
+     * @param array $fields
      * @return $this
      */
     public function fields(array $fields)
@@ -178,10 +229,10 @@ class RequestBuilder
     }
 
     /**
-     * @param array|string $paginate
+     * @param array $paginate
      * @return $this
      */
-    public function page($paginate)
+    public function page(array $paginate)
     {
         $this->setQueryParam("page", $paginate);
 
@@ -192,7 +243,7 @@ class RequestBuilder
      * @param array|string $filter
      * @return $this
      */
-    public function filter($filter)
+    public function filter(array $filter)
     {
         $this->setQueryParam("filter", $filter);
 

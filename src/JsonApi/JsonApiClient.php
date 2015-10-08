@@ -2,6 +2,8 @@
 namespace WoohooLabs\Yang\JsonApi;
 
 use GuzzleHttp\Client;
+use Psr\Http\Message\RequestInterface;
+use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
 
 class JsonApiClient
 {
@@ -13,5 +15,14 @@ class JsonApiClient
     public function __construct()
     {
         $this->client = new Client();
+    }
+
+    /**
+     * @param \Psr\Http\Message\RequestInterface $request
+     * @return \WoohooLabs\Yang\JsonApi\Response\JsonApiResponse
+     */
+    public function request(RequestInterface $request)
+    {
+        return new JsonApiResponse($this->client->send($request));
     }
 }

@@ -30,6 +30,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "WoohooLabsExamples\\Yang\\": "examples/",
             "WoohooLabsTest\\Yang\\": "tests/"
         }
     }

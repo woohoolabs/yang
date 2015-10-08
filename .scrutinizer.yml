@@ -16,10 +16,12 @@ tools:
     php_loc:
         enabled: true
         excluded_dirs:
+            - examples
             - tests
             - vendor
     php_cpd:
         enabled: true
         excluded_dirs:
+            - examples
             - tests
             - vendor
