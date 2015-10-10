@@ -2,15 +2,15 @@
 require "../vendor/autoload.php";
 
 use GuzzleHttp\Psr7\Request;
-use WoohooLabs\Yang\JsonApi\Request\RequestBuilder;
+use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder;
 use WoohooLabs\Yang\JsonApi\JsonApiClient;
 
-$requestBuilder = new RequestBuilder(new Request("", ""));
+$requestBuilder = new JsonApiRequestBuilder(new Request("", ""));
 $request = $requestBuilder
     ->fetch()
     ->uri("http://yin.local/index.php?example=book&id=1")
-    ->fields(["book" => "title,pages"])
-    ->includes(["authors", "publisher"])
+    ->withFields(["book" => "title,pages"])
+    ->withIncludes(["authors", "publisher"])
     ->getRequest();
 
 $client = new JsonApiClient();

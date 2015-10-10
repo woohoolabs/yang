@@ -3,7 +3,7 @@ namespace WoohooLabs\Yang\JsonApi\Request;
 
 use Psr\Http\Message\RequestInterface;
 
-class RequestBuilder
+class JsonApiRequestBuilder
 {
     /**
      * @var \Psr\Http\Message\RequestInterface
@@ -14,6 +14,11 @@ class RequestBuilder
      * @var string
      */
     protected $method;
+
+    /**
+     * @var string
+     */
+    protected $protocolVersion;
 
     /**
      * @var string
@@ -41,6 +46,16 @@ class RequestBuilder
     protected $queryString;
 
     /**
+     * @var array
+     */
+    protected $headers;
+
+    /**
+     * @var string
+     */
+    protected $body;
+
+    /**
      * @param \Psr\Http\Message\RequestInterface $request
      */
     public function __construct(RequestInterface $request)
@@ -52,10 +67,12 @@ class RequestBuilder
     public function initialize()
     {
         $this->method = "GET";
+        $this->protocolVersion = "";
         $this->scheme = "http";
         $this->host = "";
         $this->path = "";
         $this->queryString = [];
+        $this->headers = [];
     }
 
     /**
@@ -63,9 +80,7 @@ class RequestBuilder
      */
     public function fetch()
     {
-        $this->method = "GET";
-
-        return $this;
+        return $this->method("GET");
     }
 
     /**
@@ -73,7 +88,7 @@ class RequestBuilder
      */
     public function create()
     {
-        $this->method = "POST";
+        return $this->method("POST");
     }
 
     /**
@@ -81,9 +96,7 @@ class RequestBuilder
      */
     public function update()
     {
-        $this->method = "PATCH";
-
-        return $this;
+        return $this->method("UPDATE");
     }
 
     /**
@@ -91,9 +104,7 @@ class RequestBuilder
      */
     public function delete()
     {
-        $this->method = "DELETE";
-
-        return $this;
+        return $this->method("DELETE");
     }
 
     /**
@@ -105,6 +116,33 @@ class RequestBuilder
         $this->method = $method;
 
         return $this;
+    }
+
+    /**
+     * @param string $version
+     * @return $this
+     */
+    public function protocolVersion($version)
+    {
+        $this->protocolVersion = $version;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function http()
+    {
+        return $this->uriScheme("http");
+    }
+
+    /**
+     * @return $this
+     */
+    public function https()
+    {
+        return $this->uriScheme("https");
     }
 
     /**
@@ -143,30 +181,10 @@ class RequestBuilder
     }
 
     /**
-     * @return $this
-     */
-    public function http()
-    {
-        $this->scheme = "http";
-
-        return $this;
-    }
-
-    /**
-     * @return $this
-     */
-    public function https()
-    {
-        $this->scheme = "https";
-
-        return $this;
-    }
-
-    /**
      * @param string $scheme
      * @return $this
      */
-    public function scheme($scheme)
+    public function uriScheme($scheme)
     {
         $this->scheme = $scheme;
 
@@ -177,7 +195,7 @@ class RequestBuilder
      * @param string $host
      * @return $this
      */
-    public function host($host)
+    public function uriHost($host)
     {
         $this->host = $host;
 
@@ -188,7 +206,7 @@ class RequestBuilder
      * @param string $port
      * @return $this
      */
-    public function port($port)
+    public function uriPort($port)
     {
         $this->port = $port;
 
@@ -199,9 +217,33 @@ class RequestBuilder
      * @param string $path
      * @return $this
      */
-    public function path($path)
+    public function uriPath($path)
     {
         $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     * @param string|array $value
+     * @return $this
+     */
+    public function uriQueryParam($name, $value)
+    {
+        $this->queryString[$name] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     * @param string|string[] $value
+     * @return $this
+     */
+    public function withHeader($name, $value)
+    {
+        $this->headers[$name] = $value;
 
         return $this;
     }
@@ -210,7 +252,7 @@ class RequestBuilder
      * @param array $fields
      * @return $this
      */
-    public function fields(array $fields)
+    public function withFields(array $fields)
     {
         $this->setQueryParam("fields", $fields);
 
@@ -221,7 +263,7 @@ class RequestBuilder
      * @param array|string $fields
      * @return $this
      */
-    public function sort($fields)
+    public function withSort($fields)
     {
         $this->setQueryParam("sort", $fields);
 
@@ -232,7 +274,7 @@ class RequestBuilder
      * @param array $paginate
      * @return $this
      */
-    public function page(array $paginate)
+    public function withPage(array $paginate)
     {
         $this->setQueryParam("page", $paginate);
 
@@ -243,7 +285,7 @@ class RequestBuilder
      * @param array|string $filter
      * @return $this
      */
-    public function filter(array $filter)
+    public function withFilter(array $filter)
     {
         $this->setQueryParam("filter", $filter);
 
@@ -254,7 +296,7 @@ class RequestBuilder
      * @param array|string $includes
      * @return $this
      */
-    public function includes($includes)
+    public function withIncludes($includes)
     {
         if (is_array($includes)) {
             $this->queryString["includes"] = implode(",", $includes);
@@ -266,17 +308,37 @@ class RequestBuilder
     }
 
     /**
+     * @param array|object|string $body
+     * @return $this
+     */
+    public function withBody($body)
+    {
+        if (is_string($body)) {
+            $this->body = $body;
+        } elseif (is_array($body) || is_object($body)) {
+            $this->body = json_encode($body);
+        }
+
+        return $this;
+    }
+
+    /**
      * @return \Psr\Http\Message\RequestInterface
      */
     public function getRequest()
     {
         $request = $this->request->withMethod($this->method);
+        $request = $request->withProtocolVersion($this->protocolVersion);
         $request = $request->withUri($request->getUri()->withScheme($this->scheme));
         $request = $request->withUri($request->getUri()->withHost($this->host));
         $request = $request->withUri($request->getUri()->withPath($this->path));
         $request = $request->withUri($request->getUri()->withQuery($this->getQueryString()));
-        $request = $request->withHeader("Content-Type", "application/vnd.api+json");
         $request = $request->withHeader("Accept", "application/vnd.api+json");
+        $request = $request->withHeader("Content-Type", "application/vnd.api+json");
+        foreach ($this->headers as $name => $value) {
+            $request = $request->withHeader($name, $value);
+        }
+        $request->getBody()->write($this->body);
 
         return $request;
     }

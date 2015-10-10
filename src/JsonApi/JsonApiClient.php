@@ -25,4 +25,13 @@ class JsonApiClient
     {
         return new JsonApiResponse($this->client->send($request));
     }
+
+    /**
+     * @param \Psr\Http\Message\RequestInterface $request
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function requestAsync(RequestInterface $request)
+    {
+        return $this->client->sendAsync($request);
+    }
 }
