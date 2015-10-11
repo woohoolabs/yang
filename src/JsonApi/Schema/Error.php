@@ -56,7 +56,7 @@ class Error
         $code = empty($error["code"]) === false ? $error["code"] : "";
         $title = empty($error["title"]) === false ? $error["title"] : "";
         $detail = empty($error["detail"]) === false ? $error["detail"] : "";
-        $source = ErrorSource::fromArray(isset($error["source"]) && is_array($error["source"]) ? $error["source"] : "");
+        $source = ErrorSource::fromArray(isset($error["source"]) && is_array($error["source"]) ? $error["source"] : []);
 
         return new self($id, $meta, $links, $status, $code, $title, $detail, $source);
     }
@@ -65,7 +65,7 @@ class Error
      * @param string $id
      * @param array $meta
      * @param \WoohooLabs\Yang\JsonApi\Schema\Links $links
-     * @param string $status
+     * @param int $status
      * @param string $code
      * @param string $title
      * @param string $detail
