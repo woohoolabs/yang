@@ -148,6 +148,7 @@ class Data
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
      */
+    public function primaryResourceToArray()
     {
         if ($this->hasPrimaryResources() === false) {
             return null;
@@ -157,11 +158,13 @@ class Data
         $key = key($this->primaryKeys);
         $id = key($ids);
 
+        return $this->resources[$key][$id]->toArray();
     }
 
     /**
      * @return \Traversable|array
      */
+    public function primaryCollectionToArray()
     {
         ksort($this->primaryKeys);
 
@@ -169,6 +172,7 @@ class Data
         foreach ($this->primaryKeys as $type => $ids) {
             ksort($ids);
             foreach ($ids as $id => $value) {
+                $result[] = $this->resources[$type][$id]->toArray();
             }
         }
 
@@ -178,6 +182,7 @@ class Data
     /**
      * @return \Traversable|array
      */
+    public function includedToArray()
     {
         ksort($this->includedKeys);
 
@@ -185,6 +190,7 @@ class Data
         foreach ($this->includedKeys as $type => $ids) {
             ksort($ids);
             foreach ($ids as $id => $value) {
+                $result[] = $this->resources[$type][$id]->toArray();
             }
         }
 

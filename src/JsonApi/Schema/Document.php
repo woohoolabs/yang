@@ -110,6 +110,7 @@ class Document
         }
 
         if ($this->hasData()) {
+            $content["data"] = $this->data->primaryResourceToArray();
         }
 
         if ($this->hasErrors()) {
