@@ -31,7 +31,7 @@ class JsonApiResponse implements ResponseInterface
     public function getDocument()
     {
         if ($this->document === null) {
-            $this->document = new Document(json_decode($this->response->getBody()->getContents(), true));
+            $this->document = Document::createFromArray(json_decode($this->response->getBody()->getContents(), true));
         }
 
         return $this->document;

@@ -18,4 +18,4 @@ $response = $client->request($request);
 
 echo "Status: " . $response->getStatusCode() . "<br/>";
 echo "Body:<pre>";
-print_r(json_decode($response->getBody()->getContents(), true));
+print_r($response->getDocument()->toArray());
