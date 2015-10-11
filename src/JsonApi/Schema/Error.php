@@ -50,13 +50,13 @@ class Error
     public static function createFromArray(array $error)
     {
         $id = empty($error["id"]) === false ? $error["id"] : "";
-        $meta = isset($array["meta"]) && is_array($error["meta"]) ? $error["meta"] : [];
-        $links = Links::createFromArray(isset($array["links"]) && is_array($error["links"]) ? $error["links"] : []);
+        $meta = isset($error["meta"]) && is_array($error["meta"]) ? $error["meta"] : [];
+        $links = Links::createFromArray(isset($error["links"]) && is_array($error["links"]) ? $error["links"] : []);
         $status = empty($error["status"]) === false ? $error["status"] : "";
         $code = empty($error["code"]) === false ? $error["code"] : "";
         $title = empty($error["title"]) === false ? $error["title"] : "";
         $detail = empty($error["detail"]) === false ? $error["detail"] : "";
-        $source = ErrorSource::fromArray(isset($array["source"]) && is_array($error["source"]) ? $error["source"] : "");
+        $source = ErrorSource::fromArray(isset($error["source"]) && is_array($error["source"]) ? $error["source"] : "");
 
         return new self($id, $meta, $links, $status, $code, $title, $detail, $source);
     }
@@ -118,7 +118,7 @@ class Error
             $content["detail"] = $this->detail;
         }
 
-        if ($this->source->hasSource()) {
+        if ($this->hasSource()) {
             $content["source"] = $this->source->toArray();
         }
 
@@ -198,7 +198,7 @@ class Error
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\ErrorSource
+     * @return bool
      */
     public function hasSource()
     {

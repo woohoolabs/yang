@@ -14,7 +14,7 @@ class Document
     protected $meta;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\Links[]
+     * @var \WoohooLabs\Yang\JsonApi\Schema\Links
      */
     protected $links;
 
