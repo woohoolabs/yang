@@ -18,6 +18,9 @@ class Document
      */
     protected $links;
 
+    /**
+     * @var \WoohooLabs\Yang\JsonApi\Schema\Data
+     */
     protected $data;
 
     /**
@@ -51,6 +54,14 @@ class Document
         }
         $linksObject = Links::createFromArray($links);
 
+        if (isset($document["data"]) && is_array($document["data"])) {
+            $data = $document["data"];
+        } else {
+            $data = [];
+        }
+
+        $dataObject = Data::createFromArray($data);
+
         $errors = [];
         if (isset($document["errors"]) && is_array($document["errors"])) {
             foreach ($document["errors"] as $error) {
@@ -60,20 +71,22 @@ class Document
             }
         }
 
-        return new self($jsonApiObject, $meta, $linksObject, $errors);
+        return new self($jsonApiObject, $meta, $linksObject, $dataObject, $errors);
     }
 
     /**
      * @param \WoohooLabs\Yang\JsonApi\Schema\JsonApi $jsonApi
      * @param array $meta
      * @param \WoohooLabs\Yang\JsonApi\Schema\Links $links
+     * @param \WoohooLabs\Yang\JsonApi\Schema\Data $data
      * @param \WoohooLabs\Yang\JsonApi\Schema\Error[] $errors
      */
-    public function __construct(JsonApi $jsonApi, array $meta, Links $links, array $errors)
+    public function __construct(JsonApi $jsonApi, array $meta, Links $links, Data $data, array $errors)
     {
         $this->jsonApi = $jsonApi;
         $this->meta = $meta;
         $this->links = $links;
+        $this->data = $data;
         $this->errors = $errors;
     }
 
@@ -94,6 +107,9 @@ class Document
 
         if ($this->hasLinks()) {
             $content["links"] = $this->links->toArray();
+        }
+
+        if ($this->hasData()) {
         }
 
         if ($this->hasErrors()) {
@@ -160,7 +176,15 @@ class Document
      */
     public function hasData()
     {
-        return empty($this->data) === false;
+        return $this->data->hasPrimaryResources();
+    }
+
+    /**
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Data
+     */
+    public function getData()
+    {
+        return $this->data;
     }
 
     /**

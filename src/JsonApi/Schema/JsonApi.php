@@ -20,7 +20,7 @@ class JsonApi
     public static function createFromArray($array)
     {
         $version = empty($array["version"]) ? "" : $array["version"];
-        $meta = empty($array["meta"]) === false && is_array($array["meta"]) ? $array["meta"] : [];
+        $meta = isset($array["meta"]) && is_array($array["meta"]) ? $array["meta"] : [];
 
         return new self($version, $meta);
     }
