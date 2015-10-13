@@ -110,7 +110,7 @@ class Document
         }
 
         if ($this->hasData()) {
-            $content["data"] = $this->data->primaryResourceToArray();
+            $content["data"] = $this->data->primaryDataToArray();
         }
 
         if ($this->hasErrors()) {
@@ -119,6 +119,10 @@ class Document
                 $errors = $error->toArray();
             }
             $content["errors"] = $errors;
+        }
+
+        if ($this->data->hasIncludedResources()) {
+            $content["included"] = $this->data->includedToArray();
         }
 
         return $content;

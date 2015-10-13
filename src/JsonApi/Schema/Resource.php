@@ -71,12 +71,20 @@ class Resource
             "id" => $this->id
         ];
 
-        if ($this->links) {
-            $result["version"] = $this->links;
-        }
-
         if (empty($this->meta) === false) {
             $result["meta"] = $this->meta;
+        }
+
+        if ($this->links) {
+            $result["links"] = $this->links->toArray();
+        }
+
+        if ($this->attributes) {
+            $result["attributes"] = $this->attributes;
+        }
+
+        if ($this->relationships) {
+            $result["relationships"] = $this->relationships;
         }
 
         return $result;

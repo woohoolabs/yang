@@ -3,6 +3,11 @@ namespace WoohooLabs\Yang\JsonApi\Schema;
 
 class Data
 {
+    /*
+     * @var bool
+     */
+    protected $isSingleResourceData;
+
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\Resource[]
      */
@@ -19,25 +24,93 @@ class Data
     protected $includedKeys = [];
 
     /**
-     * @param array $resources
+     * @param array $data
      * @return $this
      */
-    public static function createFromArray(array $resources)
+    public static function createFromArray(array $data)
     {
+        $isSingleResourceData = self::isAssociativeArray($data);
+
         $resourceList = [];
-        foreach ($resources as $resource) {
-            $resourceList[] = Resource::createFromArray($resource);
+        if ($isSingleResourceData) {
+            $resourceList = [Resource::createFromArray($data)];
+        } else {
+            foreach ($data as $resource) {
+                $resourceList[] = Resource::createFromArray($resource);
+            }
         }
 
-        return new self($resourceList);
+        return new self($isSingleResourceData, $resourceList);
     }
 
     /**
+     * @param bool $isSingleResourceData
      * @param \WoohooLabs\Yang\JsonApi\Schema\Resource[] $resources
      */
-    public function __construct(array $resources)
+    public function __construct($isSingleResourceData, array $resources)
     {
+        $this->isSingleResourceData = $isSingleResourceData;
         $this->setPrimaryResources($resources);
+    }
+
+    /**
+     * @return array|null
+     */
+    public function primaryDataToArray()
+    {
+        return $this->isSingleResourceData ? $this->primaryResourceToArray() : $this->primaryCollectionToArray();
+    }
+
+    /**
+     * @return array
+     */
+    public function includedToArray()
+    {
+        ksort($this->includedKeys);
+
+        $result = [];
+        foreach ($this->includedKeys as $type => $ids) {
+            ksort($ids);
+            foreach ($ids as $id => $value) {
+                $result[] = $this->resources[$type][$id]->toArray();
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return array|null
+     */
+    protected function primaryResourceToArray()
+    {
+        if ($this->hasPrimaryResources() === false) {
+            return null;
+        }
+
+        $ids = reset($this->primaryKeys);
+        $key = key($this->primaryKeys);
+        $id = key($ids);
+
+        return $this->resources[$key][$id]->toArray();
+    }
+
+    /**
+     * @return array
+     */
+    protected function primaryCollectionToArray()
+    {
+        ksort($this->primaryKeys);
+
+        $result = [];
+        foreach ($this->primaryKeys as $type => $ids) {
+            ksort($ids);
+            foreach ($ids as $id => $value) {
+                $result[] = $this->resources[$type][$id]->toArray();
+            }
+        }
+
+        return $result;
     }
 
     /**
@@ -145,58 +218,6 @@ class Data
         return $this;
     }
 
-    /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
-     */
-    public function primaryResourceToArray()
-    {
-        if ($this->hasPrimaryResources() === false) {
-            return null;
-        }
-
-        $ids = reset($this->primaryKeys);
-        $key = key($this->primaryKeys);
-        $id = key($ids);
-
-        return $this->resources[$key][$id]->toArray();
-    }
-
-    /**
-     * @return \Traversable|array
-     */
-    public function primaryCollectionToArray()
-    {
-        ksort($this->primaryKeys);
-
-        $result = [];
-        foreach ($this->primaryKeys as $type => $ids) {
-            ksort($ids);
-            foreach ($ids as $id => $value) {
-                $result[] = $this->resources[$type][$id]->toArray();
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * @return \Traversable|array
-     */
-    public function includedToArray()
-    {
-        ksort($this->includedKeys);
-
-        $result = [];
-        foreach ($this->includedKeys as $type => $ids) {
-            ksort($ids);
-            foreach ($ids as $id => $value) {
-                $result[] = $this->resources[$type][$id]->toArray();
-            }
-        }
-
-        return $result;
-    }
-
     protected function addResource(&$keys, Resource $resource)
     {
         $type = $resource->getType();
@@ -204,5 +225,15 @@ class Data
 
         $keys[$type][$id] = true;
         $this->resources[$type][$id] = $resource;
+    }
+
+
+    /**
+     * @param array $array
+     * @return bool
+     */
+    private static function isAssociativeArray(array $array)
+    {
+        return (bool)count(array_filter(array_keys($array), 'is_string'));
     }
 }
