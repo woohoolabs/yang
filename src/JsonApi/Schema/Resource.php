@@ -28,37 +28,29 @@ class Resource
      */
     protected $attributes;
 
+    /**
+     * @var \WoohooLabs\Yang\JsonApi\Schema\Relationship
+     */
     protected $relationships;
 
     /**
      * @param array $array
-     * @return $this
+     * @param \WoohooLabs\Yang\JsonApi\Schema\Resources $resources
      */
-    public static function createFromArray($array)
+    public function __construct($array, Resources $resources)
     {
-        $type = empty($array["type"]) ? "" : $array["type"];
-        $id = empty($array["id"]) ? "" : $array["id"];
-        $links = Links::createFromArray(isset($array["links"]) && is_array($array["links"]) ? $array["links"] : []);
-        $meta = isset($array["meta"]) && is_array($array["meta"]) ? $array["meta"] : [];
-        $attributes = isset($array["attributes"]) && is_array($array["attributes"]) ? $array["attributes"] : [];
+        $this->type = empty($array["type"]) ? "" : $array["type"];
+        $this->id = empty($array["id"]) ? "" : $array["id"];
+        $this->meta = $this->isArrayKey($array, "meta") ? $array["meta"] : [];
+        $this->links = Links::createFromArray($this->isArrayKey($array, "links") ? $array["links"] : []);
+        $this->attributes = $this->isArrayKey($array, "attributes") ? $array["attributes"] : [];
 
-        return new self($type, $id, $meta, $links, $attributes);
-    }
-
-    /**
-     * @param string $type
-     * @param string $id
-     * @param array $meta
-     * @param \WoohooLabs\Yang\JsonApi\Schema\Links $links
-     * @param array $attributes
-     */
-    public function __construct($type, $id, array $meta, Links $links, array $attributes)
-    {
-        $this->type = $type;
-        $this->id = $id;
-        $this->meta = $meta;
-        $this->links = $links;
-        $this->attributes = $attributes;
+        $this->relationships = [];
+        if ($this->isArrayKey($array, "relationships")) {
+            foreach ($array["relationships"] as $name => $relationship) {
+                $this->relationships[$name] = new Relationship($name, $relationship, $resources);
+            }
+        }
     }
 
     /**
@@ -79,12 +71,15 @@ class Resource
             $result["links"] = $this->links->toArray();
         }
 
-        if ($this->attributes) {
+        if (empty($this->attributes) === false) {
             $result["attributes"] = $this->attributes;
         }
 
-        if ($this->relationships) {
-            $result["relationships"] = $this->relationships;
+        if (empty($this->relationships) === false) {
+            $result["relationships"] = [];
+            foreach ($this->relationships as $name => $relationship) {
+                $result["relationships"][$name] = $relationship->toArray();
+            }
         }
 
         return $result;
@@ -162,5 +157,15 @@ class Resource
     public function getAttribute($name)
     {
         return $this->hasAttribute($name) ? $this->attributes[$name] : null;
+    }
+
+    /**
+     * @param array $array
+     * @param string $key
+     * @return bool
+     */
+    protected function isArrayKey($array, $key)
+    {
+        return isset($array[$key]) && is_array($array[$key]);
     }
 }

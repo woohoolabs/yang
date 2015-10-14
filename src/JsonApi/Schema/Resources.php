@@ -1,12 +1,12 @@
 <?php
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
-class Data
+class Resources
 {
     /*
      * @var bool
      */
-    protected $isSingleResourceData;
+    protected $isSinglePrimaryResource;
 
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\Resource[]
@@ -25,32 +25,23 @@ class Data
 
     /**
      * @param array $data
-     * @return $this
+     * @param array $included
      */
-    public static function createFromArray(array $data)
+    public function __construct(array $data, array $included)
     {
-        $isSingleResourceData = self::isAssociativeArray($data);
+        $this->isSinglePrimaryResource = $this->isAssociativeArray($data);
 
-        $resourceList = [];
-        if ($isSingleResourceData) {
-            $resourceList = [Resource::createFromArray($data)];
+        if ($this->isSinglePrimaryResource) {
+            $this->addPrimaryResource(new Resource($data, $this));
         } else {
             foreach ($data as $resource) {
-                $resourceList[] = Resource::createFromArray($resource);
+                $this->addPrimaryResource(new Resource($resource, $this));
             }
         }
 
-        return new self($isSingleResourceData, $resourceList);
-    }
-
-    /**
-     * @param bool $isSingleResourceData
-     * @param \WoohooLabs\Yang\JsonApi\Schema\Resource[] $resources
-     */
-    public function __construct($isSingleResourceData, array $resources)
-    {
-        $this->isSingleResourceData = $isSingleResourceData;
-        $this->setPrimaryResources($resources);
+        foreach ($included as $resource) {
+            $this->addIncludedResource(new Resource($resource, $this));
+        }
     }
 
     /**
@@ -58,7 +49,7 @@ class Data
      */
     public function primaryDataToArray()
     {
-        return $this->isSingleResourceData ? $this->primaryResourceToArray() : $this->primaryCollectionToArray();
+        return $this->isSinglePrimaryResource ? $this->primaryResourceToArray() : $this->primaryCollectionToArray();
     }
 
     /**
@@ -227,12 +218,11 @@ class Data
         $this->resources[$type][$id] = $resource;
     }
 
-
     /**
      * @param array $array
      * @return bool
      */
-    private static function isAssociativeArray(array $array)
+    private function isAssociativeArray(array $array)
     {
         return (bool)count(array_filter(array_keys($array), 'is_string'));
     }

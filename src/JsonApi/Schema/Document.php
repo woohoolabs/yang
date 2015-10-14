@@ -19,9 +19,9 @@ class Document
     protected $links;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\Data
+     * @var \WoohooLabs\Yang\JsonApi\Schema\Resources
      */
-    protected $data;
+    protected $resources;
 
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\Error[]
@@ -60,7 +60,13 @@ class Document
             $data = [];
         }
 
-        $dataObject = Data::createFromArray($data);
+        if (isset($document["included"]) && is_array($document["included"])) {
+            $included = $document["included"];
+        } else {
+            $included = [];
+        }
+
+        $resources = new Resources($data, $included);
 
         $errors = [];
         if (isset($document["errors"]) && is_array($document["errors"])) {
@@ -71,22 +77,22 @@ class Document
             }
         }
 
-        return new self($jsonApiObject, $meta, $linksObject, $dataObject, $errors);
+        return new self($jsonApiObject, $meta, $linksObject, $resources, $errors);
     }
 
     /**
      * @param \WoohooLabs\Yang\JsonApi\Schema\JsonApi $jsonApi
      * @param array $meta
      * @param \WoohooLabs\Yang\JsonApi\Schema\Links $links
-     * @param \WoohooLabs\Yang\JsonApi\Schema\Data $data
+     * @param \WoohooLabs\Yang\JsonApi\Schema\Resources $resources
      * @param \WoohooLabs\Yang\JsonApi\Schema\Error[] $errors
      */
-    public function __construct(JsonApi $jsonApi, array $meta, Links $links, Data $data, array $errors)
+    public function __construct(JsonApi $jsonApi, array $meta, Links $links, Resources $resources, array $errors)
     {
         $this->jsonApi = $jsonApi;
         $this->meta = $meta;
         $this->links = $links;
-        $this->data = $data;
+        $this->resources = $resources;
         $this->errors = $errors;
     }
 
@@ -110,7 +116,7 @@ class Document
         }
 
         if ($this->hasData()) {
-            $content["data"] = $this->data->primaryDataToArray();
+            $content["data"] = $this->resources->primaryDataToArray();
         }
 
         if ($this->hasErrors()) {
@@ -121,8 +127,8 @@ class Document
             $content["errors"] = $errors;
         }
 
-        if ($this->data->hasIncludedResources()) {
-            $content["included"] = $this->data->includedToArray();
+        if ($this->resources->hasIncludedResources()) {
+            $content["included"] = $this->resources->includedToArray();
         }
 
         return $content;
@@ -181,15 +187,15 @@ class Document
      */
     public function hasData()
     {
-        return $this->data->hasPrimaryResources();
+        return $this->resources->hasPrimaryResources();
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Data
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Resources
      */
-    public function getData()
+    public function getPrimaryResources()
     {
-        return $this->data;
+        return $this->resources;
     }
 
     /**

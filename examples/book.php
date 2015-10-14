@@ -9,7 +9,7 @@ $requestBuilder = new JsonApiRequestBuilder(new Request("", ""));
 $request = $requestBuilder
     ->fetch()
     ->uri("http://yin.local/index.php?example=book&id=1")
-    ->withFields(["book" => "title,pages"])
+    ->withFields(["book" => "title,pages,authors,publisher"])
     ->withIncludes(["authors", "publisher"])
     ->getRequest();
 
