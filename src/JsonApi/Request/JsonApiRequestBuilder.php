@@ -299,9 +299,9 @@ class JsonApiRequestBuilder
     public function withIncludes($includes)
     {
         if (is_array($includes)) {
-            $this->queryString["includes"] = implode(",", $includes);
+            $this->queryString["include"] = implode(",", $includes);
         } else {
-            $this->queryString["includes"] = $includes;
+            $this->queryString["include"] = $includes;
         }
 
         return $this;

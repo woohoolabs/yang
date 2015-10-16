@@ -29,7 +29,7 @@ class Resource
     protected $attributes;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\Relationship
+     * @var \WoohooLabs\Yang\JsonApi\Schema\Relationship[]
      */
     protected $relationships;
 
