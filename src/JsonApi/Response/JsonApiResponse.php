@@ -42,8 +42,15 @@ class JsonApiResponse implements ResponseInterface
         return $this->response->getProtocolVersion();
     }
 
+    /**
+     * @param string $version
+     * @return mixed
+     */
     public function withProtocolVersion($version)
     {
+        $response = clone $this;
+        $response->response = $this->response->withProtocolVersion($version);
+        return $response;
     }
 
     public function getHeaders()
@@ -68,14 +75,23 @@ class JsonApiResponse implements ResponseInterface
 
     public function withHeader($name, $value)
     {
+        $response = clone $this;
+        $response->response = $this->response->withHeader($name, $value);
+        return $response;
     }
 
     public function withAddedHeader($name, $value)
     {
+        $response = clone $this;
+        $response->response = $this->response->withAddedHeader($name, $value);
+        return $response;
     }
 
     public function withoutHeader($name)
     {
+        $response = clone $this;
+        $response->response = $this->response->withoutHeader($name);
+        return $response;
     }
 
     public function getBody()
@@ -85,6 +101,9 @@ class JsonApiResponse implements ResponseInterface
 
     public function withBody(StreamInterface $body)
     {
+        $response = clone $this;
+        $response->response = $this->response->withBody($body);
+        return $response;
     }
 
     public function getStatusCode()
@@ -94,6 +113,9 @@ class JsonApiResponse implements ResponseInterface
 
     public function withStatus($code, $reasonPhrase = '')
     {
+        $response = clone $this;
+        $response->response = $this->response->withStatus($code, $reasonPhrase);
+        return $response;
     }
 
     public function getReasonPhrase()
