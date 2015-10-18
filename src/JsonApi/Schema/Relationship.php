@@ -129,6 +129,89 @@ class Relationship
     }
 
     /**
+     * @return array
+     */
+    public function getResourceLinks()
+    {
+        return $this->resourceMap;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getResourceLink()
+    {
+        $link = reset($this->resourceMap);
+
+        return $link === false ? null : $link;
+    }
+
+    /**
+     * @param string $type
+     * @param string $id
+     * @return bool
+     */
+    public function hasResource($type, $id)
+    {
+        return $this->resources->hasIncludedResource($type, $id);
+    }
+
+    /**
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource[]
+     */
+    public function getResourceCollection()
+    {
+        $resources = [];
+        foreach ($this->resourceMap as $resourceLink) {
+            if ($this->hasResource($resourceLink["type"], $resourceLink["id"])) {
+                $resources[] = $this->getResourceBy($resourceLink["type"], $resourceLink["id"]);
+            }
+        }
+
+        return $resources;
+    }
+
+    /**
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource[]
+     */
+    public function getResourceMap()
+    {
+        $resources = [];
+        foreach ($this->resourceMap as $resourceLink) {
+            $type = $resourceLink["type"];
+            $id = $resourceLink["id"];
+            if ($this->hasResource($type, $id)) {
+                $resources[$type][$id] = $this->getResourceBy($type, $id);
+            }
+        }
+
+        return $resources;
+    }
+
+    /**
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
+     */
+    public function getResource()
+    {
+        $resourceMap = reset($this->resourceMap);
+        if (is_array($resourceMap) === false) {
+            return null;
+        }
+
+        return $this->getResourceBy($resourceMap["type"], $resourceMap["id"]);
+    }
+
+    /**
+     * @param string $type
+     * @param string $id
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
+     */
+    public function getResourceBy($type, $id)
+    {
+        return $this->resources->getResource($type, $id);
+    }
+
+    /**
      * @param array $array
      * @return bool
      */

@@ -160,6 +160,24 @@ class Resource
     }
 
     /**
+     * @param string $name
+     * @return bool
+     */
+    public function hasRelationship($name)
+    {
+        return array_key_exists($name, $this->relationships);
+    }
+
+    /**
+     * @param string $name
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Relationship|null|
+     */
+    public function getRelationship($name)
+    {
+        return $this->hasRelationship($name) ? $this->relationships[$name] : null;
+    }
+
+    /**
      * @param array $array
      * @param string $key
      * @return bool

@@ -19,3 +19,6 @@ $response = $client->request($request);
 echo "Status: " . $response->getStatusCode() . "<br/>";
 echo "Body:<pre>";
 print_r($response->getDocument()->toArray());
+
+echo "Publisher:";
+print_r($response->getDocument()->getPrimaryResource()->getRelationship("publisher")->getResource()->toArray());

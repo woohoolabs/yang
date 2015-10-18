@@ -191,6 +191,14 @@ class Document
     }
 
     /**
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource
+     */
+    public function getPrimaryResource()
+    {
+        return $this->resources->getPrimaryResource();
+    }
+
+    /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Resources
      */
     public function getPrimaryResources()

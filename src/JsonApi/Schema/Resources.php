@@ -123,6 +123,33 @@ class Resources
     }
 
     /**
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource[]
+     */
+    public function getPrimaryCollection()
+    {
+        $resources = [];
+        foreach ($this->primaryKeys as $type => $ids) {
+            foreach ($ids as $id) {
+                $resources[] = $this->getResource($type, $id);
+            }
+        }
+
+        return $resources;
+    }
+
+    /**
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
+     */
+    public function getPrimaryResource()
+    {
+        $ids = reset($this->primaryKeys);
+        $type = key($this->primaryKeys);
+        $id = key($ids);
+
+        return $this->getResource($type, $id);
+    }
+
+    /**
      * @param string $type
      * @param string $id
      * @return bool
@@ -151,24 +178,10 @@ class Resources
     }
 
     /**
-     * @param \WoohooLabs\Yang\JsonApi\Schema\Resource[] $resources
-     * @return $this
-     */
-    public function setPrimaryResources(array $resources)
-    {
-        $this->primaryKeys = [];
-        foreach ($resources as $resource) {
-            $this->addPrimaryResource($resource);
-        }
-
-        return $this;
-    }
-
-    /**
      * @param \WoohooLabs\Yang\JsonApi\Schema\Resource $resource
      * @return $this
      */
-    public function addPrimaryResource(Resource $resource)
+    protected function addPrimaryResource(Resource $resource)
     {
         $type = $resource->getType();
         $id = $resource->getId();
@@ -183,24 +196,10 @@ class Resources
     }
 
     /**
-     * @param \WoohooLabs\Yang\JsonApi\Schema\Resource[] $resources
-     * @return $this
-     */
-    public function setIncludedResources(array $resources)
-    {
-        $this->includedKeys = [];
-        foreach ($resources as $resource) {
-            $this->addIncludedResource($resource);
-        }
-
-        return $this;
-    }
-
-    /**
      * @param \WoohooLabs\Yang\JsonApi\Schema\Resource $resource
      * @return $this
      */
-    public function addIncludedResource(Resource $resource)
+    protected function addIncludedResource(Resource $resource)
     {
         if ($this->hasPrimaryResource($resource->getType(), $resource->getId()) === false) {
             $this->addResource($this->includedKeys, $resource);
