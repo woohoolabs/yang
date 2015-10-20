@@ -1,4 +1,4 @@
-## 0.2.0 - unreleased
+## 0.3.0 - unreleased
 
 ADDED:
 
@@ -7,6 +7,18 @@ CHANGED:
 REMOVED:
 
 FIXED:
+
+## 0.2.0 - 2015-10-20
+
+ADDED:
+
+- Ability to send multiple async requests concurrently
+- Ability to determine the type of documents and relationships
+
+CHANGED:
+
+- Shortened getter names (removed the "get" prefix)
+
 
 ## 0.1.0 - 2015-10-18
 
