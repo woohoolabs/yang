@@ -34,4 +34,17 @@ class JsonApiClient
     {
         return $this->client->sendAsync($request);
     }
+
+    /**
+     * @param \Psr\Http\Message\RequestInterface[] $requests
+     * @return \Psr\Http\Message\ResponseInterface[]
+     */
+    public function requestConcurrent(array $requests)
+    {
+        foreach ($requests as $key => $request) {
+            $requests[$key] = $this->client->sendAsync($request);
+        }
+
+        return \GuzzleHttp\Promise\unwrap($requests);
+    }
 }
