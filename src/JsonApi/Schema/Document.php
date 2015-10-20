@@ -115,7 +115,7 @@ class Document
             $content["links"] = $this->links->toArray();
         }
 
-        if ($this->hasData()) {
+        if ($this->hasPrimaryResources()) {
             $content["data"] = $this->resources->primaryDataToArray();
         }
 
@@ -145,7 +145,7 @@ class Document
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\JsonApi
      */
-    public function getJsonApi()
+    public function jsonApi()
     {
         return $this->jsonApi;
     }
@@ -161,7 +161,7 @@ class Document
     /**
      * @return array
      */
-    public function getMeta()
+    public function meta()
     {
         return $this->meta;
     }
@@ -177,7 +177,7 @@ class Document
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Links
      */
-    public function getLinks()
+    public function links()
     {
         return $this->links;
     }
@@ -185,25 +185,61 @@ class Document
     /**
      * @return bool
      */
-    public function hasData()
+    public function hasPrimaryResources()
     {
         return $this->resources->hasPrimaryResources();
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
      */
-    public function getPrimaryResource()
+    public function primaryResource()
     {
         return $this->resources->getPrimaryResource();
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Resources
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource[]
      */
-    public function getPrimaryResources()
+    public function primaryResources()
     {
-        return $this->resources;
+        return $this->resources->getPrimaryResources();
+    }
+
+    /**
+     * @param string $type
+     * @param string $id
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
+     */
+    public function resource($type, $id)
+    {
+        return $this->resources->getResource($type, $id);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasIncludedResources()
+    {
+        return $this->resources->hasIncludedResources();
+    }
+
+    /**
+     * @param string $type
+     * @param string $id
+     * @return bool
+     */
+    public function hasIncludedResource($type, $id)
+    {
+        return $this->resources->hasIncludedResource($type, $id);
+    }
+
+    /**
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource[]
+     */
+    public function includedResources()
+    {
+        return $this->resources->getIncludedResources();
     }
 
     /**

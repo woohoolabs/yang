@@ -72,7 +72,7 @@ class ErrorSource
     /**
      * @return string
      */
-    public function getPointer()
+    public function pointer()
     {
         return $this->pointer;
     }
@@ -88,7 +88,7 @@ class ErrorSource
     /**
      * @return string
      */
-    public function getParameter()
+    public function parameter()
     {
         return $this->parameter;
     }

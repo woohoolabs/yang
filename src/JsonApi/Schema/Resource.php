@@ -88,7 +88,7 @@ class Resource
     /**
      * @return string
      */
-    public function getType()
+    public function type()
     {
         return $this->type;
     }
@@ -96,7 +96,7 @@ class Resource
     /**
      * @return string
      */
-    public function getId()
+    public function id()
     {
         return $this->id;
     }
@@ -112,7 +112,7 @@ class Resource
     /**
      * @return array
      */
-    public function getMeta()
+    public function meta()
     {
         return $this->meta;
     }
@@ -128,7 +128,7 @@ class Resource
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Links
      */
-    public function getLinks()
+    public function links()
     {
         return $this->links;
     }
@@ -136,7 +136,7 @@ class Resource
     /**
      * @return array
      */
-    public function getAttributes()
+    public function attributes()
     {
         return $this->attributes;
     }
@@ -154,7 +154,7 @@ class Resource
      * @param string $name
      * @return mixed|null
      */
-    public function getAttribute($name)
+    public function attribute($name)
     {
         return $this->hasAttribute($name) ? $this->attributes[$name] : null;
     }
@@ -170,9 +170,9 @@ class Resource
 
     /**
      * @param string $name
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Relationship|null|
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Relationship|null
      */
-    public function getRelationship($name)
+    public function relationship($name)
     {
         return $this->hasRelationship($name) ? $this->relationships[$name] : null;
     }

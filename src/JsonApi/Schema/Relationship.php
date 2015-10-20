@@ -91,7 +91,7 @@ class Relationship
     /**
      * @return string
      */
-    public function getName()
+    public function name()
     {
         return $this->name;
     }
@@ -107,7 +107,7 @@ class Relationship
     /**
      * @return array
      */
-    public function getMeta()
+    public function meta()
     {
         return $this->meta;
     }
@@ -123,7 +123,7 @@ class Relationship
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Links
      */
-    public function getLinks()
+    public function links()
     {
         return $this->links;
     }
@@ -131,7 +131,7 @@ class Relationship
     /**
      * @return array
      */
-    public function getResourceLinks()
+    public function resourceLinks()
     {
         return $this->resourceMap;
     }
@@ -139,7 +139,7 @@ class Relationship
     /**
      * @return array|null
      */
-    public function getResourceLink()
+    public function resourceLink()
     {
         $link = reset($this->resourceMap);
 
@@ -151,7 +151,7 @@ class Relationship
      * @param string $id
      * @return bool
      */
-    public function hasResource($type, $id)
+    public function hasIncludedResource($type, $id)
     {
         return $this->resources->hasIncludedResource($type, $id);
     }
@@ -159,12 +159,12 @@ class Relationship
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Resource[]
      */
-    public function getResourceCollection()
+    public function resources()
     {
         $resources = [];
         foreach ($this->resourceMap as $resourceLink) {
-            if ($this->hasResource($resourceLink["type"], $resourceLink["id"])) {
-                $resources[] = $this->getResourceBy($resourceLink["type"], $resourceLink["id"]);
+            if ($this->hasIncludedResource($resourceLink["type"], $resourceLink["id"])) {
+                $resources[] = $this->resourceBy($resourceLink["type"], $resourceLink["id"]);
             }
         }
 
@@ -174,14 +174,14 @@ class Relationship
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Resource[]
      */
-    public function getResourceMap()
+    public function resourceMap()
     {
         $resources = [];
         foreach ($this->resourceMap as $resourceLink) {
             $type = $resourceLink["type"];
             $id = $resourceLink["id"];
-            if ($this->hasResource($type, $id)) {
-                $resources[$type][$id] = $this->getResourceBy($type, $id);
+            if ($this->hasIncludedResource($type, $id)) {
+                $resources[$type][$id] = $this->resourceBy($type, $id);
             }
         }
 
@@ -191,14 +191,14 @@ class Relationship
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
      */
-    public function getResource()
+    public function resource()
     {
         $resourceMap = reset($this->resourceMap);
         if (is_array($resourceMap) === false) {
             return null;
         }
 
-        return $this->getResourceBy($resourceMap["type"], $resourceMap["id"]);
+        return $this->resourceBy($resourceMap["type"], $resourceMap["id"]);
     }
 
     /**
@@ -206,7 +206,7 @@ class Relationship
      * @param string $id
      * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
      */
-    public function getResourceBy($type, $id)
+    public function resourceBy($type, $id)
     {
         return $this->resources->getResource($type, $id);
     }

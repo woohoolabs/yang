@@ -125,7 +125,7 @@ class Resources
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Resource[]
      */
-    public function getPrimaryCollection()
+    public function getPrimaryResources()
     {
         $resources = [];
         foreach ($this->primaryKeys as $type => $ids) {
@@ -178,13 +178,28 @@ class Resources
     }
 
     /**
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource[]
+     */
+    public function getIncludedResources()
+    {
+        $resources = [];
+        foreach ($this->includedKeys as $type => $ids) {
+            foreach ($ids as $id) {
+                $resources[] = $this->getResource($type, $id);
+            }
+        }
+
+        return $resources;
+    }
+
+    /**
      * @param \WoohooLabs\Yang\JsonApi\Schema\Resource $resource
      * @return $this
      */
     protected function addPrimaryResource(Resource $resource)
     {
-        $type = $resource->getType();
-        $id = $resource->getId();
+        $type = $resource->type();
+        $id = $resource->id();
         if ($this->hasIncludedResource($type, $id) === true) {
             unset($this->includedKeys[$type][$id]);
             $this->primaryKeys[$type][$id] = true;
@@ -201,7 +216,7 @@ class Resources
      */
     protected function addIncludedResource(Resource $resource)
     {
-        if ($this->hasPrimaryResource($resource->getType(), $resource->getId()) === false) {
+        if ($this->hasPrimaryResource($resource->type(), $resource->id()) === false) {
             $this->addResource($this->includedKeys, $resource);
         }
 
@@ -210,8 +225,8 @@ class Resources
 
     protected function addResource(&$keys, Resource $resource)
     {
-        $type = $resource->getType();
-        $id = $resource->getId();
+        $type = $resource->type();
+        $id = $resource->id();
 
         $keys[$type][$id] = true;
         $this->resources[$type][$id] = $resource;

@@ -28,7 +28,7 @@ class JsonApiResponse implements ResponseInterface
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Document
      */
-    public function getDocument()
+    public function document()
     {
         if ($this->document === null) {
             $this->document = Document::createFromArray(json_decode($this->response->getBody()->getContents(), true));

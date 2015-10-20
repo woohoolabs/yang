@@ -54,15 +54,15 @@ class Links
      */
     public function hasSelf()
     {
-        return $this->getLink("self") !== null;
+        return $this->link("self") !== null;
     }
 
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
      */
-    public function getSelf()
+    public function self()
     {
-        return $this->getLink("self");
+        return $this->link("self");
     }
 
     /**
@@ -70,15 +70,15 @@ class Links
      */
     public function hasRelated()
     {
-        return $this->getLink("related") !== null;
+        return $this->link("related") !== null;
     }
 
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
      */
-    public function getRelated()
+    public function related()
     {
-        return $this->getLink("related");
+        return $this->link("related");
     }
 
     /**
@@ -86,15 +86,15 @@ class Links
      */
     public function hasFirst()
     {
-        return $this->getLink("first") !== null;
+        return $this->link("first") !== null;
     }
 
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
      */
-    public function getFirst()
+    public function first()
     {
-        return $this->getLink("first");
+        return $this->link("first");
     }
 
     /**
@@ -102,15 +102,15 @@ class Links
      */
     public function hasLast()
     {
-        return $this->getLink("last") !== null;
+        return $this->link("last") !== null;
     }
 
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
      */
-    public function getLast()
+    public function last()
     {
-        return $this->getLink("last");
+        return $this->link("last");
     }
 
     /**
@@ -118,15 +118,15 @@ class Links
      */
     public function hasPrev()
     {
-        return $this->getLink("prev") !== null;
+        return $this->link("prev") !== null;
     }
 
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
      */
-    public function getPrev()
+    public function prev()
     {
-        return $this->getLink("prev");
+        return $this->link("prev");
     }
 
     /**
@@ -134,15 +134,15 @@ class Links
      */
     public function hasNext()
     {
-        return $this->getLink("next") !== null;
+        return $this->link("next") !== null;
     }
 
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
      */
-    public function getNext()
+    public function next()
     {
-        return $this->getLink("next");
+        return $this->link("next");
     }
 
     /**
@@ -158,7 +158,7 @@ class Links
      * @param $name
      * @return \WoohooLabs\Yang\JsonApi\Schema\Link[] $links
      */
-    public function getLink($name)
+    public function link($name)
     {
         return isset($this->links[$name]) ? $this->links[$name] : null;
     }
@@ -174,7 +174,7 @@ class Links
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Link[]
      */
-    public function getLinks()
+    public function links()
     {
         return $this->links;
     }

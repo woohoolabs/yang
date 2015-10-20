@@ -72,7 +72,7 @@ class JsonApi
     /**
      * @return string
      */
-    public function getVersion()
+    public function version()
     {
         return $this->version;
     }
@@ -88,7 +88,7 @@ class JsonApi
     /**
      * @return array
      */
-    public function getMeta()
+    public function meta()
     {
         return $this->meta;
     }

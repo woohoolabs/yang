@@ -128,7 +128,7 @@ class Error
     /**
      * @return string
      */
-    public function getId()
+    public function id()
     {
         return $this->id;
     }
@@ -144,7 +144,7 @@ class Error
     /**
      * @return array
      */
-    public function getMeta()
+    public function meta()
     {
         return $this->meta;
     }
@@ -160,7 +160,7 @@ class Error
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Links
      */
-    public function getLinks()
+    public function links()
     {
         return $this->links;
     }
@@ -168,7 +168,7 @@ class Error
     /**
      * @return int
      */
-    public function getStatus()
+    public function status()
     {
         return $this->status;
     }
@@ -176,7 +176,7 @@ class Error
     /**
      * @return string
      */
-    public function getCode()
+    public function code()
     {
         return $this->code;
     }
@@ -184,7 +184,7 @@ class Error
     /**
      * @return string
      */
-    public function getTitle()
+    public function title()
     {
         return $this->title;
     }
@@ -192,7 +192,7 @@ class Error
     /**
      * @return string
      */
-    public function getDetail()
+    public function detail()
     {
         return $this->detail;
     }
@@ -208,7 +208,7 @@ class Error
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\ErrorSource
      */
-    public function getSource()
+    public function source()
     {
         return $this->source;
     }

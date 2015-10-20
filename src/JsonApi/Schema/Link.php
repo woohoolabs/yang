@@ -61,7 +61,7 @@ class Link
     /**
      * @return string
      */
-    public function getHref()
+    public function href()
     {
         return $this->href;
     }
@@ -77,7 +77,7 @@ class Link
     /**
      * @return array
      */
-    public function getMeta()
+    public function meta()
     {
         return $this->meta;
     }
