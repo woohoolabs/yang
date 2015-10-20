@@ -99,6 +99,22 @@ class Relationship
     /**
      * @return bool
      */
+    public function isToOneRelationship()
+    {
+        return $this->isToOneRelationship === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isToManyRelationship()
+    {
+        return $this->isToOneRelationship === false;
+    }
+
+    /**
+     * @return bool
+     */
     public function hasMeta()
     {
         return empty($this->meta) === false;
@@ -161,6 +177,10 @@ class Relationship
      */
     public function resources()
     {
+        if ($this->isToOneRelationship) {
+            return [];
+        }
+
         $resources = [];
         foreach ($this->resourceMap as $resourceLink) {
             if ($this->hasIncludedResource($resourceLink["type"], $resourceLink["id"])) {
@@ -193,6 +213,10 @@ class Relationship
      */
     public function resource()
     {
+        if ($this->isToOneRelationship === false) {
+            return null;
+        }
+
         $resourceMap = reset($this->resourceMap);
         if (is_array($resourceMap) === false) {
             return null;

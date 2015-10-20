@@ -29,9 +29,13 @@ class Resources
      */
     public function __construct(array $data, array $included)
     {
-        $this->isSinglePrimaryResource = $this->isAssociativeArray($data);
+        if (empty($data)) {
+            $this->isSinglePrimaryResource = null;
+        } else {
+            $this->isSinglePrimaryResource = $this->isAssociativeArray($data) === true;
+        }
 
-        if ($this->isSinglePrimaryResource) {
+        if ($this->isSinglePrimaryResource === true) {
             $this->addPrimaryResource(new Resource($data, $this));
         } else {
             foreach ($data as $resource) {
@@ -105,6 +109,22 @@ class Resources
     }
 
     /**
+     * @return bool
+     */
+    public function isSinglePrimaryResource()
+    {
+        return $this->isSinglePrimaryResource === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPrimaryResourceCollection()
+    {
+        return $this->isSinglePrimaryResource === false;
+    }
+
+    /**
      * @param string $type
      * @param string $id
      * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
@@ -127,6 +147,10 @@ class Resources
      */
     public function getPrimaryResources()
     {
+        if ($this->isSinglePrimaryResource) {
+            return [];
+        }
+
         $resources = [];
         foreach ($this->primaryKeys as $type => $ids) {
             foreach ($ids as $id) {
@@ -142,6 +166,10 @@ class Resources
      */
     public function getPrimaryResource()
     {
+        if ($this->isSinglePrimaryResource === false) {
+            return null;
+        }
+
         $ids = reset($this->primaryKeys);
         $type = key($this->primaryKeys);
         $id = key($ids);

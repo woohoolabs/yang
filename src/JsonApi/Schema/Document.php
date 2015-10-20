@@ -185,6 +185,22 @@ class Document
     /**
      * @return bool
      */
+    public function isSingleResourceDocument()
+    {
+        return $this->resources->isSinglePrimaryResource() === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isResourceCollectionDocument()
+    {
+        return $this->resources->isPrimaryResourceCollection() === true;
+    }
+
+    /**
+     * @return bool
+     */
     public function hasPrimaryResources()
     {
         return $this->resources->hasPrimaryResources();
@@ -253,7 +269,7 @@ class Document
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\Error[]
      */
-    public function getErrors()
+    public function errors()
     {
         return $this->errors;
     }
