@@ -9,6 +9,18 @@
 
 **Woohoo Labs. Yang is a PHP framework which helps you to communicate with JSON API servers.**
 
+## Table of Contents
+
+* [Introduction](#introduction)
+* [Install](#install)
+* [Basic Usage](#basic-usage)
+* [Advanced Usage](#advanced-usage)
+* [Versioning](#versioning)
+* [Change Log](#change-log)
+* [Contributing](#contributing)
+* [Credits](#credits)
+* [License](#license)
+
 ## Introduction
 
 [JSON API](http://jsonapi.org) specification
@@ -28,7 +40,7 @@ $ composer require woohoolabs/yang
 
 ## Basic Usage
 
-## Advanced usage
+## Advanced Usage
 
 ## Examples
 
@@ -36,7 +48,7 @@ $ composer require woohoolabs/yang
 
 This library follows [SemVer v2.0.0](http://semver.org/).
 
-## Change log
+## Change Log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
