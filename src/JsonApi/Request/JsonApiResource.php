@@ -26,6 +26,16 @@ class JsonApiResource
     /**
      * @param string $type
      * @param string $id
+     * @return $this
+     */
+    public static function create($type = "", $id = "")
+    {
+        return new self($type, $id);
+    }
+
+    /**
+     * @param string $type
+     * @param string $id
      */
     public function __construct($type = "", $id = "")
     {
@@ -38,30 +48,36 @@ class JsonApiResource
     /**
      * @param string $name
      * @param mixed $value
+     * @return $this
      */
     public function setAttribute($name, $value)
     {
         $this->attributes[$name] = $value;
+        return $this;
     }
 
     /**
      * @param string $relationship
      * @param string $type
      * @param string $id
+     * @return $this
      */
     public function setToOneResourceIdentifier($relationship, $type, $id)
     {
         $this->relationships[$relationship] = ["type" => $type, "id" => $id];
+        return $this;
     }
 
     /**
      * @param string $relationship
      * @param string $type
      * @param string $id
+     * @return $this
      */
     public function addToManyResourceIdentifier($relationship, $type, $id)
     {
         $this->relationships[$relationship][] = ["type" => $type, "id" => $id];
+        return $this;
     }
 
     /**
