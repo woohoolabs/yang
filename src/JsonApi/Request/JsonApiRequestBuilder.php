@@ -330,11 +330,14 @@ class JsonApiRequestBuilder
     public function getRequest()
     {
         $request = $this->request->withMethod($this->method);
+        $uri = $request
+            ->getUri()
+            ->withScheme($this->scheme)
+            ->withHost($this->host)
+            ->withPath($this->path)
+            ->withQuery($this->getQueryString());
+        $request = $request->withUri($uri);
         $request = $request->withProtocolVersion($this->protocolVersion);
-        $request = $request->getUri()->withScheme($this->scheme);
-        $request = $request->getUri()->withHost($this->host);
-        $request = $request->getUri()->withPath($this->path);
-        $request = $request->getUri()->withQuery($this->getQueryString());
         $request = $request->withHeader("Accept", "application/vnd.api+json");
         $request = $request->withHeader("Content-Type", "application/vnd.api+json");
         foreach ($this->headers as $name => $value) {
