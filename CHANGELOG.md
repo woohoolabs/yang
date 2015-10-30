@@ -2,6 +2,8 @@
 
 ADDED:
 
+- Ability to define options for `JsonApiClient`
+
 CHANGED:
 
 REMOVED:

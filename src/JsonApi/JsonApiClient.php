@@ -12,9 +12,12 @@ class JsonApiClient
      */
     protected $client;
 
-    public function __construct()
+    /**
+     * @param array $config
+     */
+    public function __construct(array $config = [])
     {
-        $this->client = new Client();
+        $this->client = new Client($config);
     }
 
     /**
