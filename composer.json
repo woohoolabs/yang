@@ -16,7 +16,7 @@
         "source": "https://github.com/woohoolabs/yang"
     },
     "require": {
-        "php":">=5.5.0",
+        "php":"^5.5.0|^7.0.0",
         "guzzlehttp/guzzle": "^6.0.0"
     },
     "require-dev": {
