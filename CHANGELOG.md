@@ -11,6 +11,8 @@ REMOVED:
 
 FIXED:
 
+- PHP version constraint in composer.json
+
 ## 0.2.0 - 2015-10-20
 
 ADDED:
