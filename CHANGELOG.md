@@ -3,6 +3,7 @@
 ADDED:
 
 - Ability to define options for `JsonApiClient`
+- `Document::getError()` utility method 
 
 CHANGED:
 

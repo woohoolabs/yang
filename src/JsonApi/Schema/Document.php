@@ -273,4 +273,13 @@ class Document
     {
         return $this->errors;
     }
+
+    /**
+     * @param int $number
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Error|null
+     */
+    public function error($number)
+    {
+        return isset($this->errors[$number]) ? $this->errors[$number] : null;
+    }
 }
