@@ -13,7 +13,7 @@ REMOVED:
 FIXED:
 
 - PHP version constraint in composer.json
-- If the response didn't contain a valid JSON, `Response::document()` could raise a fatal error
+- If the response didn't contain a valid JSON, `Response::document()` could have raised a fatal error
 
 ## 0.2.0 - 2015-10-20
 
