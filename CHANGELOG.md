@@ -4,6 +4,7 @@ ADDED:
 
 - Ability to define options for `JsonApiClient`
 - `Document::error($number)` utility method to retrieve only one error
+- `Response::isSuccessful()` to determine if the response was successful
 
 CHANGED:
 
@@ -12,6 +13,7 @@ REMOVED:
 FIXED:
 
 - PHP version constraint in composer.json
+- If the response didn't contain a valid JSON, `Response::document()` could raise a fatal error
 
 ## 0.2.0 - 2015-10-20
 

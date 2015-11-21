@@ -26,15 +26,35 @@ class JsonApiResponse implements ResponseInterface
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Document
+     * @return bool
+     */
+    public function hasDocument()
+    {
+        return $this->document() !== null;
+    }
+
+    /**
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Document|null
      */
     public function document()
     {
         if ($this->document === null) {
-            $this->document = Document::createFromArray(json_decode($this->response->getBody()->getContents(), true));
+            $response = json_decode($this->response->getBody()->getContents(), true);
+            $this->document = is_array($response) === true ? Document::createFromArray($response) : null;
         }
 
         return $this->document;
+    }
+
+    /**
+     * @param array $allowedStatusCodes
+     * @return bool
+     */
+    public function isSuccessful($allowedStatusCodes = [])
+    {
+        return (empty($allowedStatusCodes) === true || in_array($this->getStatusCode(), $allowedStatusCodes)) &&
+            $this->hasDocument() === true &&
+            $this->document()->hasErrors() === false;
     }
 
     public function getProtocolVersion()
