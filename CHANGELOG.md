@@ -3,7 +3,7 @@
 ADDED:
 
 - Ability to define options for `JsonApiClient`
-- `Document::getError()` utility method 
+- `Document::error($number)` utility method to retrieve only one error
 
 CHANGED:
 
