@@ -53,7 +53,16 @@ class JsonApiResponse implements ResponseInterface
     public function isSuccessful($allowedStatusCodes = [])
     {
         return (empty($allowedStatusCodes) === true || in_array($this->getStatusCode(), $allowedStatusCodes)) &&
-            $this->document()->hasErrors() === false;
+            ($this->hasDocument() === false || $this->document()->hasErrors() === false);
+    }
+
+    /**
+     * @param array $allowedStatusCodes
+     * @return bool
+     */
+    public function isSuccessfulDocument($allowedStatusCodes = [])
+    {
+        return $this->isSuccessful($allowedStatusCodes) && $this->hasDocument();
     }
 
     public function getProtocolVersion()
