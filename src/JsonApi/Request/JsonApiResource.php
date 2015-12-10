@@ -85,7 +85,11 @@ class JsonApiResource
      */
     public function toArray()
     {
-        $resource = ["data" => []];
+        $resource = ["data" => ["type" => $this->type]];
+        if (empty($this->id) === false) {
+            $resource["data"]["id"] = $this->id;
+        }
+
         foreach ($this->attributes as $name => $attribute) {
             $resource["data"]["attributes"][$name] = $attribute;
         }

@@ -14,6 +14,7 @@ FIXED:
 
 - PHP version constraint in composer.json
 - If the response didn't contain a valid JSON, `Response::document()` could have raised a fatal error
+- The type and id weren't included in the request body
 
 ## 0.2.0 - 2015-10-20
 
