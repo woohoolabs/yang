@@ -26,7 +26,7 @@ class Relationship
     /**
      * @var array
      */
-    protected $resourceMap;
+    protected $resourceMap = [];
 
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\Resources

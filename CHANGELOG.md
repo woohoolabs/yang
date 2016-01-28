@@ -17,6 +17,7 @@ FIXED:
 - If the response didn't contain a valid JSON, `Response::document()` could have raised a fatal error
 - The type and id weren't included in the request body
 - Empty responses weren't considered successful by `JsonApiResponse::isSuccessful()`
+- Empty relationship data can now be discovered
 
 ## 0.2.0 - 2015-10-20
 
