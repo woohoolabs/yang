@@ -6,6 +6,7 @@ ADDED:
 - `Document::error($number)` utility method to retrieve only one error
 - `Response::isSuccessful()` to determine if the response was successful
 - `Response::isSuccessful()` to determine if the response was successful and contains a document
+- Support for PHPUnit 5.0
 
 CHANGED:
 
