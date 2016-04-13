@@ -206,7 +206,7 @@ class Resources
             unset($this->includedKeys[$type . "." . $id]);
         }
 
-        $this->addPrimaryResource($resource);
+        $this->addResource($this->primaryKeys, $resource);
 
         return $this;
     }
