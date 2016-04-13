@@ -64,11 +64,9 @@ class Resources
         ksort($this->includedKeys);
 
         $result = [];
-        foreach ($this->includedKeys as $type => $ids) {
-            ksort($ids);
-            foreach ($ids as $id => $value) {
-                $result[] = $this->resources[$type][$id]->toArray();
-            }
+        foreach ($this->includedKeys as $resource) {
+            /** @var \WoohooLabs\Yang\JsonApi\Schema\Resource $resource */
+            $result[] = $resource;
         }
 
         return $result;
@@ -83,11 +81,10 @@ class Resources
             return null;
         }
 
-        $ids = reset($this->primaryKeys);
+        reset($this->primaryKeys);
         $key = key($this->primaryKeys);
-        $id = key($ids);
 
-        return $this->resources[$key][$id]->toArray();
+        return $this->resources[$key]->toArray();
     }
 
     /**
@@ -95,14 +92,10 @@ class Resources
      */
     protected function primaryCollectionToArray()
     {
-        ksort($this->primaryKeys);
-
         $result = [];
-        foreach ($this->primaryKeys as $type => $ids) {
-            ksort($ids);
-            foreach ($ids as $id => $value) {
-                $result[] = $this->resources[$type][$id]->toArray();
-            }
+        foreach ($this->primaryKeys as $resource) {
+            /** @var \WoohooLabs\Yang\JsonApi\Schema\Resource $resource */
+            $result[] = $resource->toArray();
         }
 
         return $result;
@@ -131,7 +124,7 @@ class Resources
      */
     public function getResource($type, $id)
     {
-        return isset($this->resources[$type][$id]) ? $this->resources[$type][$id] : null;
+        return isset($this->resources[$type . "." . $id]) ? $this->resources[$type . "." . $id] : null;
     }
 
     /**
@@ -147,18 +140,7 @@ class Resources
      */
     public function getPrimaryResources()
     {
-        if ($this->isSinglePrimaryResource) {
-            return [];
-        }
-
-        $resources = [];
-        foreach ($this->primaryKeys as $type => $ids) {
-            foreach ($ids as $id) {
-                $resources[] = $this->getResource($type, $id);
-            }
-        }
-
-        return $resources;
+        return array_values($this->primaryKeys);
     }
 
     /**
@@ -166,15 +148,14 @@ class Resources
      */
     public function getPrimaryResource()
     {
-        if ($this->isSinglePrimaryResource === false) {
+        if ($this->hasPrimaryResources() === false) {
             return null;
         }
 
-        $ids = reset($this->primaryKeys);
-        $type = key($this->primaryKeys);
-        $id = key($ids);
+        reset($this->primaryKeys);
+        $key = key($this->primaryKeys);
 
-        return $this->getResource($type, $id);
+        return $this->resources[$key];
     }
 
     /**
@@ -184,7 +165,7 @@ class Resources
      */
     public function hasPrimaryResource($type, $id)
     {
-        return isset($this->primaryKeys[$type][$id]);
+        return isset($this->primaryKeys[$type . "." . $id]);
     }
 
     /**
@@ -202,7 +183,7 @@ class Resources
      */
     public function hasIncludedResource($type, $id)
     {
-        return isset($this->includedKeys[$type][$id]);
+        return isset($this->includedKeys[$type . "." . $id]);
     }
 
     /**
@@ -210,14 +191,7 @@ class Resources
      */
     public function getIncludedResources()
     {
-        $resources = [];
-        foreach ($this->includedKeys as $type => $ids) {
-            foreach ($ids as $id) {
-                $resources[] = $this->getResource($type, $id);
-            }
-        }
-
-        return $resources;
+        return array_values($this->includedKeys);
     }
 
     /**
@@ -229,11 +203,10 @@ class Resources
         $type = $resource->type();
         $id = $resource->id();
         if ($this->hasIncludedResource($type, $id) === true) {
-            unset($this->includedKeys[$type][$id]);
-            $this->primaryKeys[$type][$id] = true;
-        } else {
-            $this->addResource($this->primaryKeys, $resource);
+            unset($this->includedKeys[$type . "." . $id]);
         }
+
+        $this->addPrimaryResource($resource);
 
         return $this;
     }
@@ -256,8 +229,8 @@ class Resources
         $type = $resource->type();
         $id = $resource->id();
 
-        $keys[$type][$id] = true;
-        $this->resources[$type][$id] = $resource;
+        $this->resources[$type . "." . $id] = $resource;
+        $keys[$type . "." . $id] = &$this->resources[$type . "." . $id];
     }
 
     /**

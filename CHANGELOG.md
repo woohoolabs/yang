@@ -10,6 +10,8 @@ ADDED:
 
 CHANGED:
 
+- Improved performance
+
 REMOVED:
 
 FIXED:
@@ -19,6 +21,7 @@ FIXED:
 - The type and id weren't included in the request body
 - Empty responses weren't considered successful by `JsonApiResponse::isSuccessful()`
 - Empty relationship data can now be discovered
+- Sorting does not happen on resource ID
 
 ## 0.2.0 - 2015-10-20
 
