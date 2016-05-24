@@ -2,8 +2,8 @@
 require "../vendor/autoload.php";
 
 use GuzzleHttp\Psr7\Request;
-use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder;
 use WoohooLabs\Yang\JsonApi\JsonApiClient;
+use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder;
 
 $requestBuilder = new JsonApiRequestBuilder(new Request("", ""));
 $request = $requestBuilder
