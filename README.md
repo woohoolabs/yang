@@ -38,6 +38,12 @@ version:
 $ composer require woohoolabs/yang
 ```
 
+If you want to use Guzzle 6 as the HTTP client implementation, you should run the following command too: 
+
+```bash
+$ composer require php-http/guzzle6-adapter
+```
+
 ## Basic Usage
 
 ## Advanced Usage

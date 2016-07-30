@@ -2,7 +2,11 @@
 
 ADDED:
 
+- Support for HTTPlug library to abstract the HTTP client away
+
 CHANGED:
+
+- Separated the async functionalities of `JsonApiClient` into `JsonApiAsyncClient`
 
 REMOVED:
 

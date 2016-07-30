@@ -2,6 +2,7 @@
 require "../vendor/autoload.php";
 
 use GuzzleHttp\Psr7\Request;
+use Http\Adapter\Guzzle6\Client as GuzzleClient;
 use WoohooLabs\Yang\JsonApi\JsonApiClient;
 use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder;
 
@@ -13,7 +14,8 @@ $request = $requestBuilder
     ->withIncludes(["authors", "publisher"])
     ->getRequest();
 
-$client = new JsonApiClient();
+$guzzleClient = GuzzleClient::createWithConfig([]);
+$client = new JsonApiClient($guzzleClient);
 $response = $client->request($request);
 
 echo "Status: " . $response->getStatusCode() . "<br/>";
