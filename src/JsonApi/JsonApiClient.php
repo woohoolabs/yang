@@ -24,7 +24,7 @@ class JsonApiClient
      * @param \Psr\Http\Message\RequestInterface $request
      * @return \WoohooLabs\Yang\JsonApi\Response\JsonApiResponse
      */
-    public function request(RequestInterface $request)
+    public function sendRequest(RequestInterface $request)
     {
         return new JsonApiResponse($this->client->sendRequest($request));
     }

@@ -6,7 +6,9 @@ ADDED:
 
 CHANGED:
 
-- Separated the async functionalities of `JsonApiClient` into `JsonApiAsyncClient`
+- Moved asyncronous functionalities of `JsonApiClient` into `JsonApiAsyncClient`
+- `JsonApiClient::request()` method was renamed to `JsonApiClient::sendRequest()`
+- `JsonApiAsyncClient::requestAsync()` method was renamed to `JsonApiAsyncClient::sendAsyncRequest()`
 
 REMOVED:
 

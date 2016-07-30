@@ -16,7 +16,7 @@ $request = $requestBuilder
 
 $guzzleClient = GuzzleClient::createWithConfig([]);
 $client = new JsonApiClient($guzzleClient);
-$response = $client->request($request);
+$response = $client->sendRequest($request);
 
 echo "Status: " . $response->getStatusCode() . "<br/>";
 echo "Body:<pre>";
