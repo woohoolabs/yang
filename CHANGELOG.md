@@ -14,6 +14,8 @@ REMOVED:
 
 FIXED:
 
+- Error when serialized response body is apparently empty even though it contains data
+
 ## 0.3.0 - 2016-07-30
 
 ADDED:

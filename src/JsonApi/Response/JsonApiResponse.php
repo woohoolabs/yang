@@ -13,9 +13,9 @@ class JsonApiResponse implements ResponseInterface
     protected $response;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\Document
+     * @var \WoohooLabs\Yang\JsonApi\Schema\Document|false|null
      */
-    protected $document;
+    protected $document = false;
 
     /**
      * @param \Psr\Http\Message\ResponseInterface $response
@@ -30,7 +30,7 @@ class JsonApiResponse implements ResponseInterface
      */
     public function hasDocument()
     {
-        return $this->document() !== null;
+        return is_object($this->document());
     }
 
     /**
@@ -38,8 +38,8 @@ class JsonApiResponse implements ResponseInterface
      */
     public function document()
     {
-        if ($this->document === null) {
-            $response = json_decode($this->response->getBody()->getContents(), true);
+        if ($this->document === false) {
+            $response = json_decode($this->response->getBody()->__toString(), true);
             $this->document = is_array($response) === true ? Document::createFromArray($response) : null;
         }
 
