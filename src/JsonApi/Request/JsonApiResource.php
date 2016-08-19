@@ -46,6 +46,16 @@ class JsonApiResource
     }
 
     /**
+     * @param array $attributes
+     * @return $this
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+
+    /**
      * @param string $name
      * @param mixed $value
      * @return $this

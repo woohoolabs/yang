@@ -3,6 +3,7 @@
 ADDED:
 
 - Support for HTTPlug library to abstract the HTTP client away
+- `JsonApiResource::setAttributes()` method
 
 CHANGED:
 
