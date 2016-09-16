@@ -1,4 +1,14 @@
-## 0.4.0 - unreleased
+## 0.5.0 - unreleased
+
+ADDED:
+
+CHANGED:
+
+REMOVED:
+
+FIXED:
+
+## 0.4.0 - 2016-09-16
 
 ADDED:
 
@@ -10,8 +20,6 @@ CHANGED:
 - Moved asyncronous functionalities of `JsonApiClient` into `JsonApiAsyncClient`
 - `JsonApiClient::request()` method was renamed to `JsonApiClient::sendRequest()`
 - `JsonApiAsyncClient::requestAsync()` method was renamed to `JsonApiAsyncClient::sendAsyncRequest()`
-
-REMOVED:
 
 FIXED:
 
@@ -30,8 +38,6 @@ ADDED:
 CHANGED:
 
 - Improved performance
-
-REMOVED:
 
 FIXED:
 
