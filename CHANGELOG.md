@@ -2,6 +2,8 @@
 
 ADDED:
 
+- Support for custom deserialization
+
 CHANGED:
 
 REMOVED:

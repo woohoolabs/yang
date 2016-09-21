@@ -3,6 +3,8 @@ namespace WoohooLabs\Yang\JsonApi\Response;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
+use WoohooLabs\Yang\JsonApi\Deserializer\DefaultDeserializer;
+use WoohooLabs\Yang\JsonApi\Deserializer\DeserializerInterface;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 
 class JsonApiResponse implements ResponseInterface
@@ -13,6 +15,11 @@ class JsonApiResponse implements ResponseInterface
     protected $response;
 
     /**
+     * @var DeserializerInterface
+     */
+    protected $deserializer;
+
+    /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\Document|false|null
      */
     protected $document = false;
@@ -20,9 +27,10 @@ class JsonApiResponse implements ResponseInterface
     /**
      * @param \Psr\Http\Message\ResponseInterface $response
      */
-    public function __construct(ResponseInterface $response)
+    public function __construct(ResponseInterface $response, DeserializerInterface $deserializer = null)
     {
         $this->response = $response;
+        $this->deserializer = $deserializer !== null ? $deserializer : new DefaultDeserializer();
     }
 
     /**
@@ -39,8 +47,8 @@ class JsonApiResponse implements ResponseInterface
     public function document()
     {
         if ($this->document === false) {
-            $response = json_decode($this->response->getBody()->__toString(), true);
-            $this->document = is_array($response) === true ? Document::createFromArray($response) : null;
+            $content = $this->deserializer->deserialize($this->response);
+            $this->document = is_array($content) === true ? Document::createFromArray($content) : null;
         }
 
         return $this->document;
