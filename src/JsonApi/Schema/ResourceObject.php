@@ -1,7 +1,7 @@
 <?php
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
-class Resource
+class ResourceObject
 {
     /**
      * @var string
@@ -35,9 +35,9 @@ class Resource
 
     /**
      * @param array $array
-     * @param \WoohooLabs\Yang\JsonApi\Schema\Resources $resources
+     * @param \WoohooLabs\Yang\JsonApi\Schema\ResourceObjects $resources
      */
-    public function __construct($array, Resources $resources)
+    public function __construct($array, ResourceObjects $resources)
     {
         $this->type = empty($array["type"]) ? "" : $array["type"];
         $this->id = empty($array["id"]) ? "" : $array["id"];

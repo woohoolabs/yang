@@ -1,7 +1,7 @@
 <?php
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
-class Resources
+class ResourceObjects
 {
     /*
      * @var bool
@@ -9,7 +9,7 @@ class Resources
     protected $isSinglePrimaryResource;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\Resource[]
+     * @var \WoohooLabs\Yang\JsonApi\Schema\ResourceObject[]
      */
     protected $resources = [];
 
@@ -36,15 +36,15 @@ class Resources
         }
 
         if ($this->isSinglePrimaryResource === true) {
-            $this->addPrimaryResource(new Resource($data, $this));
+            $this->addPrimaryResource(new ResourceObject($data, $this));
         } else {
             foreach ($data as $resource) {
-                $this->addPrimaryResource(new Resource($resource, $this));
+                $this->addPrimaryResource(new ResourceObject($resource, $this));
             }
         }
 
         foreach ($included as $resource) {
-            $this->addIncludedResource(new Resource($resource, $this));
+            $this->addIncludedResource(new ResourceObject($resource, $this));
         }
     }
 
@@ -65,7 +65,7 @@ class Resources
 
         $result = [];
         foreach ($this->includedKeys as $resource) {
-            /** @var \WoohooLabs\Yang\JsonApi\Schema\Resource $resource */
+            /** @var \WoohooLabs\Yang\JsonApi\Schema\ResourceObject $resource */
             $result[] = $resource;
         }
 
@@ -94,7 +94,7 @@ class Resources
     {
         $result = [];
         foreach ($this->primaryKeys as $resource) {
-            /** @var \WoohooLabs\Yang\JsonApi\Schema\Resource $resource */
+            /** @var \WoohooLabs\Yang\JsonApi\Schema\ResourceObject $resource */
             $result[] = $resource->toArray();
         }
 
@@ -120,7 +120,7 @@ class Resources
     /**
      * @param string $type
      * @param string $id
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
+     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject|null
      */
     public function getResource($type, $id)
     {
@@ -136,7 +136,7 @@ class Resources
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource[]
+     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject[]
      */
     public function getPrimaryResources()
     {
@@ -144,7 +144,7 @@ class Resources
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
+     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject|null
      */
     public function getPrimaryResource()
     {
@@ -187,7 +187,7 @@ class Resources
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource[]
+     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject[]
      */
     public function getIncludedResources()
     {
@@ -195,10 +195,10 @@ class Resources
     }
 
     /**
-     * @param \WoohooLabs\Yang\JsonApi\Schema\Resource $resource
+     * @param \WoohooLabs\Yang\JsonApi\Schema\ResourceObject $resource
      * @return $this
      */
-    protected function addPrimaryResource(Resource $resource)
+    protected function addPrimaryResource(ResourceObject $resource)
     {
         $type = $resource->type();
         $id = $resource->id();
@@ -212,10 +212,10 @@ class Resources
     }
 
     /**
-     * @param \WoohooLabs\Yang\JsonApi\Schema\Resource $resource
+     * @param \WoohooLabs\Yang\JsonApi\Schema\ResourceObject $resource
      * @return $this
      */
-    protected function addIncludedResource(Resource $resource)
+    protected function addIncludedResource(ResourceObject $resource)
     {
         if ($this->hasPrimaryResource($resource->type(), $resource->id()) === false) {
             $this->addResource($this->includedKeys, $resource);
@@ -224,7 +224,7 @@ class Resources
         return $this;
     }
 
-    protected function addResource(&$keys, Resource $resource)
+    protected function addResource(&$keys, ResourceObject $resource)
     {
         $type = $resource->type();
         $id = $resource->id();

@@ -6,6 +6,8 @@ ADDED:
 
 CHANGED:
 
+- Renamed `Resource` to `ResourceObject` and `Resources` to `ResourceObjects`
+
 REMOVED:
 
 FIXED:

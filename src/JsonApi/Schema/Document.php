@@ -19,7 +19,7 @@ class Document
     protected $links;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\Resources
+     * @var \WoohooLabs\Yang\JsonApi\Schema\ResourceObjects
      */
     protected $resources;
 
@@ -66,7 +66,7 @@ class Document
             $included = [];
         }
 
-        $resources = new Resources($data, $included);
+        $resources = new ResourceObjects($data, $included);
 
         $errors = [];
         if (isset($document["errors"]) && is_array($document["errors"])) {
@@ -84,10 +84,10 @@ class Document
      * @param \WoohooLabs\Yang\JsonApi\Schema\JsonApi $jsonApi
      * @param array $meta
      * @param \WoohooLabs\Yang\JsonApi\Schema\Links $links
-     * @param \WoohooLabs\Yang\JsonApi\Schema\Resources $resources
+     * @param \WoohooLabs\Yang\JsonApi\Schema\ResourceObjects $resources
      * @param \WoohooLabs\Yang\JsonApi\Schema\Error[] $errors
      */
-    public function __construct(JsonApi $jsonApi, array $meta, Links $links, Resources $resources, array $errors)
+    public function __construct(JsonApi $jsonApi, array $meta, Links $links, ResourceObjects $resources, array $errors)
     {
         $this->jsonApi = $jsonApi;
         $this->meta = $meta;
@@ -207,7 +207,7 @@ class Document
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
+     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject|null
      */
     public function primaryResource()
     {
@@ -215,7 +215,7 @@ class Document
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource[]
+     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject[]
      */
     public function primaryResources()
     {
@@ -225,7 +225,7 @@ class Document
     /**
      * @param string $type
      * @param string $id
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
+     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject|null
      */
     public function resource($type, $id)
     {
@@ -251,7 +251,7 @@ class Document
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource[]
+     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject[]
      */
     public function includedResources()
     {

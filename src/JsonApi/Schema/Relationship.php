@@ -29,16 +29,16 @@ class Relationship
     protected $resourceMap = [];
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\Resources
+     * @var \WoohooLabs\Yang\JsonApi\Schema\ResourceObjects
      */
     protected $resources;
 
     /**
      * @param string $name
      * @param array $array
-     * @param \WoohooLabs\Yang\JsonApi\Schema\Resources $resources
+     * @param \WoohooLabs\Yang\JsonApi\Schema\ResourceObjects $resources
      */
-    public function __construct($name, array $array, Resources $resources)
+    public function __construct($name, array $array, ResourceObjects $resources)
     {
         $this->name = $name;
         $this->meta = $this->isArrayKey($array, "meta") ? $array["meta"] : [];
@@ -173,7 +173,7 @@ class Relationship
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource[]
+     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject[]
      */
     public function resources()
     {
@@ -192,7 +192,7 @@ class Relationship
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource[]
+     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject[]
      */
     public function resourceMap()
     {
@@ -209,7 +209,7 @@ class Relationship
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
+     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject|null
      */
     public function resource()
     {
@@ -228,7 +228,7 @@ class Relationship
     /**
      * @param string $type
      * @param string $id
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Resource|null
+     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject|null
      */
     public function resourceBy($type, $id)
     {
