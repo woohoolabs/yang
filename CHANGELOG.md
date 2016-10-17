@@ -6,6 +6,7 @@ ADDED:
 
 CHANGED:
 
+- Updated minimum PHP version requirement to 5.6
 - Renamed `Resource` to `ResourceObject` and `Resources` to `ResourceObjects`
 
 REMOVED:
