@@ -7,14 +7,18 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-**Woohoo Labs. Yang is a PHP framework which helps you to communicate with JSON API servers.**
+**Woohoo Labs. Yang is a PHP framework which helps you to communicate with JSON:API servers.**
 
 ## Table of Contents
 
 * [Introduction](#introduction)
 * [Install](#install)
 * [Basic Usage](#basic-usage)
+** [Request builder](#request-builder)
+** [HTTP client](#http-client)
+** [Response hydrator](#response)
 * [Advanced Usage](#advanced-usage)
+** [Custom deserialization](#custom-deserialization)
 * [Versioning](#versioning)
 * [Change Log](#change-log)
 * [Contributing](#contributing)
@@ -23,11 +27,11 @@
 
 ## Introduction
 
-[JSON API](http://jsonapi.org) specification
+[JSON:API](http://jsonapi.org) specification
 [reached 1.0 on 29th May 2015](http://www.programmableweb.com/news/new-json-api-specification-aims-to-speed-api-development/2015/06/10)
 and we also believe it is a big day for RESTful API-s as this specification makes APIs more robust and future-proof
 than they have ever been. Woohoo Labs. Yang (named after Yin-Yang) was born to bring efficiency and elegance for your
-JSON API client implementations.
+JSON:API client implementations.
 
 ## Install
 
@@ -46,7 +50,119 @@ $ composer require php-http/guzzle6-adapter
 
 ## Basic Usage
 
+Yang can help you in 3 ways to communicate with JSON:API servers. The following subsections will cover these topics. 
+
+### Request builder
+
+Yang comes with a powerful request builder with which you are able to setup PSR-7 `Request` objects. For this purpose,
+you may use the `JsonApiRequestBulder` class as it can be seen in the following example.
+
+```php
+use GuzzleHttp\Psr7\Request;
+use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder
+
+// Instantiate an empty PSR-7 request
+$request = new Request("", "")
+
+// Instantiate the request builder
+$requestBuilder = new JsonApiRequestBuilder($request);
+
+// Setup the request with general properties
+$requestBuilder
+    ->protocolVersion("1.1")
+    ->uri("https://www.example.com/api/users")
+    ->withHeader("Accept-Charset", "utf-8");
+
+// Setup the request with JSON:API specific properties
+$requestBuilder
+    ->withFields(                                               // To define sparse fieldset
+        [
+            "users" => ["first_name", "last_name"],
+            "address" => ["country", "city", "postal_code"]
+        ]
+    )
+    ->withIncludes(                                             // To include related resources
+        ["address", "friends"]
+    )
+    ->withIncludes(                                             // Or you can pass a string instead
+        "address,friends"
+    )
+    ->withSort(                                                 // To sort resource collections
+        ["last_name", "first_name"]
+    )
+    ->withPage(                                                 // To paginate the primary data
+        ["number" => 1, "size" => 100]
+    )
+    ->withFilter(                                               // To filter the primary data
+        ["first_name" => "John"]
+    );
+    
+// Setup the request with a body
+$requestBuilder
+    ->withBody(                                                 // You can pass a valid JSON string
+        '{
+           "data": [
+             { "type": "user", "id": "1" },
+             { "type": "user", "id": "2" }
+           ]
+         }'
+    )
+    ->withBody(                                                 // or you can pass an array
+        [
+            "data" => [
+                ["type" => "user", "id" => 1],
+                ["type" => "user", "id" => 2],
+            ]
+        ]
+    )
+    ->withBody(                                                 // or you can pass a JsonApiResource instance
+        new JsonApiResource("user", 1)
+    );
+
+// Get the composed request
+$request = $requestBuilder->getRequest();
+```
+
+If you do not want to use the built-in Request Builder, you can freely setup any PSR-7 `RequestInterface` instances
+in order to proceed with the next steps like this:
+
+```php
+$request = new Request("", "");
+$request
+    ->withProtocolVersion("1.1")
+    ->withUri(new Uri("https://example.com/api/users?fields[users]=first_name,last_name"))
+    ->withHeader("Accept", ""application/vnd.api+json"")
+    ->withHeader("Content-Type", "application/vnd.api+json");    
+```
+
+### HTTP client
+
+The library comes with support for [HTTPlug](https://github.com/php-http/httplug) which is a clever HTTP client
+abstraction so you can choose how you want to send your requests. If you installed the `php-http/guzzle6-adapter`
+package, then you will be able to use Guzzle to do so:
+
+```php
+use Http\Adapter\Guzzle6\Client;
+
+// Instantiate the Guzzle HTTP Client
+$guzzleClient = Client::createWithConfig([]);
+
+// Instantiate the JSON:API Client
+$client = new JsonApiClient($guzzleClient);
+
+// Send the request to retrieve the response
+$response = $client->sendRequest($request);
+```
+
+Of course, you can use any available HTTP Clients or create you custom HTTP Client thanks to HTTPlug.
+
+### Response hydrator
+
+As soon as you have the server response, you can hydrate it 
+
 ## Advanced Usage
+
+### Custom deserialization
 
 ## Examples
 

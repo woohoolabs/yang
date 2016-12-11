@@ -4,6 +4,8 @@ ADDED:
 
 CHANGED:
 
+- Improved documentation
+
 REMOVED:
 
 FIXED:
