@@ -109,7 +109,7 @@ $requestBuilder
     
 // Setup the request with a body
 $requestBuilder
-    ->withBody(                                                 // You can pass a valid JSON string
+    ->withBody(                                                 // You can pass a JSON as string
         '{
            "data": [
              { "type": "user", "id": "1" },
@@ -117,7 +117,7 @@ $requestBuilder
            ]
          }'
     )
-    ->withBody(                                                 // or you can pass an array
+    ->withBody(                                                 // or you can pass it as an array
         [
             "data" => [
                 ["type" => "user", "id" => 1],
@@ -125,7 +125,7 @@ $requestBuilder
             ]
         ]
     )
-    ->withBody(                                                 // or you can pass a JsonApiResource instance
+    ->withBody(                                                 // or a JsonApiResource instance
         new JsonApiResource("user", 1)
     );
 
@@ -141,7 +141,7 @@ $request = new Request("", "");
 $request
     ->withProtocolVersion("1.1")
     ->withUri(new Uri("https://example.com/api/users?fields[users]=first_name,last_name"))
-    ->withHeader("Accept", ""application/vnd.api+json"")
+    ->withHeader("Accept", "application/vnd.api+json")
     ->withHeader("Content-Type", "application/vnd.api+json");    
 ```
 
