@@ -7,11 +7,12 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-**Woohoo Labs. Yang is a PHP framework which helps you to communicate with JSON:API servers.**
+**Woohoo Labs. Yin is a PHP framework which helps you to ease the communication with JSON:API servers.**
 
 ## Table of Contents
 
 * [Introduction](#introduction)
+** [Features](#features)
 * [Install](#install)
 * [Basic Usage](#basic-usage)
 ** [Request builder](#request-builder)
@@ -29,9 +30,16 @@
 
 [JSON:API](http://jsonapi.org) specification
 [reached 1.0 on 29th May 2015](http://www.programmableweb.com/news/new-json-api-specification-aims-to-speed-api-development/2015/06/10)
-and we also believe it is a big day for RESTful API-s as this specification makes APIs more robust and future-proof
-than they have ever been. Woohoo Labs. Yang (named after Yin-Yang) was born to bring efficiency and elegance for your
-JSON:API client implementations.
+and we also believe it is a big day for RESTful APIs as this specification makes APIs more robust and future-proof
+than they have ever been. Woohoo Labs. Yang (named after Yin-Yang) was born to bring efficiency and elegance to your
+JSON:API clients, while [Woohoo Labs. Yin](https://woohoolabs/yin) is its server-side counterpart.
+
+### Features
+
+- 100% [PSR-7](http://www.php-fig.org/psr/psr-7/) compatibility
+- 99% [JSON:API 1.0](http://jsonapi.org/) compatibility (approximately)
+- Provides a Request Builder to setup JSON:API request more easily
+- Provides an easy-to-use HTTP client via [HTTPlug](https://github.com/php-http/httplug)
 
 ## Install
 
@@ -41,6 +49,8 @@ version:
 ```bash
 $ composer require woohoolabs/yang
 ```
+
+Yang needs PHP 5.6+.
 
 If you want to use Guzzle 6 as the HTTP client implementation, you should run the following command too: 
 
