@@ -115,7 +115,7 @@ class Document
             $content["links"] = $this->links->toArray();
         }
 
-        if ($this->hasPrimaryResources()) {
+        if ($this->hasAnyPrimaryResources()) {
             $content["data"] = $this->resources->primaryDataToArray();
         }
 
@@ -127,7 +127,7 @@ class Document
             $content["errors"] = $errors;
         }
 
-        if ($this->resources->hasIncludedResources()) {
+        if ($this->resources->hasAnyIncludedResources()) {
             $content["included"] = $this->resources->includedToArray();
         }
 
@@ -201,9 +201,9 @@ class Document
     /**
      * @return bool
      */
-    public function hasPrimaryResources()
+    public function hasAnyPrimaryResources()
     {
-        return $this->resources->hasPrimaryResources();
+        return $this->resources->hasAnyPrimaryResources();
     }
 
     /**
@@ -235,9 +235,9 @@ class Document
     /**
      * @return bool
      */
-    public function hasIncludedResources()
+    public function hasAnyIncludedResources()
     {
-        return $this->resources->hasIncludedResources();
+        return $this->resources->hasAnyIncludedResources();
     }
 
     /**

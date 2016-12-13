@@ -32,7 +32,7 @@ class JsonApiAsyncClient
      * @param \Psr\Http\Message\RequestInterface[] $requests
      * @return \Http\Promise\Promise[]
      */
-    public function requestConcurrent(array $requests)
+    public function sendConcurrentAsyncRequests(array $requests)
     {
         foreach ($requests as $key => $request) {
             $requests[$key] = $this->sendAsyncRequest($request);

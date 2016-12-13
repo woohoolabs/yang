@@ -168,13 +168,16 @@ $client = new JsonApiAsyncClient($guzzleClient);
 
 // Send the request asyncronously to retrieve a promise
 $promise = $client->sendAsyncRequest($request);
+
+// Send multiple request asyncronously to retrieve an array of promises
+$promises = $client->sendConcurrentAsyncRequests([$request, $request]);
 ```
 
 Of course, you can use any available HTTP Clients or create you custom HTTP Client thanks to HTTPlug.
 
 ### Response
 
-As soon as you have retrieveD the server response, you can start querying it. Yang uses the PSR-7 compatible
+As soon as you have retrieved the server response, you can start querying it. Yang uses the PSR-7 compatible
 `JsonApiResponse` class for this purpose. If you used the HTTP client introduced above, you will automatically
 get an object of this kind, otherwise you have to take care of instantiating it with the right dependencies.
 
@@ -212,7 +215,7 @@ The `Document` has various useful methods too:
 // Checks if the document has a jsonapi member
 $hasJsonApi = $document->hasJsonApi();
 
-// Retrieves the jsonapi member as a WoohooLabs\Yang\JsonApi\Schema\JsonApi instance
+// Retrieves the jsonapi member as a JsonApi instance
 $jsonApi = $document->jsonApi();
 
 $jsonApiVersion = $jsonApi->version();
@@ -227,21 +230,45 @@ $meta = $document->meta();
 // Checks if the document has a links member
 $hasLinks = $document->hasLinks();
 
-// Retrieves the links member as a WoohooLabs\Yang\JsonApi\Schema\Links instance
+// Retrieves the links member as a Links instance
 $links = $document->links();
 
-$selfLink = $links->self();         // Returns a WoohooLabs\Yang\JsonApi\Schema\Link instance or null
-$firstLink = $links->first();       // Returns a WoohooLabs\Yang\JsonApi\Schema\Link instance or null
-$nextLink = $links->link("next");   // Returns a WoohooLabs\Yang\JsonApi\Schema\Link instance or null
+$selfLink = $links->self();         // Returns a Link instance or null
+$firstLink = $links->first();       // Returns a Link instance or null
+$nextLink = $links->link("next");   // Returns a Link instance or null
 
 // Checks if the document has errors
 $hasErrors = $document->hasErrors();
 
-// Retrieves the errors member as an array of WoohooLabs\Yang\JsonApi\Schema\Error instances
+// Retrieves the errors member as an array of Error instances
 $errors = $document->errors();
 
-// Retrieves the first error as a WoohooLabs\Yang\JsonApi\Schema\Error instance or null
+// Retrieves the first error as an Error instance or null
 $firstError = $document->error(0);
+
+// Checks if the document contains a single resource as the primary data
+$isSingleResourceDocument = $document->isSingleResourceDocument();
+
+// Checks if the document contains a collection of resources as the primary data
+$isResourceCollectionDocument = $document->isResourceCollectionDocument();
+
+// Checks if the document contains any primary data
+$hasPrimaryData = $document->hasAnyPrimaryResources();
+
+// Returns the primary resource as a ResourceObject instance or null if it is a collection document
+$primaryResource = $document->primaryResource();
+
+// Returns the primary resources as an array of ResourceObject instances or null if it is a single resource document
+$primaryResources = $document->primaryResources();
+
+// Checks if there is any included resources in the document
+$hasIncludedResources = $document->hasAnyIncludedResources();
+
+// Checks if there is a specific included resource in the document
+$isUserIncluded = $document->hasIncludedResource("user", "abcdefg");
+
+// Retrieves all the included resources as an array of ResourceObject instances
+$includedResources = $document->includedResources();
 ```
 
 ## Advanced Usage

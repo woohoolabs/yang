@@ -4,6 +4,9 @@ ADDED:
 
 CHANGED:
 
+- Renamed `JsonApiAsyncClient::requestConcurrent()` to `JsonApiAsyncClient::sendConcurrentAsyncRequests()`
+- Renamed `Document::hasPrimaryResources()` to `Docment::hasAnyPrimaryResources()`
+- Renamed `Document::hasIncludedResources()` to `Docment::hasAnyIncludedResources()`
 - Improved documentation
 
 REMOVED:

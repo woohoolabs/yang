@@ -77,7 +77,7 @@ class ResourceObjects
      */
     protected function primaryResourceToArray()
     {
-        if ($this->hasPrimaryResources() === false) {
+        if ($this->hasAnyPrimaryResources() === false) {
             return null;
         }
 
@@ -130,7 +130,7 @@ class ResourceObjects
     /**
      * @return bool
      */
-    public function hasPrimaryResources()
+    public function hasAnyPrimaryResources()
     {
         return empty($this->primaryKeys) === false;
     }
@@ -148,7 +148,7 @@ class ResourceObjects
      */
     public function getPrimaryResource()
     {
-        if ($this->hasPrimaryResources() === false) {
+        if ($this->hasAnyPrimaryResources() === false) {
             return null;
         }
 
@@ -171,7 +171,7 @@ class ResourceObjects
     /**
      * @return bool
      */
-    public function hasIncludedResources()
+    public function hasAnyIncludedResources()
     {
         return empty($this->includedKeys) === false;
     }
