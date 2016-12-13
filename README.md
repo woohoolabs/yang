@@ -199,7 +199,7 @@ $isSuccessful = $response->isSuccessful();
 // Checks if the response has the status codes listed below and doesn't contain errors
 $isSuccessful = $response->isSuccessful([200, 202]);
 
-// The same as the isSuccessful() method, but also ensures the response has a document
+// The same as the isSuccessful() method, but also ensures the response contains a document
 $isSuccessfulDocument = $response->isSuccessfulDocument();
 
 // Retrieves and deserializes the JSON:API document in the response body
@@ -212,7 +212,7 @@ The `Document` has various useful methods too:
 // Checks if the document has a jsonapi member
 $hasJsonApi = $document->hasJsonApi();
 
-// Retrieves the jsonapi member as an WoohooLabs\Yang\JsonApi\Schema\JsonApi object
+// Retrieves the jsonapi member as a WoohooLabs\Yang\JsonApi\Schema\JsonApi object
 $jsonApi = $document->jsonApi();
 $jsonApiVersion = $jsonApi->version();
 $jsonApiMeta = $jsonApi->meta();
@@ -226,21 +226,21 @@ $meta = $document->meta();
 // Checks if the document has a links member
 $hasLinks = $document->hasLinks();
 
-// Retrieves the links member as an WoohooLabs\Yang\JsonApi\Schema\Links object
+// Retrieves the links member as a WoohooLabs\Yang\JsonApi\Schema\Links object
 $links = $document->links();
+
 $selfLink = $links->self();         // Returns a WoohooLabs\Yang\JsonApi\Schema\Link or null
 $firstLink = $links->first();       // Returns a WoohooLabs\Yang\JsonApi\Schema\Link or null
-$prevLink = $links->link("prev");   // Returns a WoohooLabs\Yang\JsonApi\Schema\Link or null
+$nextLink = $links->link("next");   // Returns a WoohooLabs\Yang\JsonApi\Schema\Link or null
 
 // Checks if the document has errors
 $hasErrors = $document->hasErrors();
 
 // Retrieves the errors member as an array of WoohooLabs\Yang\JsonApi\Schema\Error
 $errors = $document->errors();
-$firstError = $document->error(0);  // Returns a WoohooLabs\Yang\JsonApi\Schema\Error or null
 
+$firstError = $document->error(0);  // Returns a WoohooLabs\Yang\JsonApi\Schema\Error or null
 ```
- 
 
 ## Advanced Usage
 
