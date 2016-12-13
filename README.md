@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-**Woohoo Labs. Yin is a PHP framework which helps you to ease the communication with JSON:API servers.**
+**Woohoo Labs. Yin is a PHP framework which helps you to make communication easy with JSON:API servers.**
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@
 * [Basic Usage](#basic-usage)
     * [Request builder](#request-builder)
     * [HTTP client](#http-client)
-    * [Response hydrator](#response)
+    * [Response](#response)
 * [Advanced Usage](#advanced-usage)
     * [Custom deserialization](#custom-deserialization)
 * [Versioning](#versioning)
@@ -142,7 +142,7 @@ $request
     ->withProtocolVersion("1.1")
     ->withUri(new Uri("https://example.com/api/users?fields[users]=first_name,last_name"))
     ->withHeader("Accept", "application/vnd.api+json")
-    ->withHeader("Content-Type", "application/vnd.api+json");    
+    ->withHeader("Content-Type", "application/vnd.api+json");
 ```
 
 ### HTTP client
@@ -157,18 +157,90 @@ use Http\Adapter\Guzzle6\Client;
 // Instantiate the Guzzle HTTP Client
 $guzzleClient = Client::createWithConfig([]);
 
-// Instantiate the JSON:API Client
+// Instantiate the syncronous JSON:API Client
 $client = new JsonApiClient($guzzleClient);
 
-// Send the request to retrieve the response
+// Send the request syncronously to retrieve the response
 $response = $client->sendRequest($request);
+
+// Instantiate the asyncronous JSON:API Client
+$client = new JsonApiAsyncClient($guzzleClient);
+
+// Send the request asyncronously to retrieve a promise
+$promise = $client->sendAsyncRequest($request);
 ```
 
 Of course, you can use any available HTTP Clients or create you custom HTTP Client thanks to HTTPlug.
 
-### Response hydrator
+### Response
 
-As soon as you have the server response, you can hydrate it 
+As soon as you have retrieveD the server response, you can start querying it. Yang uses the PSR-7 compatible
+`JsonApiResponse` class for this purpose. If you used the HTTP client introduced above, you will automatically
+get an object of this kind, otherwise you have to take care of instantiating it with the right dependencies.
+
+```php
+// Instantiate a JSON:API response from a PSR-7 response with the default deserializer
+$response = new JsonApiResponse($psr7Response);
+
+// Instantiate a JSON:API response from a PSR-7 response with a custom deserializer
+$response = new JsonApiResponse($psr7Response, new MyCustomDeserializer());
+```
+
+The `JsonApiResponse` class - above the ones defined by PSR-7 - has some methods to make handling JSON:API responses
+easier:
+
+```php
+// Checks if the response contains a JSON:API Document
+$hasDocument = $response->hasDocument();
+
+// Checks if the response doesn't contain errors
+$isSuccessful = $response->isSuccessful();
+
+// Checks if the response has the status codes listed below and doesn't contain errors
+$isSuccessful = $response->isSuccessful([200, 202]);
+
+// The same as the isSuccessful() method, but also ensures the response has a document
+$isSuccessfulDocument = $response->isSuccessfulDocument();
+
+// Retrieves and deserializes the JSON:API document in the response body
+$document = $response->document();
+```
+
+The `Document` has various useful methods too:
+
+```php
+// Checks if the document has a jsonapi member
+$hasJsonApi = $document->hasJsonApi();
+
+// Retrieves the jsonapi member as an WoohooLabs\Yang\JsonApi\Schema\JsonApi object
+$jsonApi = $document->jsonApi();
+$jsonApiVersion = $jsonApi->version();
+$jsonApiMeta = $jsonApi->meta();
+
+// Checks if the document has a meta member
+$hasMeta = $document->hasMeta();
+
+// Retrieves the meta member as an array
+$meta = $document->meta();
+
+// Checks if the document has a links member
+$hasLinks = $document->hasLinks();
+
+// Retrieves the links member as an WoohooLabs\Yang\JsonApi\Schema\Links object
+$links = $document->links();
+$selfLink = $links->self();         // Returns a WoohooLabs\Yang\JsonApi\Schema\Link or null
+$firstLink = $links->first();       // Returns a WoohooLabs\Yang\JsonApi\Schema\Link or null
+$prevLink = $links->link("prev");   // Returns a WoohooLabs\Yang\JsonApi\Schema\Link or null
+
+// Checks if the document has errors
+$hasErrors = $document->hasErrors();
+
+// Retrieves the errors member as an array of WoohooLabs\Yang\JsonApi\Schema\Error
+$errors = $document->errors();
+$firstError = $document->error(0);  // Returns a WoohooLabs\Yang\JsonApi\Schema\Error or null
+
+```
+ 
 
 ## Advanced Usage
 
