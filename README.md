@@ -209,7 +209,7 @@ $isSuccessfulDocument = $response->isSuccessfulDocument();
 $document = $response->document();
 ```
 
-The `Document` has various useful methods too:
+The `Document` class has various useful methods too:
 
 ```php
 // Checks if the document has a jsonapi member
@@ -269,6 +269,43 @@ $isUserIncluded = $document->hasIncludedResource("user", "abcdefg");
 
 // Retrieves all the included resources as an array of ResourceObject instances
 $includedResources = $document->includedResources();
+```
+
+The `ResourceObject` class has useful methods too: 
+
+```php
+// Returns the type of the resource
+$type = $resourceObject->type();
+
+// Returns the id of the resource
+$id = $resourceObject->id();
+
+// Checks if the resource has meta information
+$hasMeta = $resourceObject->hasMeta();
+
+// Returns the meta information
+$meta = $resourceObject->meta();
+
+// Checks if the resource has links
+$hasLinks = $resourceObject->hasLinks();
+
+// Returns the links member as a Links instance
+$links = $resourceObject->links();
+
+// Returns the attributes of the resource
+$attributes = $resourceObject->attributes();
+
+// Checks if the resource has an attribute
+$hasFirstName = $resourceObject->hasAttribute("first_name");
+
+// Returns an attribute of the resource or null if it is missing
+$firstName = $resourceObject->attribute("first_name");
+
+// Checks if the resource has a relationship
+$hasAddress = $resourceObject->hasRelationship("address");
+
+// Returns a relationship of the resource or null if it is missing
+$address = $resourceObject->relationship("address");
 ```
 
 ## Advanced Usage
