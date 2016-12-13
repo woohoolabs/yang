@@ -212,8 +212,9 @@ The `Document` has various useful methods too:
 // Checks if the document has a jsonapi member
 $hasJsonApi = $document->hasJsonApi();
 
-// Retrieves the jsonapi member as a WoohooLabs\Yang\JsonApi\Schema\JsonApi object
+// Retrieves the jsonapi member as a WoohooLabs\Yang\JsonApi\Schema\JsonApi instance
 $jsonApi = $document->jsonApi();
+
 $jsonApiVersion = $jsonApi->version();
 $jsonApiMeta = $jsonApi->meta();
 
@@ -226,20 +227,21 @@ $meta = $document->meta();
 // Checks if the document has a links member
 $hasLinks = $document->hasLinks();
 
-// Retrieves the links member as a WoohooLabs\Yang\JsonApi\Schema\Links object
+// Retrieves the links member as a WoohooLabs\Yang\JsonApi\Schema\Links instance
 $links = $document->links();
 
-$selfLink = $links->self();         // Returns a WoohooLabs\Yang\JsonApi\Schema\Link or null
-$firstLink = $links->first();       // Returns a WoohooLabs\Yang\JsonApi\Schema\Link or null
-$nextLink = $links->link("next");   // Returns a WoohooLabs\Yang\JsonApi\Schema\Link or null
+$selfLink = $links->self();         // Returns a WoohooLabs\Yang\JsonApi\Schema\Link instance or null
+$firstLink = $links->first();       // Returns a WoohooLabs\Yang\JsonApi\Schema\Link instance or null
+$nextLink = $links->link("next");   // Returns a WoohooLabs\Yang\JsonApi\Schema\Link instance or null
 
 // Checks if the document has errors
 $hasErrors = $document->hasErrors();
 
-// Retrieves the errors member as an array of WoohooLabs\Yang\JsonApi\Schema\Error
+// Retrieves the errors member as an array of WoohooLabs\Yang\JsonApi\Schema\Error instances
 $errors = $document->errors();
 
-$firstError = $document->error(0);  // Returns a WoohooLabs\Yang\JsonApi\Schema\Error or null
+// Retrieves the first error as a WoohooLabs\Yang\JsonApi\Schema\Error instance or null
+$firstError = $document->error(0);
 ```
 
 ## Advanced Usage
