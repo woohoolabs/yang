@@ -80,7 +80,7 @@ class JsonApiRequestBuilder
      */
     public function fetch()
     {
-        return $this->method("GET");
+        return $this->setMethod("GET");
     }
 
     /**
@@ -88,7 +88,7 @@ class JsonApiRequestBuilder
      */
     public function create()
     {
-        return $this->method("POST");
+        return $this->setMethod("POST");
     }
 
     /**
@@ -96,7 +96,7 @@ class JsonApiRequestBuilder
      */
     public function update()
     {
-        return $this->method("UPDATE");
+        return $this->setMethod("UPDATE");
     }
 
     /**
@@ -104,14 +104,14 @@ class JsonApiRequestBuilder
      */
     public function delete()
     {
-        return $this->method("DELETE");
+        return $this->setMethod("DELETE");
     }
 
     /**
      * @param string $method
      * @return $this
      */
-    public function method($method)
+    public function setMethod($method)
     {
         $this->method = $method;
 
@@ -122,7 +122,7 @@ class JsonApiRequestBuilder
      * @param string $version
      * @return $this
      */
-    public function protocolVersion($version)
+    public function setProtocolVersion($version)
     {
         $this->protocolVersion = $version;
 
@@ -134,7 +134,7 @@ class JsonApiRequestBuilder
      */
     public function http()
     {
-        return $this->uriScheme("http");
+        return $this->setUriScheme("http");
     }
 
     /**
@@ -142,14 +142,14 @@ class JsonApiRequestBuilder
      */
     public function https()
     {
-        return $this->uriScheme("https");
+        return $this->setUriScheme("https");
     }
 
     /**
      * @param string $uri
      * @return $this
      */
-    public function uri($uri)
+    public function setUri($uri)
     {
         $parsedUrl = parse_url($uri);
 
@@ -184,7 +184,7 @@ class JsonApiRequestBuilder
      * @param string $scheme
      * @return $this
      */
-    public function uriScheme($scheme)
+    public function setUriScheme($scheme)
     {
         $this->scheme = $scheme;
 
@@ -195,7 +195,7 @@ class JsonApiRequestBuilder
      * @param string $host
      * @return $this
      */
-    public function uriHost($host)
+    public function setUriHost($host)
     {
         $this->host = $host;
 
@@ -206,7 +206,7 @@ class JsonApiRequestBuilder
      * @param string $port
      * @return $this
      */
-    public function uriPort($port)
+    public function setUriPort($port)
     {
         $this->port = $port;
 
@@ -217,7 +217,7 @@ class JsonApiRequestBuilder
      * @param string $path
      * @return $this
      */
-    public function uriPath($path)
+    public function setUriPath($path)
     {
         $this->path = $path;
 
@@ -229,7 +229,7 @@ class JsonApiRequestBuilder
      * @param string|array $value
      * @return $this
      */
-    public function uriQueryParam($name, $value)
+    public function setUriQueryParam($name, $value)
     {
         $this->queryString[$name] = $value;
 
@@ -241,7 +241,7 @@ class JsonApiRequestBuilder
      * @param string|string[] $value
      * @return $this
      */
-    public function withHeader($name, $value)
+    public function setHeader($name, $value)
     {
         $this->headers[$name] = $value;
 
@@ -252,7 +252,7 @@ class JsonApiRequestBuilder
      * @param array $fields
      * @return $this
      */
-    public function withFields(array $fields)
+    public function setJsonApiFields(array $fields)
     {
         $this->setQueryParam("fields", $fields);
 
@@ -263,7 +263,7 @@ class JsonApiRequestBuilder
      * @param array|string $fields
      * @return $this
      */
-    public function withSort($fields)
+    public function setJsonApiSort($fields)
     {
         $this->setQueryParam("sort", $fields);
 
@@ -274,7 +274,7 @@ class JsonApiRequestBuilder
      * @param array $paginate
      * @return $this
      */
-    public function withPage(array $paginate)
+    public function setJsonApiPage(array $paginate)
     {
         $this->setQueryParam("page", $paginate);
 
@@ -285,7 +285,7 @@ class JsonApiRequestBuilder
      * @param array|string $filter
      * @return $this
      */
-    public function withFilter(array $filter)
+    public function setJsonApiFilter(array $filter)
     {
         $this->setQueryParam("filter", $filter);
 
@@ -296,7 +296,7 @@ class JsonApiRequestBuilder
      * @param array|string $includes
      * @return $this
      */
-    public function withIncludes($includes)
+    public function setJsonApiIncludes($includes)
     {
         if (is_array($includes)) {
             $this->queryString["include"] = implode(",", $includes);
@@ -311,7 +311,7 @@ class JsonApiRequestBuilder
      * @param \WoohooLabs\Yang\JsonApi\Request\JsonApiResource|array|object|string $body
      * @return $this
      */
-    public function withBody($body)
+    public function setJsonApiBody($body)
     {
         if (is_string($body)) {
             $this->body = $body;

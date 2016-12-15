@@ -9,9 +9,9 @@ use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder;
 $requestBuilder = new JsonApiRequestBuilder(new Request("", ""));
 $request = $requestBuilder
     ->fetch()
-    ->uri("http://yin.local/index.php?example=book&id=1")
-    ->withFields(["book" => "title,pages,authors,publisher"])
-    ->withIncludes(["authors", "publisher"])
+    ->setUri("http://yin.local/index.php?example=book&id=1")
+    ->setJsonApiFields(["book" => "title,pages,authors,publisher"])
+    ->setJsonApiIncludes(["authors", "publisher"])
     ->getRequest();
 
 $guzzleClient = GuzzleClient::createWithConfig([]);

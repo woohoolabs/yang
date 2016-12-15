@@ -79,37 +79,38 @@ $requestBuilder = new JsonApiRequestBuilder($request);
 
 // Setup the request with general properties
 $requestBuilder
-    ->protocolVersion("1.1")
-    ->uri("https://www.example.com/api/users")
-    ->withHeader("Accept-Charset", "utf-8");
+    ->setProtocolVersion("1.1")
+    ->setMethod("GET")
+    ->setUri("https://www.example.com/api/users")
+    ->setHeader("Accept-Charset", "utf-8");
 
 // Setup the request with JSON:API specific properties
 $requestBuilder
-    ->withFields(                                               // To define sparse fieldset
+    ->setJsonApiFields(                                         // To define sparse fieldset
         [
             "users" => ["first_name", "last_name"],
             "address" => ["country", "city", "postal_code"]
         ]
     )
-    ->withIncludes(                                             // To include related resources
+    ->setJsonApiIncludes(                                       // To include related resources
         ["address", "friends"]
     )
-    ->withIncludes(                                             // Or you can pass a string instead
+    ->setJsonApiIncludes(                                       // Or you can pass a string instead
         "address,friends"
     )
-    ->withSort(                                                 // To sort resource collections
+    ->setJsonApiSort(                                           // To sort resource collections
         ["last_name", "first_name"]
     )
-    ->withPage(                                                 // To paginate the primary data
+    ->setJsonApiPage(                                           // To paginate the primary data
         ["number" => 1, "size" => 100]
     )
-    ->withFilter(                                               // To filter the primary data
+    ->setJsonApiFilter(                                         // To filter the primary data
         ["first_name" => "John"]
     );
     
 // Setup the request with a body
 $requestBuilder
-    ->withBody(                                                 // You can pass a JSON as string
+    ->setBody(                                                  // You can pass a JSON as string
         '{
            "data": [
              { "type": "user", "id": "1" },
@@ -117,7 +118,7 @@ $requestBuilder
            ]
          }'
     )
-    ->withBody(                                                 // or you can pass it as an array
+    ->setBody(                                                  // or you can pass it as an array
         [
             "data" => [
                 ["type" => "user", "id" => 1],
@@ -125,7 +126,7 @@ $requestBuilder
             ]
         ]
     )
-    ->withBody(                                                 // or a JsonApiResource instance
+    ->setBody(                                                  // or a JsonApiResource instance
         new JsonApiResource("user", 1)
     );
 
@@ -292,7 +293,7 @@ $hasLinks = $primaryResource->hasLinks();
 // Returns the links member as a Links instance
 $links = $primaryResource->links();
 
-// Returns the attributes of the resource
+// Returns the attributes of the resource as an array
 $attributes = $primaryResource->attributes();
 
 // Checks if the resource has an attribute
