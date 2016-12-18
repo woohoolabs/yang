@@ -19,7 +19,7 @@ class JsonApiResource
     protected $attributes;
 
     /**
-     * @var array
+     * @var JsonApiRelationshipInterface[]
      */
     protected $relationships;
 
@@ -28,7 +28,7 @@ class JsonApiResource
      * @param string $id
      * @return $this
      */
-    public static function create($type = "", $id = "")
+    public static function create($type, $id = "")
     {
         return new self($type, $id);
     }
@@ -37,7 +37,7 @@ class JsonApiResource
      * @param string $type
      * @param string $id
      */
-    public function __construct($type = "", $id = "")
+    public function __construct($type, $id = "")
     {
         $this->type = $type;
         $this->id = $id;
@@ -52,6 +52,7 @@ class JsonApiResource
     public function setAttributes(array $attributes)
     {
         $this->attributes = $attributes;
+
         return $this;
     }
 
@@ -63,30 +64,39 @@ class JsonApiResource
     public function setAttribute($name, $value)
     {
         $this->attributes[$name] = $value;
+
         return $this;
     }
 
     /**
-     * @param string $relationship
-     * @param string $type
-     * @param string $id
+     * @param string $name
+     * @param JsonApiToOneRelationship $relationship
      * @return $this
      */
-    public function setToOneResourceIdentifier($relationship, $type, $id)
+    public function setToOneRelationship($name, JsonApiToOneRelationship $relationship)
     {
-        $this->relationships[$relationship] = ["type" => $type, "id" => $id];
-        return $this;
+        return $this->setRelationship($name, $relationship);
     }
 
     /**
-     * @param string $relationship
-     * @param string $type
-     * @param string $id
+     * @param string $name
+     * @param JsonApiToManyRelationship $relationship
      * @return $this
      */
-    public function addToManyResourceIdentifier($relationship, $type, $id)
+    public function setToManyRelationship($name, JsonApiToManyRelationship $relationship)
     {
-        $this->relationships[$relationship][] = ["type" => $type, "id" => $id];
+        return $this->setRelationship($name, $relationship);
+    }
+
+    /**
+     * @param string $name
+     * @param JsonApiRelationshipInterface $relationship
+     * @return $this
+     */
+    public function setRelationship($name, JsonApiRelationshipInterface $relationship)
+    {
+        $this->relationships[$name] = $relationship;
+
         return $this;
     }
 
@@ -95,17 +105,22 @@ class JsonApiResource
      */
     public function toArray()
     {
-        $resource = ["data" => ["type" => $this->type]];
+        $resource = [
+            "data" => [
+                "type" => $this->type
+            ]
+        ];
+
         if (empty($this->id) === false) {
             $resource["data"]["id"] = $this->id;
         }
 
-        foreach ($this->attributes as $name => $attribute) {
-            $resource["data"]["attributes"][$name] = $attribute;
+        if (empty($this->attributes) === false) {
+            $resource["data"]["attributes"] = $this->attributes;
         }
 
         foreach ($this->relationships as $name => $relationship) {
-            $resource["data"]["attributes"][$name]["data"] = $relationship;
+            $resource["data"]["relationships"][$name] = $relationship->toArray();
         }
 
         return $resource;

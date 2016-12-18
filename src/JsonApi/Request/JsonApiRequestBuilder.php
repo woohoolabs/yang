@@ -96,7 +96,7 @@ class JsonApiRequestBuilder
      */
     public function update()
     {
-        return $this->setMethod("UPDATE");
+        return $this->setMethod("PATCH");
     }
 
     /**
@@ -254,18 +254,18 @@ class JsonApiRequestBuilder
      */
     public function setJsonApiFields(array $fields)
     {
-        $this->setQueryParam("fields", $fields);
+        $this->setArrayQueryParam("fields", $fields);
 
         return $this;
     }
 
     /**
-     * @param array|string $fields
+     * @param array|string $sort
      * @return $this
      */
-    public function setJsonApiSort($fields)
+    public function setJsonApiSort($sort)
     {
-        $this->setQueryParam("sort", $fields);
+        $this->setListQueryParam("sort", $sort);
 
         return $this;
     }
@@ -276,7 +276,7 @@ class JsonApiRequestBuilder
      */
     public function setJsonApiPage(array $paginate)
     {
-        $this->setQueryParam("page", $paginate);
+        $this->setArrayQueryParam("page", $paginate);
 
         return $this;
     }
@@ -287,7 +287,7 @@ class JsonApiRequestBuilder
      */
     public function setJsonApiFilter(array $filter)
     {
-        $this->setQueryParam("filter", $filter);
+        $this->setArrayQueryParam("filter", $filter);
 
         return $this;
     }
@@ -298,11 +298,7 @@ class JsonApiRequestBuilder
      */
     public function setJsonApiIncludes($includes)
     {
-        if (is_array($includes)) {
-            $this->queryString["include"] = implode(",", $includes);
-        } else {
-            $this->queryString["include"] = $includes;
-        }
+        $this->setListQueryParam("include", $includes);
 
         return $this;
     }
@@ -334,6 +330,7 @@ class JsonApiRequestBuilder
             ->getUri()
             ->withScheme($this->scheme)
             ->withHost($this->host)
+            ->withPort($this->port)
             ->withPath($this->path)
             ->withQuery($this->getQueryString());
         $request = $request->withUri($uri);
@@ -358,14 +355,27 @@ class JsonApiRequestBuilder
 
     /**
      * @param string $name
-     * @param array|string $queryParam
+     * @param array $queryParam
      */
-    protected function setQueryParam($name, $queryParam)
+    protected function setArrayQueryParam($name, array $queryParam)
     {
-        if (is_array($queryParam)) {
-            foreach ($queryParam as $key => $value) {
+        foreach ($queryParam as $key => $value) {
+            if (is_array($value)) {
+                $this->queryString[$name][$key] = implode(",", $value);
+            } else {
                 $this->queryString[$name][$key] = $value;
             }
+        }
+    }
+
+    /**
+     * @param string $name
+     * @param array|string $queryParam
+     */
+    protected function setListQueryParam($name, $queryParam)
+    {
+        if (is_array($queryParam)) {
+            $this->queryString[$name] = implode(",", $queryParam);
         } else {
             $this->queryString[$name] = $queryParam;
         }

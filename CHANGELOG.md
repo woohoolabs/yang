@@ -2,11 +2,24 @@
 
 ADDED:
 
+- Added `JsonApiResource::setRelationship()`
+- Unit tests
+- Docker support to run tests
+
 CHANGED:
+
+- Added `JsonApiResource::setToOneRelationship()` instead of `JsonApiResource::setToOneResourceIdentifier()`
+- Added `JsonApiResource::setToManyRelationship()` instead of `JsonApiResource::addToManyResourceIdentifier()`
 
 REMOVED:
 
 FIXED:
+
+- `JsonApiResource` didn't add relationships to the request
+- The `type` constructor argument became required for `JsonApiResource`
+- `JsonApiRequestBuilder::setPort()` didn't do anything
+- `JsonApiRequestBuilder::setJsonApi*()` methods didn't work as intended
+- `JsonApiRequestBuilder::update()` will now set the request method to "PATCH" instead of "UPDATE" 
 
 ## 0.6.0 - 2016-12-18
 
