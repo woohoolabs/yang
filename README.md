@@ -16,7 +16,7 @@
 * [Install](#install)
 * [Basic Usage](#basic-usage)
     * [Request builder](#request-builder)
-    * [HTTP client](#http-client)
+    * [HTTP clients](#http-clients)
     * [Response](#response)
 * [Advanced Usage](#advanced-usage)
     * [Custom deserialization](#custom-deserialization)
@@ -146,7 +146,7 @@ $request
     ->withHeader("Content-Type", "application/vnd.api+json");
 ```
 
-### HTTP client
+### HTTP clients
 
 The library comes with support for [HTTPlug](https://github.com/php-http/httplug) which is a clever HTTP client
 abstraction so you can choose how you want to send your requests. If you installed the `php-http/guzzle6-adapter`
@@ -185,9 +185,6 @@ get an object of this kind, otherwise you have to take care of instantiating it 
 ```php
 // Instantiate a JSON:API response from a PSR-7 response with the default deserializer
 $response = new JsonApiResponse($psr7Response);
-
-// Instantiate a JSON:API response from a PSR-7 response with a custom deserializer
-$response = new JsonApiResponse($psr7Response, new MyCustomDeserializer());
 ```
 
 The `JsonApiResponse` class - above the ones defined by PSR-7 - has some methods to make handling JSON:API responses
@@ -308,10 +305,81 @@ $hasAddress = $primaryResource->hasRelationship("address");
 // Returns a relationship of the resource or null if it is missing
 $address = $primaryResource->relationship("address");
 ```
+The `Relationship` object supports the following methods:
+
+```php
+// Checks if it is a to-one relationship
+$isToOneRelationship = $address->isToOneRelationship(); 
+
+// Checks if it is a to-many relationship 
+$isToManyRelationship = $address->isToManyRelationship();
+
+// Returns the name of the relationship
+$name = $address->name();
+
+// Checks if the relationship has the meta member
+$hasMeta = $address->hasMeta();
+
+// Returns the meta information of the relationship as an array
+$meta = $address->meta();
+
+// Returns the links member of the relationship as a Links instance
+$links = $address->links();
+
+// Returns the resource linkage as an array of a to-one relationship
+// or null if there isn't any related data
+$resourceLinkage = $address->resourceLink();
+ 
+// Returns the resource linkage as an array of a to-many relationship
+$resourceLinkage = $address->resourceLinks();
+
+// Checks if the resource object is included
+$isIncluded = $address->isIncliuded("address", "abcd");
+
+// Returns the resource object of a to-one relationship as a `ResourceObject` instance
+// if the relationship is included, or null otherwise
+$resource = $address->resource();
+
+// Returns the resource objects of a to-many relationship as an array of `ResourceObject` instances
+// if the relationship is included, or null otherwise
+$resources = $address->resources();
+```
 
 ## Advanced Usage
 
 ### Custom deserialization
+
+Sometimes you might need to be tricky, and customly deserialize a server response. For example if you dispatch a server
+request internally (in the original request), then with this feature you can receive the response as an array - so you
+don't need to serialize at server-side and then deserialize at client-size. If you use Woohoo Labs. Yin in your server
+and a [custom serializer](https://github.com/woohoolabs/yin/#custom-serializer), then this is an easy task to do.
+
+If you use the default [HTTP Clients](#http-clients) then you only have to pass a second argument to them like below:
+
+```php
+use Http\Adapter\Guzzle6\Client;
+
+// Instantiate the Guzzle HTTP Client
+$guzzleClient = Client::createWithConfig([]);
+
+// Instantiate your custom deserializer
+$myDeserializer = new MyCustomDeserializer();
+
+// Instantiate the syncronous JSON:API Client with a custom deserializer
+$syncClient = new JsonApiClient($guzzleClient, $myDeserializer);
+
+// Instantiate the asyncronous JSON:API Client with a custom deserializer
+$asyncClient = new JsonApiAsyncClient($guzzleClient, $myDeserializer);
+```
+
+Otherwise pass your deserializer to the `JsonApiResponse` as its second argument like below:
+
+```php
+// Instantiate a JSON:API response from a PSR-7 response with a custom deserializer
+$response = new JsonApiResponse($psr7Response, new MyCustomDeserializer());
+```
+
+You only have to make sure that your custom deserializer implements the `DeserializerInterface`.
 
 ## Examples
 

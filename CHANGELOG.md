@@ -1,18 +1,13 @@
 ## 0.6.0 - unreleased
 
-ADDED:
-
 CHANGED:
 
 - Renamed `JsonApiAsyncClient::requestConcurrent()` to `JsonApiAsyncClient::sendConcurrentAsyncRequests()`
 - Renamed `Document::hasPrimaryResources()` to `Docment::hasAnyPrimaryResources()`
 - Renamed `Document::hasIncludedResources()` to `Docment::hasAnyIncludedResources()`
 - Renamed almost all methods in `JsonApiRequestBuilder`
+- Do not sort included resources by type and id
 - Improved documentation
-
-REMOVED:
-
-FIXED:
 
 ## 0.5.0 - 2016-11-01
 

@@ -61,8 +61,6 @@ class ResourceObjects
      */
     public function includedToArray()
     {
-        ksort($this->includedKeys);
-
         $result = [];
         foreach ($this->includedKeys as $resource) {
             /** @var \WoohooLabs\Yang\JsonApi\Schema\ResourceObject $resource */
