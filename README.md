@@ -37,9 +37,9 @@ JSON:API clients, while [Woohoo Labs. Yin](https://woohoolabs/yin) is its server
 ### Features
 
 - 100% [PSR-7](http://www.php-fig.org/psr/psr-7/) compatibility
-- 99% [JSON:API 1.0](http://jsonapi.org/) compatibility (approximately)
+- 99% [JSON:API 1.0](http://jsonapi.org/) conformance (approximately)
 - Provides a Request Builder to setup JSON:API request more easily
-- Provides an easy-to-use HTTP client via [HTTPlug](https://github.com/php-http/httplug)
+- Provides easy-to-use HTTP clients via [HTTPlug](https://github.com/php-http/httplug)
 
 ## Install
 
@@ -65,7 +65,7 @@ Yang can help you in 3 ways to communicate with JSON:API servers. The following 
 ### Request builder
 
 Yang comes with a powerful request builder with which you are able to setup PSR-7 `Request` objects. For this purpose,
-you may use the `JsonApiRequestBulder` class as it can be seen in the following example.
+you may use the `JsonApiRequestBuilder` class as it can be seen in the following example.
 
 ```php
 use GuzzleHttp\Psr7\Request;
@@ -135,7 +135,7 @@ $request = $requestBuilder->getRequest();
 ```
 
 If you do not want to use the built-in Request Builder, you can freely setup any PSR-7 `RequestInterface` instances
-in order to proceed with the next steps like this:
+in order to proceed with the next steps:
 
 ```php
 $request = new Request("", "");
@@ -179,8 +179,8 @@ Of course, you can use any available HTTP Clients or create you custom HTTP Clie
 ### Response
 
 As soon as you have retrieved the server response, you can start querying it. Yang uses the PSR-7 compatible
-`JsonApiResponse` class for this purpose. If you used the HTTP client introduced above, you will automatically
-get an object of this kind, otherwise you have to take care of instantiating it with the right dependencies.
+`JsonApiResponse` class for this purpose. If you used a HTTP client introduced above, you will automatically
+get an object of this type, otherwise you have to take care of instantiating it with the right dependencies.
 
 ```php
 // Instantiate a JSON:API response from a PSR-7 response with the default deserializer
@@ -197,7 +197,7 @@ $hasDocument = $response->hasDocument();
 // Checks if the response doesn't contain errors
 $isSuccessful = $response->isSuccessful();
 
-// Checks if the response has the status codes listed below and doesn't contain errors
+// Checks if the response has the status codes listed below and doesn't contain an "errors" member
 $isSuccessful = $response->isSuccessful([200, 202]);
 
 // The same as the isSuccessful() method, but also ensures the response contains a document
@@ -210,25 +210,25 @@ $document = $response->document();
 The `Document` class has various useful methods too:
 
 ```php
-// Checks if the document has a jsonapi member
+// Checks if the document has a "jsonapi" member
 $hasJsonApi = $document->hasJsonApi();
 
-// Retrieves the jsonapi member as a JsonApi instance
+// Retrieves the "jsonapi" member as a JsonApi instance
 $jsonApi = $document->jsonApi();
 
 $jsonApiVersion = $jsonApi->version();
 $jsonApiMeta = $jsonApi->meta();
 
-// Checks if the document has a meta member
+// Checks if the document has a "meta" member
 $hasMeta = $document->hasMeta();
 
-// Retrieves the meta member as an array
+// Retrieves the "meta" member as an array
 $meta = $document->meta();
 
-// Checks if the document has a links member
+// Checks if the document has a "links" member
 $hasLinks = $document->hasLinks();
 
-// Retrieves the links member as a Links instance
+// Retrieves the links "member" as a Links instance
 $links = $document->links();
 
 $selfLink = $links->self();         // Returns a Link instance or null
@@ -238,7 +238,7 @@ $nextLink = $links->link("next");   // Returns a Link instance or null
 // Checks if the document has errors
 $hasErrors = $document->hasErrors();
 
-// Retrieves the errors member as an array of Error instances
+// Retrieves the errors "member" as an array of Error instances
 $errors = $document->errors();
 
 // Retrieves the first error as an Error instance or null
@@ -287,7 +287,7 @@ $meta = $primaryResource->meta();
 // Checks if the resource has links
 $hasLinks = $primaryResource->hasLinks();
 
-// Returns the links member as a Links instance
+// Returns the "links" member as a Links instance
 $links = $primaryResource->links();
 
 // Returns the attributes of the resource as an array
@@ -317,13 +317,13 @@ $isToManyRelationship = $address->isToManyRelationship();
 // Returns the name of the relationship
 $name = $address->name();
 
-// Checks if the relationship has the meta member
+// Checks if the relationship has the "meta" member
 $hasMeta = $address->hasMeta();
 
 // Returns the meta information of the relationship as an array
 $meta = $address->meta();
 
-// Returns the links member of the relationship as a Links instance
+// Returns the "links" member of the relationship as a Links instance
 $links = $address->links();
 
 // Returns the resource linkage as an array of a to-one relationship
@@ -334,7 +334,7 @@ $resourceLinkage = $address->resourceLink();
 $resourceLinkage = $address->resourceLinks();
 
 // Checks if the resource object is included
-$isIncluded = $address->isIncliuded("address", "abcd");
+$isIncluded = $address->isIncluded("address", "abcd");
 
 // Returns the resource object of a to-one relationship as a `ResourceObject` instance
 // if the relationship is included, or null otherwise
@@ -350,9 +350,9 @@ $resources = $address->resources();
 ### Custom deserialization
 
 Sometimes you might need to be tricky, and customly deserialize a server response. For example if you dispatch a server
-request internally (in the original request), then with this feature you can receive the response as an array - so you
+request internally (within the original request), then with this feature you can receive the response as an array - so you
 don't need to serialize at server-side and then deserialize at client-size. If you use Woohoo Labs. Yin in your server
-and a [custom serializer](https://github.com/woohoolabs/yin/#custom-serializer), then this is an easy task to do.
+and a [custom serializer](https://github.com/woohoolabs/yin/#custom-serialization), then this is an easy task to do.
 
 If you use the default [HTTP Clients](#http-clients) then you only have to pass a second argument to them like below:
 
