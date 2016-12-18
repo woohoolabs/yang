@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-**Woohoo Labs. Yin is a PHP framework which helps you to communicate with JSON:API servers more easily.**
+**Woohoo Labs. Yang is a PHP framework which helps you to communicate with JSON:API servers more easily.**
 
 ## Table of Contents
 
