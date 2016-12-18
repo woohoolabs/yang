@@ -2,7 +2,7 @@
     "name": "woohoolabs/yang",
     "description": "Woohoo Labs. Yang",
     "type": "library",
-    "keywords": ["Woohoo Labs.", "Yang", "JSON:API", "PSR-7"],
+    "keywords": ["Woohoo Labs.", "Yang", "JSON API", "PSR-7"],
     "homepage": "http://yang.woohoolabs.com",
     "license": "MIT",
     "authors": [
