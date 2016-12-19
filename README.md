@@ -139,7 +139,7 @@ in order to proceed with the next steps:
 
 ```php
 $request = new Request("", "");
-$request
+$request = $request
     ->withProtocolVersion("1.1")
     ->withUri(new Uri("https://example.com/api/users?fields[users]=first_name,last_name"))
     ->withHeader("Accept", "application/vnd.api+json")
