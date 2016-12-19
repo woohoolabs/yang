@@ -1,4 +1,14 @@
-## 0.7.0 - unreleased
+## 0.8.0 - unreleased
+
+ADDED:
+
+CHANGED:
+
+REMOVED:
+
+FIXED:
+
+## 0.7.0 - 2016-12-19
 
 ADDED:
 

@@ -6,7 +6,7 @@ use WoohooLabs\Yang\JsonApi\Request\ResourceObject;
 use WoohooLabs\Yang\JsonApi\Request\ToManyRelationship;
 use WoohooLabs\Yang\JsonApi\Request\ToOneRelationship;
 
-class JsonApiResourceTest extends TestCase
+class ResourceObjectTest extends TestCase
 {
     /**
      * @test

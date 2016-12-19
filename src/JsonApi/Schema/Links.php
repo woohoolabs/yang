@@ -164,7 +164,7 @@ class Links
 
     /**
      * @param $name
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Link[] $links
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
      */
     public function link($name)
     {
