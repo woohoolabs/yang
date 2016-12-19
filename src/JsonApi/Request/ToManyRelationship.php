@@ -1,7 +1,7 @@
 <?php
 namespace WoohooLabs\Yang\JsonApi\Request;
 
-class JsonApiToManyRelationship implements JsonApiRelationshipInterface
+class ToManyRelationship implements RelationshipInterface
 {
     /**
      * @var array

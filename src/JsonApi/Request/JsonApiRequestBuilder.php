@@ -304,14 +304,14 @@ class JsonApiRequestBuilder
     }
 
     /**
-     * @param \WoohooLabs\Yang\JsonApi\Request\JsonApiResource|array|object|string $body
+     * @param \WoohooLabs\Yang\JsonApi\Request\ResourceObject|array|object|string $body
      * @return $this
      */
     public function setJsonApiBody($body)
     {
         if (is_string($body)) {
             $this->body = $body;
-        } elseif ($body instanceof JsonApiResource) {
+        } elseif ($body instanceof ResourceObject) {
             $this->body = json_encode($body->toArray());
         } elseif (is_array($body) || is_object($body)) {
             $this->body = json_encode($body);

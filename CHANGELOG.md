@@ -13,6 +13,10 @@ CHANGED:
 - Added `JsonApiResource::setToManyRelationship()` instead of `JsonApiResource::addToManyResourceIdentifier()`
 - A `Links` member won't be present in the `data` member when it is empty when using `Document::toArray()`
 - Renamed several methods of `ResourceObjects` (removed `get` prefixes)
+- Renamed `JsonApiRelationshipInterface` class to `RelationshipInterface`
+- Renamed `JsonApiResource` class to `ResourceObject`
+- Renamed `JsonApiToManyRelationship` class to `ToManyRelationship`
+- Renamed `JsonApiToOneRelationship` class to `ToOneRelationship`
 
 FIXED:
 

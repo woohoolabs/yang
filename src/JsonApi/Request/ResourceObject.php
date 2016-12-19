@@ -1,7 +1,7 @@
 <?php
 namespace WoohooLabs\Yang\JsonApi\Request;
 
-class JsonApiResource
+class ResourceObject
 {
     /**
      * @var string
@@ -19,7 +19,7 @@ class JsonApiResource
     private $attributes;
 
     /**
-     * @var JsonApiRelationshipInterface[]
+     * @var RelationshipInterface[]
      */
     private $relationships;
 
@@ -70,30 +70,30 @@ class JsonApiResource
 
     /**
      * @param string $name
-     * @param JsonApiToOneRelationship $relationship
+     * @param ToOneRelationship $relationship
      * @return $this
      */
-    public function setToOneRelationship($name, JsonApiToOneRelationship $relationship)
+    public function setToOneRelationship($name, ToOneRelationship $relationship)
     {
         return $this->setRelationship($name, $relationship);
     }
 
     /**
      * @param string $name
-     * @param JsonApiToManyRelationship $relationship
+     * @param ToManyRelationship $relationship
      * @return $this
      */
-    public function setToManyRelationship($name, JsonApiToManyRelationship $relationship)
+    public function setToManyRelationship($name, ToManyRelationship $relationship)
     {
         return $this->setRelationship($name, $relationship);
     }
 
     /**
      * @param string $name
-     * @param JsonApiRelationshipInterface $relationship
+     * @param RelationshipInterface $relationship
      * @return $this
      */
-    public function setRelationship($name, JsonApiRelationshipInterface $relationship)
+    public function setRelationship($name, RelationshipInterface $relationship)
     {
         $this->relationships[$name] = $relationship;
 

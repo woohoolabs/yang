@@ -2,9 +2,9 @@
 namespace WoohooLabs\Yang\Tests\JsonApi\Request;
 
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Request\JsonApiResource;
-use WoohooLabs\Yang\JsonApi\Request\JsonApiToManyRelationship;
-use WoohooLabs\Yang\JsonApi\Request\JsonApiToOneRelationship;
+use WoohooLabs\Yang\JsonApi\Request\ResourceObject;
+use WoohooLabs\Yang\JsonApi\Request\ToManyRelationship;
+use WoohooLabs\Yang\JsonApi\Request\ToOneRelationship;
 
 class JsonApiResourceTest extends TestCase
 {
@@ -13,9 +13,9 @@ class JsonApiResourceTest extends TestCase
      */
     public function create()
     {
-        $resource = JsonApiResource::create("", "");
+        $resource = ResourceObject::create("", "");
 
-          $this->assertInstanceOf(JsonApiResource::class, $resource);
+          $this->assertInstanceOf(ResourceObject::class, $resource);
     }
 
     /**
@@ -23,7 +23,7 @@ class JsonApiResourceTest extends TestCase
      */
     public function getType()
     {
-        $resource = new JsonApiResource("a");
+        $resource = new ResourceObject("a");
 
         $this->assertEquals(
             [
@@ -40,7 +40,7 @@ class JsonApiResourceTest extends TestCase
      */
     public function getId()
     {
-        $resource = new JsonApiResource("", "b");
+        $resource = new ResourceObject("", "b");
 
         $this->assertEquals(
             [
@@ -58,7 +58,7 @@ class JsonApiResourceTest extends TestCase
      */
     public function setAttributes()
     {
-        $resource = new JsonApiResource("", "");
+        $resource = new ResourceObject("", "");
         $resource
             ->setAttributes(["a" => "b", "c" => "d"]);
 
@@ -81,7 +81,7 @@ class JsonApiResourceTest extends TestCase
      */
     public function setAttribute()
     {
-        $resource = new JsonApiResource("", "");
+        $resource = new ResourceObject("", "");
         $resource
             ->setAttribute("a", "b")
             ->setAttribute("c", "d");
@@ -105,9 +105,9 @@ class JsonApiResourceTest extends TestCase
      */
     public function setToOneRelationship()
     {
-        $resource = new JsonApiResource("", "");
+        $resource = new ResourceObject("", "");
         $resource
-            ->setToOneRelationship("a", new JsonApiToOneRelationship("a", "a1"));
+            ->setToOneRelationship("a", new ToOneRelationship("a", "a1"));
 
         $this->assertEquals(
             [
@@ -132,10 +132,10 @@ class JsonApiResourceTest extends TestCase
      */
     public function setToManyRelationship()
     {
-        $resource = new JsonApiResource("", "");
+        $resource = new ResourceObject("", "");
         $resource
-            ->setToManyRelationship("a", new JsonApiToManyRelationship())
-            ->setToManyRelationship("b", new JsonApiToManyRelationship());
+            ->setToManyRelationship("a", new ToManyRelationship())
+            ->setToManyRelationship("b", new ToManyRelationship());
 
         $this->assertEquals(
             [

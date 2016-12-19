@@ -1,7 +1,7 @@
 <?php
 namespace WoohooLabs\Yang\JsonApi\Request;
 
-interface JsonApiRelationshipInterface
+interface RelationshipInterface
 {
     /**
      * @return array
