@@ -232,7 +232,7 @@ class Relationship
      */
     public function resourceBy($type, $id)
     {
-        return $this->resources->getResource($type, $id);
+        return $this->resources->resource($type, $id);
     }
 
     /**

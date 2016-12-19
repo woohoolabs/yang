@@ -52,6 +52,14 @@ class Links
     /**
      * @return bool
      */
+    public function hasAnyLinks()
+    {
+        return empty($this->links) === false;
+    }
+
+    /**
+     * @return bool
+     */
     public function hasSelf()
     {
         return $this->link("self") !== null;

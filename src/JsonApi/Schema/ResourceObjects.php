@@ -26,17 +26,36 @@ class ResourceObjects
     /**
      * @param array $data
      * @param array $included
+     * @return ResourceObjects
      */
-    public function __construct(array $data, array $included)
+    public static function createFromSinglePrimaryData(array $data, array $included)
     {
-        if (empty($data)) {
-            $this->isSinglePrimaryResource = null;
-        } else {
-            $this->isSinglePrimaryResource = $this->isAssociativeArray($data) === true;
-        }
+        return new self($data, $included, true);
+    }
+
+    /**
+     * @param array $data
+     * @param array $included
+     * @return ResourceObjects
+     */
+    public static function createFromCollectionPrimaryData(array $data, array $included)
+    {
+        return new self($data, $included, false);
+    }
+
+    /**
+     * @param array $data
+     * @param array $included
+     * @param bool $isSinglePrimaryResource
+     */
+    public function __construct(array $data, array $included, $isSinglePrimaryResource)
+    {
+        $this->isSinglePrimaryResource = $isSinglePrimaryResource;
 
         if ($this->isSinglePrimaryResource === true) {
-            $this->addPrimaryResource(new ResourceObject($data, $this));
+            if (empty($data) === false) {
+                $this->addPrimaryResource(new ResourceObject($data, $this));
+            }
         } else {
             foreach ($data as $resource) {
                 $this->addPrimaryResource(new ResourceObject($resource, $this));
@@ -64,7 +83,7 @@ class ResourceObjects
         $result = [];
         foreach ($this->includedKeys as $resource) {
             /** @var \WoohooLabs\Yang\JsonApi\Schema\ResourceObject $resource */
-            $result[] = $resource;
+            $result[] = $resource->toArray();
         }
 
         return $result;
@@ -120,7 +139,7 @@ class ResourceObjects
      * @param string $id
      * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject|null
      */
-    public function getResource($type, $id)
+    public function resource($type, $id)
     {
         return isset($this->resources[$type . "." . $id]) ? $this->resources[$type . "." . $id] : null;
     }
@@ -136,7 +155,7 @@ class ResourceObjects
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject[]
      */
-    public function getPrimaryResources()
+    public function primaryResources()
     {
         return array_values($this->primaryKeys);
     }
@@ -144,7 +163,7 @@ class ResourceObjects
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject|null
      */
-    public function getPrimaryResource()
+    public function primaryResource()
     {
         if ($this->hasAnyPrimaryResources() === false) {
             return null;
@@ -187,7 +206,7 @@ class ResourceObjects
     /**
      * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject[]
      */
-    public function getIncludedResources()
+    public function includedResources()
     {
         return array_values($this->includedKeys);
     }
@@ -229,14 +248,5 @@ class ResourceObjects
 
         $this->resources[$type . "." . $id] = $resource;
         $keys[$type . "." . $id] = &$this->resources[$type . "." . $id];
-    }
-
-    /**
-     * @param array $array
-     * @return bool
-     */
-    private function isAssociativeArray(array $array)
-    {
-        return (bool)count(array_filter(array_keys($array), 'is_string'));
     }
 }

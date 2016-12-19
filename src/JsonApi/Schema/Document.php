@@ -54,19 +54,18 @@ class Document
         }
         $linksObject = Links::createFromArray($links);
 
-        if (isset($document["data"]) && is_array($document["data"])) {
-            $data = $document["data"];
-        } else {
-            $data = [];
-        }
-
         if (isset($document["included"]) && is_array($document["included"])) {
             $included = $document["included"];
         } else {
             $included = [];
         }
 
-        $resources = new ResourceObjects($data, $included);
+        $resources = null;
+        if (isset($document["data"]) === false) {
+            $resources = ResourceObjects::createFromSinglePrimaryData([], $included);
+        } elseif (is_array($document["data"])) {
+            $resources = new ResourceObjects($document["data"], $included, self::isAssociativeArray($document["data"]));
+        }
 
         $errors = [];
         if (isset($document["errors"]) && is_array($document["errors"])) {
@@ -122,7 +121,7 @@ class Document
         if ($this->hasErrors()) {
             $errors = [];
             foreach ($this->errors as $error) {
-                $errors = $error->toArray();
+                $errors[] = $error->toArray();
             }
             $content["errors"] = $errors;
         }
@@ -211,7 +210,7 @@ class Document
      */
     public function primaryResource()
     {
-        return $this->resources->getPrimaryResource();
+        return $this->resources->primaryResource();
     }
 
     /**
@@ -219,7 +218,7 @@ class Document
      */
     public function primaryResources()
     {
-        return $this->resources->getPrimaryResources();
+        return $this->resources->primaryResources();
     }
 
     /**
@@ -229,7 +228,7 @@ class Document
      */
     public function resource($type, $id)
     {
-        return $this->resources->getResource($type, $id);
+        return $this->resources->resource($type, $id);
     }
 
     /**
@@ -255,7 +254,7 @@ class Document
      */
     public function includedResources()
     {
-        return $this->resources->getIncludedResources();
+        return $this->resources->includedResources();
     }
 
     /**
@@ -281,5 +280,14 @@ class Document
     public function error($number)
     {
         return isset($this->errors[$number]) ? $this->errors[$number] : null;
+    }
+
+    /**
+     * @param array $array
+     * @return bool
+     */
+    private static function isAssociativeArray(array $array)
+    {
+        return (bool)count(array_filter(array_keys($array), 'is_string'));
     }
 }

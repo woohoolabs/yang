@@ -5,13 +5,14 @@ ADDED:
 - Added `JsonApiResource::setRelationship()`
 - Unit tests
 - Docker support to run tests
+- `Links::hasAnyLinks()` method
 
 CHANGED:
 
 - Added `JsonApiResource::setToOneRelationship()` instead of `JsonApiResource::setToOneResourceIdentifier()`
 - Added `JsonApiResource::setToManyRelationship()` instead of `JsonApiResource::addToManyResourceIdentifier()`
-
-REMOVED:
+- A `Links` member won't be present in the `data` member when it is empty when using `Document::toArray()`
+- Renamed several methods of `ResourceObjects` (removed `get` prefixes)
 
 FIXED:
 
@@ -19,7 +20,11 @@ FIXED:
 - The `type` constructor argument became required for `JsonApiResource`
 - `JsonApiRequestBuilder::setPort()` didn't do anything
 - `JsonApiRequestBuilder::setJsonApi*()` methods didn't work as intended
-- `JsonApiRequestBuilder::update()` will now set the request method to "PATCH" instead of "UPDATE" 
+- `JsonApiRequestBuilder::update()` will now set the request method to "PATCH" instead of "UPDATE"
+- Error objects are correctly listed under the `errors` member when using `Document::toArray()`
+- Correctly transforming `included` member when using `Document::toArray()`
+- `ResourceObjects::isSingleResourceDocument()` `Document::isResourceDocument()` returned wrong value When `data` member was null 
+- `ResourceObjects::hasAnyPrimaryResources()` returned wrong value When `data` member was null 
 
 ## 0.6.0 - 2016-12-18
 

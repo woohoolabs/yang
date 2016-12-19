@@ -67,7 +67,7 @@ class ResourceObject
             $result["meta"] = $this->meta;
         }
 
-        if ($this->links) {
+        if ($this->links->hasAnyLinks()) {
             $result["links"] = $this->links->toArray();
         }
 
