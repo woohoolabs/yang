@@ -126,8 +126,8 @@ $requestBuilder
             ]
         ]
     )
-    ->setBody(                                                  // or a JsonApiResource instance
-        new JsonApiResource("user", 1)
+    ->setBody(                                                  // or a ResourceObject instance
+        new ResourceObject("user", 1)
     );
 
 // Get the composed request
