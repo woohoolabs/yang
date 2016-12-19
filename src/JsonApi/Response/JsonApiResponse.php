@@ -55,13 +55,17 @@ class JsonApiResponse implements ResponseInterface
     }
 
     /**
-     * @param array $allowedStatusCodes
+     * @param array $successfulStatusCodes
      * @return bool
      */
-    public function isSuccessful($allowedStatusCodes = [])
+    public function isSuccessful($successfulStatusCodes = [])
     {
-        return (empty($allowedStatusCodes) === true || in_array($this->getStatusCode(), $allowedStatusCodes, true)) &&
-            ($this->hasDocument() === false || $this->document()->hasErrors() === false);
+        $isStatusCodeSuccessful = empty($successfulStatusCodes) === true ||
+            in_array($this->getStatusCode(), $successfulStatusCodes, true);
+
+        $hasNoErrors = $this->hasDocument() === false || $this->document()->hasErrors() === false;
+
+        return $isStatusCodeSuccessful && $hasNoErrors;
     }
 
     /**
