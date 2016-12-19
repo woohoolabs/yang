@@ -6,32 +6,32 @@ class ResourceObject
     /**
      * @var string
      */
-    protected $type;
+    private $type;
 
     /**
      * @var string
      */
-    protected $id;
+    private $id;
 
     /**
      * @var array
      */
-    protected $meta;
+    private $meta;
 
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\Links
      */
-    protected $links;
+    private $links;
 
     /**
      * @var array
      */
-    protected $attributes;
+    private $attributes;
 
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\Relationship[]
      */
-    protected $relationships;
+    private $relationships;
 
     /**
      * @param array $array
@@ -182,7 +182,7 @@ class ResourceObject
      * @param string $key
      * @return bool
      */
-    protected function isArrayKey($array, $key)
+    private function isArrayKey($array, $key)
     {
         return isset($array[$key]) && is_array($array[$key]);
     }

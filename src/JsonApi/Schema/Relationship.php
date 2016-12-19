@@ -6,32 +6,32 @@ class Relationship
     /**
      * @var bool
      */
-    protected $isToOneRelationship;
+    private $isToOneRelationship;
 
     /**
      * @var string
      */
-    protected $name;
+    private $name;
 
     /**
      * @var array
      */
-    protected $meta;
+    private $meta;
 
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\Links
      */
-    protected $links;
+    private $links;
 
     /**
      * @var array
      */
-    protected $resourceMap = [];
+    private $resourceMap = [];
 
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\ResourceObjects
      */
-    protected $resources;
+    private $resources;
 
     /**
      * @param string $name
@@ -239,7 +239,7 @@ class Relationship
      * @param array $array
      * @return bool
      */
-    protected function isAssociativeArray(array $array)
+    private function isAssociativeArray(array $array)
     {
         return (bool)count(array_filter(array_keys($array), 'is_string'));
     }
@@ -249,7 +249,7 @@ class Relationship
      * @param string $key
      * @return bool
      */
-    protected function isArrayKey($array, $key)
+    private function isArrayKey($array, $key)
     {
         return isset($array[$key]) && is_array($array[$key]);
     }

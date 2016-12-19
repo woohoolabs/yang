@@ -9,7 +9,7 @@ class JsonApiAsyncClient
     /**
      * @var \Http\Client\HttpAsyncClient
      */
-    protected $client;
+    private $client;
 
     /**
      * @param \Http\Client\HttpAsyncClient $client

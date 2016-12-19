@@ -6,22 +6,22 @@ class ResourceObjects
     /*
      * @var bool
      */
-    protected $isSinglePrimaryResource;
+    private $isSinglePrimaryResource;
 
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\ResourceObject[]
      */
-    protected $resources = [];
+    private $resources = [];
 
     /**
      * @var array
      */
-    protected $primaryKeys = [];
+    private $primaryKeys = [];
 
     /**
      * @var array
      */
-    protected $includedKeys = [];
+    private $includedKeys = [];
 
     /**
      * @param array $data
@@ -73,7 +73,7 @@ class ResourceObjects
     /**
      * @return array|null
      */
-    protected function primaryResourceToArray()
+    private function primaryResourceToArray()
     {
         if ($this->hasAnyPrimaryResources() === false) {
             return null;
@@ -88,7 +88,7 @@ class ResourceObjects
     /**
      * @return array
      */
-    protected function primaryCollectionToArray()
+    private function primaryCollectionToArray()
     {
         $result = [];
         foreach ($this->primaryKeys as $resource) {
@@ -196,7 +196,7 @@ class ResourceObjects
      * @param \WoohooLabs\Yang\JsonApi\Schema\ResourceObject $resource
      * @return $this
      */
-    protected function addPrimaryResource(ResourceObject $resource)
+    private function addPrimaryResource(ResourceObject $resource)
     {
         $type = $resource->type();
         $id = $resource->id();
@@ -213,7 +213,7 @@ class ResourceObjects
      * @param \WoohooLabs\Yang\JsonApi\Schema\ResourceObject $resource
      * @return $this
      */
-    protected function addIncludedResource(ResourceObject $resource)
+    private function addIncludedResource(ResourceObject $resource)
     {
         if ($this->hasPrimaryResource($resource->type(), $resource->id()) === false) {
             $this->addResource($this->includedKeys, $resource);
@@ -222,7 +222,7 @@ class ResourceObjects
         return $this;
     }
 
-    protected function addResource(&$keys, ResourceObject $resource)
+    private function addResource(&$keys, ResourceObject $resource)
     {
         $type = $resource->type();
         $id = $resource->id();

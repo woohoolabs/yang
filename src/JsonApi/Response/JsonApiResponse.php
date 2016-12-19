@@ -12,17 +12,17 @@ class JsonApiResponse implements ResponseInterface
     /**
      * @var \Psr\Http\Message\ResponseInterface
      */
-    protected $response;
+    private $response;
 
     /**
      * @var DeserializerInterface
      */
-    protected $deserializer;
+    private $deserializer;
 
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\Document|false|null
      */
-    protected $document = false;
+    private $document = false;
 
     /**
      * @param \Psr\Http\Message\ResponseInterface $response
@@ -60,7 +60,7 @@ class JsonApiResponse implements ResponseInterface
      */
     public function isSuccessful($allowedStatusCodes = [])
     {
-        return (empty($allowedStatusCodes) === true || in_array($this->getStatusCode(), $allowedStatusCodes)) &&
+        return (empty($allowedStatusCodes) === true || in_array($this->getStatusCode(), $allowedStatusCodes, true)) &&
             ($this->hasDocument() === false || $this->document()->hasErrors() === false);
     }
 
@@ -147,7 +147,7 @@ class JsonApiResponse implements ResponseInterface
         return $this->response->getStatusCode();
     }
 
-    public function withStatus($code, $reasonPhrase = '')
+    public function withStatus($code, $reasonPhrase = "")
     {
         $response = clone $this;
         $response->response = $this->response->withStatus($code, $reasonPhrase);

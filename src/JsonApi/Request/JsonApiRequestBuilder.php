@@ -8,52 +8,52 @@ class JsonApiRequestBuilder
     /**
      * @var \Psr\Http\Message\RequestInterface
      */
-    protected $request;
+    private $request;
 
     /**
      * @var string
      */
-    protected $method;
+    private $method;
 
     /**
      * @var string
      */
-    protected $protocolVersion;
+    private $protocolVersion;
 
     /**
      * @var string
      */
-    protected $scheme;
+    private $scheme;
 
     /**
      * @var string
      */
-    protected $host;
+    private $host;
 
     /**
      * @var string
      */
-    protected $port;
+    private $port;
 
     /**
      * @var string
      */
-    protected $path;
+    private $path;
 
     /**
      * @var array
      */
-    protected $queryString;
+    private $queryString;
 
     /**
      * @var array
      */
-    protected $headers;
+    private $headers;
 
     /**
      * @var string
      */
-    protected $body;
+    private $body;
 
     /**
      * @param \Psr\Http\Message\RequestInterface $request
@@ -348,7 +348,7 @@ class JsonApiRequestBuilder
     /**
      * @return string
      */
-    protected function getQueryString()
+    private function getQueryString()
     {
         return http_build_query($this->queryString);
     }
@@ -357,7 +357,7 @@ class JsonApiRequestBuilder
      * @param string $name
      * @param array $queryParam
      */
-    protected function setArrayQueryParam($name, array $queryParam)
+    private function setArrayQueryParam($name, array $queryParam)
     {
         foreach ($queryParam as $key => $value) {
             if (is_array($value)) {
@@ -372,7 +372,7 @@ class JsonApiRequestBuilder
      * @param string $name
      * @param array|string $queryParam
      */
-    protected function setListQueryParam($name, $queryParam)
+    private function setListQueryParam($name, $queryParam)
     {
         if (is_array($queryParam)) {
             $this->queryString[$name] = implode(",", $queryParam);

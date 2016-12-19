@@ -6,22 +6,22 @@ class JsonApiResource
     /**
      * @var string
      */
-    protected $type;
+    private $type;
 
     /**
      * @var string
      */
-    protected $id;
+    private $id;
 
     /**
      * @var array
      */
-    protected $attributes;
+    private $attributes;
 
     /**
      * @var JsonApiRelationshipInterface[]
      */
-    protected $relationships;
+    private $relationships;
 
     /**
      * @param string $type

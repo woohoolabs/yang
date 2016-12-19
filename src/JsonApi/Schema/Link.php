@@ -6,12 +6,12 @@ class Link
     /**
      * @var string
      */
-    protected $href;
+    private $href;
 
     /**
      * @var array
      */
-    protected $meta;
+    private $meta;
 
     /**
      * @param string $link

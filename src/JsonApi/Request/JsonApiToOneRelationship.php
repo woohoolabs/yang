@@ -6,12 +6,12 @@ class JsonApiToOneRelationship implements JsonApiRelationshipInterface
     /**
      * @var string
      */
-    protected $type;
+    private $type;
 
     /**
      * @var string
      */
-    protected $id;
+    private $id;
 
     /**
      * @param string $type

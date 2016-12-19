@@ -6,42 +6,42 @@ class Error
     /**
      * @var string
      */
-    protected $id;
+    private $id;
 
     /**
      * @var array
      */
-    protected $meta;
+    private $meta;
 
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\Links
      */
-    protected $links;
+    private $links;
 
     /**
      * @var int
      */
-    protected $status;
+    private $status;
 
     /**
      * @var string
      */
-    protected $code;
+    private $code;
 
     /**
      * @var string
      */
-    protected $title;
+    private $title;
 
     /**
      * @var string
      */
-    protected $detail;
+    private $detail;
 
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\ErrorSource
      */
-    protected $source;
+    private $source;
 
     /**
      * @param array $error

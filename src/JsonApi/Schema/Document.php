@@ -6,27 +6,27 @@ class Document
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\JsonApi
      */
-    protected $jsonApi;
+    private $jsonApi;
 
     /**
      * @var array
      */
-    protected $meta;
+    private $meta;
 
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\Links
      */
-    protected $links;
+    private $links;
 
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\ResourceObjects
      */
-    protected $resources;
+    private $resources;
 
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\Error[]
      */
-    protected $errors;
+    private $errors;
 
     /**
      * @param array $document

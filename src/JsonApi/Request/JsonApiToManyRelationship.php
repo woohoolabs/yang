@@ -6,7 +6,7 @@ class JsonApiToManyRelationship implements JsonApiRelationshipInterface
     /**
      * @var array
      */
-    protected $resourceIdentifiers = [];
+    private $resourceIdentifiers = [];
 
     public static function create()
     {

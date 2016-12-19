@@ -6,7 +6,7 @@ class Links
     /**
      * @var \WoohooLabs\Yang\JsonApi\Schema\Link[]
      */
-    protected $links;
+    private $links;
 
     /**
      * @param array $links

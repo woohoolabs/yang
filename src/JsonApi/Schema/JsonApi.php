@@ -6,12 +6,12 @@ class JsonApi
     /**
      * @var string
      */
-    protected $version;
+    private $version;
 
     /**
      * @var array
      */
-    protected $meta;
+    private $meta;
 
     /**
      * @param array $array

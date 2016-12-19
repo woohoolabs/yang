@@ -12,12 +12,12 @@ class JsonApiClient
     /**
      * @var \Http\Client\HttpClient
      */
-    protected $client;
+    private $client;
 
     /**
      * @var DeserializerInterface
      */
-    protected $deserializer;
+    private $deserializer;
 
     public function __construct(HttpClient $client, DeserializerInterface $deserializer = null)
     {
