@@ -60,8 +60,7 @@ class Document
             $included = [];
         }
 
-        $resources = null;
-        if (is_array($document["data"])) {
+        if (isset($document["data"]) && is_array($document["data"])) {
             $resources = new ResourceObjects($document["data"], $included, self::isAssociativeArray($document["data"]));
         } else {
             $resources = ResourceObjects::createFromSinglePrimaryData([], $included);
