@@ -54,16 +54,16 @@ class ResourceObjects
 
         if ($this->isSinglePrimaryResource === true) {
             if (empty($data) === false) {
-                $this->addPrimaryResource(new ResourceObject($data, $this));
+                $this->addPrimaryResource(ResourceObject::createFromArray($data, $this));
             }
         } else {
             foreach ($data as $resource) {
-                $this->addPrimaryResource(new ResourceObject($resource, $this));
+                $this->addPrimaryResource(ResourceObject::createFromArray($resource, $this));
             }
         }
 
         foreach ($included as $resource) {
-            $this->addIncludedResource(new ResourceObject($resource, $this));
+            $this->addIncludedResource(ResourceObject::createFromArray($resource, $this));
         }
     }
 

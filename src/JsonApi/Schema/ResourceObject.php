@@ -36,21 +36,46 @@ class ResourceObject
     /**
      * @param array $array
      * @param \WoohooLabs\Yang\JsonApi\Schema\ResourceObjects $resources
+     * @return ResourceObject
      */
-    public function __construct($array, ResourceObjects $resources)
+    public static function createFromArray($array, ResourceObjects $resources)
     {
-        $this->type = empty($array["type"]) ? "" : $array["type"];
-        $this->id = empty($array["id"]) ? "" : $array["id"];
-        $this->meta = $this->isArrayKey($array, "meta") ? $array["meta"] : [];
-        $this->links = Links::createFromArray($this->isArrayKey($array, "links") ? $array["links"] : []);
-        $this->attributes = $this->isArrayKey($array, "attributes") ? $array["attributes"] : [];
+        $type = isset($array["type"]) && is_string($array["type"]) ? $array["type"] : "";
+        $id = isset($array["id"]) && is_string($array["id"]) ? $array["id"] : "";
+        $meta = self::isArrayKey($array, "meta") ? $array["meta"] : [];
+        $links = Links::createFromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
+        $attributes = self::isArrayKey($array, "attributes") ? $array["attributes"] : [];
 
-        $this->relationships = [];
-        if ($this->isArrayKey($array, "relationships")) {
+        $relationships = [];
+        if (self::isArrayKey($array, "relationships")) {
             foreach ($array["relationships"] as $name => $relationship) {
-                $this->relationships[$name] = new Relationship($name, $relationship, $resources);
+                if (is_string($name) === false || is_array($relationship) === false) {
+                    continue;
+                }
+
+                $relationships[$name] = new Relationship($name, $relationship, $resources);
             }
         }
+
+        return new self($type, $id, $meta, $links, $attributes, $relationships);
+    }
+
+    /**
+     * @param string $type
+     * @param string $id
+     * @param array $meta
+     * @param Links $links
+     * @param array $attributes
+     * @param Relationship[] $relationships
+     */
+    public function __construct($type, $id, array $meta, Links $links, array $attributes, array $relationships)
+    {
+        $this->type = $type;
+        $this->id = $id;
+        $this->meta = $meta;
+        $this->links = $links;
+        $this->attributes = $attributes;
+        $this->relationships = $relationships;
     }
 
     /**
@@ -182,7 +207,7 @@ class ResourceObject
      * @param string $key
      * @return bool
      */
-    private function isArrayKey($array, $key)
+    private static function isArrayKey($array, $key)
     {
         return isset($array[$key]) && is_array($array[$key]);
     }

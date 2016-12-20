@@ -5,7 +5,10 @@ ADDED:
 CHANGED:
 
 - `Link::createFromArray()` performs type checks before instantiating a `Link` object
-- The "jsonapi" member is always present when using `Document::toArray()` 
+- Added a `ResourceObject::createFromArray()` instead of the constructor 
+- `ResourceObject::createFromArray()` performs more type checks before instantiating a `ResourceObject`
+- The "jsonapi" member is always present when using `Document::toArray()`
+- The "links" member won't be present in a relationship when it is empty when using `ResourceObject::toArray()`
 
 REMOVED:
 
@@ -17,6 +20,7 @@ FIXED:
 - The "jsonapi" member was incorrectly recognized as `jsonApi`
 - If the "jsonapi" member doesn't define the `version`, "1.0" will be the default now as per the spec
 - Invocation of `Links::hasLink()` and thus `Links::hasSelf()` etc. methods resulted in an infinite loop
+- `Relationship::toArray()` showed the "data" member incorrectly for to-one relationships
 
 ## 0.7.0 - 2016-12-19
 
@@ -31,7 +35,7 @@ CHANGED:
 
 - Added `JsonApiResource::setToOneRelationship()` instead of `JsonApiResource::setToOneResourceIdentifier()`
 - Added `JsonApiResource::setToManyRelationship()` instead of `JsonApiResource::addToManyResourceIdentifier()`
-- A "links" member won't be present in the "data" member when it is empty when using `Document::toArray()`
+- The "links" member won't be present in the "data" member when it is empty when using `Document::toArray()`
 - Renamed several methods of `ResourceObjects` (removed `get` prefixes)
 - Renamed `JsonApiRelationshipInterface` class to `RelationshipInterface`
 - Renamed `JsonApiResource` class to `ResourceObject`

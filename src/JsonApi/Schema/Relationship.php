@@ -48,14 +48,22 @@ class Relationship
             if ($this->isAssociativeArray($array["data"])) {
                 $this->isToOneRelationship = true;
                 if (empty($array["data"]["type"]) === false && empty($array["data"]["id"]) === false) {
-                    $this->resourceMap = [["type" => $array["data"]["type"], "id" => $array["data"]["id"]]];
+                    $this->resourceMap = [
+                        [
+                            "type" => $array["data"]["type"],
+                            "id" => $array["data"]["id"]
+                        ]
+                    ];
                 }
             } else {
                 $this->isToOneRelationship = false;
                 $this->resourceMap = [];
                 foreach ($array["data"] as $item) {
                     if (empty($item["type"]) === false && empty($item["id"]) === false) {
-                        $this->resourceMap[] = ["type" => $item["type"], "id" => $item["id"]];
+                        $this->resourceMap[] = [
+                            "type" => $item["type"],
+                            "id" => $item["id"]
+                        ];
                     }
                 }
             }
@@ -77,12 +85,12 @@ class Relationship
             $result["meta"] = $this->meta;
         }
 
-        if ($this->links) {
+        if ($this->links->hasAnyLinks()) {
             $result["links"] = $this->links->toArray();
         }
 
         if (empty($this->resourceMap) === false) {
-            $result["data"] = $this->resourceMap;
+            $result["data"] = $this->isToOneRelationship ? reset($this->resourceMap) : $this->resourceMap;
         }
 
         return $result;
