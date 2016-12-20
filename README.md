@@ -256,7 +256,7 @@ $primaryResource = $document->primaryResource();
 // Returns the primary resources as an array of ResourceObject instances or null if it is a single resource document
 $primaryResources = $document->primaryResources();
 
-// Checks if there is any included resources in the document
+// Checks if there are any included resources in the document
 $hasIncludedResources = $document->hasAnyIncludedResources();
 
 // Checks if there is a specific included resource in the document
