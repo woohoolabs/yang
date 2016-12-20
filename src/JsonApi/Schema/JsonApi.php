@@ -19,7 +19,7 @@ class JsonApi
      */
     public static function createFromArray($array)
     {
-        $version = empty($array["version"]) ? "" : $array["version"];
+        $version = isset($array["version"]) && is_string("version") ? $array["version"] : "1.0";
         $meta = isset($array["meta"]) && is_array($array["meta"]) ? $array["meta"] : [];
 
         return new self($version, $meta);
@@ -51,22 +51,6 @@ class JsonApi
         }
 
         return $result;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasJsonApi()
-    {
-        return $this->hasVersion() || $this->hasMeta();
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasVersion()
-    {
-        return empty($this->version) === false;
     }
 
     /**

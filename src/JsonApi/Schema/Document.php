@@ -34,8 +34,8 @@ class Document
      */
     public static function createFromArray(array $document)
     {
-        if (isset($document["jsonApi"]) && is_array($document["jsonApi"])) {
-            $jsonApi = $document["jsonApi"];
+        if (isset($document["jsonapi"]) && is_array($document["jsonapi"])) {
+            $jsonApi = $document["jsonapi"];
         } else {
             $jsonApi = [];
         }
@@ -61,10 +61,10 @@ class Document
         }
 
         $resources = null;
-        if (isset($document["data"]) === false) {
-            $resources = ResourceObjects::createFromSinglePrimaryData([], $included);
-        } elseif (is_array($document["data"])) {
+        if (is_array($document["data"])) {
             $resources = new ResourceObjects($document["data"], $included, self::isAssociativeArray($document["data"]));
+        } else {
+            $resources = ResourceObjects::createFromSinglePrimaryData([], $included);
         }
 
         $errors = [];
@@ -100,11 +100,9 @@ class Document
      */
     public function toArray()
     {
-        $content = [];
-
-        if ($this->hasJsonApi()) {
-            $content["jsonApi"] = $this->jsonApi->toArray();
-        }
+        $content = [
+            "jsonapi" => $this->jsonApi->toArray()
+        ];
 
         if ($this->hasMeta()) {
             $content["meta"] = $this->meta;
@@ -131,14 +129,6 @@ class Document
         }
 
         return $content;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasJsonApi()
-    {
-        return $this->jsonApi->hasJsonApi();
     }
 
     /**
@@ -170,7 +160,7 @@ class Document
      */
     public function hasLinks()
     {
-        return $this->links->hasLinks();
+        return $this->links->hasAnyLinks();
     }
 
     /**

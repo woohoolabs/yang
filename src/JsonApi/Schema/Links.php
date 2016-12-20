@@ -52,14 +52,6 @@ class Links
     /**
      * @return bool
      */
-    public function hasAnyLinks()
-    {
-        return empty($this->links) === false;
-    }
-
-    /**
-     * @return bool
-     */
     public function hasSelf()
     {
         return $this->link("self") !== null;
@@ -159,7 +151,7 @@ class Links
      */
     public function hasLink($name)
     {
-        return $this->hasLink($name) !== null;
+        return isset($this->links[$name]);
     }
 
     /**
@@ -174,7 +166,7 @@ class Links
     /**
      * @return bool
      */
-    public function hasLinks()
+    public function hasAnyLinks()
     {
         return empty($this->links) === false;
     }

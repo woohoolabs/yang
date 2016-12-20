@@ -16,13 +16,19 @@ class DocumentTest extends TestCase
     {
         $document = $this->createDocument(
             [
-                "jsonApi" => [],
+                "jsonapi" => [],
                 "meta" => [],
                 "data" => []
             ]
         );
 
-        $this->assertEquals([], $document->toArray());
+        $this->assertEquals(
+            [
+                "jsonapi" => [
+                    "version" => "1.0",
+                ]
+            ],
+            $document->toArray());
     }
 
     /**
@@ -32,7 +38,7 @@ class DocumentTest extends TestCase
     {
         $document = $this->createDocument(
             [
-                "jsonApi" => [
+                "jsonapi" => [
                     "version" => "1.0",
                 ],
                 "meta" => [
@@ -61,7 +67,7 @@ class DocumentTest extends TestCase
 
         $this->assertEquals(
             [
-                "jsonApi" => [
+                "jsonapi" => [
                     "version" => "1.0",
                 ],
                 "meta" => [
@@ -90,32 +96,6 @@ class DocumentTest extends TestCase
             ],
             $document->toArray()
         );
-    }
-
-    /**
-     * @test
-     */
-    public function hasJsonApiIsTrue()
-    {
-        $document = $this->createDocument(
-            [
-                "jsonApi" => [
-                    "version" => "1.0",
-                ],
-            ]
-        );
-
-        $this->assertTrue($document->hasJsonApi());
-    }
-
-    /**
-     * @test
-     */
-    public function hasJsonApiIsFalse()
-    {
-        $document = $this->createDocument([]);
-
-        $this->assertFalse($document->hasJsonApi());
     }
 
     /**

@@ -28,8 +28,8 @@ class Link
      */
     public static function createFromArray(array $link)
     {
-        $href = empty($link["href"]) ? "" : $link["href"];
-        $meta = empty($link["meta"]) ? [] : $link["meta"];
+        $href = isset($link["href"]) && is_string($link["href"]) ? $link["href"] : "";
+        $meta = isset($link["meta"]) && is_array($link["meta"]) ? $link["meta"] : [];
 
         return new self($href, $meta);
     }

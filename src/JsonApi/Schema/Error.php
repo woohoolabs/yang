@@ -154,7 +154,7 @@ class Error
      */
     public function hasLinks()
     {
-        return $this->links->hasLinks();
+        return $this->links->hasAnyLinks();
     }
 
     /**

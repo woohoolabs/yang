@@ -133,7 +133,7 @@ class Relationship
      */
     public function hasLinks()
     {
-        return $this->links->hasLinks();
+        return $this->links->hasAnyLinks();
     }
 
     /**
