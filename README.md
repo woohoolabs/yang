@@ -210,9 +210,6 @@ $document = $response->document();
 The `Document` class has various useful methods too:
 
 ```php
-// Checks if the document has a "jsonapi" member
-$hasJsonApi = $document->hasJsonApi();
-
 // Retrieves the "jsonapi" member as a JsonApi instance
 $jsonApi = $document->jsonApi();
 

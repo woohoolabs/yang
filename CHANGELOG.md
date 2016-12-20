@@ -25,7 +25,7 @@ REMOVED:
 
 FIXED:
 
-- The "jsonapi" member was incorrectly recognized as `jsonApi`
+- The "jsonapi" member was incorrectly recognized as "jsonApi"
 - If the "jsonapi" member doesn't define the `version`, "1.0" will be the default now as per the spec
 - Invocation of `Links::hasLink()` and thus `Links::hasSelf()` etc. methods resulted in an infinite loop
 - `Relationship::toArray()` showed the "data" member incorrectly for to-one relationships
