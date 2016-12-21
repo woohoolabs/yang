@@ -1,4 +1,14 @@
-## 0.9.0 - unreleased
+## 1.0.0 - unreleased
+
+ADDED:
+
+CHANGED:
+
+REMOVED:
+
+FIXED:
+
+## 0.9.0 - 2016-12-21
 
 ADDED:
 
@@ -9,11 +19,8 @@ CHANGED:
 - `Error::createFromArray()` performs more type checks before instantiating an `Error` object
 - Renamed `ErrorSource::fromArray()` to `ErrorSource::createFromArray()`
 - `ErrorSource::createFromArray()` performs more type checks before instantiating an `ErrorSource` object
-- Added `Relationships::createFromArray()` instead of the constructor 
-
-REMOVED:
-
-FIXED:
+- Added `Relationships::createFromArray()` instead of the constructor
+- Renamed `Relationship::resourceLink` to `Relationship::firstResourceLink`
 
 ## 0.8.0 - 2016-12-20
 
