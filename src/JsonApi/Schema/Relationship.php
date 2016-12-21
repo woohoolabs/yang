@@ -49,7 +49,7 @@ class Relationship
         }
 
         if (self::isAssociativeArray($array["data"])) {
-            return self::createToOneFromArray($name, $meta, $links, $resources);
+            return self::createToOneFromArray($name, $meta, $links, $array["data"], $resources);
         }
 
         return self::createToManyFromArray($name, $meta, $links, $array["data"], $resources);
@@ -71,19 +71,25 @@ class Relationship
      * @param string $name
      * @param array $meta
      * @param Links $links
+     * @param array $data
      * @param ResourceObjects $resources
      * @return Relationship
      */
-    private static function createToOneFromArray($name, array $meta, Links $links, ResourceObjects $resources)
-    {
+    private static function createToOneFromArray(
+        $name,
+        array $meta,
+        Links $links,
+        array $data,
+        ResourceObjects $resources
+    ) {
         $resourceMap = [];
         $isToOneRelationship = true;
 
-        if (empty($array["data"]["type"]) === false && empty($array["data"]["id"]) === false) {
+        if (empty($data["type"]) === false && empty($data["id"]) === false) {
             $resourceMap = [
                 [
-                    "type" => $array["data"]["type"],
-                    "id" => $array["data"]["id"]
+                    "type" => $data["type"],
+                    "id" => $data["id"]
                 ]
             ];
         }
