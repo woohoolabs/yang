@@ -60,7 +60,7 @@ FIXED:
 - Error objects are correctly listed under the "errors" member when using `Document::toArray()`
 - Correctly transforming "included" member when using `Document::toArray()`
 - `ResourceObjects::isSingleResourceDocument()` `Document::isResourceDocument()` returned wrong value when "data" member was null 
-- `ResourceObjects::hasAnyPrimaryResources()` returned wrong value When "data" member was null 
+- `ResourceObjects::hasAnyPrimaryResources()` returned wrong value when "data" member was null 
 
 ## 0.6.0 - 2016-12-18
 

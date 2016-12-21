@@ -216,7 +216,7 @@ $jsonApi = $document->jsonApi();
 $jsonApiVersion = $jsonApi->version();
 $jsonApiMeta = $jsonApi->meta();
 
-// Checks if the document has a "meta" member
+// Checks if the document has the "meta" member
 $hasMeta = $document->hasMeta();
 
 // Retrieves the "meta" member as an array
@@ -225,7 +225,7 @@ $meta = $document->meta();
 // Checks if the document has a "links" member
 $hasLinks = $document->hasLinks();
 
-// Retrieves the links "member" as a Links instance
+// Retrieves the "links" member as a Links instance
 $links = $document->links();
 
 $selfLink = $links->self();         // Returns a Link instance or null
@@ -235,7 +235,7 @@ $nextLink = $links->link("next");   // Returns a Link instance or null
 // Checks if the document has errors
 $hasErrors = $document->hasErrors();
 
-// Retrieves the errors "member" as an array of Error instances
+// Retrieves the "errors" member as an array of Error instances
 $errors = $document->errors();
 
 // Retrieves the first error as an Error instance or null
@@ -275,10 +275,10 @@ $type = $primaryResource->type();
 // Returns the id of the resource
 $id = $primaryResource->id();
 
-// Checks if the resource has meta information
+// Checks if the resource has the "meta" member
 $hasMeta = $primaryResource->hasMeta();
 
-// Returns the meta information as an array
+// Returns the "meta" member as an array
 $meta = $primaryResource->meta();
 
 // Checks if the resource has links
@@ -317,7 +317,7 @@ $name = $address->name();
 // Checks if the relationship has the "meta" member
 $hasMeta = $address->hasMeta();
 
-// Returns the meta information of the relationship as an array
+// Returns the "meta" member of the relationship as an array
 $meta = $address->meta();
 
 // Returns the "links" member of the relationship as a Links instance
