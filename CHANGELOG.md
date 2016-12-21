@@ -22,6 +22,10 @@ CHANGED:
 - Added `Relationships::createFromArray()` instead of the constructor
 - Renamed `Relationship::resourceLink` to `Relationship::firstResourceLink`
 
+FIXED:
+
+- Representing error status as string as per the spec
+
 ## 0.8.0 - 2016-12-20
 
 CHANGED:

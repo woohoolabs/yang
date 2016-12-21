@@ -19,7 +19,7 @@ class Error
     private $links;
 
     /**
-     * @var int
+     * @var string
      */
     private $status;
 
@@ -65,7 +65,7 @@ class Error
      * @param string $id
      * @param array $meta
      * @param \WoohooLabs\Yang\JsonApi\Schema\Links $links
-     * @param int $status
+     * @param string $status
      * @param string $code
      * @param string $title
      * @param string $detail
@@ -166,7 +166,7 @@ class Error
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function status()
     {
