@@ -79,7 +79,9 @@ class JsonApiResponseTest extends TestCase
             [],
             [
                 "errors" => [
-                    ["status" => 400]
+                    [
+                        "status" => "400"
+                    ]
                 ]
             ]
         );
@@ -97,7 +99,9 @@ class JsonApiResponseTest extends TestCase
             [],
             [
                 "errors" => [
-                    ["status" => 400]
+                    [
+                        "status" => "400"
+                    ]
                 ]
             ]
         );

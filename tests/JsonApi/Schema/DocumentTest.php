@@ -53,7 +53,7 @@ class DocumentTest extends TestCase
                 ],
                 "errors" => [
                     [
-                        "status" => 401
+                        "status" => "401"
                     ]
                 ],
                 "included" => [
@@ -84,7 +84,7 @@ class DocumentTest extends TestCase
                 ],
                 "errors" => [
                     [
-                        "status" => 401
+                        "status" => "401"
                     ]
                 ],
                 "included" => [
