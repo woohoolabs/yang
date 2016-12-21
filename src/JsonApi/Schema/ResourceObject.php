@@ -53,7 +53,7 @@ class ResourceObject
                     continue;
                 }
 
-                $relationships[$name] = new Relationship($name, $relationship, $resources);
+                $relationships[$name] = Relationship::createFromArray($name, $relationship, $resources);
             }
         }
 

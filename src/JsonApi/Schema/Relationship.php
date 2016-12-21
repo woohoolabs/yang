@@ -37,18 +37,21 @@ class Relationship
      * @param string $name
      * @param array $array
      * @param \WoohooLabs\Yang\JsonApi\Schema\ResourceObjects $resources
+     * @return Relationship
      */
-    public function __construct($name, array $array, ResourceObjects $resources)
+    public static function createFromArray($name, array $array, ResourceObjects $resources)
     {
-        $this->name = $name;
-        $this->meta = $this->isArrayKey($array, "meta") ? $array["meta"] : [];
-        $this->links = Links::createFromArray($this->isArrayKey($array, "links") ? $array["links"] : []);
+        $meta = self::isArrayKey($array, "meta") ? $array["meta"] : [];
+        $links = Links::createFromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
+        $resourceMap = [];
 
-        if ($this->isArrayKey($array, "data")) {
-            if ($this->isAssociativeArray($array["data"])) {
-                $this->isToOneRelationship = true;
+        if (self::isArrayKey($array, "data") == false) {
+            $isToOneRelationship = null;
+        } else {
+            if (self::isAssociativeArray($array["data"])) {
+                $isToOneRelationship = true;
                 if (empty($array["data"]["type"]) === false && empty($array["data"]["id"]) === false) {
-                    $this->resourceMap = [
+                    $resourceMap = [
                         [
                             "type" => $array["data"]["type"],
                             "id" => $array["data"]["id"]
@@ -56,21 +59,43 @@ class Relationship
                     ];
                 }
             } else {
-                $this->isToOneRelationship = false;
-                $this->resourceMap = [];
+                $isToOneRelationship = false;
+                $resourceMap = [];
                 foreach ($array["data"] as $item) {
                     if (empty($item["type"]) === false && empty($item["id"]) === false) {
-                        $this->resourceMap[] = [
+                        $resourceMap[] = [
                             "type" => $item["type"],
                             "id" => $item["id"]
                         ];
                     }
                 }
             }
-        } else {
-            $this->isToOneRelationship = null;
         }
 
+        return new Relationship($name, $meta, $links, $resourceMap, $isToOneRelationship, $resources);
+    }
+
+    /**
+     * @param string $name
+     * @param array $meta
+     * @param Links $links
+     * @param array $resourceMap
+     * @param bool $isToOneRelationship
+     * @param ResourceObjects $resources
+     */
+    public function __construct(
+        $name,
+        array $meta,
+        Links $links,
+        array $resourceMap,
+        $isToOneRelationship,
+        ResourceObjects $resources
+    ) {
+        $this->name = $name;
+        $this->meta = $meta;
+        $this->links = $links;
+        $this->resourceMap = $resourceMap;
+        $this->isToOneRelationship = $isToOneRelationship;
         $this->resources = $resources;
     }
 
@@ -247,7 +272,7 @@ class Relationship
      * @param array $array
      * @return bool
      */
-    private function isAssociativeArray(array $array)
+    private static function isAssociativeArray(array $array)
     {
         return (bool)count(array_filter(array_keys($array), 'is_string'));
     }
@@ -257,7 +282,7 @@ class Relationship
      * @param string $key
      * @return bool
      */
-    private function isArrayKey($array, $key)
+    private static function isArrayKey($array, $key)
     {
         return isset($array[$key]) && is_array($array[$key]);
     }

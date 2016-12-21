@@ -17,10 +17,10 @@ class ErrorSource
      * @param array $source
      * @return $this
      */
-    public static function fromArray(array $source)
+    public static function createFromArray(array $source)
     {
-        $pointer = empty($source["pointer"]) === false ? $source["pointer"] : "";
-        $parameter = empty($source["parameter"]) === false ? $source["parameter"] : "";
+        $pointer = isset($source["pointer"]) && is_string($source["pointer"]) ? $source["pointer"] : "";
+        $parameter = isset($source["parameter"]) && is_string($source["parameter"]) ? $source["parameter"] : "";
 
         return new self($pointer, $parameter);
     }

@@ -146,6 +146,22 @@ class Links
     }
 
     /**
+     * @return bool
+     */
+    public function hasAbout()
+    {
+        return $this->link("about") !== null;
+    }
+
+    /**
+     * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
+     */
+    public function about()
+    {
+        return $this->link("about");
+    }
+
+    /**
      * @param $name
      * @return bool
      */

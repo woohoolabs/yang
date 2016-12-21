@@ -330,6 +330,54 @@ class LinksTest extends TestCase
     /**
      * @test
      */
+    public function hasAboutIsTrue()
+    {
+        $links = Links::createFromArray(
+            [
+                "about" => ""
+            ]
+        );
+
+        $this->assertTrue($links->hasAbout());
+    }
+
+    /**
+     * @test
+     */
+    public function hasAboutIsFalse()
+    {
+        $links = Links::createFromArray([]);
+
+        $this->assertFalse($links->hasAbout());
+    }
+
+    /**
+     * @test
+     */
+    public function aboutReturnsObject()
+    {
+        $links = Links::createFromArray(
+            [
+                "about" => [],
+            ]
+        );
+
+        $this->assertInstanceOf(Link::class, $links->about());
+    }
+
+    /**
+     * @test
+     */
+    public function aboutReturnsNull()
+    {
+        $links = Links::createFromArray([]);
+
+        $this->assertNull($links->about());
+    }
+
+    /**
+     * @test
+     */
     public function hasLinkIsTrue()
     {
         $links = Links::createFromArray(

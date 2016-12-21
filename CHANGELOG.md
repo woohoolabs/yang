@@ -2,7 +2,14 @@
 
 ADDED:
 
+- Better support for "about" links
+
 CHANGED:
+
+- `Error::createFromArray()` performs more type checks before instantiating an `Error` object
+- Renamed `ErrorSource::fromArray()` to `ErrorSource::createFromArray()`
+- `ErrorSource::createFromArray()` performs more type checks before instantiating an `ErrorSource` object
+- Added `Relationships::createFromArray()` instead of the constructor 
 
 REMOVED:
 
@@ -13,7 +20,7 @@ FIXED:
 CHANGED:
 
 - `Link::createFromArray()` performs type checks before instantiating a `Link` object
-- Added a `ResourceObject::createFromArray()` instead of the constructor 
+- Added `ResourceObject::createFromArray()` instead of the constructor
 - `ResourceObject::createFromArray()` performs more type checks before instantiating a `ResourceObject`
 - The "jsonapi" member is always present when using `Document::toArray()`
 - The "links" member won't be present in a relationship when it is empty when using `ResourceObject::toArray()`
