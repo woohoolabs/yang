@@ -205,6 +205,118 @@ class RelationshipTest extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function resourceLinksForToManyRelationship()
+    {
+        $relationship = $this->createRelationship(
+            [
+                "data" => [
+                    [
+                        "type" => "a",
+                        "id" => "b",
+                    ]
+                ]
+            ]
+        );
+
+        $this->assertEquals(
+            [
+                [
+                    "type" => "a",
+                    "id" => "b",
+                ]
+            ],
+            $relationship->resourceLinks()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function resourceLinksForToOneRelationship()
+    {
+        $relationship = $this->createRelationship(
+            [
+                "data" => [
+                    "type" => "a",
+                    "id" => "b",
+                ]
+            ]
+        );
+
+        $this->assertEquals(
+            [
+                [
+                    "type" => "a",
+                    "id" => "b",
+                ]
+            ],
+            $relationship->resourceLinks()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function firstResourceLinkForToManyRelationship()
+    {
+        $relationship = $this->createRelationship(
+            [
+                "data" => [
+                    [
+                        "type" => "a",
+                        "id" => "b",
+                    ]
+                ]
+            ]
+        );
+
+        $this->assertEquals(
+            [
+                "type" => "a",
+                "id" => "b",
+            ],
+            $relationship->firstResourceLink()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function firstResourceLinkForToOneRelationship()
+    {
+        $relationship = $this->createRelationship(
+            [
+                "data" => [
+                    [
+                        "type" => "a",
+                        "id" => "b",
+                    ]
+                ]
+            ]
+        );
+
+        $this->assertEquals(
+            [
+                "type" => "a",
+                "id" => "b",
+            ],
+            $relationship->firstResourceLink()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function firstResourceLinkWhenEmpty()
+    {
+        $relationship = $this->createRelationship([]);
+
+        $this->assertNull($relationship->firstResourceLink());
+    }
+
+    /**
      * @param array $relationship
      * @param string $name
      * @return Relationship

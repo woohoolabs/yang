@@ -107,7 +107,7 @@ class ResourceObjectTest extends TestCase
     {
         $resource = new ResourceObject("", "");
         $resource
-            ->setToOneRelationship("a", new ToOneRelationship("a", "a1"));
+            ->setToOneRelationship("a", ToOneRelationship::create("a", "a1"));
 
         $this->assertEquals(
             [

@@ -188,7 +188,7 @@ class Relationship
     /**
      * @return array|null
      */
-    public function resourceLink()
+    public function firstResourceLink()
     {
         $link = reset($this->resourceMap);
 
