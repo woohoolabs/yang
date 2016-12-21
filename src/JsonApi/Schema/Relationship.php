@@ -43,32 +43,78 @@ class Relationship
     {
         $meta = self::isArrayKey($array, "meta") ? $array["meta"] : [];
         $links = Links::createFromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
-        $resourceMap = [];
 
         if (self::isArrayKey($array, "data") === false) {
-            $isToOneRelationship = null;
-        } else {
-            if (self::isAssociativeArray($array["data"])) {
-                $isToOneRelationship = true;
-                if (empty($array["data"]["type"]) === false && empty($array["data"]["id"]) === false) {
-                    $resourceMap = [
-                        [
-                            "type" => $array["data"]["type"],
-                            "id" => $array["data"]["id"]
-                        ]
-                    ];
-                }
-            } else {
-                $isToOneRelationship = false;
-                $resourceMap = [];
-                foreach ($array["data"] as $item) {
-                    if (empty($item["type"]) === false && empty($item["id"]) === false) {
-                        $resourceMap[] = [
-                            "type" => $item["type"],
-                            "id" => $item["id"]
-                        ];
-                    }
-                }
+            return self::createEmptyFromArray($name, $meta, $links, $resources);
+        }
+
+        if (self::isAssociativeArray($array["data"])) {
+            return self::createToOneFromArray($name, $meta, $links, $resources);
+        }
+
+        return self::createToManyFromArray($name, $meta, $links, $array["data"], $resources);
+    }
+
+    /**
+     * @param string $name
+     * @param array $meta
+     * @param Links $links
+     * @param ResourceObjects $resources
+     * @return Relationship
+     */
+    private static function createEmptyFromArray($name, array $meta, Links $links, ResourceObjects $resources)
+    {
+        return new Relationship($name, $meta, $links, [], $resources, null);
+    }
+
+    /**
+     * @param string $name
+     * @param array $meta
+     * @param Links $links
+     * @param ResourceObjects $resources
+     * @return Relationship
+     */
+    private static function createToOneFromArray($name, array $meta, Links $links, ResourceObjects $resources)
+    {
+        $resourceMap = [];
+        $isToOneRelationship = true;
+
+        if (empty($array["data"]["type"]) === false && empty($array["data"]["id"]) === false) {
+            $resourceMap = [
+                [
+                    "type" => $array["data"]["type"],
+                    "id" => $array["data"]["id"]
+                ]
+            ];
+        }
+
+        return new Relationship($name, $meta, $links, $resourceMap, $resources, $isToOneRelationship);
+    }
+
+    /**
+     * @param string $name
+     * @param array $meta
+     * @param Links $links
+     * @param array $data
+     * @param ResourceObjects $resources
+     * @return Relationship
+     */
+    private static function createToManyFromArray(
+        $name,
+        array $meta,
+        Links $links,
+        array $data,
+        ResourceObjects $resources
+    ) {
+        $isToOneRelationship = false;
+        $resourceMap = [];
+
+        foreach ($data as $item) {
+            if (empty($item["type"]) === false && empty($item["id"]) === false) {
+                $resourceMap[] = [
+                    "type" => $item["type"],
+                    "id" => $item["id"]
+                ];
             }
         }
 
