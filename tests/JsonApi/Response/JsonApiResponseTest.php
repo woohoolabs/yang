@@ -3,7 +3,6 @@ namespace WoohooLabs\Yang\Tests\JsonApi\Response;
 
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\StreamInterface;
 use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 
@@ -269,6 +268,26 @@ class JsonApiResponseTest extends TestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertEquals(201, $newResponse->getStatusCode());
+    }
+
+    /**
+     * @test
+     */
+    public function getBody()
+    {
+        $response = $this->createResponse(200, [], ["meta" => ["a" => "b"]]);
+
+        $this->assertEquals('{"meta":{"a":"b"}}', $response->getBody()->__toString());
+    }
+
+    /**
+     * @test
+     */
+    public function getReasonPhrase()
+    {
+        $response = $this->createResponse(200);
+
+        $this->assertEquals("OK", $response->getReasonPhrase());
     }
 
     private function createResponse($statusCode = null, array $headers = [], array $body = null)

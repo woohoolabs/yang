@@ -2,9 +2,7 @@
 namespace WoohooLabs\Yang\Tests\JsonApi\Schema;
 
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Schema\Error;
 use WoohooLabs\Yang\JsonApi\Schema\ErrorSource;
-use WoohooLabs\Yang\JsonApi\Schema\Links;
 
 class ErrorSourceTest extends TestCase
 {

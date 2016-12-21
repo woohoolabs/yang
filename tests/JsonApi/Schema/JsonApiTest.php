@@ -3,8 +3,6 @@ namespace WoohooLabs\Yang\Tests\JsonApi\Schema;
 
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Schema\JsonApi;
-use WoohooLabs\Yang\JsonApi\Schema\Link;
-use WoohooLabs\Yang\JsonApi\Schema\Links;
 
 class JsonApiTest extends TestCase
 {

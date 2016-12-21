@@ -134,8 +134,8 @@ class ResourceObjectTest extends TestCase
     {
         $resource = new ResourceObject("", "");
         $resource
-            ->setToManyRelationship("a", new ToManyRelationship())
-            ->setToManyRelationship("b", new ToManyRelationship());
+            ->setToManyRelationship("a", ToManyRelationship::create())
+            ->setToManyRelationship("b", ToManyRelationship::create());
 
         $this->assertEquals(
             [

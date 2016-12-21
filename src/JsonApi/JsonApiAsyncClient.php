@@ -34,10 +34,12 @@ class JsonApiAsyncClient
      */
     public function sendConcurrentAsyncRequests(array $requests)
     {
+        $result = [];
+
         foreach ($requests as $key => $request) {
-            $requests[$key] = $this->sendAsyncRequest($request);
+            $result[$key] = $this->sendAsyncRequest($request);
         }
 
-        return $requests;
+        return $result;
     }
 }
