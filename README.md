@@ -110,7 +110,7 @@ $requestBuilder
     
 // Setup the request with a body
 $requestBuilder
-    ->setBody(                                                  // You can pass a JSON as string
+    ->setJsonApiBody(                                           // You can pass a JSON as string
         '{
            "data": [
              { "type": "user", "id": "1" },
@@ -118,7 +118,7 @@ $requestBuilder
            ]
          }'
     )
-    ->setBody(                                                  // or you can pass it as an array
+    ->setJsonApiBody(                                           // or you can pass it as an array
         [
             "data" => [
                 ["type" => "user", "id" => 1],
@@ -126,7 +126,7 @@ $requestBuilder
             ]
         ]
     )
-    ->setBody(                                                  // or a ResourceObject instance
+    ->setJsonApiBody(                                           // or a ResourceObject instance
         new ResourceObject("user", 1)
     );
 
