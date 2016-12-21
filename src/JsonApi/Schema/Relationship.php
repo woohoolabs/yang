@@ -4,7 +4,7 @@ namespace WoohooLabs\Yang\JsonApi\Schema;
 class Relationship
 {
     /**
-     * @var bool
+     * @var bool|null
      */
     private $isToOneRelationship;
 
@@ -45,7 +45,7 @@ class Relationship
         $links = Links::createFromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
         $resourceMap = [];
 
-        if (self::isArrayKey($array, "data") == false) {
+        if (self::isArrayKey($array, "data") === false) {
             $isToOneRelationship = null;
         } else {
             if (self::isAssociativeArray($array["data"])) {
@@ -72,7 +72,7 @@ class Relationship
             }
         }
 
-        return new Relationship($name, $meta, $links, $resourceMap, $isToOneRelationship, $resources);
+        return new Relationship($name, $meta, $links, $resourceMap, $resources, $isToOneRelationship);
     }
 
     /**
@@ -80,16 +80,16 @@ class Relationship
      * @param array $meta
      * @param Links $links
      * @param array $resourceMap
-     * @param bool $isToOneRelationship
      * @param ResourceObjects $resources
+     * @param bool|null $isToOneRelationship
      */
     public function __construct(
         $name,
         array $meta,
         Links $links,
         array $resourceMap,
-        $isToOneRelationship,
-        ResourceObjects $resources
+        ResourceObjects $resources,
+        $isToOneRelationship = null
     ) {
         $this->name = $name;
         $this->meta = $meta;
