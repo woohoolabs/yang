@@ -107,7 +107,7 @@ $requestBuilder
     ->setJsonApiFilter(                                         // To filter the primary data
         ["first_name" => "John"]
     );
-    
+
 // Setup the request with a body
 $requestBuilder
     ->setJsonApiBody(                                           // You can pass a JSON as string
