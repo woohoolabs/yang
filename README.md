@@ -43,20 +43,27 @@ JSON:API clients, while [Woohoo Labs. Yin](https://woohoolabs/yin) is its server
 
 ## Install
 
-You need [Composer](https://getcomposer.org) to install this library. Run the command below and you will get the latest
-version:
+The only thing you need before getting started is [Composer](http://getcomposer.org).
+
+### Install a PSR-7 implementation:
+
+Because Yang requires a HTTP client implementation (a package which provides the `php-http/client-implementation`
+virtual package), you must install one first. You may use the [Guzzle 6 Adapter](https://github.com/php-http/guzzle6-adapter)
+or any other library of your preference:
+
+```bash
+$ composer require php-http/guzzle6-adapter
+```
+
+### Install Yang:
+
+To install the latest version of this library, run the command below:
 
 ```bash
 $ composer require woohoolabs/yang
 ```
 
-Yang needs PHP 5.6+.
-
-If you want to use Guzzle 6 as the HTTP client implementation, you should run the following command too: 
-
-```bash
-$ composer require php-http/guzzle6-adapter
-```
+Yang requires PHP 5.6 at least.
 
 ## Basic Usage
 
