@@ -5,6 +5,8 @@ ADDED:
 CHANGED:
 
 - Renamed `DefaultDeserializer` to `JsonDeserializer`
+- Moved `JsonApiClient` and `JsonApiAsyncClient` into the `JsonApi\Client` namespace
+
 REMOVED:
 
 FIXED:

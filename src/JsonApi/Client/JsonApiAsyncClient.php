@@ -1,5 +1,5 @@
 <?php
-namespace WoohooLabs\Yang\JsonApi;
+namespace WoohooLabs\Yang\JsonApi\Client;
 
 use Http\Client\HttpAsyncClient;
 use Psr\Http\Message\RequestInterface;
