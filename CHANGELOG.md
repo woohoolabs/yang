@@ -4,6 +4,7 @@ ADDED:
 
 CHANGED:
 
+- Renamed `DefaultDeserializer` to `JsonDeserializer`
 REMOVED:
 
 FIXED:

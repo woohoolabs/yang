@@ -3,7 +3,7 @@ namespace WoohooLabs\Yang\JsonApi\Deserializer;
 
 use Psr\Http\Message\ResponseInterface;
 
-class DefaultDeserializer implements DeserializerInterface
+class JsonDeserializer implements DeserializerInterface
 {
     /**
      * @param ResponseInterface $response
