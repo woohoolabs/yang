@@ -3,8 +3,8 @@ namespace WoohooLabs\Yang\JsonApi\Response;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
-use WoohooLabs\Yang\JsonApi\Deserializer\JsonDeserializer;
 use WoohooLabs\Yang\JsonApi\Deserializer\DeserializerInterface;
+use WoohooLabs\Yang\JsonApi\Deserializer\JsonDeserializer;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 
 class JsonApiResponse implements ResponseInterface
