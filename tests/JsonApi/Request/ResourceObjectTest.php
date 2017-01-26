@@ -15,7 +15,7 @@ class ResourceObjectTest extends TestCase
     {
         $resource = ResourceObject::create("", "");
 
-          $this->assertInstanceOf(ResourceObject::class, $resource);
+        $this->assertInstanceOf(ResourceObject::class, $resource);
     }
 
     /**

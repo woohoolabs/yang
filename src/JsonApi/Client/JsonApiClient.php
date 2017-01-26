@@ -3,8 +3,8 @@ namespace WoohooLabs\Yang\JsonApi\Client;
 
 use Http\Client\HttpClient;
 use Psr\Http\Message\RequestInterface;
-use WoohooLabs\Yang\JsonApi\Deserializer\JsonDeserializer;
 use WoohooLabs\Yang\JsonApi\Deserializer\DeserializerInterface;
+use WoohooLabs\Yang\JsonApi\Deserializer\JsonDeserializer;
 use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
 
 class JsonApiClient
