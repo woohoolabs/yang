@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-    yang-php:
+    php:
         container_name: yang-php
         image: php:7.0-cli
         volumes:

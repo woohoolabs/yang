@@ -4,6 +4,7 @@ ADDED:
 
 CHANGED:
 
+- Increased minimum PHP version requirement to 7.0
 - Renamed `DefaultDeserializer` to `JsonDeserializer`
 - Moved `JsonApiClient` and `JsonApiAsyncClient` into the `JsonApi\Client` namespace
 
