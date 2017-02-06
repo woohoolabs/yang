@@ -131,7 +131,7 @@ class JsonApiRequestBuilder
         }
 
         if (empty($parsedUrl["port"]) === false) {
-            $this->port = $parsedUrl["port"];
+            $this->port = (int) $parsedUrl["port"];
         }
 
         if (empty($parsedUrl["host"]) === false) {
