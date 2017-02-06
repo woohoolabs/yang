@@ -63,7 +63,7 @@ To install the latest version of this library, run the command below:
 $ composer require woohoolabs/yang
 ```
 
-Yang requires PHP 7.0 at least but you can use Yang 0.9 for PHP 5.6.
+Yang requires PHP 7.0 at least. You may use Yang 0.9 for PHP 5.6.
 
 ## Basic Usage
 

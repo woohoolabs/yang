@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\Tests\JsonApi\Schema;
 
 use PHPUnit\Framework\TestCase;
@@ -250,12 +252,12 @@ class ResourceObjectsTest extends TestCase
         $this->assertEmpty($resourceObjects->includedResources());
     }
 
-    private function createResourceObjectsFromSinglePrimaryData(array $data = [], array $included = [])
+    private function createResourceObjectsFromSinglePrimaryData(array $data = [], array $included = []): ResourceObjects
     {
         return new ResourceObjects($data, $included, true);
     }
 
-    private function createResourceObjectsFromCollectionPrimaryData(array $data = [], array $included = [])
+    private function createResourceObjectsFromCollectionPrimaryData(array $data = [], array $included = []): ResourceObjects
     {
         return new ResourceObjects($data, $included, false);
     }

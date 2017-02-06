@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
 class ResourceObject
@@ -19,7 +21,7 @@ class ResourceObject
     private $meta;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\Links
+     * @var Links
      */
     private $links;
 
@@ -29,16 +31,11 @@ class ResourceObject
     private $attributes;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\Relationship[]
+     * @var Relationship[]
      */
     private $relationships;
 
-    /**
-     * @param array $array
-     * @param \WoohooLabs\Yang\JsonApi\Schema\ResourceObjects $resources
-     * @return ResourceObject
-     */
-    public static function createFromArray($array, ResourceObjects $resources)
+    public static function createFromArray(array $array, ResourceObjects $resources): ResourceObject
     {
         $type = isset($array["type"]) && is_string($array["type"]) ? $array["type"] : "";
         $id = isset($array["id"]) && is_string($array["id"]) ? $array["id"] : "";
@@ -61,15 +58,16 @@ class ResourceObject
     }
 
     /**
-     * @param string $type
-     * @param string $id
-     * @param array $meta
-     * @param Links $links
-     * @param array $attributes
      * @param Relationship[] $relationships
      */
-    public function __construct($type, $id, array $meta, Links $links, array $attributes, array $relationships)
-    {
+    public function __construct(
+        string $type,
+        string $id,
+        array $meta,
+        Links $links,
+        array $attributes,
+        array $relationships
+    ) {
         $this->type = $type;
         $this->id = $id;
         $this->meta = $meta;
@@ -78,10 +76,7 @@ class ResourceObject
         $this->relationships = $relationships;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         $result = [
             "type" => $this->type,
@@ -110,104 +105,68 @@ class ResourceObject
         return $result;
     }
 
-    /**
-     * @return string
-     */
-    public function type()
+    public function type(): string
     {
         return $this->type;
     }
 
-    /**
-     * @return string
-     */
-    public function id()
+    public function id(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasMeta()
+    public function hasMeta(): bool
     {
         return empty($this->meta) === false;
     }
 
-    /**
-     * @return array
-     */
-    public function meta()
+    public function meta(): array
     {
         return $this->meta;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasLinks()
+    public function hasLinks(): bool
     {
         return $this->links->hasAnyLinks();
     }
 
-    /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Links
-     */
-    public function links()
+    public function links(): Links
     {
         return $this->links;
     }
 
-    /**
-     * @return array
-     */
-    public function attributes()
+    public function attributes(): array
     {
         return $this->attributes;
     }
 
-    /**
-     * @param string $name
-     * @return bool
-     */
-    public function hasAttribute($name)
+    public function hasAttribute(string $name): bool
     {
         return array_key_exists($name, $this->attributes);
     }
 
     /**
-     * @param string $name
      * @return mixed|null
      */
-    public function attribute($name)
+    public function attribute(string $name)
     {
         return $this->hasAttribute($name) ? $this->attributes[$name] : null;
     }
 
-    /**
-     * @param string $name
-     * @return bool
-     */
-    public function hasRelationship($name)
+    public function hasRelationship(string $name): bool
     {
         return array_key_exists($name, $this->relationships);
     }
 
     /**
-     * @param string $name
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Relationship|null
+     * @return Relationship|null
      */
-    public function relationship($name)
+    public function relationship(string $name)
     {
         return $this->hasRelationship($name) ? $this->relationships[$name] : null;
     }
 
-    /**
-     * @param array $array
-     * @param string $key
-     * @return bool
-     */
-    private static function isArrayKey($array, $key)
+    private static function isArrayKey(array $array, string $key): bool
     {
         return isset($array[$key]) && is_array($array[$key]);
     }

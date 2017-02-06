@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\JsonApi\Client;
 
 use Http\Client\HttpClient;
@@ -10,7 +12,7 @@ use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
 class JsonApiClient
 {
     /**
-     * @var \Http\Client\HttpClient
+     * @var HttpClient
      */
     private $client;
 
@@ -25,11 +27,7 @@ class JsonApiClient
         $this->deserializer = $deserializer ? $deserializer : new JsonDeserializer();
     }
 
-    /**
-     * @param \Psr\Http\Message\RequestInterface $request
-     * @return \WoohooLabs\Yang\JsonApi\Response\JsonApiResponse
-     */
-    public function sendRequest(RequestInterface $request)
+    public function sendRequest(RequestInterface $request): JsonApiResponse
     {
         return new JsonApiResponse($this->client->sendRequest($request), $this->deserializer);
     }

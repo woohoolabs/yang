@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
 class ErrorSource
@@ -13,11 +15,7 @@ class ErrorSource
      */
     private $parameter;
 
-    /**
-     * @param array $source
-     * @return $this
-     */
-    public static function createFromArray(array $source)
+    public static function createFromArray(array $source): ErrorSource
     {
         $pointer = isset($source["pointer"]) && is_string($source["pointer"]) ? $source["pointer"] : "";
         $parameter = isset($source["parameter"]) && is_string($source["parameter"]) ? $source["parameter"] : "";
@@ -25,20 +23,13 @@ class ErrorSource
         return new self($pointer, $parameter);
     }
 
-    /**
-     * @param string $pointer
-     * @param string $parameter
-     */
-    public function __construct($pointer, $parameter)
+    public function __construct(string $pointer, string $parameter)
     {
         $this->pointer = $pointer;
         $this->parameter = $parameter;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         $content = [];
 
@@ -53,42 +44,27 @@ class ErrorSource
         return $content;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasSource()
+    public function hasSource(): bool
     {
         return $this->hasPointer() || $this->hasParameter();
     }
 
-    /**
-     * @return bool
-     */
-    public function hasPointer()
+    public function hasPointer(): bool
     {
         return empty($this->pointer) === false;
     }
 
-    /**
-     * @return string
-     */
-    public function pointer()
+    public function pointer(): string
     {
         return $this->pointer;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasParameter()
+    public function hasParameter(): bool
     {
         return empty($this->parameter) === false;
     }
 
-    /**
-     * @return string
-     */
-    public function parameter()
+    public function parameter(): string
     {
         return $this->parameter;
     }

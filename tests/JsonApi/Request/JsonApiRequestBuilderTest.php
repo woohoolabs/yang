@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\Tests\JsonApi\Request;
 
 use GuzzleHttp\Psr7\Request;
@@ -122,9 +124,9 @@ class JsonApiRequestBuilderTest extends TestCase
     {
         $requestBuilder = $this->createRequestBuilder();
 
-        $requestBuilder->setUriPort("8080");
+        $requestBuilder->setUriPort(8080);
 
-        $this->assertEquals("8080", $requestBuilder->getRequest()->getUri()->getPort());
+        $this->assertEquals(8080, $requestBuilder->getRequest()->getUri()->getPort());
     }
 
     /**
@@ -243,10 +245,7 @@ class JsonApiRequestBuilderTest extends TestCase
         $this->assertEquals(["application/vnd.api+json"], $requestBuilder->getRequest()->getHeader("Content-Type"));
     }
 
-    /**
-     * @return JsonApiRequestBuilder
-     */
-    private function createRequestBuilder()
+    private function createRequestBuilder(): JsonApiRequestBuilder
     {
         return new JsonApiRequestBuilder(new Request("", ""));
     }

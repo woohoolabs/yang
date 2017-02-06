@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
 class Error
@@ -14,7 +16,7 @@ class Error
     private $meta;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\Links
+     * @var Links
      */
     private $links;
 
@@ -39,15 +41,11 @@ class Error
     private $detail;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\ErrorSource
+     * @var ErrorSource
      */
     private $source;
 
-    /**
-     * @param array $error
-     * @return $this
-     */
-    public static function createFromArray(array $error)
+    public static function createFromArray(array $error): Error
     {
         $id = isset($error["id"]) && is_string($error["id"]) ? $error["id"] : "";
         $meta = isset($error["meta"]) && is_array($error["meta"]) ? $error["meta"] : [];
@@ -61,18 +59,16 @@ class Error
         return new self($id, $meta, $links, $status, $code, $title, $detail, $source);
     }
 
-    /**
-     * @param string $id
-     * @param array $meta
-     * @param \WoohooLabs\Yang\JsonApi\Schema\Links $links
-     * @param string $status
-     * @param string $code
-     * @param string $title
-     * @param string $detail
-     * @param \WoohooLabs\Yang\JsonApi\Schema\ErrorSource $source
-     */
-    public function __construct($id, array $meta, Links $links, $status, $code, $title, $detail, ErrorSource $source)
-    {
+    public function __construct(
+        string $id,
+        array $meta,
+        Links $links,
+        string $status,
+        string $code,
+        string $title,
+        string $detail,
+        ErrorSource $source
+    ) {
         $this->id = $id;
         $this->meta = $meta;
         $this->links = $links;
@@ -83,10 +79,7 @@ class Error
         $this->source = $source;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         $content = [];
 
@@ -125,90 +118,57 @@ class Error
         return $content;
     }
 
-    /**
-     * @return string
-     */
-    public function id()
+    public function id(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasMeta()
+    public function hasMeta(): bool
     {
         return empty($this->meta) === false;
     }
 
-    /**
-     * @return array
-     */
-    public function meta()
+    public function meta(): array
     {
         return $this->meta;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasLinks()
+    public function hasLinks(): bool
     {
         return $this->links->hasAnyLinks();
     }
 
-    /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Links
-     */
-    public function links()
+    public function links(): Links
     {
         return $this->links;
     }
 
-    /**
-     * @return string
-     */
-    public function status()
+    public function status(): string
     {
         return $this->status;
     }
 
-    /**
-     * @return string
-     */
-    public function code()
+    public function code(): string
     {
         return $this->code;
     }
 
-    /**
-     * @return string
-     */
-    public function title()
+    public function title(): string
     {
         return $this->title;
     }
 
-    /**
-     * @return string
-     */
-    public function detail()
+    public function detail(): string
     {
         return $this->detail;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasSource()
+    public function hasSource(): bool
     {
         return $this->source->hasSource();
     }
 
-    /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\ErrorSource
-     */
-    public function source()
+    public function source(): ErrorSource
     {
         return $this->source;
     }

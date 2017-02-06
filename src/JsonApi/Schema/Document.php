@@ -1,10 +1,12 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
 class Document
 {
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\JsonApi
+     * @var JsonApi
      */
     private $jsonApi;
 
@@ -14,25 +16,21 @@ class Document
     private $meta;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\Links
+     * @var Links
      */
     private $links;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\ResourceObjects
+     * @var ResourceObjects
      */
     private $resources;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\Error[]
+     * @var Error[]
      */
     private $errors;
 
-    /**
-     * @param array $document
-     * @return $this
-     */
-    public static function createFromArray(array $document)
+    public static function createFromArray(array $document): Document
     {
         if (isset($document["jsonapi"]) && is_array($document["jsonapi"])) {
             $jsonApi = $document["jsonapi"];
@@ -79,11 +77,7 @@ class Document
     }
 
     /**
-     * @param \WoohooLabs\Yang\JsonApi\Schema\JsonApi $jsonApi
-     * @param array $meta
-     * @param \WoohooLabs\Yang\JsonApi\Schema\Links $links
-     * @param \WoohooLabs\Yang\JsonApi\Schema\ResourceObjects $resources
-     * @param \WoohooLabs\Yang\JsonApi\Schema\Error[] $errors
+     * @param Error[] $errors
      */
     public function __construct(JsonApi $jsonApi, array $meta, Links $links, ResourceObjects $resources, array $errors)
     {
@@ -94,10 +88,7 @@ class Document
         $this->errors = $errors;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         $content = [
             "jsonapi" => $this->jsonApi->toArray()
@@ -130,10 +121,7 @@ class Document
         return $content;
     }
 
-    /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\JsonApi
-     */
-    public function jsonApi()
+    public function jsonApi(): JsonApi
     {
         return $this->jsonApi;
     }
@@ -141,61 +129,43 @@ class Document
     /**
      * @return bool
      */
-    public function hasMeta()
+    public function hasMeta(): bool
     {
         return empty($this->meta) === false;
     }
 
-    /**
-     * @return array
-     */
-    public function meta()
+    public function meta(): array
     {
         return $this->meta;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasLinks()
+    public function hasLinks(): bool
     {
         return $this->links->hasAnyLinks();
     }
 
-    /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Links
-     */
-    public function links()
+    public function links(): Links
     {
         return $this->links;
     }
 
-    /**
-     * @return bool
-     */
-    public function isSingleResourceDocument()
+    public function isSingleResourceDocument(): bool
     {
         return $this->resources->isSinglePrimaryResource() === true;
     }
 
-    /**
-     * @return bool
-     */
-    public function isResourceCollectionDocument()
+    public function isResourceCollectionDocument(): bool
     {
         return $this->resources->isPrimaryResourceCollection() === true;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasAnyPrimaryResources()
+    public function hasAnyPrimaryResources(): bool
     {
         return $this->resources->hasAnyPrimaryResources();
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject|null
+     * @return ResourceObject|null
      */
     public function primaryResource()
     {
@@ -203,79 +173,61 @@ class Document
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject[]
+     * @return ResourceObject[]
      */
-    public function primaryResources()
+    public function primaryResources(): array
     {
         return $this->resources->primaryResources();
     }
 
     /**
-     * @param string $type
-     * @param string $id
-     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject|null
+     * @return ResourceObject|null
      */
-    public function resource($type, $id)
+    public function resource(string $type, string $id)
     {
         return $this->resources->resource($type, $id);
     }
 
-    /**
-     * @return bool
-     */
-    public function hasAnyIncludedResources()
+    public function hasAnyIncludedResources(): bool
     {
         return $this->resources->hasAnyIncludedResources();
     }
 
-    /**
-     * @param string $type
-     * @param string $id
-     * @return bool
-     */
-    public function hasIncludedResource($type, $id)
+    public function hasIncludedResource(string $type, string $id): bool
     {
         return $this->resources->hasIncludedResource($type, $id);
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject[]
+     * @return ResourceObject[]
      */
-    public function includedResources()
+    public function includedResources(): array
     {
         return $this->resources->includedResources();
     }
 
-    /**
-     * @return bool
-     */
-    public function hasErrors()
+    public function hasErrors(): bool
     {
         return empty($this->errors) === false;
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Error[]
+     * @return Error[]
      */
-    public function errors()
+    public function errors(): array
     {
         return $this->errors;
     }
 
     /**
-     * @param int $number
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Error|null
+     * @return Error|null
      */
-    public function error($number)
+    public function error(int $number)
     {
-        return isset($this->errors[$number]) ? $this->errors[$number] : null;
+        return $this->errors[$number] ?? null;
     }
 
-    /**
-     * @param array $array
-     * @return bool
-     */
-    private static function isAssociativeArray(array $array)
+    private static function isAssociativeArray(array $array): bool
     {
         return (bool)count(array_filter(array_keys($array), 'is_string'));
     }

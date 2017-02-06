@@ -1,18 +1,16 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
 class Links
 {
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\Link[]
+     * @var Link[]
      */
     private $links;
 
-    /**
-     * @param array $links
-     * @return $this
-     */
-    public static function createFromArray(array $links)
+    public static function createFromArray(array $links): Links
     {
         $linkObjects = [];
         foreach ($links as $name => $value) {
@@ -27,170 +25,137 @@ class Links
     }
 
     /**
-     * @param \WoohooLabs\Yang\JsonApi\Schema\Link[] $links
+     * @param Link[] $links
      */
     public function __construct(array $links)
     {
         $this->links = $links;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         $links = [];
 
         foreach ($this->links as $rel => $link) {
-            /** @var \WoohooLabs\Yang\JsonApi\Schema\Link $link */
             $links[$rel] = $link->toArray();
         }
 
         return $links;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasSelf()
+    public function hasSelf(): bool
     {
-        return $this->link("self") !== null;
+        return $this->hasLink("self");
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
+     * @return Link|null
      */
     public function self()
     {
         return $this->link("self");
     }
 
-    /**
-     * @return bool
-     */
-    public function hasRelated()
+    public function hasRelated(): bool
     {
-        return $this->link("related") !== null;
+        return $this->hasLink("related");
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
+     * @return Link|null
      */
     public function related()
     {
         return $this->link("related");
     }
 
-    /**
-     * @return bool
-     */
-    public function hasFirst()
+    public function hasFirst(): bool
     {
-        return $this->link("first") !== null;
+        return $this->hasLink("first");
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
+     * @return Link|null
      */
     public function first()
     {
         return $this->link("first");
     }
 
-    /**
-     * @return bool
-     */
-    public function hasLast()
+    public function hasLast(): bool
     {
-        return $this->link("last") !== null;
+        return $this->hasLink("last");
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
+     * @return Link|null
      */
     public function last()
     {
         return $this->link("last");
     }
 
-    /**
-     * @return bool
-     */
-    public function hasPrev()
+    public function hasPrev(): bool
     {
-        return $this->link("prev") !== null;
+        return $this->hasLink("prev");
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
+     * @return Link|null
      */
     public function prev()
     {
         return $this->link("prev");
     }
 
-    /**
-     * @return bool
-     */
-    public function hasNext()
+    public function hasNext(): bool
     {
-        return $this->link("next") !== null;
+        return $this->hasLink("next");
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
+     * @return Link|null
      */
     public function next()
     {
         return $this->link("next");
     }
 
-    /**
-     * @return bool
-     */
-    public function hasAbout()
+    public function hasAbout(): bool
     {
-        return $this->link("about") !== null;
+        return $this->hasLink("about");
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
+     * @return Link|null
      */
     public function about()
     {
         return $this->link("about");
     }
 
-    /**
-     * @param $name
-     * @return bool
-     */
-    public function hasLink($name)
+    public function hasLink(string $name): bool
     {
         return isset($this->links[$name]);
     }
 
     /**
-     * @param $name
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Link|null
+     * @return Link|null
      */
-    public function link($name)
+    public function link(string $name)
     {
-        return isset($this->links[$name]) ? $this->links[$name] : null;
+        return $this->links[$name] ?? null;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasAnyLinks()
+    public function hasAnyLinks(): bool
     {
         return empty($this->links) === false;
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Link[]
+     * @return Link[]
      */
-    public function links()
+    public function links(): array
     {
         return $this->links;
     }

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\Tests\JsonApi\Schema;
 
 use PHPUnit\Framework\TestCase;
@@ -434,7 +436,7 @@ class DocumentTest extends TestCase
         $this->assertNull($document->error(0));
     }
 
-    private function createDocument(array $body = [])
+    private function createDocument(array $body = []): Document
     {
         return Document::createFromArray($body);
     }

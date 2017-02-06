@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\Tests\JsonApi\Schema;
 
 use PHPUnit\Framework\TestCase;
@@ -310,7 +312,7 @@ class ResourceObjectTest extends TestCase
         $this->assertNull(null, $resourceObject->relationship("a"));
     }
 
-    private function createResourceObject(array $data)
+    private function createResourceObject(array $data): ResourceObject
     {
         return ResourceObject::createFromArray($data, new ResourceObjects($data, [], true));
     }

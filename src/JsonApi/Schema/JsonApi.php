@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
 class JsonApi
@@ -13,11 +15,7 @@ class JsonApi
      */
     private $meta;
 
-    /**
-     * @param array $array
-     * @return $this
-     */
-    public static function createFromArray($array)
+    public static function createFromArray(array $array): JsonApi
     {
         $version = isset($array["version"]) && is_string("version") ? $array["version"] : "1.0";
         $meta = isset($array["meta"]) && is_array($array["meta"]) ? $array["meta"] : [];
@@ -25,20 +23,13 @@ class JsonApi
         return new self($version, $meta);
     }
 
-    /**
-     * @param string $version
-     * @param array $meta
-     */
-    public function __construct($version, array $meta)
+    public function __construct(string $version, array $meta)
     {
         $this->version = $version;
         $this->meta = $meta;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         $result = [];
 
@@ -53,26 +44,17 @@ class JsonApi
         return $result;
     }
 
-    /**
-     * @return string
-     */
-    public function version()
+    public function version(): string
     {
         return $this->version;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasMeta()
+    public function hasMeta(): bool
     {
         return empty($this->meta) === false;
     }
 
-    /**
-     * @return array
-     */
-    public function meta()
+    public function meta(): array
     {
         return $this->meta;
     }

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\JsonApi\Response;
 
 use Psr\Http\Message\ResponseInterface;
@@ -10,7 +12,7 @@ use WoohooLabs\Yang\JsonApi\Schema\Document;
 class JsonApiResponse implements ResponseInterface
 {
     /**
-     * @var \Psr\Http\Message\ResponseInterface
+     * @var ResponseInterface
      */
     private $response;
 
@@ -20,29 +22,23 @@ class JsonApiResponse implements ResponseInterface
     private $deserializer;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\Document|false|null
+     * @var Document|false|null
      */
     private $document = false;
 
-    /**
-     * @param \Psr\Http\Message\ResponseInterface $response
-     */
     public function __construct(ResponseInterface $response, DeserializerInterface $deserializer = null)
     {
         $this->response = $response;
-        $this->deserializer = $deserializer !== null ? $deserializer : new JsonDeserializer();
+        $this->deserializer = $deserializer ?? new JsonDeserializer();
     }
 
-    /**
-     * @return bool
-     */
-    public function hasDocument()
+    public function hasDocument(): bool
     {
         return is_object($this->document());
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Document|null
+     * @return Document|null
      */
     public function document()
     {
@@ -54,11 +50,7 @@ class JsonApiResponse implements ResponseInterface
         return $this->document;
     }
 
-    /**
-     * @param array $successfulStatusCodes
-     * @return bool
-     */
-    public function isSuccessful($successfulStatusCodes = [])
+    public function isSuccessful(array $successfulStatusCodes = []): bool
     {
         $isStatusCodeSuccessful = empty($successfulStatusCodes) === true ||
             in_array($this->getStatusCode(), $successfulStatusCodes, true);
@@ -68,11 +60,7 @@ class JsonApiResponse implements ResponseInterface
         return $isStatusCodeSuccessful && $hasNoErrors;
     }
 
-    /**
-     * @param array $allowedStatusCodes
-     * @return bool
-     */
-    public function isSuccessfulDocument($allowedStatusCodes = [])
+    public function isSuccessfulDocument(array $allowedStatusCodes = []): bool
     {
         return $this->isSuccessful($allowedStatusCodes) && $this->hasDocument();
     }

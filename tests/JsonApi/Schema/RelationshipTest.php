@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
 use PHPUnit\Framework\TestCase;
@@ -316,12 +318,7 @@ class RelationshipTest extends TestCase
         $this->assertNull($relationship->firstResourceLink());
     }
 
-    /**
-     * @param array $relationship
-     * @param string $name
-     * @return Relationship
-     */
-    private function createRelationship(array $relationship, $name = "")
+    private function createRelationship(array $relationship, string $name = ""): Relationship
     {
         return Relationship::createFromArray($name, $relationship, new ResourceObjects([], [], true));
     }

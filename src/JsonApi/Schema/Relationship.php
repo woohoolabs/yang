@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
 class Relationship
@@ -19,7 +21,7 @@ class Relationship
     private $meta;
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\Links
+     * @var Links
      */
     private $links;
 
@@ -29,17 +31,11 @@ class Relationship
     private $resourceMap = [];
 
     /**
-     * @var \WoohooLabs\Yang\JsonApi\Schema\ResourceObjects
+     * @var ResourceObjects
      */
     private $resources;
 
-    /**
-     * @param string $name
-     * @param array $array
-     * @param \WoohooLabs\Yang\JsonApi\Schema\ResourceObjects $resources
-     * @return Relationship
-     */
-    public static function createFromArray($name, array $array, ResourceObjects $resources)
+    public static function createFromArray(string $name, array $array, ResourceObjects $resources): Relationship
     {
         $meta = self::isArrayKey($array, "meta") ? $array["meta"] : [];
         $links = Links::createFromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
@@ -55,33 +51,22 @@ class Relationship
         return self::createToManyFromArray($name, $meta, $links, $array["data"], $resources);
     }
 
-    /**
-     * @param string $name
-     * @param array $meta
-     * @param Links $links
-     * @param ResourceObjects $resources
-     * @return Relationship
-     */
-    private static function createEmptyFromArray($name, array $meta, Links $links, ResourceObjects $resources)
-    {
+    private static function createEmptyFromArray(
+        string $name,
+        array $meta,
+        Links $links,
+        ResourceObjects $resources
+    ): Relationship {
         return new Relationship($name, $meta, $links, [], $resources, null);
     }
 
-    /**
-     * @param string $name
-     * @param array $meta
-     * @param Links $links
-     * @param array $data
-     * @param ResourceObjects $resources
-     * @return Relationship
-     */
     private static function createToOneFromArray(
-        $name,
+        string $name,
         array $meta,
         Links $links,
         array $data,
         ResourceObjects $resources
-    ) {
+    ): Relationship {
         $resourceMap = [];
         $isToOneRelationship = true;
 
@@ -97,21 +82,13 @@ class Relationship
         return new Relationship($name, $meta, $links, $resourceMap, $resources, $isToOneRelationship);
     }
 
-    /**
-     * @param string $name
-     * @param array $meta
-     * @param Links $links
-     * @param array $data
-     * @param ResourceObjects $resources
-     * @return Relationship
-     */
     private static function createToManyFromArray(
-        $name,
+        string $name,
         array $meta,
         Links $links,
         array $data,
         ResourceObjects $resources
-    ) {
+    ): Relationship {
         $isToOneRelationship = false;
         $resourceMap = [];
 
@@ -127,21 +104,13 @@ class Relationship
         return new Relationship($name, $meta, $links, $resourceMap, $resources, $isToOneRelationship);
     }
 
-    /**
-     * @param string $name
-     * @param array $meta
-     * @param Links $links
-     * @param array $resourceMap
-     * @param ResourceObjects $resources
-     * @param bool|null $isToOneRelationship
-     */
     public function __construct(
-        $name,
+        string $name,
         array $meta,
         Links $links,
         array $resourceMap,
         ResourceObjects $resources,
-        $isToOneRelationship = null
+        bool $isToOneRelationship = null
     ) {
         $this->name = $name;
         $this->meta = $meta;
@@ -151,10 +120,7 @@ class Relationship
         $this->resources = $resources;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         $result = [];
 
@@ -173,66 +139,42 @@ class Relationship
         return $result;
     }
 
-    /**
-     * @return string
-     */
-    public function name()
+    public function name(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return bool
-     */
-    public function isToOneRelationship()
+    public function isToOneRelationship(): bool
     {
         return $this->isToOneRelationship === true;
     }
 
-    /**
-     * @return bool
-     */
-    public function isToManyRelationship()
+    public function isToManyRelationship(): bool
     {
         return $this->isToOneRelationship === false;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasMeta()
+    public function hasMeta(): bool
     {
         return empty($this->meta) === false;
     }
 
-    /**
-     * @return array
-     */
-    public function meta()
+    public function meta(): array
     {
         return $this->meta;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasLinks()
+    public function hasLinks(): bool
     {
         return $this->links->hasAnyLinks();
     }
 
-    /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\Links
-     */
-    public function links()
+    public function links(): Links
     {
         return $this->links;
     }
 
-    /**
-     * @return array
-     */
-    public function resourceLinks()
+    public function resourceLinks(): array
     {
         return $this->resourceMap;
     }
@@ -247,20 +189,15 @@ class Relationship
         return $link === false ? null : $link;
     }
 
-    /**
-     * @param string $type
-     * @param string $id
-     * @return bool
-     */
-    public function hasIncludedResource($type, $id)
+    public function hasIncludedResource(string $type, string $id): bool
     {
         return $this->resources->hasIncludedResource($type, $id);
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject[]
+     * @return ResourceObject[]
      */
-    public function resources()
+    public function resources(): array
     {
         if ($this->isToOneRelationship) {
             return [];
@@ -277,9 +214,9 @@ class Relationship
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject[]
+     * @return ResourceObject[]
      */
-    public function resourceMap()
+    public function resourceMap(): array
     {
         $resources = [];
         foreach ($this->resourceMap as $resourceLink) {
@@ -294,7 +231,7 @@ class Relationship
     }
 
     /**
-     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject|null
+     * @return ResourceObject|null
      */
     public function resource()
     {
@@ -311,30 +248,19 @@ class Relationship
     }
 
     /**
-     * @param string $type
-     * @param string $id
-     * @return \WoohooLabs\Yang\JsonApi\Schema\ResourceObject|null
+     * @return ResourceObject|null
      */
-    public function resourceBy($type, $id)
+    public function resourceBy(string $type, string $id)
     {
         return $this->resources->resource($type, $id);
     }
 
-    /**
-     * @param array $array
-     * @return bool
-     */
-    private static function isAssociativeArray(array $array)
+    private static function isAssociativeArray(array $array): bool
     {
-        return (bool)count(array_filter(array_keys($array), 'is_string'));
+        return (bool) count(array_filter(array_keys($array), 'is_string'));
     }
 
-    /**
-     * @param array $array
-     * @param string $key
-     * @return bool
-     */
-    private static function isArrayKey($array, $key)
+    private static function isArrayKey(array $array, string $key): bool
     {
         return isset($array[$key]) && is_array($array[$key]);
     }

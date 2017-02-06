@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\Tests\JsonApi\Response;
 
 use GuzzleHttp\Psr7\Response;
@@ -294,7 +296,7 @@ class JsonApiResponseTest extends TestCase
         $this->assertEquals("OK", $response->getReasonPhrase());
     }
 
-    private function createResponse($statusCode = null, array $headers = [], array $body = null)
+    private function createResponse($statusCode = null, array $headers = [], array $body = null): JsonApiResponse
     {
         return new JsonApiResponse(new Response($statusCode ? $statusCode : null, $headers, json_encode($body)));
     }

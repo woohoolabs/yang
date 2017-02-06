@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
 class Link
@@ -13,20 +15,12 @@ class Link
      */
     private $meta;
 
-    /**
-     * @param string $link
-     * @return $this
-     */
-    public static function createFromString($link)
+    public static function createFromString(string $link): Link
     {
         return new self($link);
     }
 
-    /**
-     * @param array $link
-     * @return $this
-     */
-    public static function createFromArray(array $link)
+    public static function createFromArray(array $link): Link
     {
         $href = isset($link["href"]) && is_string($link["href"]) ? $link["href"] : "";
         $meta = isset($link["meta"]) && is_array($link["meta"]) ? $link["meta"] : [];
@@ -34,20 +28,13 @@ class Link
         return new self($href, $meta);
     }
 
-    /**
-     * @param string $href
-     * @param array $meta
-     */
-    public function __construct($href, array $meta = [])
+    public function __construct(string $href, array $meta = [])
     {
         $this->href = $href;
         $this->meta = $meta;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         $link = ["href" => $this->href];
 
@@ -58,26 +45,17 @@ class Link
         return $link;
     }
 
-    /**
-     * @return string
-     */
-    public function href()
+    public function href(): string
     {
         return $this->href;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasMeta()
+    public function hasMeta(): bool
     {
         return empty($this->meta) === false;
     }
 
-    /**
-     * @return array
-     */
-    public function meta()
+    public function meta(): array
     {
         return $this->meta;
     }
