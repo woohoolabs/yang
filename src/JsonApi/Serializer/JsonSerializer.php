@@ -36,6 +36,9 @@ class JsonSerializer implements SerializerInterface
             throw new LogicException("The content of the request can be a string, an array or null!");
         }
 
+        if ($request->getBody()->isSeekable()) {
+            $request->getBody()->rewind();
+        }
         $request->getBody()->write($content);
 
         return $request;
