@@ -19,6 +19,7 @@
     * [HTTP clients](#http-clients)
     * [Response](#response)
 * [Advanced Usage](#advanced-usage)
+    * [Custom serialization](#custom-serialization)
     * [Custom deserialization](#custom-deserialization)
 * [Versioning](#versioning)
 * [Change Log](#change-log)
@@ -117,7 +118,7 @@ $requestBuilder
 
 // Setup the request with a body
 $requestBuilder
-    ->setJsonApiBody(                                           // You can pass a JSON as string
+    ->setJsonApiBody(                                           // You can pass JSON as string
         '{
            "data": [
              { "type": "user", "id": "1" },
@@ -351,14 +352,40 @@ $resources = $address->resources();
 
 ## Advanced Usage
 
+### Custom serialization
+
+Sometimes you might need to be tricky, and customly serialize a request body. For example if you dispatch a server
+request internally (within the original request), then you can send the request body as an array thanks to this
+feature - so you don't need to serialize at client-side and then deserialize at server-size. If you use Woohoo Labs. Yin
+and a [custom deserializer](https://github.com/woohoolabs/yin/#custom-deserialization) at server-side, then this is an
+easy task to do.
+
+At client-side, if you use Yang with the [Request Builder](#request-builder), then you only have to pass a second
+constructor argument to it like below:
+
+```php
+// Instantiate a PSR-7 request
+$request = new Request();
+
+// Instantiate your custom serializer
+$mySerializer = new MyCustomSerializer();
+
+// Instantiate the request builder with a custom serializer
+$requestBuilder = new JsonApiRequestBuilder($request, $mySerializer);
+```
+
+You only have to make sure that your custom serializer implements the `SerializerInterface`.
+
 ### Custom deserialization
 
 Sometimes you might need to be tricky, and customly deserialize a server response. For example if you dispatch a server
-request internally (within the original request), then with this feature you can receive the response as an array - so you
-don't need to serialize at server-side and then deserialize at client-size. If you use Woohoo Labs. Yin in your server
-and a [custom serializer](https://github.com/woohoolabs/yin/#custom-serialization), then this is an easy task to do.
+request internally (within the original request), then you can receive the response body as an array thanks to this
+feature - so you don't need to serialize at server-side and then deserialize at client-size. If you use Woohoo Labs. Yin
+and a [custom serializer](https://github.com/woohoolabs/yin/#custom-serialization) at server-side, then this is an easy
+task to do.
 
-If you use the default [HTTP Clients](#http-clients) then you only have to pass a second argument to them like below:
+At client-side, if you use Yang with the default [HTTP Clients](#http-clients) then you only have to pass a second
+constructor argument to them like below:
 
 ```php
 use Http\Adapter\Guzzle6\Client;

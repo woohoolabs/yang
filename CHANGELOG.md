@@ -2,11 +2,15 @@
 
 ADDED:
 
+- Support for custom serialization
+- Ability to configure the `JsonDeserializer`
+
 CHANGED:
 
 - Increased minimum PHP version requirement to 7.0
 - Renamed `DefaultDeserializer` to `JsonDeserializer`
 - Moved `JsonApiClient` and `JsonApiAsyncClient` into the `JsonApi\Client` namespace
+- Moved deserializers into the `Serializer` namespace along with serializers
 
 REMOVED:
 
@@ -56,7 +60,7 @@ FIXED:
 
 ADDED:
 
-- Added `JsonApiResource::setRelationship()`
+- `JsonApiResource::setRelationship()` method
 - Unit tests
 - Docker support to run tests
 - `Links::hasAnyLinks()` method

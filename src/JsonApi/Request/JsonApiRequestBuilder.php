@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\JsonApi\Request;
 
 use Psr\Http\Message\RequestInterface;
+use WoohooLabs\Yang\JsonApi\Serializer\JsonSerializer;
+use WoohooLabs\Yang\JsonApi\Serializer\SerializerInterface;
 
 class JsonApiRequestBuilder
 {
@@ -11,6 +13,11 @@ class JsonApiRequestBuilder
      * @var RequestInterface
      */
     private $request;
+
+    /**
+     * @var SerializerInterface
+     */
+    private $serializer;
 
     /**
      * @var string
@@ -57,9 +64,10 @@ class JsonApiRequestBuilder
      */
     private $body;
 
-    public function __construct(RequestInterface $request)
+    public function __construct(RequestInterface $request, SerializerInterface $serializer = null)
     {
         $this->request = $request;
+        $this->serializer = $serializer ?? new JsonSerializer();
         $this->initialize();
     }
 
@@ -236,16 +244,14 @@ class JsonApiRequestBuilder
     }
 
     /**
-     * @param ResourceObject|array|object|string $body
+     * @param ResourceObject|array|string $body
      */
     public function setJsonApiBody($body): JsonApiRequestBuilder
     {
-        if (is_string($body)) {
+        if ($body instanceof ResourceObject) {
+            $this->body = $body->toArray();
+        } else {
             $this->body = $body;
-        } elseif ($body instanceof ResourceObject) {
-            $this->body = json_encode($body->toArray());
-        } elseif (is_array($body) || is_object($body)) {
-            $this->body = json_encode($body);
         }
 
         return $this;
@@ -271,9 +277,8 @@ class JsonApiRequestBuilder
         foreach ($this->headers as $name => $value) {
             $request = $request->withHeader($name, $value);
         }
-        $request->getBody()->write($this->body);
 
-        return $request;
+        return $this->serializer->serialize($request, $this->body);
     }
 
     private function getQueryString(): string

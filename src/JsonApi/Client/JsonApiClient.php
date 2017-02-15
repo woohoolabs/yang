@@ -5,9 +5,9 @@ namespace WoohooLabs\Yang\JsonApi\Client;
 
 use Http\Client\HttpClient;
 use Psr\Http\Message\RequestInterface;
-use WoohooLabs\Yang\JsonApi\Deserializer\DeserializerInterface;
-use WoohooLabs\Yang\JsonApi\Deserializer\JsonDeserializer;
 use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
+use WoohooLabs\Yang\JsonApi\Serializer\DeserializerInterface;
+use WoohooLabs\Yang\JsonApi\Serializer\JsonDeserializer;
 
 class JsonApiClient
 {
@@ -24,7 +24,7 @@ class JsonApiClient
     public function __construct(HttpClient $client, DeserializerInterface $deserializer = null)
     {
         $this->client = $client;
-        $this->deserializer = $deserializer ? $deserializer : new JsonDeserializer();
+        $this->deserializer = $deserializer ?? new JsonDeserializer();
     }
 
     public function sendRequest(RequestInterface $request): JsonApiResponse
