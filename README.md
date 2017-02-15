@@ -116,9 +116,9 @@ $requestBuilder
         ["first_name" => "John"]
     );
 
-// Setup the request with a body
+// Setup the request body
 $requestBuilder
-    ->setJsonApiBody(                                           // You can pass JSON as string
+    ->setJsonApiBody(                                           // You can pass the content as a JSON string
         '{
            "data": [
              { "type": "user", "id": "1" },
@@ -134,7 +134,7 @@ $requestBuilder
             ]
         ]
     )
-    ->setJsonApiBody(                                           // or a ResourceObject instance
+    ->setJsonApiBody(                                           // or as a ResourceObject instance
         new ResourceObject("user", 1)
     );
 
@@ -182,7 +182,7 @@ $promise = $client->sendAsyncRequest($request);
 $promises = $client->sendConcurrentAsyncRequests([$request, $request]);
 ```
 
-Of course, you can use any available HTTP Clients or create you custom HTTP Client thanks to HTTPlug.
+Of course, you can use any available HTTP Clients or create a custom HTTP Client thanks to HTTPlug.
 
 ### Response
 
@@ -195,8 +195,8 @@ get an object of this type, otherwise you have to take care of instantiating it 
 $response = new JsonApiResponse($psr7Response);
 ```
 
-The `JsonApiResponse` class - above the ones defined by PSR-7 - has some methods to make handling JSON:API responses
-easier:
+The `JsonApiResponse` class - above the ones defined by PSR-7 - has some methods to make the handling of JSON:API
+responses easier:
 
 ```php
 // Checks if the response contains a JSON:API Document
