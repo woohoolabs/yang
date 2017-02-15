@@ -25,15 +25,15 @@ class JsonSerializer implements SerializerInterface
     }
 
     /**
-     * @param array|string|mixed $content
+     * @param array|string|null $content
      * @throws LogicException
      */
     public function serialize(RequestInterface $request, $content): RequestInterface
     {
         if (is_array($content)) {
             $content = json_encode($content, $this->options, $this->depth);
-        } elseif (is_string($content) === false) {
-            throw new LogicException("The content of the request must be a");
+        } elseif ($content !== null && is_string($content) === false) {
+            throw new LogicException("The content of the request can be a string, an array or null!");
         }
 
         $request->getBody()->write($content);
