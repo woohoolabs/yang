@@ -60,7 +60,7 @@ class JsonApiRequestBuilder
     private $headers;
 
     /**
-     * @var string
+     * @var mixed
      */
     private $body;
 
