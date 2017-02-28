@@ -1,4 +1,14 @@
-## 1.0.0 - unreleased
+## 1.1.0 - unreleased
+
+ADDED:
+
+CHANGED:
+
+REMOVED:
+
+FIXED:
+
+## 1.0.0 - 2017-02-28
 
 ADDED:
 
@@ -11,10 +21,6 @@ CHANGED:
 - Renamed `DefaultDeserializer` to `JsonDeserializer`
 - Moved `JsonApiClient` and `JsonApiAsyncClient` into the `JsonApi\Client` namespace
 - Moved deserializers into the `JsonApi\Serializer` namespace along with serializers
-
-REMOVED:
-
-FIXED:
 
 ## 0.9.0 - 2016-12-21
 
