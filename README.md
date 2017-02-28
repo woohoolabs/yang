@@ -414,6 +414,9 @@ You only have to make sure that your custom deserializer implements the `Deseria
 
 ## Examples
 
+Have a look at the [examples directory](https://github.com/woohoolabs/yang/blob/master/examples/) for a really basic
+example.
+
 ## Versioning
 
 This library follows [SemVer v2.0.0](http://semver.org/).

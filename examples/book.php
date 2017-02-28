@@ -17,18 +17,20 @@ $request = $requestBuilder
     ->setJsonApiIncludes(["authors", "publisher"])
     ->getRequest();
 
-// Create HTTP Client
+// Create an HTTP Client
 $guzzleClient = GuzzleClient::createWithConfig([]);
 $client = new JsonApiClient($guzzleClient);
+
+// Retrieve response
 $response = $client->sendRequest($request);
 
-// Print response status code
+// Print the response status code
 echo "Status: " . $response->getStatusCode() . "<br/>";
 
-// Print response body
+// Print the response body
 echo "Body:<pre>";
 print_r($response->document()->toArray());
 
-// Print book publisher
+// Print the book publisher
 echo "Publisher:";
 print_r($response->document()->primaryResource()->relationship("publisher")->resource()->toArray());
