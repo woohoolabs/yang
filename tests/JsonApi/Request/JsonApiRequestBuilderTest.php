@@ -136,9 +136,9 @@ class JsonApiRequestBuilderTest extends TestCase
     {
         $requestBuilder = $this->createRequestBuilder();
 
-        $requestBuilder->setUriPath("api/users");
+        $requestBuilder->setUriPath("/api/users");
 
-        $this->assertEquals("api/users", $requestBuilder->getRequest()->getUri()->getPath());
+        $this->assertEquals("/api/users", $requestBuilder->getRequest()->getUri()->getPath());
     }
 
     /**
