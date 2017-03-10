@@ -298,6 +298,9 @@ $links = $primaryResource->links();
 // Returns the attributes of the resource as an array
 $attributes = $primaryResource->attributes();
 
+// Returns the ID and attributes of the resource as an array
+$attributes = $primaryResource->idAndAttributes();
+
 // Checks if the resource has an attribute
 $hasFirstName = $primaryResource->hasAttribute("first_name");
 

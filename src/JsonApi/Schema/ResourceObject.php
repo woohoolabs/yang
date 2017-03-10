@@ -140,6 +140,11 @@ class ResourceObject
         return $this->attributes;
     }
 
+    public function idAndAttributes(): array
+    {
+        return array_merge(["id" => $this->id()], $this->attributes());
+    }
+
     public function hasAttribute(string $name): bool
     {
         return array_key_exists($name, $this->attributes);

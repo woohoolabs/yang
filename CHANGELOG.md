@@ -1,6 +1,8 @@
-## 1.1.0 - unreleased
+## 1.0.1 - unreleased
 
 ADDED:
+
+- Added `ResourceObject::idAndAttributes()` method
 
 CHANGED:
 

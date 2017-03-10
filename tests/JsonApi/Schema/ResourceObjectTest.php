@@ -199,6 +199,23 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
+    public function idAndAttributes()
+    {
+        $resourceObject = $this->createResourceObject(
+            [
+                "id" => "abc",
+                "attributes" => [
+                    "a" => "b"
+                ]
+            ]
+        );
+
+        $this->assertEquals(["id" => "abc", "a" => "b"], $resourceObject->idAndAttributes());
+    }
+
+    /**
+     * @test
+     */
     public function hasAttributeIsTrue()
     {
         $resourceObject = $this->createResourceObject(
