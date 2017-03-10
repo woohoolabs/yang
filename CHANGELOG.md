@@ -12,7 +12,7 @@ FIXED:
 
 ADDED:
 
-- Added `ResourceObject::idAndAttributes()` method
+- `ResourceObject::idAndAttributes()` method
 
 ## 1.0.0 - 2017-02-28
 
