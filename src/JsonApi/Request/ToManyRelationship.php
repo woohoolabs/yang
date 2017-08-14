@@ -15,22 +15,24 @@ class ToManyRelationship implements RelationshipInterface
         return new self();
     }
 
-    /**
-     * @param string $type
-     * @param string $id
-     */
-    public function addResourceIdentifier($type, $id)
+    public function addResourceIdentifier(string $type, string $id, array $meta = [])
     {
-        $this->resourceIdentifiers[] = ["type" => $type, "id" => $id];
+        $resourceIdentifier = [
+            "type" => $type,
+            "id" => $id,
+        ];
+
+        if (empty ($meta) === false) {
+            $resourceIdentifier["meta"] = $meta;
+        }
+
+        $this->resourceIdentifiers[] = $resourceIdentifier;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         return [
-            "data" => $this->resourceIdentifiers
+            "data" => $this->resourceIdentifiers,
         ];
     }
 }

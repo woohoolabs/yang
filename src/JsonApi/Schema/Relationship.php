@@ -74,10 +74,10 @@ class Relationship
             $resourceMap = [
                 [
                     "type" => $data["type"],
-                    "id" => $data["id"]
+                    "id" => $data["id"],
                 ]
             ];
-            if (!empty($data["meta"])) {
+            if (empty($data["meta"]) === false) {
                 $resourceMap[0]["meta"] = $data["meta"];
             }
         }
@@ -99,9 +99,9 @@ class Relationship
             if (empty($item["type"]) === false && empty($item["id"]) === false) {
                 $resource = [
                     "type" => $item["type"],
-                    "id" => $item["id"]
+                    "id" => $item["id"],
                 ];
-                if (!empty($item["meta"])) {
+                if (empty($item["meta"]) === false) {
                     $resource["meta"] = $item["meta"];
                 }
                 $resourceMap[] = $resource;
@@ -266,8 +266,6 @@ class Relationship
      * Get meta information that may be defined next to the resource identifier link.
      * This occurs when a relationship contains additional data besides the relation's identifiers.
      *
-     * @param string $type
-     * @param string $id
      * @return null|array
      */
     public function resourceLinkMeta(string $type, string $id)

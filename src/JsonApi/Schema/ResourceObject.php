@@ -80,7 +80,7 @@ class ResourceObject
     {
         $result = [
             "type" => $this->type,
-            "id" => $this->id
+            "id" => $this->id,
         ];
 
         if (empty($this->meta) === false) {

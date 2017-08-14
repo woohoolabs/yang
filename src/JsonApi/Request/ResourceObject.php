@@ -109,7 +109,7 @@ class ResourceObject
     {
         $resource = [
             "data" => [
-                "type" => $this->type
+                "type" => $this->type,
             ]
         ];
 

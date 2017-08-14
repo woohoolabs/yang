@@ -16,35 +16,35 @@ class ToOneRelationship implements RelationshipInterface
     private $id;
 
     /**
-     * @param string $type
-     * @param string $id
-     * @return $this
+     * @var array
      */
-    public static function create($type, $id)
+    private $meta;
+
+    public static function create(string $type, string $id, array $meta = []): ToOneRelationship
     {
-        return new self($type, $id);
+        return new self($type, $id, $meta);
     }
 
-    /**
-     * @param string $type
-     * @param string $id
-     */
-    public function __construct($type, $id)
+    public function __construct(string $type, string $id, array $meta = [])
     {
         $this->type = $type;
         $this->id = $id;
+        $this->meta = $meta;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
+        $resourceIdentifier = [
+            "type" => $this->type,
+            "id" => $this->id,
+        ];
+
+        if (empty($this->meta) === false) {
+            $resourceIdentifier["meta"] = $this->meta;
+        }
+
         return [
-            "data" => [
-                "type" => $this->type,
-                "id" => $this->id,
-            ]
+            "data" => $resourceIdentifier
         ];
     }
 }
