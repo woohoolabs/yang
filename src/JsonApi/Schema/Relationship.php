@@ -77,6 +77,9 @@ class Relationship
                     "id" => $data["id"]
                 ]
             ];
+            if (! empty($data["meta"])) {
+                $resourceMap[0]["meta"] = $data["meta"];
+            }
         }
 
         return new Relationship($name, $meta, $links, $resourceMap, $resources, $isToOneRelationship);
@@ -94,10 +97,14 @@ class Relationship
 
         foreach ($data as $item) {
             if (empty($item["type"]) === false && empty($item["id"]) === false) {
-                $resourceMap[] = [
+                $resource = [
                     "type" => $item["type"],
                     "id" => $item["id"]
                 ];
+                if (! empty($item["meta"])) {
+                    $resource["meta"] = $item["meta"];
+                }
+                $resourceMap[] = $resource;
             }
         }
 
@@ -253,6 +260,25 @@ class Relationship
     public function resourceBy(string $type, string $id)
     {
         return $this->resources->resource($type, $id);
+    }
+
+    /**
+     * Get meta information that may be defined next to the resource identifier link.
+     * This occurs when a relationship contains additional data besides the relation's identifiers.
+     *
+     * @param string $type
+     * @param string $id
+     * @return null|array
+     */
+    public function resourceLinkMeta(string $type, string $id)
+    {
+        foreach ($this->resourceMap as $resourceLink) {
+            if (isset($resourceLink["meta"]) && $resourceLink["type"] === $type && $resourceLink["id"] === $id) {
+                return $resourceLink["meta"];
+            }
+        }
+
+        return null;
     }
 
     private static function isAssociativeArray(array $array): bool
