@@ -25,21 +25,12 @@ class ResourceObject
      */
     private $relationships;
 
-    /**
-     * @param string $type
-     * @param string $id
-     * @return $this
-     */
-    public static function create($type, $id = "")
+    public static function create(string $type, string $id = ""): ResourceObject
     {
         return new self($type, $id);
     }
 
-    /**
-     * @param string $type
-     * @param string $id
-     */
-    public function __construct($type, $id = "")
+    public function __construct(string $type, string $id = "")
     {
         $this->type = $type;
         $this->id = $id;
@@ -47,11 +38,7 @@ class ResourceObject
         $this->relationships = [];
     }
 
-    /**
-     * @param array $attributes
-     * @return $this
-     */
-    public function setAttributes(array $attributes)
+    public function setAttributes(array $attributes): ResourceObject
     {
         $this->attributes = $attributes;
 
@@ -59,53 +46,33 @@ class ResourceObject
     }
 
     /**
-     * @param string $name
      * @param mixed $value
-     * @return $this
      */
-    public function setAttribute($name, $value)
+    public function setAttribute(string $name, $value): ResourceObject
     {
         $this->attributes[$name] = $value;
 
         return $this;
     }
 
-    /**
-     * @param string $name
-     * @param ToOneRelationship $relationship
-     * @return $this
-     */
-    public function setToOneRelationship($name, ToOneRelationship $relationship)
+    public function setToOneRelationship(string $name, ToOneRelationship $relationship): ResourceObject
     {
         return $this->setRelationship($name, $relationship);
     }
 
-    /**
-     * @param string $name
-     * @param ToManyRelationship $relationship
-     * @return $this
-     */
-    public function setToManyRelationship($name, ToManyRelationship $relationship)
+    public function setToManyRelationship(string $name, ToManyRelationship $relationship): ResourceObject
     {
         return $this->setRelationship($name, $relationship);
     }
 
-    /**
-     * @param string $name
-     * @param RelationshipInterface $relationship
-     * @return $this
-     */
-    public function setRelationship($name, RelationshipInterface $relationship)
+    public function setRelationship(string $name, RelationshipInterface $relationship): ResourceObject
     {
         $this->relationships[$name] = $relationship;
 
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         $resource = [
             "data" => [
