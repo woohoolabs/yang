@@ -2,9 +2,11 @@
 
 ADDED:
 
-- [#4](https://github.com/woohoolabs/yang/pulls/4): Allow relationship's resource identifier objects to have a "meta" value. 
+- [#4](https://github.com/woohoolabs/yang/pulls/4): Allow relationship's resource identifier objects to have a "meta" value
 
 CHANGED:
+
+- Added missing parameter type declarations
 
 REMOVED:
 
