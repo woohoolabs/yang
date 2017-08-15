@@ -28,7 +28,7 @@ class LinkTest extends TestCase
             [
                 "href" => "abc",
                 "meta" => [
-                    "abc" => "def"
+                    "abc" => "def",
                 ],
             ]
         );
@@ -62,7 +62,7 @@ class LinkTest extends TestCase
             [
                 "href" => "abc",
                 "meta" => [
-                    "abc" => "def"
+                    "abc" => "def",
                 ],
             ]
         );
@@ -71,7 +71,7 @@ class LinkTest extends TestCase
             [
                 "href" => "abc",
                 "meta" => [
-                    "abc" => "def"
+                    "abc" => "def",
                 ],
             ],
             $link->toArray()
@@ -97,7 +97,7 @@ class LinkTest extends TestCase
             [
                 "href" => "",
                 "meta" => [
-                    "abc" => "def"
+                    "abc" => "def",
                 ],
             ]
         );
@@ -129,7 +129,7 @@ class LinkTest extends TestCase
             [
                 "href" => "",
                 "meta" => [
-                    "abc" => "def"
+                    "abc" => "def",
                 ],
             ]
         );

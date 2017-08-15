@@ -145,10 +145,10 @@ class ResourceObjectTest extends TestCase
                     "type" => "",
                     "relationships" => [
                         "a" => [
-                            "data" => []
+                            "data" => [],
                         ],
                         "b" => [
-                            "data" => []
+                            "data" => [],
                         ],
                     ],
                 ],

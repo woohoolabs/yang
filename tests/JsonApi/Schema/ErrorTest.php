@@ -19,10 +19,10 @@ class ErrorTest extends TestCase
             [
                 "id" => "a",
                 "meta" => [
-                    "a" => "b"
+                    "a" => "b",
                 ],
                 "links" => [
-                    "a" => "b"
+                    "a" => "b",
                 ],
                 "status" => "1",
                 "code" => "a",
@@ -39,12 +39,12 @@ class ErrorTest extends TestCase
             [
                 "id" => "a",
                 "meta" => [
-                    "a" => "b"
+                    "a" => "b",
                 ],
                 "links" => [
                     "a" => [
-                        "href" => "b"
-                    ]
+                        "href" => "b",
+                    ],
                 ],
                 "status" => "1",
                 "code" => "a",
@@ -66,7 +66,7 @@ class ErrorTest extends TestCase
     {
         $error = Error::createFromArray(
             [
-                "id" => "a"
+                "id" => "a",
             ]
         );
 
@@ -81,8 +81,8 @@ class ErrorTest extends TestCase
         $error = Error::createFromArray(
             [
                 "meta" => [
-                    "a" => "b"
-                ]
+                    "a" => "b",
+                ],
             ]
         );
 
@@ -107,8 +107,8 @@ class ErrorTest extends TestCase
         $error = Error::createFromArray(
             [
                 "meta" => [
-                    "a" => "b"
-                ]
+                    "a" => "b",
+                ],
             ]
         );
 
@@ -123,8 +123,8 @@ class ErrorTest extends TestCase
         $error = Error::createFromArray(
             [
                 "links" => [
-                    "a" => "b"
-                ]
+                    "a" => "b",
+                ],
             ]
         );
 
@@ -172,7 +172,7 @@ class ErrorTest extends TestCase
     {
         $error = Error::createFromArray(
             [
-                "code" => "a"
+                "code" => "a",
             ]
         );
 
@@ -186,7 +186,7 @@ class ErrorTest extends TestCase
     {
         $error = Error::createFromArray(
             [
-                "title" => "a"
+                "title" => "a",
             ]
         );
 
@@ -200,7 +200,7 @@ class ErrorTest extends TestCase
     {
         $error = Error::createFromArray(
             [
-                "detail" => "a"
+                "detail" => "a",
             ]
         );
 

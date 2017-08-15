@@ -109,7 +109,7 @@ class ResourceObjectsTest extends TestCase
                 [
                     "type" => "",
                     "id" => "",
-                ]
+                ],
             ]
         );
 
@@ -134,7 +134,7 @@ class ResourceObjectsTest extends TestCase
         $resourceObjects = $this->createResourceObjectsFromSinglePrimaryData(
             [
                 "type" => "users",
-                "id" => "abcd"
+                "id" => "abcd",
             ]
         );
 
@@ -151,7 +151,7 @@ class ResourceObjectsTest extends TestCase
                 [
                     "type" => "users",
                     "id" => "abcd"
-                ]
+                ],
             ]
         );
 
@@ -179,7 +179,7 @@ class ResourceObjectsTest extends TestCase
                 [
                     "type" => "",
                     "id" => "",
-                ]
+                ],
             ]
         );
 
@@ -207,7 +207,7 @@ class ResourceObjectsTest extends TestCase
                 [
                     "type" => "user",
                     "id" => "abcd",
-                ]
+                ],
             ]
         );
 
@@ -235,7 +235,7 @@ class ResourceObjectsTest extends TestCase
                 [
                     "type" => "",
                     "id" => "",
-                ]
+                ],
             ]
         );
 
