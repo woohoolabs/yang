@@ -22,7 +22,7 @@ class ToManyRelationship implements RelationshipInterface
             "id" => $id,
         ];
 
-        if (empty ($meta) === false) {
+        if (empty($meta) === false) {
             $resourceIdentifier["meta"] = $meta;
         }
 
