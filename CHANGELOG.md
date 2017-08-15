@@ -6,6 +6,7 @@ ADDED:
 
 CHANGED:
 
+- `ToManyRelationship::addResourceIdentifier()` uses fluent interface
 - Added missing parameter type declarations
 
 REMOVED:

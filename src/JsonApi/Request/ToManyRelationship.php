@@ -15,7 +15,7 @@ class ToManyRelationship implements RelationshipInterface
         return new self();
     }
 
-    public function addResourceIdentifier(string $type, string $id, array $meta = [])
+    public function addResourceIdentifier(string $type, string $id, array $meta = []): ToManyRelationship
     {
         $resourceIdentifier = [
             "type" => $type,
@@ -27,6 +27,8 @@ class ToManyRelationship implements RelationshipInterface
         }
 
         $this->resourceIdentifiers[] = $resourceIdentifier;
+
+        return $this;
     }
 
     public function toArray(): array
