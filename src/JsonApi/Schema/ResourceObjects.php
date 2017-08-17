@@ -41,16 +41,16 @@ class ResourceObjects
 
         if ($this->isSinglePrimaryResource === true) {
             if (empty($data) === false) {
-                $this->addPrimaryResource(ResourceObject::createFromArray($data, $this));
+                $this->addPrimaryResource(ResourceObject::createForResponse($data, $this));
             }
         } else {
             foreach ($data as $resource) {
-                $this->addPrimaryResource(ResourceObject::createFromArray($resource, $this));
+                $this->addPrimaryResource(ResourceObject::createForResponse($resource, $this));
             }
         }
 
         foreach ($included as $resource) {
-            $this->addIncludedResource(ResourceObject::createFromArray($resource, $this));
+            $this->addIncludedResource(ResourceObject::createForResponse($resource, $this));
         }
     }
 
@@ -166,7 +166,7 @@ class ResourceObjects
         return array_values($this->includedKeys);
     }
 
-    private function addPrimaryResource(ResourceObject $resource): ResourceObjects
+    private function addPrimaryResource(ResponseResourceObjectInterface $resource): ResourceObjects
     {
         $type = $resource->type();
         $id = $resource->id();
@@ -179,7 +179,7 @@ class ResourceObjects
         return $this;
     }
 
-    private function addIncludedResource(ResourceObject $resource): ResourceObjects
+    private function addIncludedResource(ResponseResourceObjectInterface $resource): ResourceObjects
     {
         if ($this->hasPrimaryResource($resource->type(), $resource->id()) === false) {
             $this->addResource($this->includedKeys, $resource);
@@ -191,7 +191,7 @@ class ResourceObjects
     /**
      * @return void
      */
-    private function addResource(array &$keys, ResourceObject $resource)
+    private function addResource(array &$keys, ResponseResourceObjectInterface $resource)
     {
         $type = $resource->type();
         $id = $resource->id();

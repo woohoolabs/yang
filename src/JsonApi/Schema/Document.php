@@ -165,7 +165,7 @@ class Document
     }
 
     /**
-     * @return ResourceObject|null
+     * @return ResponseResourceObjectInterface|null
      */
     public function primaryResource()
     {
@@ -173,7 +173,7 @@ class Document
     }
 
     /**
-     * @return ResourceObject[]
+     * @return ResponseResourceObjectInterface[]
      */
     public function primaryResources(): array
     {
@@ -181,7 +181,7 @@ class Document
     }
 
     /**
-     * @return ResourceObject|null
+     * @return ResponseResourceObjectInterface|null
      */
     public function resource(string $type, string $id)
     {
@@ -199,7 +199,7 @@ class Document
     }
 
     /**
-     * @return ResourceObject[]
+     * @return ResponseResourceObjectInterface[]
      */
     public function includedResources(): array
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\JsonApi\Request;
 
 use Psr\Http\Message\RequestInterface;
+use WoohooLabs\Yang\JsonApi\Schema\RequestResourceObjectInterface;
 use WoohooLabs\Yang\JsonApi\Serializer\JsonSerializer;
 use WoohooLabs\Yang\JsonApi\Serializer\SerializerInterface;
 
@@ -244,11 +245,11 @@ class JsonApiRequestBuilder
     }
 
     /**
-     * @param ResourceObject|array|string $body
+     * @param RequestResourceObjectInterface|array|string $body
      */
     public function setJsonApiBody($body): JsonApiRequestBuilder
     {
-        if ($body instanceof ResourceObject) {
+        if ($body instanceof RequestResourceObjectInterface) {
             $this->body = $body->toArray();
         } else {
             $this->body = $body;

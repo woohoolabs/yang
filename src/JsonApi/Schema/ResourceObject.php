@@ -3,7 +3,11 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
-class ResourceObject
+use WoohooLabs\Yang\JsonApi\Request\RelationshipInterface;
+use WoohooLabs\Yang\JsonApi\Request\ToManyRelationship;
+use WoohooLabs\Yang\JsonApi\Request\ToOneRelationship;
+
+class ResourceObject implements RequestResourceObjectInterface, ResponseResourceObjectInterface
 {
     /**
      * @var string
@@ -35,7 +39,12 @@ class ResourceObject
      */
     private $relationships;
 
-    public static function createFromArray(array $array, ResourceObjects $resources): ResourceObject
+    public static function createForRequest(string $type, string $id = ""): RequestResourceObjectInterface
+    {
+        return new self($type, $id, [], new Links([]), [], []);
+    }
+
+    public static function createForResponse(array $array, ResourceObjects $resources): ResponseResourceObjectInterface
     {
         $type = isset($array["type"]) && is_string($array["type"]) ? $array["type"] : "";
         $id = isset($array["id"]) && is_string($array["id"]) ? $array["id"] : "";
@@ -80,8 +89,11 @@ class ResourceObject
     {
         $result = [
             "type" => $this->type,
-            "id" => $this->id,
         ];
+
+        if (empty($this->id) === false) {
+            $result["id"] = $this->id;
+        }
 
         if (empty($this->meta) === false) {
             $result["meta"] = $this->meta;
@@ -169,6 +181,40 @@ class ResourceObject
     public function relationship(string $name)
     {
         return $this->hasRelationship($name) ? $this->relationships[$name] : null;
+    }
+
+    public function setAttributes(array $attributes): RequestResourceObjectInterface
+    {
+        $this->attributes = $attributes;
+
+        return $this;
+    }
+
+    /**
+     * @param mixed $value
+     */
+    public function setAttribute(string $name, $value): RequestResourceObjectInterface
+    {
+        $this->attributes[$name] = $value;
+
+        return $this;
+    }
+
+    public function setToOneRelationship(string $name, ToOneRelationship $relationship): RequestResourceObjectInterface
+    {
+        return $this->setRelationship($name, $relationship);
+    }
+
+    public function setToManyRelationship(string $name, ToManyRelationship $relationship): RequestResourceObjectInterface
+    {
+        return $this->setRelationship($name, $relationship);
+    }
+
+    public function setRelationship(string $name, RelationshipInterface $relationship): RequestResourceObjectInterface
+    {
+        $this->relationships[$name] = $relationship;
+
+        return $this;
     }
 
     private static function isArrayKey(array $array, string $key): bool

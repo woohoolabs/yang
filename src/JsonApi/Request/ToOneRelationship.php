@@ -44,7 +44,7 @@ class ToOneRelationship implements RelationshipInterface
         }
 
         return [
-            "data" => $resourceIdentifier
+            "data" => $resourceIdentifier,
         ];
     }
 }

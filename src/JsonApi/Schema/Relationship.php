@@ -202,7 +202,7 @@ class Relationship
     }
 
     /**
-     * @return ResourceObject[]
+     * @return ResponseResourceObjectInterface[]
      */
     public function resources(): array
     {
@@ -221,7 +221,7 @@ class Relationship
     }
 
     /**
-     * @return ResourceObject[]
+     * @return ResponseResourceObjectInterface[]
      */
     public function resourceMap(): array
     {
@@ -238,7 +238,7 @@ class Relationship
     }
 
     /**
-     * @return ResourceObject|null
+     * @return ResponseResourceObjectInterface|null
      */
     public function resource()
     {
@@ -255,7 +255,7 @@ class Relationship
     }
 
     /**
-     * @return ResourceObject|null
+     * @return ResponseResourceObjectInterface|null
      */
     public function resourceBy(string $type, string $id)
     {

@@ -2,6 +2,7 @@
 
 ADDED:
 
+- [#3](https://github.com/woohoolabs/yang/issues/3): Unify Schema/ResourceObject and Request/ResourceObject
 - [#4](https://github.com/woohoolabs/yang/pulls/4): Allow relationship's resource identifier objects to have a "meta" value
 
 CHANGED:
