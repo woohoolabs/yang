@@ -1,4 +1,15 @@
-## 1.1.0 - unreleased
+## 1.2.0 - unreleased
+
+ADDED:
+
+CHANGED:
+
+REMOVED:
+
+FIXED:
+
+
+## 1.1.0 - 2017-09-01
 
 ADDED:
 
@@ -8,10 +19,6 @@ CHANGED:
 
 - `ToManyRelationship::addResourceIdentifier()` uses fluent interface
 - Added missing parameter type declarations
-
-REMOVED:
-
-FIXED:
 
 ## 1.0.1 - 2017-03-10
 
