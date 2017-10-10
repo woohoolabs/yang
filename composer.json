@@ -15,7 +15,7 @@
         "source": "https://github.com/woohoolabs/yang"
     },
     "require": {
-        "php": "^7.0.0",
+        "php": "^7.1.0",
         "php-http/httplug": "^1.0.0",
         "php-http/client-implementation": "^1.0.0",
         "psr/http-message-implementation": "^1.0.0"
