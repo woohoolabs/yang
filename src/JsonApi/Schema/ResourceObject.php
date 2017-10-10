@@ -164,9 +164,14 @@ class ResourceObject
     }
 
     /**
-     * @return Relationship|null
+     * @return Relationship[]
      */
-    public function relationship(string $name)
+    public function relationships(): array
+    {
+        return $this->relationships;
+    }
+
+    public function relationship(string $name): ?Relationship
     {
         return $this->hasRelationship($name) ? $this->relationships[$name] : null;
     }

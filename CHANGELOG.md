@@ -2,6 +2,8 @@
 
 ADDED:
 
+- Ability to retrieve all relationships of a resource via `ResourceObject::getRelationships()`
+
 CHANGED:
 
 - Increased minimum PHP version requirement to 7.1
