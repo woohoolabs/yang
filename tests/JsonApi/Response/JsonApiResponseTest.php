@@ -148,7 +148,7 @@ class JsonApiResponseTest extends TestCase
     {
         $response = $this->createResponse(200);
 
-        $this->assertEquals("1.1", $response->getProtocolVersion());
+        $this->assertSame("1.1", $response->getProtocolVersion());
     }
 
     /**
@@ -160,8 +160,8 @@ class JsonApiResponseTest extends TestCase
 
         $newResponse = $response->withProtocolVersion("2.0");
 
-        $this->assertEquals("1.1", $response->getProtocolVersion());
-        $this->assertEquals("2.0", $newResponse->getProtocolVersion());
+        $this->assertSame("1.1", $response->getProtocolVersion());
+        $this->assertSame("2.0", $newResponse->getProtocolVersion());
     }
 
     /**
@@ -171,7 +171,7 @@ class JsonApiResponseTest extends TestCase
     {
         $response = $this->createResponse(200, ["A" => "B"]);
 
-        $this->assertEquals(["A" => ["B"]], $response->getHeaders());
+        $this->assertSame(["A" => ["B"]], $response->getHeaders());
     }
 
     /**
@@ -181,7 +181,7 @@ class JsonApiResponseTest extends TestCase
     {
         $response = $this->createResponse(200, ["A" => "B"]);
 
-        $this->assertEquals(["B"], $response->getHeader("A"));
+        $this->assertSame(["B"], $response->getHeader("A"));
     }
 
     /**
@@ -191,7 +191,7 @@ class JsonApiResponseTest extends TestCase
     {
         $response = $this->createResponse(200, ["A" => "B"]);
 
-        $this->assertEquals("B", $response->getHeaderLine("A"));
+        $this->assertSame("B", $response->getHeaderLine("A"));
     }
 
     /**
@@ -223,8 +223,8 @@ class JsonApiResponseTest extends TestCase
 
         $newResponse = $response->withHeader("A", "B");
 
-        $this->assertEquals([], $response->getHeader("A"));
-        $this->assertEquals(["B"], $newResponse->getHeader("A"));
+        $this->assertSame([], $response->getHeader("A"));
+        $this->assertSame(["B"], $newResponse->getHeader("A"));
     }
 
     /**
@@ -236,8 +236,8 @@ class JsonApiResponseTest extends TestCase
 
         $newResponse = $response->withAddedHeader("A", "C");
 
-        $this->assertEquals(["B"], $response->getHeader("A"));
-        $this->assertEquals(["B", "C"], $newResponse->getHeader("A"));
+        $this->assertSame(["B"], $response->getHeader("A"));
+        $this->assertSame(["B", "C"], $newResponse->getHeader("A"));
     }
 
     /**
@@ -249,8 +249,8 @@ class JsonApiResponseTest extends TestCase
 
         $newResponse = $response->withoutHeader("A");
 
-        $this->assertEquals(["B"], $response->getHeader("A"));
-        $this->assertEquals([], $newResponse->getHeader("A"));
+        $this->assertSame(["B"], $response->getHeader("A"));
+        $this->assertSame([], $newResponse->getHeader("A"));
     }
 
     /**
@@ -260,7 +260,7 @@ class JsonApiResponseTest extends TestCase
     {
         $response = $this->createResponse(201);
 
-        $this->assertEquals(201, $response->getStatusCode());
+        $this->assertSame(201, $response->getStatusCode());
     }
 
     /**
@@ -272,8 +272,8 @@ class JsonApiResponseTest extends TestCase
 
         $newResponse = $response->withStatus(201);
 
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertEquals(201, $newResponse->getStatusCode());
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame(201, $newResponse->getStatusCode());
     }
 
     /**
@@ -283,7 +283,7 @@ class JsonApiResponseTest extends TestCase
     {
         $response = $this->createResponse(200, [], ["meta" => ["a" => "b"]]);
 
-        $this->assertEquals('{"meta":{"a":"b"}}', $response->getBody()->__toString());
+        $this->assertSame('{"meta":{"a":"b"}}', $response->getBody()->__toString());
     }
 
     /**
@@ -293,7 +293,7 @@ class JsonApiResponseTest extends TestCase
     {
         $response = $this->createResponse(200);
 
-        $this->assertEquals("OK", $response->getReasonPhrase());
+        $this->assertSame("OK", $response->getReasonPhrase());
     }
 
     private function createResponse($statusCode = null, array $headers = [], array $body = null): JsonApiResponse

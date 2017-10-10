@@ -24,7 +24,7 @@ class JsonSerializerTest extends TestCase
         $response = $this->createRequest($body);
         $serializer = new JsonSerializer();
 
-        $this->assertEquals(json_encode($body), $serializer->serialize($response, $body)->getBody()->__toString());
+        $this->assertSame(json_encode($body), $serializer->serialize($response, $body)->getBody()->__toString());
     }
 
     private function createRequest(array $body): Request

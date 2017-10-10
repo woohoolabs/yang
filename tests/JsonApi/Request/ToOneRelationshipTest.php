@@ -25,7 +25,7 @@ class ToOneRelationshipTest extends TestCase
     {
         $relationship = ToOneRelationship::create("a", "1");
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "data" => [
                     "type" => "a",
@@ -43,7 +43,7 @@ class ToOneRelationshipTest extends TestCase
     {
         $relationship = ToOneRelationship::create("a", "1", ["x" => "y"]);
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "data" => [
                     "type" => "a",

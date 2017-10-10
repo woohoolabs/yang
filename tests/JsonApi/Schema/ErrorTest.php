@@ -35,7 +35,7 @@ class ErrorTest extends TestCase
             ]
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "id" => "a",
                 "meta" => [
@@ -70,7 +70,7 @@ class ErrorTest extends TestCase
             ]
         );
 
-        $this->assertEquals("a", $error->id());
+        $this->assertSame("a", $error->id());
     }
 
     /**
@@ -112,7 +112,7 @@ class ErrorTest extends TestCase
             ]
         );
 
-        $this->assertEquals(["a" => "b"], $error->meta());
+        $this->assertSame(["a" => "b"], $error->meta());
     }
 
     /**
@@ -162,7 +162,7 @@ class ErrorTest extends TestCase
             ]
         );
 
-        $this->assertEquals("400", $error->status());
+        $this->assertSame("400", $error->status());
     }
 
     /**
@@ -176,7 +176,7 @@ class ErrorTest extends TestCase
             ]
         );
 
-        $this->assertEquals("a", $error->code());
+        $this->assertSame("a", $error->code());
     }
 
     /**
@@ -190,7 +190,7 @@ class ErrorTest extends TestCase
             ]
         );
 
-        $this->assertEquals("a", $error->title());
+        $this->assertSame("a", $error->title());
     }
 
     /**
@@ -204,7 +204,7 @@ class ErrorTest extends TestCase
             ]
         );
 
-        $this->assertEquals("a", $error->detail());
+        $this->assertSame("a", $error->detail());
     }
 
     /**

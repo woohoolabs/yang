@@ -24,7 +24,7 @@ class JsonDeserializerTest extends TestCase
         $response = $this->createResponse($body);
         $deserializer = new JsonDeserializer();
 
-        $this->assertEquals($body, $deserializer->deserialize($response));
+        $this->assertSame($body, $deserializer->deserialize($response));
     }
 
     private function createResponse(array $body): Response

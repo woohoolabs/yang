@@ -20,7 +20,7 @@ class ErrorSourceTest extends TestCase
             ]
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "pointer" => "a",
                 "parameter" => "b",
@@ -102,7 +102,7 @@ class ErrorSourceTest extends TestCase
             ]
         );
 
-        $this->assertEquals("a", $source->pointer());
+        $this->assertSame("a", $source->pointer());
     }
 
     /**
@@ -112,7 +112,7 @@ class ErrorSourceTest extends TestCase
     {
         $source = ErrorSource::createFromArray([]);
 
-        $this->assertEquals("", $source->pointer());
+        $this->assertSame("", $source->pointer());
     }
 
     /**
@@ -150,7 +150,7 @@ class ErrorSourceTest extends TestCase
             ]
         );
 
-        $this->assertEquals("a", $source->parameter());
+        $this->assertSame("a", $source->parameter());
     }
 
     /**
@@ -160,6 +160,6 @@ class ErrorSourceTest extends TestCase
     {
         $source = ErrorSource::createFromArray([]);
 
-        $this->assertEquals("", $source->parameter());
+        $this->assertSame("", $source->parameter());
     }
 }

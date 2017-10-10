@@ -151,12 +151,12 @@ class Document
 
     public function isSingleResourceDocument(): bool
     {
-        return $this->resources->isSinglePrimaryResource() === true;
+        return $this->resources->isSinglePrimaryResource();
     }
 
     public function isResourceCollectionDocument(): bool
     {
-        return $this->resources->isPrimaryResourceCollection() === true;
+        return $this->resources->isPrimaryResourceCollection();
     }
 
     public function hasAnyPrimaryResources(): bool

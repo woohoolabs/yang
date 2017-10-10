@@ -24,7 +24,7 @@ class DocumentTest extends TestCase
             ]
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "jsonapi" => [
                     "version" => "1.0",
@@ -67,7 +67,7 @@ class DocumentTest extends TestCase
             ]
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "jsonapi" => [
                     "version" => "1.0",
@@ -149,7 +149,7 @@ class DocumentTest extends TestCase
             ]
         );
 
-        $this->assertEquals(["a" => "b"], $document->meta());
+        $this->assertSame(["a" => "b"], $document->meta());
     }
 
     /**

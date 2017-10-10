@@ -18,7 +18,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->fetch();
 
-        $this->assertEquals("GET", $requestBuilder->getRequest()->getMethod());
+        $this->assertSame("GET", $requestBuilder->getRequest()->getMethod());
     }
 
     /**
@@ -30,7 +30,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->create();
 
-        $this->assertEquals("POST", $requestBuilder->getRequest()->getMethod());
+        $this->assertSame("POST", $requestBuilder->getRequest()->getMethod());
     }
 
     /**
@@ -42,7 +42,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->update();
 
-        $this->assertEquals("PATCH", $requestBuilder->getRequest()->getMethod());
+        $this->assertSame("PATCH", $requestBuilder->getRequest()->getMethod());
     }
 
     /**
@@ -54,7 +54,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->delete();
 
-        $this->assertEquals("DELETE", $requestBuilder->getRequest()->getMethod());
+        $this->assertSame("DELETE", $requestBuilder->getRequest()->getMethod());
     }
 
     /**
@@ -66,7 +66,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setProtocolVersion("2.0");
 
-        $this->assertEquals("2.0", $requestBuilder->getRequest()->getProtocolVersion());
+        $this->assertSame("2.0", $requestBuilder->getRequest()->getProtocolVersion());
     }
 
     /**
@@ -78,7 +78,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->http();
 
-        $this->assertEquals("http", $requestBuilder->getRequest()->getUri()->getScheme());
+        $this->assertSame("http", $requestBuilder->getRequest()->getUri()->getScheme());
     }
 
     /**
@@ -90,7 +90,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->https();
 
-        $this->assertEquals("https", $requestBuilder->getRequest()->getUri()->getScheme());
+        $this->assertSame("https", $requestBuilder->getRequest()->getUri()->getScheme());
     }
 
     /**
@@ -102,7 +102,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setUri("http://example.com/api/users");
 
-        $this->assertEquals("http://example.com/api/users", $requestBuilder->getRequest()->getUri()->__toString());
+        $this->assertSame("http://example.com/api/users", $requestBuilder->getRequest()->getUri()->__toString());
     }
 
     /**
@@ -114,7 +114,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setUriHost("example.com");
 
-        $this->assertEquals("example.com", $requestBuilder->getRequest()->getUri()->getHost());
+        $this->assertSame("example.com", $requestBuilder->getRequest()->getUri()->getHost());
     }
 
     /**
@@ -126,7 +126,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setUriPort(8080);
 
-        $this->assertEquals(8080, $requestBuilder->getRequest()->getUri()->getPort());
+        $this->assertSame(8080, $requestBuilder->getRequest()->getUri()->getPort());
     }
 
     /**
@@ -138,7 +138,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setUriPath("/api/users");
 
-        $this->assertEquals("/api/users", $requestBuilder->getRequest()->getUri()->getPath());
+        $this->assertSame("/api/users", $requestBuilder->getRequest()->getUri()->getPath());
     }
 
     /**
@@ -150,7 +150,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setUriQueryParam("a", "b");
 
-        $this->assertEquals("a=b", $requestBuilder->getRequest()->getUri()->getQuery());
+        $this->assertSame("a=b", $requestBuilder->getRequest()->getUri()->getQuery());
     }
 
     /**
@@ -162,7 +162,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setHeader("a", "b");
 
-        $this->assertEquals(["b"], $requestBuilder->getRequest()->getHeader("a"));
+        $this->assertSame(["b"], $requestBuilder->getRequest()->getHeader("a"));
     }
 
     /**
@@ -174,7 +174,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setJsonApiFields(["a" => ["b", "c"]]);
 
-        $this->assertEquals("fields[a]=b,c", rawurldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("fields[a]=b,c", rawurldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
@@ -186,7 +186,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setJsonApiSort(["b", "-c"]);
 
-        $this->assertEquals("sort=b,-c", rawurldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("sort=b,-c", rawurldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
@@ -198,7 +198,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setJsonApiPage(["a" => 1, "b" => 100]);
 
-        $this->assertEquals("page[a]=1&page[b]=100", rawurldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("page[a]=1&page[b]=100", rawurldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
@@ -210,7 +210,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setJsonApiFilter(["a" => "abc"]);
 
-        $this->assertEquals("filter[a]=abc", rawurldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("filter[a]=abc", rawurldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
@@ -222,7 +222,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setJsonApiIncludes(["a", "b.c"]);
 
-        $this->assertEquals("include=a,b.c", rawurldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("include=a,b.c", rawurldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
@@ -232,7 +232,7 @@ class JsonApiRequestBuilderTest extends TestCase
     {
         $requestBuilder = $this->createRequestBuilder();
 
-        $this->assertEquals(["application/vnd.api+json"], $requestBuilder->getRequest()->getHeader("Accept"));
+        $this->assertSame(["application/vnd.api+json"], $requestBuilder->getRequest()->getHeader("Accept"));
     }
 
     /**
@@ -242,7 +242,7 @@ class JsonApiRequestBuilderTest extends TestCase
     {
         $requestBuilder = $this->createRequestBuilder();
 
-        $this->assertEquals(["application/vnd.api+json"], $requestBuilder->getRequest()->getHeader("Content-Type"));
+        $this->assertSame(["application/vnd.api+json"], $requestBuilder->getRequest()->getHeader("Content-Type"));
     }
 
     private function createRequestBuilder(): JsonApiRequestBuilder

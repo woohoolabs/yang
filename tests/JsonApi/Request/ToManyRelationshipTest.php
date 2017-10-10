@@ -26,7 +26,7 @@ class ToManyRelationshipTest extends TestCase
         $relationship = ToManyRelationship::create();
         $relationship->addResourceIdentifier("a", "1");
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "data" => [
                     [
@@ -49,7 +49,7 @@ class ToManyRelationshipTest extends TestCase
             ->addResourceIdentifier("a", "1", ["x" => "y"])
             ->addResourceIdentifier("a", "1");
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "data" => [
                     [

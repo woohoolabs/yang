@@ -22,7 +22,7 @@ class JsonApiTest extends TestCase
             ]
         );
 
-        $this->assertEquals("1.1", $jsonApi->version());
+        $this->assertSame("1.1", $jsonApi->version());
         $this->assertTrue($jsonApi->hasMeta());
     }
 
@@ -33,7 +33,7 @@ class JsonApiTest extends TestCase
     {
         $jsonApi = JsonApi::createFromArray([]);
 
-        $this->assertEquals("1.0", $jsonApi->version());
+        $this->assertSame("1.0", $jsonApi->version());
         $this->assertFalse($jsonApi->hasMeta());
     }
 
@@ -51,7 +51,7 @@ class JsonApiTest extends TestCase
             ]
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "version" => "1.0",
                 "meta" => [
@@ -73,7 +73,7 @@ class JsonApiTest extends TestCase
             ]
         );
 
-        $this->assertEquals("1.0", $jsonApi->version());
+        $this->assertSame("1.0", $jsonApi->version());
     }
 
     /**
@@ -111,6 +111,6 @@ class JsonApiTest extends TestCase
             ]
         );
 
-        $this->assertEquals(["abc" => "def"], $jsonApi->meta());
+        $this->assertSame(["abc" => "def"], $jsonApi->meta());
     }
 }

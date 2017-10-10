@@ -27,7 +27,7 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "meta" => [
                     "a" => "b"
@@ -53,7 +53,7 @@ class RelationshipTest extends TestCase
     {
         $relationship = $this->createRelationship([], "a");
 
-        $this->assertEquals("a", $relationship->name());
+        $this->assertSame("a", $relationship->name());
     }
 
     /**
@@ -167,7 +167,7 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertEquals(["a" => "b"], $relationship->meta());
+        $this->assertSame(["a" => "b"], $relationship->meta());
     }
 
     /**
@@ -222,7 +222,7 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 [
                     "type" => "a",
@@ -247,7 +247,7 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 [
                     "type" => "a",
@@ -274,7 +274,7 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "type" => "a",
                 "id" => "b",
@@ -299,7 +299,7 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "type" => "a",
                 "id" => "b",

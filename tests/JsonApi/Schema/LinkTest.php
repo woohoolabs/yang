@@ -15,7 +15,7 @@ class LinkTest extends TestCase
     {
         $link = Link::createFromString("abc");
 
-        $this->assertEquals("abc", $link->href());
+        $this->assertSame("abc", $link->href());
         $this->assertFalse($link->hasMeta());
     }
 
@@ -33,7 +33,7 @@ class LinkTest extends TestCase
             ]
         );
 
-        $this->assertEquals("abc", $link->href());
+        $this->assertSame("abc", $link->href());
         $this->assertTrue($link->hasMeta());
     }
 
@@ -49,7 +49,7 @@ class LinkTest extends TestCase
             ]
         );
 
-        $this->assertEquals("", $link->href());
+        $this->assertSame("", $link->href());
         $this->assertFalse($link->hasMeta());
     }
 
@@ -67,7 +67,7 @@ class LinkTest extends TestCase
             ]
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "href" => "abc",
                 "meta" => [
@@ -85,7 +85,7 @@ class LinkTest extends TestCase
     {
         $link = new Link("abc");
 
-        $this->assertEquals("abc", $link->href());
+        $this->assertSame("abc", $link->href());
     }
 
     /**
@@ -134,6 +134,6 @@ class LinkTest extends TestCase
             ]
         );
 
-        $this->assertEquals(["abc" => "def"], $link->meta());
+        $this->assertSame(["abc" => "def"], $link->meta());
     }
 }

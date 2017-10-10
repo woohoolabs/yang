@@ -35,7 +35,7 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "type" => "user",
                 "id" => "abc",
@@ -65,7 +65,7 @@ class ResourceObjectTest extends TestCase
     {
         $resourceObject = $this->createResourceObject([]);
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "type" => "",
                 "id" => "",
@@ -85,7 +85,7 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertEquals("abc", $resourceObject->type());
+        $this->assertSame("abc", $resourceObject->type());
     }
 
     /**
@@ -99,7 +99,7 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertEquals("abc", $resourceObject->id());
+        $this->assertSame("abc", $resourceObject->id());
     }
 
     /**
@@ -141,7 +141,7 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertEquals(["abc" => "def"], $resourceObject->meta());
+        $this->assertSame(["abc" => "def"], $resourceObject->meta());
     }
 
     /**
@@ -193,7 +193,7 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertEquals(["a" => "b"], $resourceObject->attributes());
+        $this->assertSame(["a" => "b"], $resourceObject->attributes());
     }
 
     /**
@@ -210,7 +210,7 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertEquals(["id" => "abc", "a" => "b"], $resourceObject->idAndAttributes());
+        $this->assertSame(["id" => "abc", "a" => "b"], $resourceObject->idAndAttributes());
     }
 
     /**
@@ -274,7 +274,7 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertEquals("b", $resourceObject->attribute("a"));
+        $this->assertSame("b", $resourceObject->attribute("a"));
     }
 
     /**

@@ -27,7 +27,7 @@ class ResourceObjectTest extends TestCase
     {
         $resource = new ResourceObject("a");
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "data" => [
                     "type" => "a",
@@ -44,7 +44,7 @@ class ResourceObjectTest extends TestCase
     {
         $resource = new ResourceObject("", "b");
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "data" => [
                     "type" => "",
@@ -64,7 +64,7 @@ class ResourceObjectTest extends TestCase
         $resource
             ->setAttributes(["a" => "b", "c" => "d"]);
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "data" => [
                     "type" => "",
@@ -88,7 +88,7 @@ class ResourceObjectTest extends TestCase
             ->setAttribute("a", "b")
             ->setAttribute("c", "d");
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "data" => [
                     "type" => "",
@@ -111,7 +111,7 @@ class ResourceObjectTest extends TestCase
         $resource
             ->setToOneRelationship("a", ToOneRelationship::create("a", "a1"));
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "data" => [
                     "type" => "",
@@ -139,7 +139,7 @@ class ResourceObjectTest extends TestCase
             ->setToManyRelationship("a", ToManyRelationship::create())
             ->setToManyRelationship("b", ToManyRelationship::create());
 
-        $this->assertEquals(
+        $this->assertSame(
             [
                 "data" => [
                     "type" => "",
