@@ -1,15 +1,19 @@
-## 1.2.0 - unreleased
+## 1.3.0 - unreleased
 
 ADDED:
-
-- Ability to hydrate responses to objects via `ClassHydrator`
-- Ability to retrieve all relationships of a resource via `ResourceObject::getRelationships()`
 
 CHANGED:
 
 REMOVED:
 
 FIXED:
+
+## 1.2.0 - 2017-10-10
+
+ADDED:
+
+- Ability to hydrate responses to objects via `ClassHydrator`
+- Ability to retrieve all relationships of a resource via `ResourceObject::getRelationships()`
 
 ## 1.1.0 - 2017-09-01
 
