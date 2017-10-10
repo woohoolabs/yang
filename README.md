@@ -468,16 +468,16 @@ $hydrator = new ClassHydrator();
 $dog = $hydrator->hydrate($response->document());
 ```
 
-That's all you need to create the `$dog` object! Now, you can use it to display its properties: 
+That's all you need to create the `$dog` object! Now, you can display its properties:
 
 ```php
 echo "Dog:\n";
-echo "Name: " . $dog->name . "\n";
-echo "Breed: " . $dog->breed . "\n\n";
+echo "Name : " . $dog->name . "\n";
+echo "Breed: " . $dog->breed->name . "\n\n";
 
 echo "Owners:\n";
 foreach ($dog->owners as $owner) {
-    echo "Name: " . $dog->owner->name . "\n";
+    echo "Name   : " . $dog->owner->name . "\n";
     echo "Address: " . $dog->owner->address->city . ", " . $dog->owner->address->addressLine . "\n";
     echo "------------------\n";
 }
