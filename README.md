@@ -22,6 +22,7 @@
 * [Advanced Usage](#advanced-usage)
     * [Custom serialization](#custom-serialization)
     * [Custom deserialization](#custom-deserialization)
+    * [Hydration](#hydration)
 * [Versioning](#versioning)
 * [Change Log](#change-log)
 * [Contributing](#contributing)
@@ -43,6 +44,7 @@ JSON:API clients, while [Woohoo Labs. Yin](https://woohoolabs/yin) is its server
 - 99% [JSON:API 1.0](http://jsonapi.org/) conformance (approximately)
 - Provides a Request Builder to setup JSON:API request more easily
 - Provides easy-to-use HTTP clients via [HTTPlug](https://github.com/php-http/httplug)
+- Supports [hydrators](#hydration) out-of-the-box in order to easily convert API responses to objects
 
 ## Install
 
@@ -416,6 +418,8 @@ $response = new JsonApiResponse($psr7Response, new MyCustomDeserializer());
 ```
 
 You only have to make sure that your custom deserializer implements the `DeserializerInterface`.
+
+### Hydration
 
 ## Examples
 

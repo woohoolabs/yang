@@ -2,6 +2,7 @@
 
 ADDED:
 
+- Ability to hydrate responses to objects via `ClassHydrator`
 - Ability to retrieve all relationships of a resource via `ResourceObject::getRelationships()`
 
 CHANGED:

@@ -21,17 +21,17 @@ class ResourceObjectTest extends TestCase
                 "type" => "user",
                 "id" => "abc",
                 "meta" => [
-                    "a" => "b"
+                    "a" => "b",
                 ],
                 "links" => [
-                    "a" => "b"
+                    "a" => "b",
                 ],
                 "attributes" => [
-                    "a" => "b"
+                    "a" => "b",
                 ],
                 "relationships" => [
-                    "a" => []
-                ]
+                    "a" => [],
+                ],
             ]
         );
 
@@ -40,19 +40,19 @@ class ResourceObjectTest extends TestCase
                 "type" => "user",
                 "id" => "abc",
                 "meta" => [
-                    "a" => "b"
+                    "a" => "b",
                 ],
                 "links" => [
                     "a" => [
-                        "href" => "b"
-                    ]
+                        "href" => "b",
+                    ],
                 ],
                 "attributes" => [
-                    "a" => "b"
+                    "a" => "b",
                 ],
                 "relationships" => [
-                    "a" => []
-                ]
+                    "a" => [],
+                ],
             ],
             $resourceObject->toArray()
         );
@@ -81,7 +81,7 @@ class ResourceObjectTest extends TestCase
     {
         $resourceObject = $this->createResourceObject(
             [
-                "type" => "abc"
+                "type" => "abc",
             ]
         );
 
@@ -95,7 +95,7 @@ class ResourceObjectTest extends TestCase
     {
         $resourceObject = $this->createResourceObject(
             [
-                "id" => "abc"
+                "id" => "abc",
             ]
         );
 
@@ -110,8 +110,8 @@ class ResourceObjectTest extends TestCase
         $resourceObject = $this->createResourceObject(
             [
                 "meta" => [
-                    "abc" => "def"
-                ]
+                    "abc" => "def",
+                ],
             ]
         );
 
@@ -136,8 +136,8 @@ class ResourceObjectTest extends TestCase
         $resourceObject = $this->createResourceObject(
             [
                 "meta" => [
-                    "abc" => "def"
-                ]
+                    "abc" => "def",
+                ],
             ]
         );
 
@@ -152,8 +152,8 @@ class ResourceObjectTest extends TestCase
         $resourceObject = $this->createResourceObject(
             [
                 "links" => [
-                    "a" => "b"
-                ]
+                    "a" => "b",
+                ],
             ]
         );
 
@@ -188,8 +188,8 @@ class ResourceObjectTest extends TestCase
         $resourceObject = $this->createResourceObject(
             [
                 "attributes" => [
-                    "a" => "b"
-                ]
+                    "a" => "b",
+                ],
             ]
         );
 
@@ -205,8 +205,8 @@ class ResourceObjectTest extends TestCase
             [
                 "id" => "abc",
                 "attributes" => [
-                    "a" => "b"
-                ]
+                    "a" => "b",
+                ],
             ]
         );
 
@@ -269,12 +269,43 @@ class ResourceObjectTest extends TestCase
         $resourceObject = $this->createResourceObject(
             [
                 "attributes" => [
-                    "a" => "b"
-                ]
+                    "a" => "b",
+                ],
             ]
         );
 
         $this->assertEquals("b", $resourceObject->attribute("a"));
+    }
+
+    /**
+     * @test
+     */
+    public function relationships()
+    {
+        $resourceObject = $this->createResourceObject(
+            [
+                "relationships" => [
+                    "a" => [
+                        "data" => [
+                            "type" => "a",
+                            "id" => "1",
+                        ],
+                    ],
+                    "b" => [
+                        "data" => [
+                            "type" => "a",
+                            "id" => "1",
+                        ],
+                    ],
+                ],
+            ]
+        );
+
+        $relationships = $resourceObject->relationships();
+
+        $this->assertCount(2, $relationships);
+        $this->assertInstanceOf(Relationship::class, $relationships["a"]);
+        $this->assertInstanceOf(Relationship::class, $relationships["b"]);
     }
 
     /**
@@ -285,8 +316,8 @@ class ResourceObjectTest extends TestCase
         $resourceObject = $this->createResourceObject(
             [
                 "relationships" => [
-                    "a" => []
-                ]
+                    "a" => [],
+                ],
             ]
         );
 
@@ -311,8 +342,8 @@ class ResourceObjectTest extends TestCase
         $resourceObject = $this->createResourceObject(
             [
                 "relationships" => [
-                    "a" => []
-                ]
+                    "a" => [],
+                ],
             ]
         );
 
