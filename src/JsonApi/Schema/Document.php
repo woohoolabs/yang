@@ -164,7 +164,10 @@ class Document
         return $this->resources->hasAnyPrimaryResources();
     }
 
-    public function primaryResource(): ?ResourceObject
+    /**
+     * @return ResourceObject|null
+     */
+    public function primaryResource()
     {
         return $this->resources->primaryResource();
     }
@@ -177,7 +180,10 @@ class Document
         return $this->resources->primaryResources();
     }
 
-    public function resource(string $type, string $id): ?ResourceObject
+    /**
+     * @return ResourceObject|null
+     */
+    public function resource(string $type, string $id)
     {
         return $this->resources->resource($type, $id);
     }
@@ -213,7 +219,10 @@ class Document
         return $this->errors;
     }
 
-    public function error(int $number): ?Error
+    /**
+     * @return Error|null
+     */
+    public function error(int $number)
     {
         return $this->errors[$number] ?? null;
     }

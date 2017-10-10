@@ -54,7 +54,10 @@ class ResourceObjects
         }
     }
 
-    public function primaryDataToArray(): ?array
+    /**
+     * @return array|null
+     */
+    public function primaryDataToArray()
     {
         return $this->isSinglePrimaryResource ? $this->primaryResourceToArray() : $this->primaryCollectionToArray();
     }
@@ -69,7 +72,10 @@ class ResourceObjects
         return $result;
     }
 
-    private function primaryResourceToArray(): ?array
+    /**
+     * @return array|null
+     */
+    private function primaryResourceToArray()
     {
         if ($this->hasAnyPrimaryResources() === false) {
             return null;
@@ -101,7 +107,10 @@ class ResourceObjects
         return $this->isSinglePrimaryResource === false;
     }
 
-    public function resource(string $type, string $id): ?ResourceObject
+    /**
+     * @return ResourceObject|null
+     */
+    public function resource(string $type, string $id)
     {
         return $this->resources[$type . "." . $id] ?? null;
     }
@@ -119,7 +128,10 @@ class ResourceObjects
         return array_values($this->primaryKeys);
     }
 
-    public function primaryResource(): ?ResourceObject
+    /**
+     * @return ResourceObject|null
+     */
+    public function primaryResource()
     {
         if ($this->hasAnyPrimaryResources() === false) {
             return null;
