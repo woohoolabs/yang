@@ -48,10 +48,7 @@ class Links
         return $this->hasLink("self");
     }
 
-    /**
-     * @return Link|null
-     */
-    public function self()
+    public function self(): ?Link
     {
         return $this->link("self");
     }
@@ -61,10 +58,7 @@ class Links
         return $this->hasLink("related");
     }
 
-    /**
-     * @return Link|null
-     */
-    public function related()
+    public function related(): ?Link
     {
         return $this->link("related");
     }
@@ -74,10 +68,7 @@ class Links
         return $this->hasLink("first");
     }
 
-    /**
-     * @return Link|null
-     */
-    public function first()
+    public function first(): ?Link
     {
         return $this->link("first");
     }
@@ -87,10 +78,7 @@ class Links
         return $this->hasLink("last");
     }
 
-    /**
-     * @return Link|null
-     */
-    public function last()
+    public function last(): ?Link
     {
         return $this->link("last");
     }
@@ -100,10 +88,7 @@ class Links
         return $this->hasLink("prev");
     }
 
-    /**
-     * @return Link|null
-     */
-    public function prev()
+    public function prev(): ?Link
     {
         return $this->link("prev");
     }
@@ -113,10 +98,7 @@ class Links
         return $this->hasLink("next");
     }
 
-    /**
-     * @return Link|null
-     */
-    public function next()
+    public function next(): ?Link
     {
         return $this->link("next");
     }
@@ -126,10 +108,7 @@ class Links
         return $this->hasLink("about");
     }
 
-    /**
-     * @return Link|null
-     */
-    public function about()
+    public function about(): ?Link
     {
         return $this->link("about");
     }
@@ -139,10 +118,7 @@ class Links
         return isset($this->links[$name]);
     }
 
-    /**
-     * @return Link|null
-     */
-    public function link(string $name)
+    public function link(string $name): ?Link
     {
         return $this->links[$name] ?? null;
     }

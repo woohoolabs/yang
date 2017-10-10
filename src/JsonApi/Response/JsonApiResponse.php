@@ -37,10 +37,7 @@ class JsonApiResponse implements ResponseInterface
         return is_object($this->document());
     }
 
-    /**
-     * @return Document|null
-     */
-    public function document()
+    public function document(): ?Document
     {
         if ($this->document === false) {
             $content = $this->deserializer->deserialize($this->response);

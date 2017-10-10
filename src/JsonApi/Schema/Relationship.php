@@ -186,10 +186,7 @@ class Relationship
         return $this->resourceMap;
     }
 
-    /**
-     * @return array|null
-     */
-    public function firstResourceLink()
+    public function firstResourceLink(): ?array
     {
         $link = reset($this->resourceMap);
 
@@ -237,10 +234,7 @@ class Relationship
         return $resources;
     }
 
-    /**
-     * @return ResourceObject|null
-     */
-    public function resource()
+    public function resource(): ?ResourceObject
     {
         if ($this->isToOneRelationship === false) {
             return null;
@@ -254,10 +248,7 @@ class Relationship
         return $this->resourceBy($resourceMap["type"], $resourceMap["id"]);
     }
 
-    /**
-     * @return ResourceObject|null
-     */
-    public function resourceBy(string $type, string $id)
+    public function resourceBy(string $type, string $id): ?ResourceObject
     {
         return $this->resources->resource($type, $id);
     }
