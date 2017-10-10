@@ -64,14 +64,14 @@ class JsonApiRequestBuilder
      */
     private $body;
 
-    public function __construct(RequestInterface $request, SerializerInterface $serializer = null)
+    public function __construct(RequestInterface $request, ?SerializerInterface $serializer = null)
     {
         $this->request = $request;
         $this->serializer = $serializer ?? new JsonSerializer();
         $this->initialize();
     }
 
-    public function initialize()
+    public function initialize(): void
     {
         $this->method = "GET";
         $this->protocolVersion = "";
@@ -286,10 +286,7 @@ class JsonApiRequestBuilder
         return http_build_query($this->queryString);
     }
 
-    /**
-     * @return void
-     */
-    private function setArrayQueryParam(string $name, array $queryParam)
+    private function setArrayQueryParam(string $name, array $queryParam): void
     {
         foreach ($queryParam as $key => $value) {
             if (is_array($value)) {
@@ -302,9 +299,8 @@ class JsonApiRequestBuilder
 
     /**
      * @param array|string $queryParam
-     * @return void
      */
-    private function setListQueryParam(string $name, $queryParam)
+    private function setListQueryParam(string $name, $queryParam): void
     {
         if (is_array($queryParam)) {
             $this->queryString[$name] = implode(",", $queryParam);

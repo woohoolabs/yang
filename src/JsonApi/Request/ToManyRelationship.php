@@ -10,7 +10,7 @@ class ToManyRelationship implements RelationshipInterface
      */
     private $resourceIdentifiers = [];
 
-    public static function create()
+    public static function create(): ToManyRelationship
     {
         return new self();
     }

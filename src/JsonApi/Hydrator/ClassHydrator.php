@@ -87,9 +87,8 @@ class ClassHydrator implements HydratorInterface
 
     /**
      * @param stdClass[] $resourceMap
-     * @return stdClass|null
      */
-    private function getObjectFromMap(string $type, string $id, array $resourceMap)
+    private function getObjectFromMap(string $type, string $id, array $resourceMap): ?stdClass
     {
         return $resourceMap[$type . "-" . $id] ?? null;
     }
@@ -97,7 +96,7 @@ class ClassHydrator implements HydratorInterface
     /**
      * @param stdClass[] $resourceMap
      */
-    private function saveObjectToMap(stdClass $object, array &$resourceMap)
+    private function saveObjectToMap(stdClass $object, array &$resourceMap): void
     {
         $resourceMap[$object->type . "-" . $object->id] = $object;
     }

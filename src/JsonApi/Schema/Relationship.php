@@ -117,7 +117,7 @@ class Relationship
         Links $links,
         array $resourceMap,
         ResourceObjects $resources,
-        bool $isToOneRelationship = null
+        ?bool $isToOneRelationship = null
     ) {
         $this->name = $name;
         $this->meta = $meta;
@@ -186,10 +186,7 @@ class Relationship
         return $this->resourceMap;
     }
 
-    /**
-     * @return array|null
-     */
-    public function firstResourceLink()
+    public function firstResourceLink(): ?array
     {
         $link = reset($this->resourceMap);
 
@@ -237,10 +234,7 @@ class Relationship
         return $resources;
     }
 
-    /**
-     * @return ResourceObject|null
-     */
-    public function resource()
+    public function resource(): ?ResourceObject
     {
         if ($this->isToOneRelationship === false) {
             return null;
@@ -254,10 +248,7 @@ class Relationship
         return $this->resourceBy($resourceMap["type"], $resourceMap["id"]);
     }
 
-    /**
-     * @return ResourceObject|null
-     */
-    public function resourceBy(string $type, string $id)
+    public function resourceBy(string $type, string $id): ?ResourceObject
     {
         return $this->resources->resource($type, $id);
     }
@@ -265,10 +256,8 @@ class Relationship
     /**
      * Get meta information that may be defined next to the resource identifier link.
      * This occurs when a relationship contains additional data besides the relation's identifiers.
-     *
-     * @return null|array
      */
-    public function resourceLinkMeta(string $type, string $id)
+    public function resourceLinkMeta(string $type, string $id): ?array
     {
         foreach ($this->resourceMap as $resourceLink) {
             if (isset($resourceLink["meta"]) && $resourceLink["type"] === $type && $resourceLink["id"] === $id) {

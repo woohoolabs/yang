@@ -26,7 +26,7 @@ class JsonApiResponse implements ResponseInterface
      */
     private $document = false;
 
-    public function __construct(ResponseInterface $response, DeserializerInterface $deserializer = null)
+    public function __construct(ResponseInterface $response, ?DeserializerInterface $deserializer = null)
     {
         $this->response = $response;
         $this->deserializer = $deserializer ?? new JsonDeserializer();
@@ -37,10 +37,7 @@ class JsonApiResponse implements ResponseInterface
         return is_object($this->document());
     }
 
-    /**
-     * @return Document|null
-     */
-    public function document()
+    public function document(): ?Document
     {
         if ($this->document === false) {
             $content = $this->deserializer->deserialize($this->response);
@@ -70,14 +67,11 @@ class JsonApiResponse implements ResponseInterface
         return $this->response->getProtocolVersion();
     }
 
-    /**
-     * @param string $version
-     * @return mixed
-     */
     public function withProtocolVersion($version)
     {
         $response = clone $this;
         $response->response = $this->response->withProtocolVersion($version);
+
         return $response;
     }
 

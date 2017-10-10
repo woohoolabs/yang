@@ -126,9 +126,6 @@ class Document
         return $this->jsonApi;
     }
 
-    /**
-     * @return bool
-     */
     public function hasMeta(): bool
     {
         return empty($this->meta) === false;
@@ -164,10 +161,7 @@ class Document
         return $this->resources->hasAnyPrimaryResources();
     }
 
-    /**
-     * @return ResourceObject|null
-     */
-    public function primaryResource()
+    public function primaryResource(): ?ResourceObject
     {
         return $this->resources->primaryResource();
     }
@@ -180,10 +174,7 @@ class Document
         return $this->resources->primaryResources();
     }
 
-    /**
-     * @return ResourceObject|null
-     */
-    public function resource(string $type, string $id)
+    public function resource(string $type, string $id): ?ResourceObject
     {
         return $this->resources->resource($type, $id);
     }
@@ -219,10 +210,7 @@ class Document
         return $this->errors;
     }
 
-    /**
-     * @return Error|null
-     */
-    public function error(int $number)
+    public function error(int $number): ?Error
     {
         return $this->errors[$number] ?? null;
     }

@@ -21,7 +21,7 @@ class JsonApiClient
      */
     private $deserializer;
 
-    public function __construct(HttpClient $client, DeserializerInterface $deserializer = null)
+    public function __construct(HttpClient $client, ?DeserializerInterface $deserializer = null)
     {
         $this->client = $client;
         $this->deserializer = $deserializer ?? new JsonDeserializer();

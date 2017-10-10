@@ -171,10 +171,7 @@ class ResourceObject
         return array_key_exists($name, $this->relationships);
     }
 
-    /**
-     * @return Relationship|null
-     */
-    public function relationship(string $name)
+    public function relationship(string $name): ?Relationship
     {
         return $this->hasRelationship($name) ? $this->relationships[$name] : null;
     }
