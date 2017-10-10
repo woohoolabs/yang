@@ -15,6 +15,22 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
+    public function doNotHydrateErrorDocument()
+    {
+        $document = [
+            "errors" => [],
+        ];
+
+        $document = Document::createFromArray($document);
+        $hydrator = new ClassHydrator();
+        $object = $hydrator->hydrate($document);
+
+        $this->assertEquals(new \stdClass(), $object);
+    }
+
+    /**
+     * @test
+     */
     public function hydrateObjectWithTypeAndId()
     {
         $document = [
@@ -51,9 +67,51 @@ class ClassHydratorTest extends TestCase
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrate($document);
 
-        $this->assertAttributeEquals("A", "a", $object);
-        $this->assertAttributeEquals("B", "b", $object);
-        $this->assertAttributeEquals("C", "c", $object);
+        $this->assertAttributeSame("A", "a", $object);
+        $this->assertAttributeSame("B", "b", $object);
+        $this->assertAttributeSame("C", "c", $object);
+    }
+
+    /**
+     * @test
+     */
+    public function hydrateObjectsWithAttributes()
+    {
+        $document = [
+            "data" => [
+                [
+                    "type" => "a",
+                    "id" => "1",
+                    "attributes" => [
+                        "a" => "A",
+                        "b" => "B",
+                        "c" => "C",
+                    ],
+                ],
+                [
+                    "type" => "a",
+                    "id" => "2",
+                    "attributes" => [
+                        "a" => "D",
+                        "b" => "E",
+                        "c" => "F",
+                    ],
+                ],
+            ],
+        ];
+
+        $document = Document::createFromArray($document);
+        $hydrator = new ClassHydrator();
+        $objects = $hydrator->hydrate($document);
+
+        $this->assertCount(2, $objects);
+        $this->assertAttributeSame("A", "a", $objects[0]);
+        $this->assertAttributeSame("B", "b", $objects[0]);
+        $this->assertAttributeSame("C", "c", $objects[0]);
+
+        $this->assertAttributeSame("D", "a", $objects[1]);
+        $this->assertAttributeSame("E", "b", $objects[1]);
+        $this->assertAttributeSame("F", "c", $objects[1]);
     }
 
     /**

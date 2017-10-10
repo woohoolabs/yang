@@ -14,15 +14,15 @@ class ClassHydrator implements HydratorInterface
      */
     public function hydrate(Document $document)
     {
-        if ($document->hasErrors()) {
+        if ($document->hasAnyPrimaryResources() === false) {
             return new stdClass();
         }
 
-        if ($document->isResourceCollectionDocument()) {
-            return $this->hydratePrimaryResources($document);
+        if ($document->isSingleResourceDocument()) {
+            return $this->hydratePrimaryResource($document);
         }
 
-        return $this->hydratePrimaryResource($document);
+        return $this->hydratePrimaryResources($document);
     }
 
     private function hydratePrimaryResources(Document $document): array
