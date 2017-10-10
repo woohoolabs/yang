@@ -7,8 +7,6 @@ ADDED:
 
 CHANGED:
 
-- Increased minimum PHP version requirement to 7.1
-
 REMOVED:
 
 FIXED:
