@@ -394,9 +394,9 @@ foreach ($dogResource->relationship("owners")->resources() as $ownerResource) {
 ```
 
 This is when using a hydrator can help you. Currently, Yang has only one hydrator, the `ClassHydrator` which - if the
-response was successful - maps the specified document to an `stdClass` with all of the resource attributes and
-relationships. It means that errors, links, meta data won't be present in the returned object! However, relationships are
-very easy to access now.
+response was successful - maps the specified document to an `stdClass` with all the resource attributes and relationships.
+It means that errors, links, meta data won't be present in the returned object! However, relationships are very easy to
+access now.
 
 Let's use the document from the last example for demonstrating the power of hydrators: 
 
