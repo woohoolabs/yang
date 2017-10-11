@@ -19,10 +19,10 @@
     * [Request builder](#request-builder)
     * [HTTP clients](#http-clients)
     * [Response](#response)
+    * [Hydration](#hydration)
 * [Advanced Usage](#advanced-usage)
     * [Custom serialization](#custom-serialization)
     * [Custom deserialization](#custom-deserialization)
-    * [Hydration](#hydration)
 * [Versioning](#versioning)
 * [Change Log](#change-log)
 * [Contributing](#contributing)
@@ -360,6 +360,66 @@ $resource = $address->resource();
 $resources = $address->resources();
 ```
 
+### Hydration
+
+JSON:API responses with many related resources are not easily to process with the above approach. For example, if you want
+to retrieve the value of an attribute of a related resource, you need the following code:
+
+```php
+$dogResource = $response->document()->primaryResource();
+
+$breedName = $dogResource->relationship("breed")->resource()->attribute("name");
+```
+
+This is a bit too much code to write if you want to map map complex response documents with many relationships to objects:
+
+```php
+$dogResource = $response->document()->primaryResource();
+
+$dog = new stdClass();
+$dog->name = $dogResource->attribute("name");
+$dog->age = $dogResource->attribute("age");
+$dog->breed = $dogResource->relationship("breed")->resource()->attribute("name");
+foreach ($dogResource->relationship("owners")->resources() as $ownerResource) {
+    $owner = new stdClass();
+    $owner->name = $ownerResource->attribute("name");
+    
+    $addressResource = $ownerResource->relationship("address")->resource();
+    $owner->address = new stdClass();
+    $owner->address->city = $addressResource->attribute("city");
+    $owner->address->addressLine = $addressResource->attribute("city");
+
+    $dog->owners[] = $owner;
+}
+```
+
+This is when using a hydrator can help you. Currently, Yang has only one hydrator, the `ClassHydrator` which
+- if the response was successful - maps the specified document to an `stdClass` with all of the resource attributes and
+relationships. It means that errors, links, meta data won't be present in the returned object! However, relationships are
+very easy to access now.
+
+Let's use the document from the last example for demonstrating the power of hydrators: 
+
+```php
+$hydrator = new ClassHydrator();
+$dog = $hydrator->hydrate($response->document());
+```
+
+That's all you need to create the same `$dog` object as above! Now, you can display its properties:
+
+```php
+echo "Dog:\n";
+echo "Name : " . $dog->name . "\n";
+echo "Breed: " . $dog->breed->name . "\n\n";
+
+echo "Owners:\n";
+foreach ($dog->owners as $owner) {
+    echo "Name   : " . $dog->owner->name . "\n";
+    echo "Address: " . $dog->owner->address->city . ", " . $dog->owner->address->addressLine . "\n";
+    echo "------------------\n";
+}
+```
+
 ## Advanced Usage
 
 ### Custom serialization
@@ -421,67 +481,6 @@ $response = new JsonApiResponse($psr7Response, new MyCustomDeserializer());
 ```
 
 You only have to make sure that your custom deserializer implements the `DeserializerInterface`.
-
-### Hydration
-
-JSON:API responses with many related resources are not easily to process. For example, if you want to retrieve the
-value of an attribute of a related resource, you need the following code:
-
-```php
-$dogResource = $response->document()->primaryResource();
-
-$breedName = $dogResource->relationship("breed")->resource()->attribute("name");
-```
-
-This is a bit too much code to write. And it gets even worse if you want to map complex response documents
-with many relationships to objects:
-
-```php
-$dogResource = $response->document()->primaryResource();
-
-$dog = new stdClass();
-$dog->name = $dogResource->attribute("name");
-$dog->age = $dogResource->attribute("age");
-$dog->breed = $dogResource->relationship("breed")->resource()->attribute("name");
-foreach ($dogResource->relationship("owners")->resources() as $ownerResource) {
-    $owner = new stdClass();
-    $owner->name = $ownerResource->attribute("name");
-    
-    $addressResource = $ownerResource->relationship("address")->resource();
-    $owner->address = new stdClass();
-    $owner->address->city = $addressResource->attribute("city");
-    $owner->address->addressLine = $addressResource->attribute("city");
-
-    $dog->owners[] = $owner;
-}
-```
-
-This is when using a hydrator can help you.  Currently, Yang has only one hydrator, the `ClassHydrator` which maps the
-specified document to an `stdClass` with all of the resource attributes and relationships if the response was successful.
-It means that errors, links, meta data won't be present in the returned object! However, relationships are very easy
-to access now.
-
-Let's use the above document for demonstrating the power of hydrators: 
-
-```php
-$hydrator = new ClassHydrator();
-$dog = $hydrator->hydrate($response->document());
-```
-
-That's all you need to create the `$dog` object! Now, you can display its properties:
-
-```php
-echo "Dog:\n";
-echo "Name : " . $dog->name . "\n";
-echo "Breed: " . $dog->breed->name . "\n\n";
-
-echo "Owners:\n";
-foreach ($dog->owners as $owner) {
-    echo "Name   : " . $dog->owner->name . "\n";
-    echo "Address: " . $dog->owner->address->city . ", " . $dog->owner->address->addressLine . "\n";
-    echo "------------------\n";
-}
-```
 
 ## Examples
 
