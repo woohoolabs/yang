@@ -1,14 +1,18 @@
-## 1.3.0 - unreleased
+## 1.4.0 - unreleased
 
 ADDED:
 
 CHANGED:
 
-- Increased minimum PHP version requirement to 7.1
-
 REMOVED:
 
 FIXED:
+
+## 1.3.0 - 2017-10-17
+
+CHANGED:
+
+- Increased minimum PHP version requirement to 7.1
 
 ## 1.2.0 - 2017-10-10
 
