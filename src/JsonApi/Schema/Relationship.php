@@ -41,7 +41,8 @@ class Relationship
         $links = Links::createFromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
 
         if (self::isArrayKey($array, "data") === false) {
-            return self::createEmptyFromArray($name, $meta, $links, $resources);
+            $isToOneRelationship = array_key_exists("data", $array) && is_null($array["data"]);
+            return self::createEmptyFromArray($name, $meta, $links, $resources, $isToOneRelationship);
         }
 
         if (self::isAssociativeArray($array["data"])) {
@@ -55,9 +56,10 @@ class Relationship
         string $name,
         array $meta,
         Links $links,
-        ResourceObjects $resources
+        ResourceObjects $resources,
+        $isToOneRelationship = null
     ): Relationship {
-        return new Relationship($name, $meta, $links, [], $resources, null);
+        return new Relationship($name, $meta, $links, [], $resources, $isToOneRelationship);
     }
 
     private static function createToOneFromArray(
