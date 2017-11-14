@@ -143,6 +143,8 @@ class Relationship
 
         if (empty($this->resourceMap) === false) {
             $result["data"] = $this->isToOneRelationship ? reset($this->resourceMap) : $this->resourceMap;
+        }else{
+            $result["data"] = $this->isToOneRelationship ? null : [];
         }
 
         return $result;
