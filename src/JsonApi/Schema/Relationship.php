@@ -41,7 +41,7 @@ class Relationship
         $links = Links::createFromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
 
         if (self::isArrayKey($array, "data") === false) {
-            $isToOneRelationship = array_key_exists("data", $array) && is_null($array["data"]);
+            $isToOneRelationship = array_key_exists("data", $array) && $array["data"] === null;
             return self::createEmptyFromArray($name, $meta, $links, $resources, $isToOneRelationship);
         }
 
