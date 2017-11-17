@@ -40,15 +40,22 @@ class Relationship
         $meta = self::isArrayKey($array, "meta") ? $array["meta"] : [];
         $links = Links::createFromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
 
-        if (self::isArrayKey($array, "data") === false) {
-            $isToOneRelationship = array_key_exists("data", $array) && $array["data"] === null;
-            return self::createEmptyFromArray($name, $meta, $links, $resources, $isToOneRelationship);
+        // Data member is missing
+        if (array_key_exists("data", $array) === false) {
+            return self::createEmptyFromArray($name, $meta, $links, $resources, null);
         }
 
+        // Relationship is empty To-One
+        if ($array["data"] === null) {
+            return self::createEmptyFromArray($name, $meta, $links, $resources, true);
+        }
+
+        // Relationship is To-One
         if (self::isAssociativeArray($array["data"])) {
             return self::createToOneFromArray($name, $meta, $links, $array["data"], $resources);
         }
 
+        // Relationship is To-Many
         return self::createToManyFromArray($name, $meta, $links, $array["data"], $resources);
     }
 
@@ -57,7 +64,7 @@ class Relationship
         array $meta,
         Links $links,
         ResourceObjects $resources,
-        $isToOneRelationship = null
+        $isToOneRelationship
     ): Relationship {
         return new Relationship($name, $meta, $links, [], $resources, $isToOneRelationship);
     }
@@ -141,10 +148,14 @@ class Relationship
             $result["links"] = $this->links->toArray();
         }
 
-        if (empty($this->resourceMap) === false) {
-            $result["data"] = $this->isToOneRelationship ? reset($this->resourceMap) : $this->resourceMap;
-        } else {
+        if ($this->isToOneRelationship === null) {
+            return $result;
+        }
+
+        if (empty($this->resourceMap)) {
             $result["data"] = $this->isToOneRelationship ? null : [];
+        } else {
+            $result["data"] = $this->isToOneRelationship ? reset($this->resourceMap) : $this->resourceMap;
         }
 
         return $result;

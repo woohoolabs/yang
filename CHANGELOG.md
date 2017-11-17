@@ -8,6 +8,12 @@ REMOVED:
 
 FIXED:
 
+## 1.3.1 - unreleased
+
+FIXED:
+
+- [#8](https://github.com/woohoolabs/yang/pulls/8): Fix for unexpected behaviour when To-One relationship data is null
+
 ## 1.3.0 - 2017-10-17
 
 CHANGED:

@@ -10,37 +10,185 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function toArray()
+    public function toArrayWhenDataIsMissing()
     {
         $relationship = $this->createRelationship(
             [
                 "meta" => [
-                    "a" => "b"
+                    "a" => "b",
                 ],
                 "links" => [
-                    "a" => "b"
+                    "a" => "b",
                 ],
-                "data" => [
-                    "type" => "a",
-                    "id" => "b",
-                ]
             ]
         );
 
         $this->assertSame(
             [
                 "meta" => [
-                    "a" => "b"
+                    "a" => "b",
                 ],
                 "links" => [
                     "a" => [
-                        "href" => "b"
-                    ]
+                        "href" => "b",
+                    ],
+                ],
+            ],
+            $relationship->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function toArrayWhenDataIsEmptyToOne()
+    {
+        $relationship = $this->createRelationship(
+            [
+                "meta" => [
+                    "a" => "b",
+                ],
+                "links" => [
+                    "a" => "b",
+                ],
+                "data" => null,
+            ]
+        );
+
+        $this->assertSame(
+            [
+                "meta" => [
+                    "a" => "b",
+                ],
+                "links" => [
+                    "a" => [
+                        "href" => "b",
+                    ],
+                ],
+                "data" => null,
+            ],
+            $relationship->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function toArrayWhenDataIsEmptyToMany()
+    {
+        $relationship = $this->createRelationship(
+            [
+                "meta" => [
+                    "a" => "b",
+                ],
+                "links" => [
+                    "a" => "b",
+                ],
+                "data" => [],
+            ]
+        );
+
+        $this->assertSame(
+            [
+                "meta" => [
+                    "a" => "b",
+                ],
+                "links" => [
+                    "a" => [
+                        "href" => "b",
+                    ],
+                ],
+                "data" => [],
+            ],
+            $relationship->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function toArrayWhenDataIsToOne()
+    {
+        $relationship = $this->createRelationship(
+            [
+                "meta" => [
+                    "a" => "b",
+                ],
+                "links" => [
+                    "a" => "b",
                 ],
                 "data" => [
                     "type" => "a",
                     "id" => "b",
-                ]
+                ],
+            ]
+        );
+
+        $this->assertSame(
+            [
+                "meta" => [
+                    "a" => "b",
+                ],
+                "links" => [
+                    "a" => [
+                        "href" => "b",
+                    ],
+                ],
+                "data" => [
+                    "type" => "a",
+                    "id" => "b",
+                ],
+            ],
+            $relationship->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function toArrayWhenDataIsToMany()
+    {
+        $relationship = $this->createRelationship(
+            [
+                "meta" => [
+                    "a" => "b",
+                ],
+                "links" => [
+                    "a" => "b",
+                ],
+                "data" => [
+                    [
+                        "type" => "a",
+                        "id" => "1",
+                    ],
+                    [
+                        "type" => "a",
+                        "id" => "2",
+                    ],
+                ],
+            ]
+        );
+
+        $this->assertSame(
+            [
+                "meta" => [
+                    "a" => "b",
+                ],
+                "links" => [
+                    "a" => [
+                        "href" => "b",
+                    ],
+                ],
+                "data" => [
+                    [
+                        "type" => "a",
+                        "id" => "1",
+                    ],
+                    [
+                        "type" => "a",
+                        "id" => "2",
+                    ],
+                ],
             ],
             $relationship->toArray()
         );
@@ -59,6 +207,20 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
+    public function isToOneRelationshipIsTrueWhenEmpty()
+    {
+        $relationship = $this->createRelationship(
+            [
+                "data" => null,
+            ]
+        );
+
+        $this->assertTrue($relationship->isToOneRelationship());
+    }
+
+    /**
+     * @test
+     */
     public function isToOneRelationshipIsTrue()
     {
         $relationship = $this->createRelationship(
@@ -66,11 +228,25 @@ class RelationshipTest extends TestCase
                 "data" => [
                     "type" => "a",
                     "id" => "b",
-                ]
+                ],
             ]
         );
 
         $this->assertTrue($relationship->isToOneRelationship());
+    }
+
+    /**
+     * @test
+     */
+    public function isToOneRelationshipIsFalseWhenEmpty()
+    {
+        $relationship = $this->createRelationship(
+            [
+                "data" => [],
+            ]
+        );
+
+        $this->assertFalse($relationship->isToOneRelationship());
     }
 
     /**
@@ -84,12 +260,26 @@ class RelationshipTest extends TestCase
                     [
                         "type" => "a",
                         "id" => "b",
-                    ]
-                ]
+                    ],
+                ],
             ]
         );
 
         $this->assertFalse($relationship->isToOneRelationship());
+    }
+
+    /**
+     * @test
+     */
+    public function isToManyRelationshipIsTrueWhenEmpty()
+    {
+        $relationship = $this->createRelationship(
+            [
+                "data" => [],
+            ]
+        );
+
+        $this->assertTrue($relationship->isToManyRelationship());
     }
 
     /**
@@ -103,12 +293,26 @@ class RelationshipTest extends TestCase
                     [
                         "type" => "a",
                         "id" => "b",
-                    ]
-                ]
+                    ],
+                ],
             ]
         );
 
         $this->assertTrue($relationship->isToManyRelationship());
+    }
+
+    /**
+     * @test
+     */
+    public function isToManyRelationshipIsFalseWhenEmpty()
+    {
+        $relationship = $this->createRelationship(
+            [
+                "data" => null,
+            ]
+        );
+
+        $this->assertFalse($relationship->isToManyRelationship());
     }
 
     /**
@@ -121,7 +325,7 @@ class RelationshipTest extends TestCase
                 "data" => [
                     "type" => "a",
                     "id" => "b",
-                ]
+                ],
             ]
         );
 
@@ -137,7 +341,7 @@ class RelationshipTest extends TestCase
             [
                 "meta" => [
                     "a" => "b",
-                ]
+                ],
             ]
         );
 
@@ -163,7 +367,7 @@ class RelationshipTest extends TestCase
             [
                 "meta" => [
                     "a" => "b",
-                ]
+                ],
             ]
         );
 
@@ -179,7 +383,7 @@ class RelationshipTest extends TestCase
             [
                 "links" => [
                     "a" => "b",
-                ]
+                ],
             ]
         );
 
