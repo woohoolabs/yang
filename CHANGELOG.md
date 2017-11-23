@@ -2,7 +2,7 @@
 
 FIXED:
 
-- [#8](https://github.com/woohoolabs/yang/pulls/8): Fix for unexpected behaviour when To-One relationship data is null
+- [#8](https://github.com/woohoolabs/yang/pull/8): Fix for unexpected behaviour when To-One relationship data is null
 
 ## 1.2.0 - 2017-10-10
 
@@ -15,7 +15,7 @@ ADDED:
 
 ADDED:
 
-- [#4](https://github.com/woohoolabs/yang/pulls/4): Allow relationship's resource identifier objects to have a "meta" value
+- [#4](https://github.com/woohoolabs/yang/pull/4): Allow relationship's resource identifier objects to have a "meta" value
 
 CHANGED:
 
