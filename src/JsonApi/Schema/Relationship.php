@@ -285,7 +285,7 @@ class Relationship
 
     private static function isAssociativeArray(array $array): bool
     {
-        return (bool) count(array_filter(array_keys($array), 'is_string'));
+        return (bool) count(array_filter(array_keys($array), "is_string"));
     }
 
     private static function isArrayKey(array $array, string $key): bool
@@ -295,6 +295,6 @@ class Relationship
 
     private static function isBlankKey(array $array, string $key): bool
     {
-        return empty($array[$key]) && !is_numeric($array[$key]);
+        return array_key_exists($key, $array) === false || (empty($array[$key]) && is_numeric($array[$key]) === false);
     }
 }

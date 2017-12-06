@@ -217,6 +217,6 @@ class Document
 
     private static function isAssociativeArray(array $array): bool
     {
-        return (bool)count(array_filter(array_keys($array), 'is_string'));
+        return (bool) count(array_filter(array_keys($array), "is_string"));
     }
 }

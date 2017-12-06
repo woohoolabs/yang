@@ -311,6 +311,6 @@ class JsonApiRequestBuilder
 
     private function isBlankKey(array $array, string $key): bool
     {
-        return empty($array[$key]) && !is_numeric($array[$key]);
+        return array_key_exists($key, $array) === false || (empty($array[$key]) && is_numeric($array[$key]) === false);
     }
 }

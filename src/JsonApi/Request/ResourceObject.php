@@ -95,8 +95,8 @@ class ResourceObject
         return $resource;
     }
 
-    private function isBlank($value): bool
+    private function isBlank(string $value): bool
     {
-        return empty($value) && !is_numeric($value);
+        return empty($value) && is_numeric($value) === false;
     }
 }
