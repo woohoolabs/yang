@@ -114,7 +114,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setUri("http://example.com/api/users?0");
 
-        $this->assertSame("http://example.com/api/users?0", $requestBuilder->getRequest()->getUri()->__toString());
+        $this->assertSame("http://example.com/api/users?0=", $requestBuilder->getRequest()->getUri()->__toString());
     }
 
     /**

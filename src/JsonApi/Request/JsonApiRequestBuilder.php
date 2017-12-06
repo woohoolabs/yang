@@ -138,7 +138,7 @@ class JsonApiRequestBuilder
             $this->scheme = $parsedUrl["scheme"];
         }
 
-        if ($this->isBlank($parsedUrl["port"]) === false) {
+        if (empty((int) $parsedUrl["port"]) === false) {
             $this->port = (int) $parsedUrl["port"];
         }
 
