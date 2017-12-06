@@ -108,7 +108,19 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setUriWithZero()
+    public function setUriWithoutPath()
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder->setUri("http://example.com");
+
+        $this->assertSame("http://example.com", $requestBuilder->getRequest()->getUri()->__toString());
+    }
+
+    /**
+     * @test
+     */
+    public function setUriWithQueryParamAsZero()
     {
         $requestBuilder = $this->createRequestBuilder();
 

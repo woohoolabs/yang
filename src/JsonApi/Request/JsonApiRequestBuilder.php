@@ -134,23 +134,23 @@ class JsonApiRequestBuilder
             return $this;
         }
 
-        if ($this->isBlank($parsedUrl["scheme"]) === false) {
+        if ($this->isBlankKey($parsedUrl, "scheme") === false) {
             $this->scheme = $parsedUrl["scheme"];
         }
 
-        if (empty((int) $parsedUrl["port"]) === false) {
+        if ($this->isBlankKey($parsedUrl, "port") === false) {
             $this->port = (int) $parsedUrl["port"];
         }
 
-        if ($this->isBlank($parsedUrl["host"]) === false) {
+        if ($this->isBlankKey($parsedUrl, "host") === false) {
             $this->host = $parsedUrl["host"];
         }
 
-        if ($this->isBlank($parsedUrl["path"]) === false) {
+        if ($this->isBlankKey($parsedUrl, "path") === false) {
             $this->path = $parsedUrl["path"];
         }
 
-        if ($this->isBlank($parsedUrl["query"]) === false) {
+        if ($this->isBlankKey($parsedUrl, "query") === false) {
             parse_str($parsedUrl["query"], $this->queryString);
         }
 
@@ -309,8 +309,8 @@ class JsonApiRequestBuilder
         }
     }
 
-    private function isBlank($value): bool
+    private function isBlankKey(array $array, string $key): bool
     {
-        return empty($value) && !is_numeric($value);
+        return empty($array[$key]) && !is_numeric($array[$key]);
     }
 }

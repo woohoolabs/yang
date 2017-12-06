@@ -79,7 +79,7 @@ class Relationship
         $resourceMap = [];
         $isToOneRelationship = true;
 
-        if (self::isBlank($data["type"]) === false && self::isBlank($data["id"]) === false) {
+        if (self::isBlankKey($data, "type") === false && self::isBlankKey($data, "id") === false) {
             $resourceMap = [
                 [
                     "type" => $data["type"],
@@ -105,7 +105,7 @@ class Relationship
         $resourceMap = [];
 
         foreach ($data as $item) {
-            if (self::isBlank($item["type"]) === false && self::isBlank($item["id"]) === false) {
+            if (self::isBlankKey($item, "type") === false && self::isBlankKey($item, "id") === false) {
                 $resource = [
                     "type" => $item["type"],
                     "id" => $item["id"],
@@ -293,8 +293,8 @@ class Relationship
         return isset($array[$key]) && is_array($array[$key]);
     }
 
-    private static function isBlank($value): bool
+    private static function isBlankKey(array $array, string $key): bool
     {
-        return empty($value) && !is_numeric($value);
+        return empty($array[$key]) && !is_numeric($array[$key]);
     }
 }
