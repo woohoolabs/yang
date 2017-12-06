@@ -108,6 +108,18 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
+    public function setUriWithZero()
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder->setUri("http://example.com/api/users?0");
+
+        $this->assertSame("http://example.com/api/users?0", $requestBuilder->getRequest()->getUri()->__toString());
+    }
+
+    /**
+     * @test
+     */
     public function setUriHost()
     {
         $requestBuilder = $this->createRequestBuilder();
@@ -144,13 +156,13 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setUriQueryParam()
+    public function setUriQueryParamWithZeroValue()
     {
         $requestBuilder = $this->createRequestBuilder();
 
-        $requestBuilder->setUriQueryParam("a", "b");
+        $requestBuilder->setUriQueryParam("a", "0");
 
-        $this->assertSame("a=b", $requestBuilder->getRequest()->getUri()->getQuery());
+        $this->assertSame("a=0", $requestBuilder->getRequest()->getUri()->getQuery());
     }
 
     /**

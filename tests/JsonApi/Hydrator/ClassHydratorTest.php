@@ -3,12 +3,9 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\Tests\JsonApi\Hydrator;
 
-use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Hydrator\ClassHydrator;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
-use WoohooLabs\Yang\JsonApi\Schema\JsonApi;
-use WoohooLabs\Yang\JsonApi\Serializer\JsonDeserializer;
 
 class ClassHydratorTest extends TestCase
 {
@@ -90,7 +87,7 @@ class ClassHydratorTest extends TestCase
                 ],
                 [
                     "type" => "a",
-                    "id" => "2",
+                    "id" => "0",
                     "attributes" => [
                         "a" => "D",
                         "b" => "E",
@@ -105,10 +102,12 @@ class ClassHydratorTest extends TestCase
         $objects = $hydrator->hydrate($document);
 
         $this->assertCount(2, $objects);
+        $this->assertAttributeSame("1", "id", $objects[0]);
         $this->assertAttributeSame("A", "a", $objects[0]);
         $this->assertAttributeSame("B", "b", $objects[0]);
         $this->assertAttributeSame("C", "c", $objects[0]);
 
+        $this->assertAttributeSame("0", "id", $objects[1]);
         $this->assertAttributeSame("D", "a", $objects[1]);
         $this->assertAttributeSame("E", "b", $objects[1]);
         $this->assertAttributeSame("F", "c", $objects[1]);
@@ -152,7 +151,7 @@ class ClassHydratorTest extends TestCase
                     "x" => [
                         "data" => [
                             "type" => "b",
-                            "id" => "1",
+                            "id" => "0",
                         ],
                     ],
                 ],
@@ -160,7 +159,7 @@ class ClassHydratorTest extends TestCase
             "included" => [
                 [
                     "type" => "b",
-                    "id" => "1",
+                    "id" => "0",
                     "attributes" => [
                         "a" => "A",
                         "b" => "B",
@@ -175,7 +174,7 @@ class ClassHydratorTest extends TestCase
 
         $this->assertObjectHasAttribute("x", $object);
         $this->assertAttributeSame("b", "type", $object->x);
-        $this->assertAttributeSame("1", "id", $object->x);
+        $this->assertAttributeSame("0", "id", $object->x);
         $this->assertAttributeSame("A", "a", $object->x);
     }
 

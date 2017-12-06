@@ -134,23 +134,23 @@ class JsonApiRequestBuilder
             return $this;
         }
 
-        if (empty($parsedUrl["scheme"]) === false) {
+        if ($this->isBlank($parsedUrl["scheme"]) === false) {
             $this->scheme = $parsedUrl["scheme"];
         }
 
-        if (empty($parsedUrl["port"]) === false) {
+        if ($this->isBlank($parsedUrl["port"]) === false) {
             $this->port = (int) $parsedUrl["port"];
         }
 
-        if (empty($parsedUrl["host"]) === false) {
+        if ($this->isBlank($parsedUrl["host"]) === false) {
             $this->host = $parsedUrl["host"];
         }
 
-        if (empty($parsedUrl["path"]) === false) {
+        if ($this->isBlank($parsedUrl["path"]) === false) {
             $this->path = $parsedUrl["path"];
         }
 
-        if (empty($parsedUrl["query"]) === false) {
+        if ($this->isBlank($parsedUrl["query"]) === false) {
             parse_str($parsedUrl["query"], $this->queryString);
         }
 
@@ -307,5 +307,10 @@ class JsonApiRequestBuilder
         } else {
             $this->queryString[$name] = $queryParam;
         }
+    }
+
+    private function isBlank($value): bool
+    {
+        return empty($value) && !is_numeric($value);
     }
 }

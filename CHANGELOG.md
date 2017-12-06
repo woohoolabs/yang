@@ -8,6 +8,13 @@ REMOVED:
 
 FIXED:
 
+## 1.3.2 - unreleased
+
+FIXED:
+
+- [#9](https://github.com/woohoolabs/yang/issues/9): Resources with an ID of "0" disappear when using `ClassHydrator`
+- Other issues with "0" affecting `ResourceObject::toString()` and `JsonApiRequestBuilder::toString()`
+
 ## 1.3.1 - 2017-11-23
 
 FIXED:

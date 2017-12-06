@@ -42,13 +42,13 @@ class ResourceObjectTest extends TestCase
      */
     public function getId()
     {
-        $resource = new ResourceObject("", "b");
+        $resource = new ResourceObject("", "0");
 
         $this->assertSame(
             [
                 "data" => [
                     "type" => "",
-                    "id" => "b",
+                    "id" => "0",
                 ],
             ],
             $resource->toArray()
