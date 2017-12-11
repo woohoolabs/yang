@@ -1,14 +1,18 @@
-## 1.4.0 - unreleased
+## 1.5.0 - unreleased
 
 ADDED:
-
-- Support for hydrating collections via `HydratorInterface::hydrateCollection()`
 
 CHANGED:
 
 REMOVED:
 
 FIXED:
+
+## 1.4.0 - 2017-12-12
+
+ADDED:
+
+- Support for hydrating collections via `HydratorInterface::hydrateCollection()`
 
 ## 1.3.2 - 2017-12-06
 
