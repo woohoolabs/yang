@@ -2,6 +2,8 @@
 
 ADDED:
 
+- Support for hydrating collections via `HydratorInterface::hydrateCollection()`
+
 CHANGED:
 
 REMOVED:

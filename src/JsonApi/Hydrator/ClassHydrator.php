@@ -25,6 +25,19 @@ class ClassHydrator implements HydratorInterface
         return $this->hydratePrimaryResources($document);
     }
 
+    public function hydrateCollection(Document $document): iterable
+    {
+        if ($document->hasAnyPrimaryResources() === false) {
+            return [];
+        }
+
+        if ($document->isSingleResourceDocument()) {
+            return [$this->hydratePrimaryResource($document)];
+        }
+
+        return $this->hydratePrimaryResources($document);
+    }
+
     private function hydratePrimaryResources(Document $document): array
     {
         $result = [];

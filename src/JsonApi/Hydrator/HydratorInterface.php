@@ -11,4 +11,6 @@ interface HydratorInterface
      * @return mixed
      */
     public function hydrate(Document $document);
+
+    public function hydrateCollection(Document $document): iterable;
 }

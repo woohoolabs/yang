@@ -420,6 +420,21 @@ foreach ($dog->owners as $owner) {
 }
 ```
 
+> Note: The method `ClassHydrator::hydrate()` returns an empty `stdClass` if the document doesn't have any primary data,
+it returns an `stdClass` if the document has a single primary resource, and it returns an array of `stdObject`s if the
+document contains multiple primary resources.
+
+You may also use the `ClassHydrator::hydrateCollection()` method for retrieving many dogs:
+
+```php
+$hydrator = new ClassHydrator();
+$dogs = $hydrator->hydrateCollection($response->document());
+```
+
+> Note: The method `ClassHydrator::hydrateCollection()` returns an empty array if the document doesn't have any primary data,
+it returns an array with only one `stdClass` if the document has a single primary resource, and it returns an array of
+`stdObject`s if the document contains multiple primary resources.
+
 ## Advanced Usage
 
 ### Custom serialization

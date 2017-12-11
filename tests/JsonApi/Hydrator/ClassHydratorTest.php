@@ -362,4 +362,86 @@ class ClassHydratorTest extends TestCase
         $this->assertAttributeSame("A", "a", $object->x->y->z);
         $this->assertAttributeSame("B", "b", $object->x->y->z);
     }
+
+    /**
+     * @test
+     */
+    public function hydrateEmptyCollection()
+    {
+        $document = [
+            "data" => [],
+        ];
+
+        $document = Document::createFromArray($document);
+        $hydrator = new ClassHydrator();
+        $collection = $hydrator->hydrateCollection($document);
+
+        $this->assertCount(0, $collection);
+    }
+
+    /**
+     * @test
+     */
+    public function hydrateCollectionEmptySingleResource()
+    {
+        $document = [
+            "data" => null,
+        ];
+
+        $document = Document::createFromArray($document);
+        $hydrator = new ClassHydrator();
+        $collection = $hydrator->hydrateCollection($document);
+
+        $this->assertCount(0, $collection);
+    }
+
+    /**
+     * @test
+     */
+    public function hydrateCollectionSingleResource()
+    {
+        $document = [
+            "data" => [
+                "type" => "a",
+                "id" => "1",
+            ],
+        ];
+
+        $document = Document::createFromArray($document);
+        $hydrator = new ClassHydrator();
+        $collection = $hydrator->hydrateCollection($document);
+
+        $this->assertCount(1, $collection);
+        $this->assertAttributeSame("a", "type", $collection[0]);
+        $this->assertAttributeSame("1", "id", $collection[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function hydrateCollectionMultipleResources()
+    {
+        $document = [
+            "data" => [
+                [
+                    "type" => "a",
+                    "id" => "1",
+                ],
+                [
+                    "type" => "a",
+                    "id" => "2",
+                ],
+            ],
+        ];
+
+        $document = Document::createFromArray($document);
+        $hydrator = new ClassHydrator();
+        $collection = $hydrator->hydrateCollection($document);
+
+        $this->assertCount(2, $collection);
+        $this->assertAttributeSame("a", "type", $collection[0]);
+        $this->assertAttributeSame("1", "id", $collection[0]);
+        $this->assertAttributeSame("a", "type", $collection[1]);
+        $this->assertAttributeSame("2", "id", $collection[1]);
+    }
 }
