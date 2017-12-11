@@ -371,7 +371,8 @@ $dogResource = $response->document()->primaryResource();
 $breedName = $dogResource->relationship("breed")->resource()->attribute("name");
 ```
 
-This is a bit too much code to write if you want to map map complex response documents with many relationships to objects:
+This is a bit too much code to write, and it gets a lot worse when you want to map complex response documents with many
+relationships to objects:
 
 ```php
 $dogResource = $response->document()->primaryResource();
@@ -393,8 +394,8 @@ foreach ($dogResource->relationship("owners")->resources() as $ownerResource) {
 }
 ```
 
-This is when using a hydrator can help you. Currently, Yang has only one hydrator, the `ClassHydrator` which - if the
-response was successful - maps the specified document to an `stdClass` with all the resource attributes and relationships.
+This is the situation when using a hydrator can help you. Currently, Yang has only one hydrator, the `ClassHydrator` which - if the
+response was successful - maps the specified document to an `stdClass` along with all the resource attributes and relationships.
 It means that errors, links, meta data won't be present in the returned object! However, relationships are very easy to
 access now.
 
@@ -405,7 +406,7 @@ $hydrator = new ClassHydrator();
 $dog = $hydrator->hydrate($response->document());
 ```
 
-That's all you need to create the same `$dog` object as above! Now, you can display its properties:
+That's all you need to do in order to create the same `$dog` object as in the first example! Now, you can display its properties:
 
 ```php
 echo "Dog:\n";
