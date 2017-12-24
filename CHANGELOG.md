@@ -8,6 +8,12 @@ REMOVED:
 
 FIXED:
 
+## 1.4.1 - 2017-12-24
+
+ADDED:
+
+- `ClassHydrator::hydrateObject()` method
+
 ## 1.4.0 - 2017-12-12
 
 ADDED:
