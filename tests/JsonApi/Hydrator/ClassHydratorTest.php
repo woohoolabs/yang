@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\Tests\JsonApi\Hydrator;
 
 use PHPUnit\Framework\TestCase;
+use stdClass;
 use WoohooLabs\Yang\JsonApi\Hydrator\ClassHydrator;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 
@@ -366,7 +367,80 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateEmptyCollection()
+    public function hydrateObjectWhenCollectionEmpty()
+    {
+        $document = [
+            "data" => [],
+        ];
+
+        $document = Document::createFromArray($document);
+        $hydrator = new ClassHydrator();
+        $object = $hydrator->hydrateObject($document);
+
+        $this->assertEquals(new stdClass(), $object);
+    }
+
+    /**
+     * @test
+     */
+    public function hydrateObjectWhenCollection()
+    {
+        $document = [
+            "data" => [
+                [
+                    "type" => "a",
+                    "id" => "1",
+                ],
+            ],
+        ];
+
+        $document = Document::createFromArray($document);
+        $hydrator = new ClassHydrator();
+        $object = $hydrator->hydrateObject($document);
+
+        $this->assertEquals(new stdClass(), $object);
+    }
+
+    /**
+     * @test
+     */
+    public function hydrateObjectWhenSingleResourceEmpty()
+    {
+        $document = [
+            "data" => null,
+        ];
+
+        $document = Document::createFromArray($document);
+        $hydrator = new ClassHydrator();
+        $object = $hydrator->hydrateObject($document);
+
+        $this->assertEquals(new stdClass(), $object);
+    }
+
+    /**
+     * @test
+     */
+    public function hydrateObjectWhenSingleResource()
+    {
+        $document = [
+            "data" => [
+                "type" => "a",
+                "id" => "1",
+            ],
+        ];
+
+        $document = Document::createFromArray($document);
+        $hydrator = new ClassHydrator();
+        $object = $hydrator->hydrateObject($document);
+
+        $this->assertEquals("a", $object->type);
+        $this->assertEquals("1", $object->id);
+    }
+
+    /**
+     * @test
+     */
+    public function hydrateCollectionWhenEmpty()
     {
         $document = [
             "data" => [],
