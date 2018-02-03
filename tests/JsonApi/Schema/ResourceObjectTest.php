@@ -357,7 +357,7 @@ class ResourceObjectTest extends TestCase
     {
         $resourceObject = $this->createResourceObject([]);
 
-        $this->assertNull(null, $resourceObject->relationship("a"));
+        $this->assertNull($resourceObject->relationship("a"));
     }
 
     private function createResourceObject(array $data): ResourceObject
