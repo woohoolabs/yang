@@ -4,6 +4,8 @@ ADDED:
 
 CHANGED:
 
+- Require PHPUnit 7.0 minimally for running tests
+
 REMOVED:
 
 FIXED:
