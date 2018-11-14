@@ -43,7 +43,7 @@ JSON:API clients, while [Woohoo Labs. Yin](https://woohoolabs/yin) is its server
 - 100% [PSR-7](http://www.php-fig.org/psr/psr-7/) compatibility
 - 99% [JSON:API 1.0](http://jsonapi.org/) conformance (approximately)
 - Provides a Request Builder to setup JSON:API request more easily
-- Provides easy-to-use HTTP clients via [HTTPlug](https://github.com/php-http/httplug)
+- Provides easy-to-use HTTP clients via [PSR-18](http://www.php-fig.org/psr/psr-18/) and [HTTPlug](https://github.com/php-http/httplug)
 - Supports [hydrators](#hydration) out-of-the-box in order to easily convert API responses to objects
 
 ## Install
@@ -52,9 +52,10 @@ The only thing you need before getting started is [Composer](http://getcomposer.
 
 ### Install HTTP client and message implementations:
 
-Because Yang requires a HTTP client implementation (a package which provides the `php-http/client-implementation`
-virtual package), you must install one first. You may use [Guzzle 6 Adapter](https://github.com/php-http/guzzle6-adapter)
-or any other library of your preference as long as it also provides the `psr/http-message-implementation` virtual package:
+Because Yang requires a HTTP client implementation (a package which provides the `psr/http-client-implementation` and the
+`php-http/async-client-implementation` virtual packages), you must install one first. You may use
+[Guzzle 6 Adapter](https://github.com/php-http/guzzle6-adapter) or any other library of your preference as long as it also
+provides the virtual packages mentioned above:
 
 ```bash
 $ composer require php-http/guzzle6-adapter
@@ -163,9 +164,9 @@ $request = $request
 
 ### HTTP clients
 
-The library comes with support for [HTTPlug](https://github.com/php-http/httplug) which is a clever HTTP client
-abstraction so you can choose how you want to send your requests. If you installed the `php-http/guzzle6-adapter`
-package, then you will be able to use Guzzle to do so:
+The library comes with support for [PSR-18](http://www.php-fig.org/psr/psr-18/) and [HTTPlug](https://github.com/php-http/httplug), 
+so you can choose how you want to send your requests. If you installed the `php-http/guzzle6-adapter` package, then you
+will be able to use Guzzle to do so:
 
 ```php
 use Http\Adapter\Guzzle6\Client;
@@ -189,7 +190,7 @@ $promise = $client->sendAsyncRequest($request);
 $promises = $client->sendConcurrentAsyncRequests([$request, $request]);
 ```
 
-Of course, you can use any available HTTP Clients or create a custom HTTP Client thanks to HTTPlug.
+Of course, you can use any available HTTP Clients or create a custom HTTP Client thanks to PSR-18 and HTTPlug.
 
 ### Response
 

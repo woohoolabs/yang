@@ -6,8 +6,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name":"Máté Kocsis",
-            "email":"kocsismate@woohoolabs.com"
+            "name": "Máté Kocsis",
+            "email": "kocsismate@woohoolabs.com"
         }
     ],
     "support": {
@@ -16,14 +16,16 @@
     },
     "require": {
         "php": "^7.1.0",
-        "php-http/httplug": "^1.0.0",
-        "php-http/client-implementation": "^1.0.0",
+        "php-http/httplug": "^2.0.0",
+        "php-http/async-client-implementation": "^1.0.0",
+        "psr/http-client": "^1.0.0",
+        "psr/http-client-implementation": "^1.0.0",
         "psr/http-message-implementation": "^1.0.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.0.0",
         "squizlabs/php_codesniffer": "^3.2.0",
-        "php-http/guzzle6-adapter": "^1.1.0"
+        "php-http/guzzle6-adapter": "^2.0.0"
     },
     "suggest": {
         "php-http/guzzle6-adapter": "Allows to use Guzzle 6 as the HTTP client implementation"

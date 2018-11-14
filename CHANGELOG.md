@@ -1,11 +1,13 @@
-## 1.5.0 - unreleased
+## 2.0.0 - unreleased
 
 ADDED:
 
+- Support for PSR-18 Client interface
+
 CHANGED:
 
-- Require PHPUnit 7.0 minimally for running tests
-- Run Travis tests on PHP 7.3 too
+- Update HTTPlug to 2.0
+- Update PHPUnit to 7.0
 
 REMOVED:
 
