@@ -52,10 +52,8 @@ The only thing you need before getting started is [Composer](http://getcomposer.
 
 ### Install HTTP client and message implementations:
 
-Because Yang requires a HTTP client implementation (a package which provides the `psr/http-client-implementation` and the
-`php-http/async-client-implementation` virtual packages), you must install one first. You may use
-[Guzzle 6 Adapter](https://github.com/php-http/guzzle6-adapter) or any other library of your preference as long as it also
-provides the virtual packages mentioned above:
+Because Yang requires a HTTP client implementation, you must install one first. You may use [Guzzle 6 Adapter](https://github.com/php-http/guzzle6-adapter)
+or any other library of your preference:
 
 ```bash
 $ composer require php-http/guzzle6-adapter

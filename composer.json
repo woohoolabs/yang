@@ -17,9 +17,6 @@
     "require": {
         "php": "^7.1.0",
         "php-http/httplug": "^1.0.0|^2.0.0",
-        "php-http/async-client-implementation": "^1.0.0",
-        "psr/http-client": "^1.0.0",
-        "psr/http-client-implementation": "^1.0.0",
         "psr/http-message-implementation": "^1.0.0"
     },
     "require-dev": {
