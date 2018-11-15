@@ -1,4 +1,15 @@
-## 1.5.0 - unreleased
+## 2.0.0 - unreleased
+
+ADDED:
+
+CHANGED:
+
+
+REMOVED:
+
+FIXED:
+
+## 1.5.0 - 2018-11-15
 
 ADDED:
 
@@ -7,10 +18,6 @@ ADDED:
 CHANGED:
 
 - Update PHPUnit to 7.0
-
-REMOVED:
-
-FIXED:
 
 ## 1.4.1 - 2017-12-24
 
