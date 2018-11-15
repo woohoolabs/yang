@@ -1,12 +1,11 @@
-## 2.0.0 - unreleased
+## 1.5.0 - unreleased
 
 ADDED:
 
-- Support for PSR-18 Client interface
+- Support for PSR-18 and HTTPlug 2.0
 
 CHANGED:
 
-- Update HTTPlug to 2.0
 - Update PHPUnit to 7.0
 
 REMOVED:
