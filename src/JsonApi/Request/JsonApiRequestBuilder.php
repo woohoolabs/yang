@@ -128,30 +128,30 @@ class JsonApiRequestBuilder
 
     public function setUri(string $uri): JsonApiRequestBuilder
     {
-        $parsedUrl = parse_url($uri);
+        $parsedUri = parse_url($uri);
 
-        if ($parsedUrl === false) {
+        if ($parsedUri === false) {
             return $this;
         }
 
-        if ($this->isBlankKey($parsedUrl, "scheme") === false) {
-            $this->scheme = $parsedUrl["scheme"];
+        if ($this->isBlankKey($parsedUri, "scheme") === false) {
+            $this->scheme = $parsedUri["scheme"];
         }
 
-        if ($this->isBlankKey($parsedUrl, "port") === false) {
-            $this->port = (int) $parsedUrl["port"];
+        if ($this->isBlankKey($parsedUri, "port") === false) {
+            $this->port = (int) $parsedUri["port"];
         }
 
-        if ($this->isBlankKey($parsedUrl, "host") === false) {
-            $this->host = $parsedUrl["host"];
+        if ($this->isBlankKey($parsedUri, "host") === false) {
+            $this->host = $parsedUri["host"];
         }
 
-        if ($this->isBlankKey($parsedUrl, "path") === false) {
-            $this->path = $parsedUrl["path"];
+        if ($this->isBlankKey($parsedUri, "path") === false) {
+            $this->path = $parsedUri["path"];
         }
 
-        if ($this->isBlankKey($parsedUrl, "query") === false) {
-            parse_str($parsedUrl["query"], $this->queryString);
+        if ($this->isBlankKey($parsedUri, "query") === false) {
+            parse_str($parsedUri["query"], $this->queryString);
         }
 
         return $this;
@@ -271,8 +271,8 @@ class JsonApiRequestBuilder
         $request = $request
             ->withUri($uri)
             ->withProtocolVersion($this->protocolVersion)
-            ->withHeader("Accept", "application/vnd.api+json")
-            ->withHeader("Content-Type", "application/vnd.api+json");
+            ->withHeader("accept", "application/vnd.api+json")
+            ->withHeader("content-type", "application/vnd.api+json");
 
         foreach ($this->headers as $name => $value) {
             $request = $request->withHeader($name, $value);

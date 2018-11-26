@@ -256,7 +256,7 @@ class JsonApiRequestBuilderTest extends TestCase
     {
         $requestBuilder = $this->createRequestBuilder();
 
-        $this->assertSame(["application/vnd.api+json"], $requestBuilder->getRequest()->getHeader("Accept"));
+        $this->assertSame(["application/vnd.api+json"], $requestBuilder->getRequest()->getHeader("accept"));
     }
 
     /**
@@ -266,7 +266,7 @@ class JsonApiRequestBuilderTest extends TestCase
     {
         $requestBuilder = $this->createRequestBuilder();
 
-        $this->assertSame(["application/vnd.api+json"], $requestBuilder->getRequest()->getHeader("Content-Type"));
+        $this->assertSame(["application/vnd.api+json"], $requestBuilder->getRequest()->getHeader("content-type"));
     }
 
     private function createRequestBuilder(): JsonApiRequestBuilder
