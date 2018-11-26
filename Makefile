@@ -9,7 +9,7 @@ help:
     sort -d | \
     awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-16s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: composer-install composer-update test
+.PHONY: composer-install composer-update test cs cs-fix
 
 composer-install:
 	docker run --rm --interactive --tty --volume $(PWD):/app --user $(id -u):$(id -g) composer install --ignore-platform-reqs
