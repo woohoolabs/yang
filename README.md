@@ -515,14 +515,13 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 
 ## Testing
 
-Woohoo Labs. Yang has a PHPUnit test suite. To run the tests, run the following command from the project folder
-after you have copied phpunit.xml.dist to phpunit.xml:
+Woohoo Labs. Yang has a PHPUnit test suite. To run the tests, run the following command from the project folder:
 
 ``` bash
 $ phpunit
 ```
 
-Additionally, you may run `docker-compose up` in order to execute the tests.
+Additionally, you may run `docker-compose up` or `make test` in order to execute the tests.
 
 ## Contributing
 
