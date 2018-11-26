@@ -47,7 +47,7 @@ class DocumentTest extends TestCase
                     "a" => "b"
                 ],
                 "links" => [
-                    "self" => "http://example.com/api/users/abcd"
+                    "self" => "https://example.com/api/users/abcd"
                 ],
                 "data" => [
                     "type" => "user",
@@ -77,7 +77,7 @@ class DocumentTest extends TestCase
                 ],
                 "links" => [
                     "self" => [
-                        "href" => "http://example.com/api/users/abcd"
+                        "href" => "https://example.com/api/users/abcd"
                     ]
                 ],
                 "data" => [
@@ -160,7 +160,7 @@ class DocumentTest extends TestCase
         $document = $this->createDocument(
             [
                 "links" => [
-                    "self" => "http://example.com/api/users/abcd",
+                    "self" => "https://example.com/api/users/abcd",
                 ],
             ]
         );

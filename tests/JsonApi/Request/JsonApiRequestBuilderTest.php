@@ -100,9 +100,9 @@ class JsonApiRequestBuilderTest extends TestCase
     {
         $requestBuilder = $this->createRequestBuilder();
 
-        $requestBuilder->setUri("http://example.com/api/users");
+        $requestBuilder->setUri("https://example.com/api/users");
 
-        $this->assertSame("http://example.com/api/users", $requestBuilder->getRequest()->getUri()->__toString());
+        $this->assertSame("https://example.com/api/users", $requestBuilder->getRequest()->getUri()->__toString());
     }
 
     /**
@@ -112,9 +112,9 @@ class JsonApiRequestBuilderTest extends TestCase
     {
         $requestBuilder = $this->createRequestBuilder();
 
-        $requestBuilder->setUri("http://example.com");
+        $requestBuilder->setUri("https://example.com");
 
-        $this->assertSame("http://example.com", $requestBuilder->getRequest()->getUri()->__toString());
+        $this->assertSame("https://example.com", $requestBuilder->getRequest()->getUri()->__toString());
     }
 
     /**
@@ -124,9 +124,9 @@ class JsonApiRequestBuilderTest extends TestCase
     {
         $requestBuilder = $this->createRequestBuilder();
 
-        $requestBuilder->setUri("http://example.com/api/users?0");
+        $requestBuilder->setUri("https://example.com/api/users?0");
 
-        $this->assertSame("http://example.com/api/users?0=", $requestBuilder->getRequest()->getUri()->__toString());
+        $this->assertSame("https://example.com/api/users?0=", $requestBuilder->getRequest()->getUri()->__toString());
     }
 
     /**

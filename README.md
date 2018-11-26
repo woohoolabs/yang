@@ -32,23 +32,23 @@
 
 ## Introduction
 
-[JSON:API](http://jsonapi.org) specification
-[reached 1.0 on 29th May 2015](http://www.programmableweb.com/news/new-json-api-specification-aims-to-speed-api-development/2015/06/10)
+[JSON:API](https://jsonapi.org) specification
+[reached 1.0 on 29th May 2015](https://www.programmableweb.com/news/new-json-api-specification-aims-to-speed-api-development/2015/06/10)
 and we also believe it is a big day for RESTful APIs as this specification makes APIs more robust and future-proof
 than they have ever been. Woohoo Labs. Yang (named after Yin-Yang) was born to bring efficiency and elegance to your
 JSON:API clients, while [Woohoo Labs. Yin](https://woohoolabs/yin) is its server-side counterpart.
 
 ### Features
 
-- 100% [PSR-7](http://www.php-fig.org/psr/psr-7/) compatibility
-- 99% [JSON:API 1.0](http://jsonapi.org/) conformance (approximately)
+- 100% [PSR-7](https://www.php-fig.org/psr/psr-7/) compatibility
+- 99% [JSON:API 1.0](https://jsonapi.org/) conformance (approximately)
 - Provides a Request Builder to setup JSON:API request more easily
-- Provides easy-to-use HTTP clients via [PSR-18](http://www.php-fig.org/psr/psr-18/) and [HTTPlug](https://github.com/php-http/httplug)
+- Provides easy-to-use HTTP clients via [PSR-18](https://www.php-fig.org/psr/psr-18/) and [HTTPlug](https://github.com/php-http/httplug)
 - Supports [hydrators](#hydration) out-of-the-box in order to easily convert API responses to objects
 
 ## Install
 
-The only thing you need before getting started is [Composer](http://getcomposer.org).
+The only thing you need before getting started is [Composer](https://getcomposer.org).
 
 ### Install HTTP client and message implementations:
 
@@ -162,7 +162,7 @@ $request = $request
 
 ### HTTP clients
 
-The library comes with support for [PSR-18](http://www.php-fig.org/psr/psr-18/) and [HTTPlug](https://github.com/php-http/httplug), 
+The library comes with support for [PSR-18](https://www.php-fig.org/psr/psr-18/) and [HTTPlug](https://github.com/php-http/httplug), 
 so you can choose how you want to send your requests. If you installed the `php-http/guzzle6-adapter` package, then you
 will be able to use Guzzle to do so:
 
@@ -507,7 +507,7 @@ example.
 
 ## Versioning
 
-This library follows [SemVer v2.0.0](http://semver.org/).
+This library follows [SemVer v2.0.0](https://semver.org/).
 
 ## Change Log
 

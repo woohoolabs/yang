@@ -12,7 +12,7 @@ use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder;
 $requestBuilder = new JsonApiRequestBuilder(new Request("", ""));
 $request = $requestBuilder
     ->fetch()
-    ->setUri("http://yin.local/index.php?example=book&id=1")
+    ->setUri("https://example.com/api/index.php?example=book&id=1")
     ->setJsonApiFields(["book" => "title,pages,authors,publisher"])
     ->setJsonApiIncludes(["authors", "publisher"])
     ->getRequest();
