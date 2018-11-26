@@ -4,18 +4,13 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\JsonApi\Response;
 
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
+use WoohooLabs\Yang\JsonApi\Hydrator\ResponseException;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Serializer\DeserializerInterface;
 use WoohooLabs\Yang\JsonApi\Serializer\JsonDeserializer;
 
-class JsonApiResponse implements ResponseInterface
+class JsonApiResponse extends AbstractResponse
 {
-    /**
-     * @var ResponseInterface
-     */
-    private $response;
-
     /**
      * @var DeserializerInterface
      */
@@ -28,20 +23,30 @@ class JsonApiResponse implements ResponseInterface
 
     public function __construct(ResponseInterface $response, ?DeserializerInterface $deserializer = null)
     {
-        $this->response = $response;
+        parent::__construct($response);
         $this->deserializer = $deserializer ?? new JsonDeserializer();
     }
 
     public function hasDocument(): bool
     {
-        return is_object($this->document());
+        if ($this->document === false) {
+            $this->setDocument();
+        }
+
+        return $this->document !== null;
     }
 
-    public function document(): ?Document
+    /**
+     * @throws ResponseException
+     */
+    public function document(): Document
     {
         if ($this->document === false) {
-            $content = $this->deserializer->deserialize($this->response);
-            $this->document = is_array($content) === true ? Document::createFromArray($content) : null;
+            $this->setDocument();
+        }
+
+        if ($this->document === null) {
+            throw new ResponseException("The response doesn't contain any document!");
         }
 
         return $this->document;
@@ -62,86 +67,15 @@ class JsonApiResponse implements ResponseInterface
         return $this->isSuccessful($allowedStatusCodes) && $this->hasDocument();
     }
 
-    public function getProtocolVersion()
+    private function setDocument(): void
     {
-        return $this->response->getProtocolVersion();
-    }
+        $content = $this->deserializer->deserialize($this->response);
 
-    public function withProtocolVersion($version)
-    {
-        $response = clone $this;
-        $response->response = $this->response->withProtocolVersion($version);
+        if (is_array($content) === false) {
+            $this->document = null;
+            return;
+        }
 
-        return $response;
-    }
-
-    public function getHeaders()
-    {
-        return $this->response->getHeaders();
-    }
-
-    public function hasHeader($name)
-    {
-        return $this->response->hasHeader($name);
-    }
-
-    public function getHeader($name)
-    {
-        return $this->response->getHeader($name);
-    }
-
-    public function getHeaderLine($name)
-    {
-        return $this->response->getHeaderLine($name);
-    }
-
-    public function withHeader($name, $value)
-    {
-        $response = clone $this;
-        $response->response = $this->response->withHeader($name, $value);
-        return $response;
-    }
-
-    public function withAddedHeader($name, $value)
-    {
-        $response = clone $this;
-        $response->response = $this->response->withAddedHeader($name, $value);
-        return $response;
-    }
-
-    public function withoutHeader($name)
-    {
-        $response = clone $this;
-        $response->response = $this->response->withoutHeader($name);
-        return $response;
-    }
-
-    public function getBody()
-    {
-        return $this->response->getBody();
-    }
-
-    public function withBody(StreamInterface $body)
-    {
-        $response = clone $this;
-        $response->response = $this->response->withBody($body);
-        return $response;
-    }
-
-    public function getStatusCode()
-    {
-        return $this->response->getStatusCode();
-    }
-
-    public function withStatus($code, $reasonPhrase = "")
-    {
-        $response = clone $this;
-        $response->response = $this->response->withStatus($code, $reasonPhrase);
-        return $response;
-    }
-
-    public function getReasonPhrase()
-    {
-        return $this->response->getReasonPhrase();
+        $this->document = Document::createFromArray($content);
     }
 }
