@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
-class JsonApi
+final class JsonApi
 {
     /**
      * @var string

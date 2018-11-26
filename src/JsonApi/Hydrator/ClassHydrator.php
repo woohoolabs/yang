@@ -7,7 +7,7 @@ use stdClass;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Schema\ResourceObject;
 
-class ClassHydrator implements HydratorInterface
+final class ClassHydrator implements HydratorInterface
 {
     /**
      * @return array|stdClass

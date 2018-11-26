@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Request;
 
-class ToOneRelationship implements RelationshipInterface
+final class ToOneRelationship implements RelationshipInterface
 {
     /**
      * @var string

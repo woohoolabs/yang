@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
 class Document
+final class Document
 {
     /**
      * @var JsonApi
@@ -91,7 +92,7 @@ class Document
     public function toArray(): array
     {
         $content = [
-            "jsonapi" => $this->jsonApi->toArray()
+            "jsonapi" => $this->jsonApi->toArray(),
         ];
 
         if ($this->hasMeta()) {

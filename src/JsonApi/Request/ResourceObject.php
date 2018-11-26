@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Request;
 
-class ResourceObject
+final class ResourceObject
 {
     /**
      * @var string

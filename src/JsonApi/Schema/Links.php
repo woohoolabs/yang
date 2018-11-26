@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
-class Links
+final class Links
 {
     /**
      * @var Link[]

@@ -6,7 +6,7 @@ namespace WoohooLabs\Yang\JsonApi\Serializer;
 use LogicException;
 use Psr\Http\Message\RequestInterface;
 
-class JsonSerializer implements SerializerInterface
+final class JsonSerializer implements SerializerInterface
 {
     /**
      * @var int

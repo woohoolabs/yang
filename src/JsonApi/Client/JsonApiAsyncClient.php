@@ -7,7 +7,7 @@ use Http\Client\HttpAsyncClient;
 use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
 
-class JsonApiAsyncClient
+final class JsonApiAsyncClient
 {
     /**
      * @var HttpAsyncClient

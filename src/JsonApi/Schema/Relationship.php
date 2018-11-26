@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
-class Relationship
+final class Relationship
 {
     /**
      * @var bool|null

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Request;
 
-class ToManyRelationship implements RelationshipInterface
+final class ToManyRelationship implements RelationshipInterface
 {
     /**
      * @var array
