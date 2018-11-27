@@ -23,6 +23,24 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
+    public function toArray()
+    {
+        $resource = new ResourceObject("a", "0");
+
+        $this->assertSame(
+            [
+                "data" => [
+                    "type" => "a",
+                    "id" => "0",
+                ],
+            ],
+            $resource->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
     public function getType()
     {
         $resource = new ResourceObject("a");

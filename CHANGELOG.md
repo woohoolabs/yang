@@ -33,6 +33,8 @@ REMOVED:
 
 FIXED:
 
+- Issues with 0 when converting to array
+
 ## 1.5.0 - 2018-11-15
 
 ADDED:

@@ -64,11 +64,11 @@ final class ErrorSource
     {
         $content = [];
 
-        if ($this->pointer) {
+        if ($this->pointer !== "") {
             $content["pointer"] = $this->pointer;
         }
 
-        if ($this->parameter) {
+        if ($this->parameter !== "") {
             $content["parameter"] = $this->parameter;
         }
 

@@ -62,6 +62,54 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
+    public function toArrayWhenEmpty()
+    {
+        $error = Error::fromArray(
+            [
+                "id" => "",
+                "status" => "",
+                "code" => "",
+                "title" => "",
+                "detail" => "",
+            ]
+        );
+
+        $this->assertSame(
+            [],
+            $error->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function toArrayWhenZero()
+    {
+        $error = Error::fromArray(
+            [
+                "id" => "0",
+                "status" => "0",
+                "code" => "0",
+                "title" => "0",
+                "detail" => "0",
+            ]
+        );
+
+        $this->assertSame(
+            [
+                "id" => "0",
+                "status" => "0",
+                "code" => "0",
+                "title" => "0",
+                "detail" => "0",
+            ],
+            $error->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
     public function id()
     {
         $error = Error::fromArray(

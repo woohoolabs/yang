@@ -32,6 +32,39 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
+    public function toArrayWhenMissing()
+    {
+        $source = ErrorSource::fromArray(
+            []
+        );
+
+        $this->assertSame(
+            [],
+            $source->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function toArrayWhenEmpty()
+    {
+        $source = ErrorSource::fromArray(
+            [
+                "pointer" => "",
+                "parameter" => "",
+            ]
+        );
+
+        $this->assertSame(
+            [],
+            $source->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
     public function hasSourceIsTrueForPointer()
     {
         $source = ErrorSource::fromArray(

@@ -144,7 +144,7 @@ final class Error
     {
         $content = [];
 
-        if ($this->id) {
+        if ($this->id !== "") {
             $content["id"] = $this->id;
         }
 
@@ -156,19 +156,19 @@ final class Error
             $content["links"] = $this->links->toArray();
         }
 
-        if ($this->status) {
+        if ($this->status !== "") {
             $content["status"] = $this->status;
         }
 
-        if ($this->code) {
+        if ($this->code !== "") {
             $content["code"] = $this->code;
         }
 
-        if ($this->title) {
+        if ($this->title !== "") {
             $content["title"] = $this->title;
         }
 
-        if ($this->detail) {
+        if ($this->detail !== "") {
             $content["detail"] = $this->detail;
         }
 

@@ -83,7 +83,7 @@ final class ResourceObject
             ],
         ];
 
-        if ($this->isBlank($this->id) === false) {
+        if ($this->id !== "") {
             $resource["data"]["id"] = $this->id;
         }
 
@@ -96,10 +96,5 @@ final class ResourceObject
         }
 
         return $resource;
-    }
-
-    private function isBlank(string $value): bool
-    {
-        return empty($value) && is_numeric($value) === false;
     }
 }

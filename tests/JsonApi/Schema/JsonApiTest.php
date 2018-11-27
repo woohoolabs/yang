@@ -17,7 +17,7 @@ class JsonApiTest extends TestCase
             [
                 "version" => "1.1",
                 "meta" => [
-                    "abc" => "def"
+                    "abc" => "def",
                 ],
             ]
         );
@@ -46,7 +46,7 @@ class JsonApiTest extends TestCase
             [
                 "version" => "1.0",
                 "meta" => [
-                    "abc" => "def"
+                    "abc" => "def",
                 ],
             ]
         );
@@ -55,7 +55,7 @@ class JsonApiTest extends TestCase
             [
                 "version" => "1.0",
                 "meta" => [
-                    "abc" => "def"
+                    "abc" => "def",
                 ],
             ],
             $jsonApi->toArray()
@@ -79,11 +79,53 @@ class JsonApiTest extends TestCase
     /**
      * @test
      */
+    public function versionWhenNotString()
+    {
+        $jsonApi = JsonApi::fromArray(
+            [
+                "version" => 1.1,
+            ]
+        );
+
+        $this->assertSame("1.0", $jsonApi->version());
+    }
+
+    /**
+     * @test
+     */
+    public function versionWhenZero()
+    {
+        $jsonApi = JsonApi::fromArray(
+            [
+                "version" => "0",
+            ]
+        );
+
+        $this->assertSame("0", $jsonApi->version());
+    }
+
+    /**
+     * @test
+     */
+    public function versionWhenEmpty()
+    {
+        $jsonApi = JsonApi::fromArray(
+            [
+                "version" => "",
+            ]
+        );
+
+        $this->assertSame("1.0", $jsonApi->version());
+    }
+
+    /**
+     * @test
+     */
     public function hasMetaIsTrue()
     {
         $jsonApi = JsonApi::fromArray(
             [
-                "meta" => ["abc" => "def"]
+                "meta" => ["abc" => "def"],
             ]
         );
 
