@@ -34,17 +34,6 @@ final class Links
         $this->links = $links;
     }
 
-    public function toArray(): array
-    {
-        $links = [];
-
-        foreach ($this->links as $rel => $link) {
-            $links[$rel] = $link->toArray();
-        }
-
-        return $links;
-    }
-
     public function hasSelf(): bool
     {
         return $this->hasLink("self");
@@ -123,10 +112,10 @@ final class Links
     public function link(string $name): Link
     {
         if (isset($this->links[$name]) === false) {
-            throw new LinkException("Link with $name rel type cannot be found!");
+            throw new LinkException("Link with '$name'' rel type cannot be found!");
         }
 
-        return $this->links[$name] ?? null;
+        return $this->links[$name];
     }
 
     public function hasAnyLinks(): bool
@@ -140,5 +129,19 @@ final class Links
     public function links(): array
     {
         return $this->links;
+    }
+
+    /**
+     * @internal
+     */
+    public function toArray(): array
+    {
+        $links = [];
+
+        foreach ($this->links as $rel => $link) {
+            $links[$rel] = $link->toArray();
+        }
+
+        return $links;
     }
 }
