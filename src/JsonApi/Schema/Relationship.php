@@ -37,91 +37,6 @@ final class Relationship
      */
     private $resources;
 
-    public static function createFromArray(string $name, array $array, ResourceObjects $resources): Relationship
-    {
-        $meta = self::isArrayKey($array, "meta") ? $array["meta"] : [];
-        $links = Links::createFromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
-
-        // Data member is missing
-        if (array_key_exists("data", $array) === false) {
-            return self::createEmptyFromArray($name, $meta, $links, $resources, null);
-        }
-
-        // Relationship is empty To-One
-        if ($array["data"] === null) {
-            return self::createEmptyFromArray($name, $meta, $links, $resources, true);
-        }
-
-        // Relationship is To-One
-        if (self::isAssociativeArray($array["data"])) {
-            return self::createToOneFromArray($name, $meta, $links, $array["data"], $resources);
-        }
-
-        // Relationship is To-Many
-        return self::createToManyFromArray($name, $meta, $links, $array["data"], $resources);
-    }
-
-    private static function createEmptyFromArray(
-        string $name,
-        array $meta,
-        Links $links,
-        ResourceObjects $resources,
-        $isToOneRelationship
-    ): Relationship {
-        return new Relationship($name, $meta, $links, [], $resources, $isToOneRelationship);
-    }
-
-    private static function createToOneFromArray(
-        string $name,
-        array $meta,
-        Links $links,
-        array $data,
-        ResourceObjects $resources
-    ): Relationship {
-        $resourceMap = [];
-        $isToOneRelationship = true;
-
-        if (self::isBlankKey($data, "type") === false && self::isBlankKey($data, "id") === false) {
-            $resourceMap = [
-                [
-                    "type" => $data["type"],
-                    "id" => $data["id"],
-                ]
-            ];
-            if (empty($data["meta"]) === false) {
-                $resourceMap[0]["meta"] = $data["meta"];
-            }
-        }
-
-        return new Relationship($name, $meta, $links, $resourceMap, $resources, $isToOneRelationship);
-    }
-
-    private static function createToManyFromArray(
-        string $name,
-        array $meta,
-        Links $links,
-        array $data,
-        ResourceObjects $resources
-    ): Relationship {
-        $isToOneRelationship = false;
-        $resourceMap = [];
-
-        foreach ($data as $item) {
-            if (self::isBlankKey($item, "type") === false && self::isBlankKey($item, "id") === false) {
-                $resource = [
-                    "type" => $item["type"],
-                    "id" => $item["id"],
-                ];
-                if (empty($item["meta"]) === false) {
-                    $resource["meta"] = $item["meta"];
-                }
-                $resourceMap[] = $resource;
-            }
-        }
-
-        return new Relationship($name, $meta, $links, $resourceMap, $resources, $isToOneRelationship);
-    }
-
     public function __construct(
         string $name,
         array $meta,
@@ -136,31 +51,6 @@ final class Relationship
         $this->resourceMap = $resourceMap;
         $this->isToOneRelationship = $isToOneRelationship;
         $this->resources = $resources;
-    }
-
-    public function toArray(): array
-    {
-        $result = [];
-
-        if (empty($this->meta) === false) {
-            $result["meta"] = $this->meta;
-        }
-
-        if ($this->links->hasAnyLinks()) {
-            $result["links"] = $this->links->toArray();
-        }
-
-        if ($this->isToOneRelationship === null) {
-            return $result;
-        }
-
-        if (empty($this->resourceMap)) {
-            $result["data"] = $this->isToOneRelationship ? null : [];
-        } else {
-            $result["data"] = $this->isToOneRelationship ? reset($this->resourceMap) : $this->resourceMap;
-        }
-
-        return $result;
     }
 
     public function name(): string
@@ -310,6 +200,125 @@ final class Relationship
         }
 
         throw new DocumentException("The relationship resource with '$type' type and '$id' ID doesn't have a meta member!");
+    }
+
+    /**
+     * @internal
+     */
+    public static function fromArray(string $name, array $array, ResourceObjects $resources): Relationship
+    {
+        $meta = self::isArrayKey($array, "meta") ? $array["meta"] : [];
+        $links = Links::fromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
+
+        // Data member is missing
+        if (array_key_exists("data", $array) === false) {
+            return self::createEmptyFromArray($name, $meta, $links, $resources, null);
+        }
+
+        // Relationship is empty To-One
+        if ($array["data"] === null) {
+            return self::createEmptyFromArray($name, $meta, $links, $resources, true);
+        }
+
+        // Relationship is To-One
+        if (self::isAssociativeArray($array["data"])) {
+            return self::createToOneFromArray($name, $meta, $links, $array["data"], $resources);
+        }
+
+        // Relationship is To-Many
+        return self::createToManyFromArray($name, $meta, $links, $array["data"], $resources);
+    }
+
+    /**
+     * @internal
+     */
+    public function toArray(): array
+    {
+        $result = [];
+
+        if (empty($this->meta) === false) {
+            $result["meta"] = $this->meta;
+        }
+
+        if ($this->links->hasAnyLinks()) {
+            $result["links"] = $this->links->toArray();
+        }
+
+        if ($this->isToOneRelationship === null) {
+            return $result;
+        }
+
+        if (empty($this->resourceMap)) {
+            $result["data"] = $this->isToOneRelationship ? null : [];
+        } else {
+            $result["data"] = $this->isToOneRelationship ? reset($this->resourceMap) : $this->resourceMap;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @internal
+     */
+    private static function createEmptyFromArray(
+        string $name,
+        array $meta,
+        Links $links,
+        ResourceObjects $resources,
+        $isToOneRelationship
+    ): Relationship {
+        return new Relationship($name, $meta, $links, [], $resources, $isToOneRelationship);
+    }
+
+    private static function createToOneFromArray(
+        string $name,
+        array $meta,
+        Links $links,
+        array $data,
+        ResourceObjects $resources
+    ): Relationship {
+        $resourceMap = [];
+        $isToOneRelationship = true;
+
+        if (self::isBlankKey($data, "type") === false && self::isBlankKey($data, "id") === false) {
+            $resourceMap = [
+                [
+                    "type" => $data["type"],
+                    "id" => $data["id"],
+                ]
+            ];
+            if (empty($data["meta"]) === false) {
+                $resourceMap[0]["meta"] = $data["meta"];
+            }
+        }
+
+        return new Relationship($name, $meta, $links, $resourceMap, $resources, $isToOneRelationship);
+    }
+
+    private static function createToManyFromArray(
+        string $name,
+        array $meta,
+        Links $links,
+        array $data,
+        ResourceObjects $resources
+    ): Relationship {
+        $isToOneRelationship = false;
+        $resourceMap = [];
+
+        foreach ($data as $item) {
+            if (self::isBlankKey($item, "type") === false && self::isBlankKey($item, "id") === false) {
+                $resource = [
+                    "type" => $item["type"],
+                    "id" => $item["id"],
+                ];
+                if (empty($item["meta"]) === false) {
+                    $resource["meta"] = $item["meta"];
+                }
+                $resourceMap[] = $resource;
+            }
+        }
+
+        return new Relationship($name, $meta, $links, $resourceMap, $resources, $isToOneRelationship);
     }
 
     private static function isAssociativeArray(array $array): bool

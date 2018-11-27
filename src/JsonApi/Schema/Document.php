@@ -32,52 +32,6 @@ final class Document
      */
     private $errors;
 
-    public static function createFromArray(array $document): Document
-    {
-        if (isset($document["jsonapi"]) && is_array($document["jsonapi"])) {
-            $jsonApi = $document["jsonapi"];
-        } else {
-            $jsonApi = [];
-        }
-        $jsonApiObject = JsonApi::createFromArray($jsonApi);
-
-        if (isset($document["meta"]) && is_array($document["meta"])) {
-            $meta = $document["meta"];
-        } else {
-            $meta = [];
-        }
-
-        if (isset($document["links"]) && is_array($document["links"])) {
-            $links = $document["links"];
-        } else {
-            $links = [];
-        }
-        $linksObject = Links::createFromArray($links);
-
-        if (isset($document["included"]) && is_array($document["included"])) {
-            $included = $document["included"];
-        } else {
-            $included = [];
-        }
-
-        if (isset($document["data"]) && is_array($document["data"])) {
-            $resources = new ResourceObjects($document["data"], $included, self::isAssociativeArray($document["data"]));
-        } else {
-            $resources = ResourceObjects::createFromSinglePrimaryData([], $included);
-        }
-
-        $errors = [];
-        if (isset($document["errors"]) && is_array($document["errors"])) {
-            foreach ($document["errors"] as $error) {
-                if (is_array($error)) {
-                    $errors[] = Error::createFromArray($error);
-                }
-            }
-        }
-
-        return new self($jsonApiObject, $meta, $linksObject, $resources, $errors);
-    }
-
     /**
      * @param Error[] $errors
      */
@@ -88,39 +42,6 @@ final class Document
         $this->links = $links;
         $this->resources = $resources;
         $this->errors = $errors;
-    }
-
-    public function toArray(): array
-    {
-        $content = [
-            "jsonapi" => $this->jsonApi->toArray(),
-        ];
-
-        if ($this->hasMeta()) {
-            $content["meta"] = $this->meta;
-        }
-
-        if ($this->hasLinks()) {
-            $content["links"] = $this->links->toArray();
-        }
-
-        if ($this->hasAnyPrimaryResources()) {
-            $content["data"] = $this->resources->primaryDataToArray();
-        }
-
-        if ($this->hasErrors()) {
-            $errors = [];
-            foreach ($this->errors as $error) {
-                $errors[] = $error->toArray();
-            }
-            $content["errors"] = $errors;
-        }
-
-        if ($this->resources->hasAnyIncludedResources()) {
-            $content["included"] = $this->resources->includedToArray();
-        }
-
-        return $content;
     }
 
     public function jsonApi(): JsonApi
@@ -229,6 +150,91 @@ final class Document
         }
 
         return $this->errors[$index];
+    }
+
+    /**
+     * @internal
+     */
+    public static function fromArray(array $document): Document
+    {
+        if (isset($document["jsonapi"]) && is_array($document["jsonapi"])) {
+            $jsonApi = $document["jsonapi"];
+        } else {
+            $jsonApi = [];
+        }
+        $jsonApiObject = JsonApi::fromArray($jsonApi);
+
+        if (isset($document["meta"]) && is_array($document["meta"])) {
+            $meta = $document["meta"];
+        } else {
+            $meta = [];
+        }
+
+        if (isset($document["links"]) && is_array($document["links"])) {
+            $links = $document["links"];
+        } else {
+            $links = [];
+        }
+        $linksObject = Links::fromArray($links);
+
+        if (isset($document["included"]) && is_array($document["included"])) {
+            $included = $document["included"];
+        } else {
+            $included = [];
+        }
+
+        if (isset($document["data"]) && is_array($document["data"])) {
+            $resources = new ResourceObjects($document["data"], $included, self::isAssociativeArray($document["data"]));
+        } else {
+            $resources = ResourceObjects::fromSinglePrimaryData([], $included);
+        }
+
+        $errors = [];
+        if (isset($document["errors"]) && is_array($document["errors"])) {
+            foreach ($document["errors"] as $error) {
+                if (is_array($error)) {
+                    $errors[] = Error::fromArray($error);
+                }
+            }
+        }
+
+        return new self($jsonApiObject, $meta, $linksObject, $resources, $errors);
+    }
+
+    /**
+     * @internal
+     */
+    public function toArray(): array
+    {
+        $content = [
+            "jsonapi" => $this->jsonApi->toArray(),
+        ];
+
+        if ($this->hasMeta()) {
+            $content["meta"] = $this->meta;
+        }
+
+        if ($this->hasLinks()) {
+            $content["links"] = $this->links->toArray();
+        }
+
+        if ($this->hasAnyPrimaryResources()) {
+            $content["data"] = $this->resources->primaryDataToArray();
+        }
+
+        if ($this->hasErrors()) {
+            $errors = [];
+            foreach ($this->errors as $error) {
+                $errors[] = $error->toArray();
+            }
+            $content["errors"] = $errors;
+        }
+
+        if ($this->resources->hasAnyIncludedResources()) {
+            $content["included"] = $this->resources->includedToArray();
+        }
+
+        return $content;
     }
 
     private static function isAssociativeArray(array $array): bool

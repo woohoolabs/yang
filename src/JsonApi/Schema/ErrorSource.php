@@ -15,33 +15,10 @@ final class ErrorSource
      */
     private $parameter;
 
-    public static function createFromArray(array $source): ErrorSource
-    {
-        $pointer = isset($source["pointer"]) && is_string($source["pointer"]) ? $source["pointer"] : "";
-        $parameter = isset($source["parameter"]) && is_string($source["parameter"]) ? $source["parameter"] : "";
-
-        return new self($pointer, $parameter);
-    }
-
     public function __construct(string $pointer, string $parameter)
     {
         $this->pointer = $pointer;
         $this->parameter = $parameter;
-    }
-
-    public function toArray(): array
-    {
-        $content = [];
-
-        if ($this->pointer) {
-            $content["pointer"] = $this->pointer;
-        }
-
-        if ($this->parameter) {
-            $content["parameter"] = $this->parameter;
-        }
-
-        return $content;
     }
 
     public function hasSource(): bool
@@ -67,5 +44,34 @@ final class ErrorSource
     public function parameter(): string
     {
         return $this->parameter;
+    }
+
+    /**
+     * @internal
+     */
+    public static function fromArray(array $source): ErrorSource
+    {
+        $pointer = isset($source["pointer"]) && is_string($source["pointer"]) ? $source["pointer"] : "";
+        $parameter = isset($source["parameter"]) && is_string($source["parameter"]) ? $source["parameter"] : "";
+
+        return new self($pointer, $parameter);
+    }
+
+    /**
+     * @internal
+     */
+    public function toArray(): array
+    {
+        $content = [];
+
+        if ($this->pointer) {
+            $content["pointer"] = $this->pointer;
+        }
+
+        if ($this->parameter) {
+            $content["parameter"] = $this->parameter;
+        }
+
+        return $content;
     }
 }

@@ -15,7 +15,7 @@ class ErrorTest extends TestCase
      */
     public function toArray()
     {
-        $error = Error::createFromArray(
+        $error = Error::fromArray(
             [
                 "id" => "a",
                 "meta" => [
@@ -64,7 +64,7 @@ class ErrorTest extends TestCase
      */
     public function id()
     {
-        $error = Error::createFromArray(
+        $error = Error::fromArray(
             [
                 "id" => "a",
             ]
@@ -78,7 +78,7 @@ class ErrorTest extends TestCase
      */
     public function hasMetaIsTrue()
     {
-        $error = Error::createFromArray(
+        $error = Error::fromArray(
             [
                 "meta" => [
                     "a" => "b",
@@ -94,7 +94,7 @@ class ErrorTest extends TestCase
      */
     public function hasMetaIsFalse()
     {
-        $error = Error::createFromArray([]);
+        $error = Error::fromArray([]);
 
         $this->assertFalse($error->hasMeta());
     }
@@ -104,7 +104,7 @@ class ErrorTest extends TestCase
      */
     public function meta()
     {
-        $error = Error::createFromArray(
+        $error = Error::fromArray(
             [
                 "meta" => [
                     "a" => "b",
@@ -120,7 +120,7 @@ class ErrorTest extends TestCase
      */
     public function hasLinksIsTrue()
     {
-        $error = Error::createFromArray(
+        $error = Error::fromArray(
             [
                 "links" => [
                     "a" => "b",
@@ -136,7 +136,7 @@ class ErrorTest extends TestCase
      */
     public function hasLinksIsFalse()
     {
-        $error = Error::createFromArray([]);
+        $error = Error::fromArray([]);
 
         $this->assertFalse($error->hasLinks());
     }
@@ -146,7 +146,7 @@ class ErrorTest extends TestCase
      */
     public function linksReturnsObject()
     {
-        $error = Error::createFromArray([]);
+        $error = Error::fromArray([]);
 
         $this->assertInstanceOf(Links::class, $error->links());
     }
@@ -156,7 +156,7 @@ class ErrorTest extends TestCase
      */
     public function status()
     {
-        $error = Error::createFromArray(
+        $error = Error::fromArray(
             [
                 "status" => "400"
             ]
@@ -170,7 +170,7 @@ class ErrorTest extends TestCase
      */
     public function code()
     {
-        $error = Error::createFromArray(
+        $error = Error::fromArray(
             [
                 "code" => "a",
             ]
@@ -184,7 +184,7 @@ class ErrorTest extends TestCase
      */
     public function title()
     {
-        $error = Error::createFromArray(
+        $error = Error::fromArray(
             [
                 "title" => "a",
             ]
@@ -198,7 +198,7 @@ class ErrorTest extends TestCase
      */
     public function detail()
     {
-        $error = Error::createFromArray(
+        $error = Error::fromArray(
             [
                 "detail" => "a",
             ]
@@ -212,7 +212,7 @@ class ErrorTest extends TestCase
      */
     public function sourceReturnsObject()
     {
-        $error = Error::createFromArray([]);
+        $error = Error::fromArray([]);
 
         $this->assertInstanceOf(ErrorSource::class, $error->source());
     }

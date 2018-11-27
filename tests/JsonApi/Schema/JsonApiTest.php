@@ -13,7 +13,7 @@ class JsonApiTest extends TestCase
      */
     public function createFromArray()
     {
-        $jsonApi = JsonApi::createFromArray(
+        $jsonApi = JsonApi::fromArray(
             [
                 "version" => "1.1",
                 "meta" => [
@@ -31,7 +31,7 @@ class JsonApiTest extends TestCase
      */
     public function createFromArrayWhenEmpty()
     {
-        $jsonApi = JsonApi::createFromArray([]);
+        $jsonApi = JsonApi::fromArray([]);
 
         $this->assertSame("1.0", $jsonApi->version());
         $this->assertFalse($jsonApi->hasMeta());
@@ -42,7 +42,7 @@ class JsonApiTest extends TestCase
      */
     public function toArray()
     {
-        $jsonApi = JsonApi::createFromArray(
+        $jsonApi = JsonApi::fromArray(
             [
                 "version" => "1.0",
                 "meta" => [
@@ -67,7 +67,7 @@ class JsonApiTest extends TestCase
      */
     public function version()
     {
-        $jsonApi = JsonApi::createFromArray(
+        $jsonApi = JsonApi::fromArray(
             [
                 "version" => "1.0",
             ]
@@ -81,7 +81,7 @@ class JsonApiTest extends TestCase
      */
     public function hasMetaIsTrue()
     {
-        $jsonApi = JsonApi::createFromArray(
+        $jsonApi = JsonApi::fromArray(
             [
                 "meta" => ["abc" => "def"]
             ]
@@ -95,7 +95,7 @@ class JsonApiTest extends TestCase
      */
     public function hasMetaIsFalse()
     {
-        $jsonApi = JsonApi::createFromArray([]);
+        $jsonApi = JsonApi::fromArray([]);
 
         $this->assertFalse($jsonApi->hasMeta());
     }
@@ -105,7 +105,7 @@ class JsonApiTest extends TestCase
      */
     public function meta()
     {
-        $jsonApi = JsonApi::createFromArray(
+        $jsonApi = JsonApi::fromArray(
             [
                 "meta" => ["abc" => "def"],
             ]

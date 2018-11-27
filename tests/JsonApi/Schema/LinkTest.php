@@ -24,7 +24,7 @@ class LinkTest extends TestCase
      */
     public function createFromArray()
     {
-        $link = Link::createFromArray(
+        $link = Link::fromArray(
             [
                 "href" => "abc",
                 "meta" => [
@@ -42,7 +42,7 @@ class LinkTest extends TestCase
      */
     public function createFromArrayWithWrongTypes()
     {
-        $link = Link::createFromArray(
+        $link = Link::fromArray(
             [
                 "href" => 123,
                 "meta" => null,
@@ -58,7 +58,7 @@ class LinkTest extends TestCase
      */
     public function toArray()
     {
-        $link = Link::createFromArray(
+        $link = Link::fromArray(
             [
                 "href" => "abc",
                 "meta" => [
@@ -93,7 +93,7 @@ class LinkTest extends TestCase
      */
     public function hasMetaIsTrue()
     {
-        $link = Link::createFromArray(
+        $link = Link::fromArray(
             [
                 "href" => "",
                 "meta" => [
@@ -110,7 +110,7 @@ class LinkTest extends TestCase
      */
     public function hasMetaIsFalse()
     {
-        $link = Link::createFromArray(
+        $link = Link::fromArray(
             [
                 "href" => "",
                 "meta" => [],
@@ -125,7 +125,7 @@ class LinkTest extends TestCase
      */
     public function meta()
     {
-        $link = Link::createFromArray(
+        $link = Link::fromArray(
             [
                 "href" => "",
                 "meta" => [

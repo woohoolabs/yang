@@ -27,32 +27,22 @@ final class ResourceObjects
      */
     private $includedKeys = [];
 
-    public static function createFromSinglePrimaryData(array $data, array $included): ResourceObjects
-    {
-        return new self($data, $included, true);
-    }
-
-    public static function createFromCollectionPrimaryData(array $data, array $included): ResourceObjects
-    {
-        return new self($data, $included, false);
-    }
-
     public function __construct(array $data, array $included, bool $isSinglePrimaryResource)
     {
         $this->isSinglePrimaryResource = $isSinglePrimaryResource;
 
         if ($this->isSinglePrimaryResource === true) {
             if (empty($data) === false) {
-                $this->addPrimaryResource(ResourceObject::createFromArray($data, $this));
+                $this->addPrimaryResource(ResourceObject::fromArray($data, $this));
             }
         } else {
             foreach ($data as $resource) {
-                $this->addPrimaryResource(ResourceObject::createFromArray($resource, $this));
+                $this->addPrimaryResource(ResourceObject::fromArray($resource, $this));
             }
         }
 
         foreach ($included as $resource) {
-            $this->addIncludedResource(ResourceObject::createFromArray($resource, $this));
+            $this->addIncludedResource(ResourceObject::fromArray($resource, $this));
         }
     }
 
@@ -150,6 +140,22 @@ final class ResourceObjects
         }
 
         return $result;
+    }
+
+    /**
+     * @internal
+     */
+    public static function fromSinglePrimaryData(array $data, array $included): ResourceObjects
+    {
+        return new self($data, $included, true);
+    }
+
+    /**
+     * @internal
+     */
+    public static function fromCollectionPrimaryData(array $data, array $included): ResourceObjects
+    {
+        return new self($data, $included, false);
     }
 
     private function primaryResourceToArray(): ?array

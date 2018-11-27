@@ -20,29 +20,10 @@ final class Link
         return new self($link);
     }
 
-    public static function createFromArray(array $link): Link
-    {
-        $href = isset($link["href"]) && is_string($link["href"]) ? $link["href"] : "";
-        $meta = isset($link["meta"]) && is_array($link["meta"]) ? $link["meta"] : [];
-
-        return new self($href, $meta);
-    }
-
     public function __construct(string $href, array $meta = [])
     {
         $this->href = $href;
         $this->meta = $meta;
-    }
-
-    public function toArray(): array
-    {
-        $link = ["href" => $this->href];
-
-        if (empty($this->meta) === false) {
-            $link["meta"] = $this->meta;
-        }
-
-        return $link;
     }
 
     public function href(): string
@@ -58,5 +39,30 @@ final class Link
     public function meta(): array
     {
         return $this->meta;
+    }
+
+    /**
+     * @internal
+     */
+    public static function fromArray(array $link): Link
+    {
+        $href = isset($link["href"]) && is_string($link["href"]) ? $link["href"] : "";
+        $meta = isset($link["meta"]) && is_array($link["meta"]) ? $link["meta"] : [];
+
+        return new self($href, $meta);
+    }
+
+    /**
+     * @internal
+     */
+    public function toArray(): array
+    {
+        $link = ["href" => $this->href];
+
+        if (empty($this->meta) === false) {
+            $link["meta"] = $this->meta;
+        }
+
+        return $link;
     }
 }

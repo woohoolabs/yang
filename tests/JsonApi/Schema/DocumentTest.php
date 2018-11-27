@@ -490,6 +490,6 @@ class DocumentTest extends TestCase
 
     private function createDocument(array $body = []): Document
     {
-        return Document::createFromArray($body);
+        return Document::fromArray($body);
     }
 }

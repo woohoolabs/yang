@@ -32,6 +32,9 @@ final class ToOneRelationship implements RelationshipInterface
         $this->meta = $meta;
     }
 
+    /**
+     * @internal
+     */
     public function toArray(): array
     {
         $resourceIdentifier = [

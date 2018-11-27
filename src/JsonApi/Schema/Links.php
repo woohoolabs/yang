@@ -12,20 +12,6 @@ final class Links
      */
     private $links;
 
-    public static function createFromArray(array $links): Links
-    {
-        $linkObjects = [];
-        foreach ($links as $name => $value) {
-            if (is_string($value)) {
-                $linkObjects[$name] = Link::createFromString($value);
-            } elseif (is_array($value)) {
-                $linkObjects[$name] = Link::createFromArray($value);
-            }
-        }
-
-        return new self($linkObjects);
-    }
-
     /**
      * @param Link[] $links
      */
@@ -129,6 +115,23 @@ final class Links
     public function links(): array
     {
         return $this->links;
+    }
+
+    /**
+     * @internal
+     */
+    public static function fromArray(array $links): Links
+    {
+        $linkObjects = [];
+        foreach ($links as $name => $value) {
+            if (is_string($value)) {
+                $linkObjects[$name] = Link::createFromString($value);
+            } elseif (is_array($value)) {
+                $linkObjects[$name] = Link::fromArray($value);
+            }
+        }
+
+        return new self($linkObjects);
     }
 
     /**

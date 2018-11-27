@@ -365,6 +365,6 @@ class ResourceObjectTest extends TestCase
 
     private function createResourceObject(array $data): ResourceObject
     {
-        return ResourceObject::createFromArray($data, new ResourceObjects($data, [], true));
+        return ResourceObject::fromArray($data, new ResourceObjects($data, [], true));
     }
 }

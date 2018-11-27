@@ -72,6 +72,9 @@ final class ResourceObject
         return $this;
     }
 
+    /**
+     * @internal
+     */
     public function toArray(): array
     {
         $resource = [

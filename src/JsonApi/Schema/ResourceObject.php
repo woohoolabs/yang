@@ -37,28 +37,6 @@ final class ResourceObject
      */
     private $relationships;
 
-    public static function createFromArray(array $array, ResourceObjects $resources): ResourceObject
-    {
-        $type = isset($array["type"]) && is_string($array["type"]) ? $array["type"] : "";
-        $id = isset($array["id"]) && is_string($array["id"]) ? $array["id"] : "";
-        $meta = self::isArrayKey($array, "meta") ? $array["meta"] : [];
-        $links = Links::createFromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
-        $attributes = self::isArrayKey($array, "attributes") ? $array["attributes"] : [];
-
-        $relationships = [];
-        if (self::isArrayKey($array, "relationships")) {
-            foreach ($array["relationships"] as $name => $relationship) {
-                if (is_string($name) === false || is_array($relationship) === false) {
-                    continue;
-                }
-
-                $relationships[$name] = Relationship::createFromArray($name, $relationship, $resources);
-            }
-        }
-
-        return new self($type, $id, $meta, $links, $attributes, $relationships);
-    }
-
     /**
      * @param Relationship[] $relationships
      */
@@ -76,35 +54,6 @@ final class ResourceObject
         $this->links = $links;
         $this->attributes = $attributes;
         $this->relationships = $relationships;
-    }
-
-    public function toArray(): array
-    {
-        $result = [
-            "type" => $this->type,
-            "id" => $this->id,
-        ];
-
-        if (empty($this->meta) === false) {
-            $result["meta"] = $this->meta;
-        }
-
-        if ($this->links->hasAnyLinks()) {
-            $result["links"] = $this->links->toArray();
-        }
-
-        if (empty($this->attributes) === false) {
-            $result["attributes"] = $this->attributes;
-        }
-
-        if (empty($this->relationships) === false) {
-            $result["relationships"] = [];
-            foreach ($this->relationships as $name => $relationship) {
-                $result["relationships"][$name] = $relationship->toArray();
-            }
-        }
-
-        return $result;
     }
 
     public function type(): string
@@ -183,6 +132,63 @@ final class ResourceObject
         }
 
         return $this->relationships[$name];
+    }
+
+    /**
+     * @internal
+     */
+    public static function fromArray(array $array, ResourceObjects $resources): ResourceObject
+    {
+        $type = isset($array["type"]) && is_string($array["type"]) ? $array["type"] : "";
+        $id = isset($array["id"]) && is_string($array["id"]) ? $array["id"] : "";
+        $meta = self::isArrayKey($array, "meta") ? $array["meta"] : [];
+        $links = Links::fromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
+        $attributes = self::isArrayKey($array, "attributes") ? $array["attributes"] : [];
+
+        $relationships = [];
+        if (self::isArrayKey($array, "relationships")) {
+            foreach ($array["relationships"] as $name => $relationship) {
+                if (is_string($name) === false || is_array($relationship) === false) {
+                    continue;
+                }
+
+                $relationships[$name] = Relationship::fromArray($name, $relationship, $resources);
+            }
+        }
+
+        return new self($type, $id, $meta, $links, $attributes, $relationships);
+    }
+
+    /**
+     * @internal
+     */
+    public function toArray(): array
+    {
+        $result = [
+            "type" => $this->type,
+            "id" => $this->id,
+        ];
+
+        if (empty($this->meta) === false) {
+            $result["meta"] = $this->meta;
+        }
+
+        if ($this->links->hasAnyLinks()) {
+            $result["links"] = $this->links->toArray();
+        }
+
+        if (empty($this->attributes) === false) {
+            $result["attributes"] = $this->attributes;
+        }
+
+        if (empty($this->relationships) === false) {
+            $result["relationships"] = [];
+            foreach ($this->relationships as $name => $relationship) {
+                $result["relationships"][$name] = $relationship->toArray();
+            }
+        }
+
+        return $result;
     }
 
     private static function isArrayKey(array $array, string $key): bool

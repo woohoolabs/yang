@@ -45,20 +45,6 @@ final class Error
      */
     private $source;
 
-    public static function createFromArray(array $error): Error
-    {
-        $id = isset($error["id"]) && is_string($error["id"]) ? $error["id"] : "";
-        $meta = isset($error["meta"]) && is_array($error["meta"]) ? $error["meta"] : [];
-        $links = Links::createFromArray(isset($error["links"]) && is_array($error["links"]) ? $error["links"] : []);
-        $status = isset($error["status"]) && is_scalar($error["status"]) ? (string) $error["status"] : "";
-        $code = isset($error["code"]) && is_string($error["code"]) ? $error["code"] : "";
-        $title = isset($error["title"]) && is_string($error["title"]) ? $error["title"] : "";
-        $detail = isset($error["detail"]) && is_string($error["detail"]) ? $error["detail"] : "";
-        $source = ErrorSource::createFromArray(isset($error["source"]) && is_array($error["source"]) ? $error["source"] : []);
-
-        return new self($id, $meta, $links, $status, $code, $title, $detail, $source);
-    }
-
     public function __construct(
         string $id,
         array $meta,
@@ -77,45 +63,6 @@ final class Error
         $this->title = $title;
         $this->detail = $detail;
         $this->source = $source;
-    }
-
-    public function toArray(): array
-    {
-        $content = [];
-
-        if ($this->id) {
-            $content["id"] = $this->id;
-        }
-
-        if (empty($this->meta) === false) {
-            $content["meta"] = $this->meta;
-        }
-
-        if ($this->hasLinks()) {
-            $content["links"] = $this->links->toArray();
-        }
-
-        if ($this->status) {
-            $content["status"] = $this->status;
-        }
-
-        if ($this->code) {
-            $content["code"] = $this->code;
-        }
-
-        if ($this->title) {
-            $content["title"] = $this->title;
-        }
-
-        if ($this->detail) {
-            $content["detail"] = $this->detail;
-        }
-
-        if ($this->hasSource()) {
-            $content["source"] = $this->source->toArray();
-        }
-
-        return $content;
     }
 
     public function id(): string
@@ -171,5 +118,64 @@ final class Error
     public function source(): ErrorSource
     {
         return $this->source;
+    }
+
+    /**
+     * @internal
+     */
+    public static function fromArray(array $error): Error
+    {
+        $id = isset($error["id"]) && is_string($error["id"]) ? $error["id"] : "";
+        $meta = isset($error["meta"]) && is_array($error["meta"]) ? $error["meta"] : [];
+        $links = Links::fromArray(isset($error["links"]) && is_array($error["links"]) ? $error["links"] : []);
+        $status = isset($error["status"]) && is_scalar($error["status"]) ? (string) $error["status"] : "";
+        $code = isset($error["code"]) && is_string($error["code"]) ? $error["code"] : "";
+        $title = isset($error["title"]) && is_string($error["title"]) ? $error["title"] : "";
+        $detail = isset($error["detail"]) && is_string($error["detail"]) ? $error["detail"] : "";
+        $source = ErrorSource::fromArray(isset($error["source"]) && is_array($error["source"]) ? $error["source"] : []);
+
+        return new self($id, $meta, $links, $status, $code, $title, $detail, $source);
+    }
+
+    /**
+     * @internal
+     */
+    public function toArray(): array
+    {
+        $content = [];
+
+        if ($this->id) {
+            $content["id"] = $this->id;
+        }
+
+        if (empty($this->meta) === false) {
+            $content["meta"] = $this->meta;
+        }
+
+        if ($this->hasLinks()) {
+            $content["links"] = $this->links->toArray();
+        }
+
+        if ($this->status) {
+            $content["status"] = $this->status;
+        }
+
+        if ($this->code) {
+            $content["code"] = $this->code;
+        }
+
+        if ($this->title) {
+            $content["title"] = $this->title;
+        }
+
+        if ($this->detail) {
+            $content["detail"] = $this->detail;
+        }
+
+        if ($this->hasSource()) {
+            $content["source"] = $this->source->toArray();
+        }
+
+        return $content;
     }
 }

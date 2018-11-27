@@ -19,7 +19,7 @@ class ClassHydratorTest extends TestCase
             "errors" => [],
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrate($document);
 
@@ -38,7 +38,7 @@ class ClassHydratorTest extends TestCase
             ],
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrate($document);
 
@@ -61,7 +61,7 @@ class ClassHydratorTest extends TestCase
             ],
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrate($document);
 
@@ -98,7 +98,7 @@ class ClassHydratorTest extends TestCase
             ],
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $objects = $hydrator->hydrate($document);
 
@@ -132,7 +132,7 @@ class ClassHydratorTest extends TestCase
             ],
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrate($document);
 
@@ -169,7 +169,7 @@ class ClassHydratorTest extends TestCase
             ],
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrate($document);
 
@@ -227,7 +227,7 @@ class ClassHydratorTest extends TestCase
             ],
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrate($document);
 
@@ -286,7 +286,7 @@ class ClassHydratorTest extends TestCase
             ],
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrate($document);
 
@@ -349,7 +349,7 @@ class ClassHydratorTest extends TestCase
             ],
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrate($document);
 
@@ -373,7 +373,7 @@ class ClassHydratorTest extends TestCase
             "data" => [],
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrateObject($document);
 
@@ -394,7 +394,7 @@ class ClassHydratorTest extends TestCase
             ],
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrateObject($document);
 
@@ -410,7 +410,7 @@ class ClassHydratorTest extends TestCase
             "data" => null,
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrateObject($document);
 
@@ -429,7 +429,7 @@ class ClassHydratorTest extends TestCase
             ],
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrateObject($document);
 
@@ -446,7 +446,7 @@ class ClassHydratorTest extends TestCase
             "data" => [],
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $collection = $hydrator->hydrateCollection($document);
 
@@ -462,7 +462,7 @@ class ClassHydratorTest extends TestCase
             "data" => null,
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $collection = $hydrator->hydrateCollection($document);
 
@@ -481,7 +481,7 @@ class ClassHydratorTest extends TestCase
             ],
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $collection = $hydrator->hydrateCollection($document);
 
@@ -508,7 +508,7 @@ class ClassHydratorTest extends TestCase
             ],
         ];
 
-        $document = Document::createFromArray($document);
+        $document = Document::fromArray($document);
         $hydrator = new ClassHydrator();
         $collection = $hydrator->hydrateCollection($document);
 

@@ -13,7 +13,7 @@ class ErrorSourceTest extends TestCase
      */
     public function toArray()
     {
-        $source = ErrorSource::createFromArray(
+        $source = ErrorSource::fromArray(
             [
                 "pointer" => "a",
                 "parameter" => "b",
@@ -34,7 +34,7 @@ class ErrorSourceTest extends TestCase
      */
     public function hasSourceIsTrueForPointer()
     {
-        $source = ErrorSource::createFromArray(
+        $source = ErrorSource::fromArray(
             [
                 "pointer" => "a",
             ]
@@ -48,7 +48,7 @@ class ErrorSourceTest extends TestCase
      */
     public function hasSourceIsTrueForParameter()
     {
-        $source = ErrorSource::createFromArray(
+        $source = ErrorSource::fromArray(
             [
                 "parameter" => "a",
             ]
@@ -62,7 +62,7 @@ class ErrorSourceTest extends TestCase
      */
     public function hasSourceIsFalse()
     {
-        $source = ErrorSource::createFromArray([]);
+        $source = ErrorSource::fromArray([]);
 
         $this->assertFalse($source->hasSource());
     }
@@ -72,7 +72,7 @@ class ErrorSourceTest extends TestCase
      */
     public function hasPointerIsTrue()
     {
-        $source = ErrorSource::createFromArray(
+        $source = ErrorSource::fromArray(
             [
                 "pointer" => "a",
             ]
@@ -86,7 +86,7 @@ class ErrorSourceTest extends TestCase
      */
     public function hasPointerIsFalse()
     {
-        $source = ErrorSource::createFromArray([]);
+        $source = ErrorSource::fromArray([]);
 
         $this->assertFalse($source->hasPointer());
     }
@@ -96,7 +96,7 @@ class ErrorSourceTest extends TestCase
      */
     public function pointer()
     {
-        $source = ErrorSource::createFromArray(
+        $source = ErrorSource::fromArray(
             [
                 "pointer" => "a",
             ]
@@ -110,7 +110,7 @@ class ErrorSourceTest extends TestCase
      */
     public function pointerWhenEmpty()
     {
-        $source = ErrorSource::createFromArray([]);
+        $source = ErrorSource::fromArray([]);
 
         $this->assertSame("", $source->pointer());
     }
@@ -120,7 +120,7 @@ class ErrorSourceTest extends TestCase
      */
     public function hasParameterIsTrue()
     {
-        $source = ErrorSource::createFromArray(
+        $source = ErrorSource::fromArray(
             [
                 "parameter" => "a",
             ]
@@ -134,7 +134,7 @@ class ErrorSourceTest extends TestCase
      */
     public function hasParameterIsFalse()
     {
-        $source = ErrorSource::createFromArray([]);
+        $source = ErrorSource::fromArray([]);
 
         $this->assertFalse($source->hasParameter());
     }
@@ -144,7 +144,7 @@ class ErrorSourceTest extends TestCase
      */
     public function parameter()
     {
-        $source = ErrorSource::createFromArray(
+        $source = ErrorSource::fromArray(
             [
                 "parameter" => "a",
             ]
@@ -158,7 +158,7 @@ class ErrorSourceTest extends TestCase
      */
     public function parameterWhenEmpty()
     {
-        $source = ErrorSource::createFromArray([]);
+        $source = ErrorSource::fromArray([]);
 
         $this->assertSame("", $source->parameter());
     }

@@ -524,6 +524,6 @@ class RelationshipTest extends TestCase
 
     private function createRelationship(array $relationship, string $name = ""): Relationship
     {
-        return Relationship::createFromArray($name, $relationship, new ResourceObjects([], [], true));
+        return Relationship::fromArray($name, $relationship, new ResourceObjects([], [], true));
     }
 }

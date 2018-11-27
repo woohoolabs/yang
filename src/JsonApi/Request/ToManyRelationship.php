@@ -31,6 +31,9 @@ final class ToManyRelationship implements RelationshipInterface
         return $this;
     }
 
+    /**
+     * @internal
+     */
     public function toArray(): array
     {
         return [

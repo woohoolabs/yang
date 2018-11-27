@@ -75,6 +75,6 @@ final class JsonApiResponse extends AbstractResponse
             return;
         }
 
-        $this->document = Document::createFromArray($content);
+        $this->document = Document::fromArray($content);
     }
 }
