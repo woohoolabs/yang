@@ -5,10 +5,6 @@ namespace WoohooLabs\Yang\JsonApi\Response;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
-use WoohooLabs\Yang\JsonApi\Hydrator\ResponseException;
-use WoohooLabs\Yang\JsonApi\Schema\Document;
-use WoohooLabs\Yang\JsonApi\Serializer\DeserializerInterface;
-use WoohooLabs\Yang\JsonApi\Serializer\JsonDeserializer;
 
 abstract class AbstractResponse implements ResponseInterface
 {

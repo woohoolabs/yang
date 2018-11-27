@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
+
 final class Relationship
 {
     /**
@@ -215,11 +217,14 @@ final class Relationship
 
     /**
      * @return ResourceObject[]
+     * @throws DocumentException
      */
     public function resources(): array
     {
         if ($this->isToOneRelationship) {
-            return [];
+            throw new DocumentException(
+                "The relationship with '$this->name' name is a to-one relationship, therefore it doesn't have multiple resources."
+            );
         }
 
         $resources = [];
@@ -249,21 +254,29 @@ final class Relationship
         return $resources;
     }
 
-    public function resource(): ?ResourceObject
+    /**
+     * @throws DocumentException
+     */
+    public function resource(): ResourceObject
     {
         if ($this->isToOneRelationship === false) {
-            return null;
+            throw new DocumentException(
+                "The relationship with '$this->name' name is a to-many relationship, therefore it doesn't have a single resource."
+            );
         }
 
         $resourceMap = reset($this->resourceMap);
-        if (is_array($resourceMap) === false) {
-            return null;
+        if ($resourceMap === false) {
+            throw new DocumentException("The relationship with '$this->name' name is empty, therefore it doesn't have a single resource.");
         }
 
         return $this->resourceBy($resourceMap["type"], $resourceMap["id"]);
     }
 
-    public function resourceBy(string $type, string $id): ?ResourceObject
+    /**
+     * @throws DocumentException
+     */
+    public function resourceBy(string $type, string $id): ResourceObject
     {
         return $this->resources->resource($type, $id);
     }

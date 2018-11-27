@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
+
 final class ResourceObjects
 {
     /*
@@ -54,11 +56,92 @@ final class ResourceObjects
         }
     }
 
+    public function isSinglePrimaryResource(): bool
+    {
+        return $this->isSinglePrimaryResource === true;
+    }
+
+    public function isPrimaryResourceCollection(): bool
+    {
+        return $this->isSinglePrimaryResource === false;
+    }
+
+    public function hasResource(string $type, string $id): bool
+    {
+        return isset($this->resources["$type.$id"]);
+    }
+
+    public function resource(string $type, string $id): ResourceObject
+    {
+        if (isset($this->resources["$type.$id"]) === false) {
+            throw new DocumentException("Document doesn't contain any resource with the '$type' type and '$id' ID!");
+        }
+
+        return $this->resources["$type.$id"];
+    }
+
+    public function hasAnyPrimaryResources(): bool
+    {
+        return empty($this->primaryKeys) === false;
+    }
+
+    /**
+     * @return ResourceObject[]
+     */
+    public function primaryResources(): array
+    {
+        return array_values($this->primaryKeys);
+    }
+
+    /**
+     * @throws DocumentException
+     */
+    public function primaryResource(): ResourceObject
+    {
+        if ($this->hasAnyPrimaryResources() === false) {
+            throw new DocumentException("The document doesn't have a primary resource!");
+        }
+
+        reset($this->primaryKeys);
+        $key = key($this->primaryKeys);
+
+        return $this->resources[$key];
+    }
+
+    public function hasPrimaryResource(string $type, string $id): bool
+    {
+        return isset($this->primaryKeys["$type.$id"]);
+    }
+
+    public function hasAnyIncludedResources(): bool
+    {
+        return empty($this->includedKeys) === false;
+    }
+
+    public function hasIncludedResource(string $type, string $id): bool
+    {
+        return isset($this->includedKeys["$type.$id"]);
+    }
+
+    /**
+     * @return ResourceObject[]
+     */
+    public function includedResources(): array
+    {
+        return array_values($this->includedKeys);
+    }
+
+    /**
+     * @internal
+     */
     public function primaryDataToArray(): ?array
     {
         return $this->isSinglePrimaryResource ? $this->primaryResourceToArray() : $this->primaryCollectionToArray();
     }
 
+    /**
+     * @internal
+     */
     public function includedToArray(): array
     {
         $result = [];
@@ -91,75 +174,12 @@ final class ResourceObjects
         return $result;
     }
 
-    public function isSinglePrimaryResource(): bool
-    {
-        return $this->isSinglePrimaryResource === true;
-    }
-
-    public function isPrimaryResourceCollection(): bool
-    {
-        return $this->isSinglePrimaryResource === false;
-    }
-
-    public function resource(string $type, string $id): ?ResourceObject
-    {
-        return $this->resources[$type . "." . $id] ?? null;
-    }
-
-    public function hasAnyPrimaryResources(): bool
-    {
-        return empty($this->primaryKeys) === false;
-    }
-
-    /**
-     * @return ResourceObject[]
-     */
-    public function primaryResources(): array
-    {
-        return array_values($this->primaryKeys);
-    }
-
-    public function primaryResource(): ?ResourceObject
-    {
-        if ($this->hasAnyPrimaryResources() === false) {
-            return null;
-        }
-
-        reset($this->primaryKeys);
-        $key = key($this->primaryKeys);
-
-        return $this->resources[$key];
-    }
-
-    public function hasPrimaryResource(string $type, string $id): bool
-    {
-        return isset($this->primaryKeys[$type . "." . $id]);
-    }
-
-    public function hasAnyIncludedResources(): bool
-    {
-        return empty($this->includedKeys) === false;
-    }
-
-    public function hasIncludedResource(string $type, string $id): bool
-    {
-        return isset($this->includedKeys[$type . "." . $id]);
-    }
-
-    /**
-     * @return ResourceObject[]
-     */
-    public function includedResources(): array
-    {
-        return array_values($this->includedKeys);
-    }
-
     private function addPrimaryResource(ResourceObject $resource): ResourceObjects
     {
         $type = $resource->type();
         $id = $resource->id();
         if ($this->hasIncludedResource($type, $id) === true) {
-            unset($this->includedKeys[$type . "." . $id]);
+            unset($this->includedKeys["$type.$id"]);
         }
 
         $this->addResource($this->primaryKeys, $resource);
@@ -180,8 +200,9 @@ final class ResourceObjects
     {
         $type = $resource->type();
         $id = $resource->id();
+        $index = "$type.$id";
 
-        $this->resources[$type . "." . $id] = $resource;
-        $keys[$type . "." . $id] = &$this->resources[$type . "." . $id];
+        $this->resources[$index] = $resource;
+        $keys[$index] = &$this->resources[$index];
     }
 }

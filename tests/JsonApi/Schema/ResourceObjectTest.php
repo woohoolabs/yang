@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\Tests\JsonApi\Schema;
 
 use PHPUnit\Framework\TestCase;
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Links;
 use WoohooLabs\Yang\JsonApi\Schema\Relationship;
 use WoohooLabs\Yang\JsonApi\Schema\ResourceObject;
@@ -353,11 +354,13 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function relationshipReturnsNull()
+    public function relationshipWhenMissing()
     {
         $resourceObject = $this->createResourceObject([]);
 
-        $this->assertNull($resourceObject->relationship("a"));
+        $this->expectException(DocumentException::class);
+
+        $resourceObject->relationship("a");
     }
 
     private function createResourceObject(array $data): ResourceObject

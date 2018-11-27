@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\JsonApi\Response;
 
 use Psr\Http\Message\ResponseInterface;
-use WoohooLabs\Yang\JsonApi\Hydrator\ResponseException;
+use WoohooLabs\Yang\JsonApi\Exception\ResponseException;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Serializer\DeserializerInterface;
 use WoohooLabs\Yang\JsonApi\Serializer\JsonDeserializer;
@@ -54,8 +54,7 @@ final class JsonApiResponse extends AbstractResponse
 
     public function isSuccessful(array $successfulStatusCodes = []): bool
     {
-        $isStatusCodeSuccessful = empty($successfulStatusCodes) === true ||
-            in_array($this->getStatusCode(), $successfulStatusCodes, true);
+        $isStatusCodeSuccessful = empty($successfulStatusCodes) || in_array($this->getStatusCode(), $successfulStatusCodes, true);
 
         $hasNoErrors = $this->hasDocument() === false || $this->document()->hasErrors() === false;
 

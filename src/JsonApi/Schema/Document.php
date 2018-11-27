@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
-class Document
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
+
 final class Document
 {
     /**
@@ -162,7 +163,7 @@ final class Document
         return $this->resources->hasAnyPrimaryResources();
     }
 
-    public function primaryResource(): ?ResourceObject
+    public function primaryResource(): ResourceObject
     {
         return $this->resources->primaryResource();
     }
@@ -175,7 +176,10 @@ final class Document
         return $this->resources->primaryResources();
     }
 
-    public function resource(string $type, string $id): ?ResourceObject
+    /**
+     * @throws DocumentException
+     */
+    public function resource(string $type, string $id): ResourceObject
     {
         return $this->resources->resource($type, $id);
     }
@@ -208,12 +212,23 @@ final class Document
      */
     public function errors(): array
     {
+        if (empty($this->errors)) {
+            throw new DocumentException("The document doesn't contain any errors!");
+        }
+
         return $this->errors;
     }
 
-    public function error(int $number): ?Error
+    /**
+     * @throws DocumentException
+     */
+    public function error(int $index): Error
     {
-        return $this->errors[$number] ?? null;
+        if (isset($this->errors[$index]) === false) {
+            throw new DocumentException("The document doesn't contain error with the '$index' index!");
+        }
+
+        return $this->errors[$index];
     }
 
     private static function isAssociativeArray(array $array): bool

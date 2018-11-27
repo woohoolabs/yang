@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\Tests\JsonApi\Schema;
 
 use PHPUnit\Framework\TestCase;
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Schema\Error;
 use WoohooLabs\Yang\JsonApi\Schema\JsonApi;
@@ -20,9 +21,11 @@ class DocumentTest extends TestCase
             [
                 "jsonapi" => [],
                 "meta" => [],
-                "data" => []
+                "data" => [],
             ]
         );
+
+        $array = $document->toArray();
 
         $this->assertSame(
             [
@@ -30,7 +33,8 @@ class DocumentTest extends TestCase
                     "version" => "1.0",
                 ]
             ],
-            $document->toArray());
+            $array
+        );
     }
 
     /**
@@ -67,36 +71,38 @@ class DocumentTest extends TestCase
             ]
         );
 
+        $array = $document->toArray();
+
         $this->assertSame(
             [
                 "jsonapi" => [
                     "version" => "1.0",
                 ],
                 "meta" => [
-                    "a" => "b"
+                    "a" => "b",
                 ],
                 "links" => [
                     "self" => [
-                        "href" => "https://example.com/api/users/abcd"
-                    ]
+                        "href" => "https://example.com/api/users/abcd",
+                    ],
                 ],
                 "data" => [
                     "type" => "user",
-                    "id" => "abcd"
+                    "id" => "abcd",
                 ],
                 "errors" => [
                     [
-                        "status" => "401"
-                    ]
+                        "status" => "401",
+                    ],
                 ],
                 "included" => [
                     [
                         "type" => "user",
-                        "id" => "efgh"
-                    ]
-                ]
+                        "id" => "efgh",
+                    ],
+                ],
             ],
-            $document->toArray()
+            $array
         );
     }
 
@@ -107,7 +113,9 @@ class DocumentTest extends TestCase
     {
         $document = $this->createDocument([]);
 
-        $this->assertInstanceOf(JsonApi::class, $document->jsonApi());
+        $jsonApi = $document->jsonApi();
+
+        $this->assertEquals(new JsonApi("1.0", []), $jsonApi);
     }
 
     /**
@@ -123,7 +131,9 @@ class DocumentTest extends TestCase
             ]
         );
 
-        $this->assertTrue($document->hasMeta());
+        $hasMeta = $document->hasMeta();
+
+        $this->assertTrue($hasMeta);
     }
 
     /**
@@ -133,23 +143,27 @@ class DocumentTest extends TestCase
     {
         $document = $this->createDocument([]);
 
-        $this->assertFalse($document->hasMeta());
+        $hasMeta = $document->hasMeta();
+
+        $this->assertFalse($hasMeta);
     }
 
     /**
      * @test
      */
-    public function metaReturnsObject()
+    public function metaReturnsMetaObject()
     {
         $document = $this->createDocument(
             [
                 "meta" => [
-                    "a" => "b"
-                ]
+                    "a" => "b",
+                ],
             ]
         );
 
-        $this->assertSame(["a" => "b"], $document->meta());
+        $meta = $document->meta();
+
+        $this->assertSame(["a" => "b"], $meta);
     }
 
     /**
@@ -165,7 +179,9 @@ class DocumentTest extends TestCase
             ]
         );
 
-        $this->assertTrue($document->hasLinks());
+        $hasLinks = $document->hasLinks();
+
+        $this->assertTrue($hasLinks);
     }
 
     /**
@@ -175,7 +191,9 @@ class DocumentTest extends TestCase
     {
         $document = $this->createDocument([]);
 
-        $this->assertFalse($document->hasLinks());
+        $hasLinks = $document->hasLinks();
+
+        $this->assertFalse($hasLinks);
     }
 
     /**
@@ -185,7 +203,9 @@ class DocumentTest extends TestCase
     {
         $document = $this->createDocument([]);
 
-        $this->assertInstanceOf(Links::class, $document->links());
+        $links = $document->links();
+
+        $this->assertEquals(new Links([]), $links);
     }
 
     /**
@@ -198,11 +218,13 @@ class DocumentTest extends TestCase
                 "data" => [
                     "type" => "",
                     "id" => "",
-                ]
+                ],
             ]
         );
 
-        $this->assertTrue($document->isSingleResourceDocument());
+        $isSingleResourceDocument = $document->isSingleResourceDocument();
+
+        $this->assertTrue($isSingleResourceDocument);
     }
 
     /**
@@ -212,11 +234,13 @@ class DocumentTest extends TestCase
     {
         $document = $this->createDocument(
             [
-                "data" => null
+                "data" => null,
             ]
         );
 
-        $this->assertTrue($document->isSingleResourceDocument());
+        $isSingleResourceDocument = $document->isSingleResourceDocument();
+
+        $this->assertTrue($isSingleResourceDocument);
     }
 
     /**
@@ -230,12 +254,14 @@ class DocumentTest extends TestCase
                     [
                         "type" => "",
                         "id" => "",
-                    ]
-                ]
+                    ],
+                ],
             ]
         );
 
-        $this->assertFalse($document->isSingleResourceDocument());
+        $isSingleResourceDocument = $document->isSingleResourceDocument();
+
+        $this->assertFalse($isSingleResourceDocument);
     }
 
     /**
@@ -249,12 +275,14 @@ class DocumentTest extends TestCase
                     [
                         "type" => "",
                         "id" => ""
-                    ]
-                ]
+                    ],
+                ],
             ]
         );
 
-        $this->assertTrue($document->isResourceCollectionDocument());
+        $isResourceCollectionDocument = $document->isResourceCollectionDocument();
+
+        $this->assertTrue($isResourceCollectionDocument);
     }
 
     /**
@@ -264,11 +292,13 @@ class DocumentTest extends TestCase
     {
         $document = $this->createDocument(
             [
-                "data" => []
+                "data" => [],
             ]
         );
 
-        $this->assertTrue($document->isResourceCollectionDocument());
+        $isResourceCollectionDocument = $document->isResourceCollectionDocument();
+
+        $this->assertTrue($isResourceCollectionDocument);
     }
 
     /**
@@ -281,11 +311,13 @@ class DocumentTest extends TestCase
                 "data" => [
                     "type" => "",
                     "id" => "",
-                ]
+                ],
             ]
         );
 
-        $this->assertFalse($document->isResourceCollectionDocument());
+        $isResourceCollectionDocument = $document->isResourceCollectionDocument();
+
+        $this->assertFalse($isResourceCollectionDocument);
     }
 
     /**
@@ -298,11 +330,13 @@ class DocumentTest extends TestCase
                 "data" => [
                     "type" => "",
                     "id" => "",
-                ]
+                ],
             ]
         );
 
-        $this->assertTrue($document->hasAnyPrimaryResources());
+        $hasAnyPrimaryResources = $document->hasAnyPrimaryResources();
+
+        $this->assertTrue($hasAnyPrimaryResources);
     }
 
     /**
@@ -312,11 +346,13 @@ class DocumentTest extends TestCase
     {
         $document = $this->createDocument(
             [
-                "data" => null
+                "data" => null,
             ]
         );
 
-        $this->assertFalse($document->hasAnyPrimaryResources());
+        $hasAnyPrimaryResources = $document->hasAnyPrimaryResources();
+
+        $this->assertFalse($hasAnyPrimaryResources);
     }
 
     /**
@@ -330,12 +366,14 @@ class DocumentTest extends TestCase
                     [
                         "type" => "",
                         "id" => "",
-                    ]
-                ]
+                    ],
+                ],
             ]
         );
 
-        $this->assertTrue($document->hasAnyPrimaryResources());
+        $hasAnyPrimaryResources = $document->hasAnyPrimaryResources();
+
+        $this->assertTrue($hasAnyPrimaryResources);
     }
 
     /**
@@ -345,11 +383,13 @@ class DocumentTest extends TestCase
     {
         $document = $this->createDocument(
             [
-                "data" => []
+                "data" => [],
             ]
         );
 
-        $this->assertFalse($document->hasAnyPrimaryResources());
+        $hasAnyPrimaryResources = $document->hasAnyPrimaryResources();
+
+        $this->assertFalse($hasAnyPrimaryResources);
     }
 
     /**
@@ -361,13 +401,15 @@ class DocumentTest extends TestCase
             [
                 "errors" => [
                     [
-                        "status" => "400"
-                    ]
-                ]
+                        "status" => "400",
+                    ],
+                ],
             ]
         );
 
-        $this->assertTrue($document->hasErrors());
+        $hasErrors = $document->hasErrors();
+
+        $this->assertTrue($hasErrors);
     }
 
     /**
@@ -377,7 +419,9 @@ class DocumentTest extends TestCase
     {
         $document = $this->createDocument();
 
-        $this->assertFalse($document->hasErrors());
+        $hasErrors = $document->hasErrors();
+
+        $this->assertFalse($hasErrors);
     }
 
     /**
@@ -389,13 +433,15 @@ class DocumentTest extends TestCase
             [
                 "errors" => [
                     [
-                        "status" => "400"
-                    ]
-                ]
+                        "status" => "400",
+                    ],
+                ],
             ]
         );
 
-        $this->assertInstanceOf(Error::class, $document->errors()[0]);
+        $error = $document->errors()[0];
+
+        $this->assertInstanceOf(Error::class, $error);
     }
 
     /**
@@ -405,7 +451,9 @@ class DocumentTest extends TestCase
     {
         $document = $this->createDocument();
 
-        $this->assertEmpty($document->errors());
+        $this->expectException(DocumentException::class);
+
+        $document->errors();
     }
 
     /**
@@ -417,13 +465,15 @@ class DocumentTest extends TestCase
             [
                 "errors" => [
                     [
-                        "status" => "400"
-                    ]
-                ]
+                        "status" => "400",
+                    ],
+                ],
             ]
         );
 
-        $this->assertInstanceOf(Error::class, $document->error(0));
+        $error = $document->error(0);
+
+        $this->assertInstanceOf(Error::class, $error);
     }
 
     /**
@@ -433,7 +483,9 @@ class DocumentTest extends TestCase
     {
         $document = $this->createDocument();
 
-        $this->assertNull($document->error(0));
+        $this->expectException(DocumentException::class);
+
+        $document->error(0);
     }
 
     private function createDocument(array $body = []): Document

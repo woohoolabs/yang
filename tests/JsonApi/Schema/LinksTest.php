@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\Tests\JsonApi\Schema;
 
 use PHPUnit\Framework\TestCase;
+use WoohooLabs\Yang\JsonApi\Exception\LinkException;
 use WoohooLabs\Yang\JsonApi\Schema\Link;
 use WoohooLabs\Yang\JsonApi\Schema\Links;
 
@@ -21,8 +22,10 @@ class LinksTest extends TestCase
             ]
         );
 
-        $this->assertArrayHasKey("self", $links->links());
-        $this->assertArrayHasKey("related", $links->links());
+        $linksArray = $links->links();
+
+        $this->assertArrayHasKey("self", $linksArray);
+        $this->assertArrayHasKey("related", $linksArray);
     }
 
     /**
@@ -37,8 +40,10 @@ class LinksTest extends TestCase
             ]
         );
 
-        $this->assertArrayHasKey("self", $links->toArray());
-        $this->assertArrayHasKey("related", $links->toArray());
+        $linksArray = $links->toArray();
+
+        $this->assertArrayHasKey("self", $linksArray);
+        $this->assertArrayHasKey("related", $linksArray);
     }
 
     /**
@@ -48,11 +53,13 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray(
             [
-                "self" => ""
+                "self" => "",
             ]
         );
 
-        $this->assertTrue($links->hasSelf());
+        $hasSelf = $links->hasSelf();
+
+        $this->assertTrue($hasSelf);
     }
 
     /**
@@ -62,7 +69,9 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray([]);
 
-        $this->assertFalse($links->hasSelf());
+        $hasSelf = $links->hasSelf();
+
+        $this->assertFalse($hasSelf);
     }
 
     /**
@@ -76,17 +85,21 @@ class LinksTest extends TestCase
             ]
         );
 
-        $this->assertInstanceOf(Link::class, $links->self());
+        $self = $links->self();
+
+        $this->assertEquals(new Link(""), $self);
     }
 
     /**
      * @test
      */
-    public function selfReturnsNull()
+    public function selfWhenMissing()
     {
         $links = Links::createFromArray([]);
 
-        $this->assertNull($links->self());
+        $this->expectException(LinkException::class);
+
+        $links->self();
     }
 
     /**
@@ -96,11 +109,25 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray(
             [
-                "related" => ""
+                "related" => "",
             ]
         );
 
-        $this->assertTrue($links->hasRelated());
+        $hasRelated = $links->hasRelated();
+
+        $this->assertTrue($hasRelated);
+    }
+
+    /**
+     * @test
+     */
+    public function hasRelatedIsFalse()
+    {
+        $links = Links::createFromArray([]);
+
+        $hasRelated = $links->hasRelated();
+
+        $this->assertFalse($hasRelated);
     }
 
     /**
@@ -114,27 +141,21 @@ class LinksTest extends TestCase
             ]
         );
 
-        $this->assertInstanceOf(Link::class, $links->related());
+        $related = $links->related();
+
+        $this->assertEquals(new Link(""), $related);
     }
 
     /**
      * @test
      */
-    public function relatedReturnsNull()
+    public function relatedWhenMissing()
     {
         $links = Links::createFromArray([]);
 
-        $this->assertNull($links->related());
-    }
+        $this->expectException(LinkException::class);
 
-    /**
-     * @test
-     */
-    public function hasRelatedIsFalse()
-    {
-        $links = Links::createFromArray([]);
-
-        $this->assertFalse($links->hasRelated());
+        $links->related();
     }
 
     /**
@@ -144,11 +165,13 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray(
             [
-                "first" => ""
+                "first" => "",
             ]
         );
 
-        $this->assertTrue($links->hasFirst());
+        $hasFirst = $links->hasFirst();
+
+        $this->assertTrue($hasFirst);
     }
 
     /**
@@ -158,7 +181,9 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray([]);
 
-        $this->assertFalse($links->hasFirst());
+        $hasFirst = $links->hasFirst();
+
+        $this->assertFalse($hasFirst);
     }
 
     /**
@@ -172,17 +197,21 @@ class LinksTest extends TestCase
             ]
         );
 
-        $this->assertInstanceOf(Link::class, $links->first());
+        $first = $links->first();
+
+        $this->assertEquals(new Link(""), $first);
     }
 
     /**
      * @test
      */
-    public function firstReturnsNull()
+    public function firstWhenMissing()
     {
         $links = Links::createFromArray([]);
 
-        $this->assertNull($links->first());
+        $this->expectException(LinkException::class);
+
+        $links->first();
     }
 
     /**
@@ -192,11 +221,13 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray(
             [
-                "last" => ""
+                "last" => "",
             ]
         );
 
-        $this->assertTrue($links->hasLast());
+        $hasLast = $links->hasLast();
+
+        $this->assertTrue($hasLast);
     }
 
     /**
@@ -206,7 +237,9 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray([]);
 
-        $this->assertFalse($links->hasLast());
+        $hasLast = $links->hasLast();
+
+        $this->assertFalse($hasLast);
     }
 
     /**
@@ -220,17 +253,21 @@ class LinksTest extends TestCase
             ]
         );
 
-        $this->assertInstanceOf(Link::class, $links->last());
+        $last = $links->last();
+
+        $this->assertEquals(new Link(""), $last);
     }
 
     /**
      * @test
      */
-    public function lastReturnsNull()
+    public function lastWhenMissing()
     {
         $links = Links::createFromArray([]);
 
-        $this->assertNull($links->last());
+        $this->expectException(LinkException::class);
+
+        $links->last();
     }
 
     /**
@@ -240,11 +277,13 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray(
             [
-                "prev" => ""
+                "prev" => "",
             ]
         );
 
-        $this->assertTrue($links->hasPrev());
+        $hasPrev = $links->hasPrev();
+
+        $this->assertTrue($hasPrev);
     }
 
     /**
@@ -254,7 +293,9 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray([]);
 
-        $this->assertFalse($links->hasPrev());
+        $hasPrev = $links->hasPrev();
+
+        $this->assertFalse($hasPrev);
     }
 
     /**
@@ -268,17 +309,21 @@ class LinksTest extends TestCase
             ]
         );
 
-        $this->assertInstanceOf(Link::class, $links->prev());
+        $prev = $links->prev();
+
+        $this->assertEquals(new Link(""), $prev);
     }
 
     /**
      * @test
      */
-    public function prevReturnsNull()
+    public function prevWhenMissing()
     {
         $links = Links::createFromArray([]);
 
-        $this->assertNull($links->prev());
+        $this->expectException(LinkException::class);
+
+        $links->prev();
     }
 
     /**
@@ -288,7 +333,7 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray(
             [
-                "next" => ""
+                "next" => "",
             ]
         );
 
@@ -302,7 +347,9 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray([]);
 
-        $this->assertFalse($links->hasNext());
+        $hasNext = $links->hasNext();
+
+        $this->assertFalse($hasNext);
     }
 
     /**
@@ -316,7 +363,9 @@ class LinksTest extends TestCase
             ]
         );
 
-        $this->assertInstanceOf(Link::class, $links->next());
+        $next = $links->next();
+
+        $this->assertEquals(new Link(""), $next);
     }
 
     /**
@@ -326,7 +375,9 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray([]);
 
-        $this->assertNull($links->next());
+        $this->expectException(LinkException::class);
+
+        $links->next();
     }
 
     /**
@@ -336,11 +387,13 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray(
             [
-                "about" => ""
+                "about" => "",
             ]
         );
 
-        $this->assertTrue($links->hasAbout());
+        $hasAbout = $links->hasAbout();
+
+        $this->assertTrue($hasAbout);
     }
 
     /**
@@ -350,7 +403,9 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray([]);
 
-        $this->assertFalse($links->hasAbout());
+        $hasAbout = $links->hasAbout();
+
+        $this->assertFalse($hasAbout);
     }
 
     /**
@@ -364,17 +419,21 @@ class LinksTest extends TestCase
             ]
         );
 
-        $this->assertInstanceOf(Link::class, $links->about());
+        $about = $links->about();
+
+        $this->assertEquals(new Link(""), $about);
     }
 
     /**
      * @test
      */
-    public function aboutReturnsNull()
+    public function aboutWhenMissing()
     {
         $links = Links::createFromArray([]);
 
-        $this->assertNull($links->about());
+        $this->expectException(LinkException::class);
+
+        $links->about();
     }
 
     /**
@@ -388,7 +447,9 @@ class LinksTest extends TestCase
             ]
         );
 
-        $this->assertTrue($links->hasLink("link"));
+        $hasLink = $links->hasLink("link");
+
+        $this->assertTrue($hasLink);
     }
 
     /**
@@ -398,7 +459,9 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray([]);
 
-        $this->assertFalse($links->hasLink("link"));
+        $hasLink = $links->hasLink("link");
+
+        $this->assertFalse($hasLink);
     }
 
     /**
@@ -412,17 +475,21 @@ class LinksTest extends TestCase
             ]
         );
 
-        $this->assertInstanceOf(Link::class, $links->link("link"));
+        $link = $links->link("link");
+
+        $this->assertEquals(new Link(""), $link);
     }
 
     /**
      * @test
      */
-    public function linkReturnsNull()
+    public function linkWhenMissing()
     {
         $links = Links::createFromArray([]);
 
-        $this->assertNull($links->link("link"));
+        $this->expectException(LinkException::class);
+
+        $links->link("link");
     }
 
     /**
@@ -436,7 +503,9 @@ class LinksTest extends TestCase
             ]
         );
 
-        $this->assertTrue($links->hasAnyLinks());
+        $hasAnyLinks = $links->hasAnyLinks();
+
+        $this->assertTrue($hasAnyLinks);
     }
 
     /**
@@ -446,6 +515,8 @@ class LinksTest extends TestCase
     {
         $links = Links::createFromArray([]);
 
-        $this->assertFalse($links->hasAnyLinks());
+        $hasAnyLinks = $links->hasAnyLinks();
+
+        $this->assertFalse($hasAnyLinks);
     }
 }

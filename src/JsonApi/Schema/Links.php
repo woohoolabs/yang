@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
+use WoohooLabs\Yang\JsonApi\Exception\LinkException;
+
 final class Links
 {
     /**
@@ -48,7 +50,7 @@ final class Links
         return $this->hasLink("self");
     }
 
-    public function self(): ?Link
+    public function self(): Link
     {
         return $this->link("self");
     }
@@ -58,7 +60,7 @@ final class Links
         return $this->hasLink("related");
     }
 
-    public function related(): ?Link
+    public function related(): Link
     {
         return $this->link("related");
     }
@@ -68,7 +70,7 @@ final class Links
         return $this->hasLink("first");
     }
 
-    public function first(): ?Link
+    public function first(): Link
     {
         return $this->link("first");
     }
@@ -78,7 +80,7 @@ final class Links
         return $this->hasLink("last");
     }
 
-    public function last(): ?Link
+    public function last(): Link
     {
         return $this->link("last");
     }
@@ -88,7 +90,7 @@ final class Links
         return $this->hasLink("prev");
     }
 
-    public function prev(): ?Link
+    public function prev(): Link
     {
         return $this->link("prev");
     }
@@ -98,7 +100,7 @@ final class Links
         return $this->hasLink("next");
     }
 
-    public function next(): ?Link
+    public function next(): Link
     {
         return $this->link("next");
     }
@@ -108,7 +110,7 @@ final class Links
         return $this->hasLink("about");
     }
 
-    public function about(): ?Link
+    public function about(): Link
     {
         return $this->link("about");
     }
@@ -118,8 +120,12 @@ final class Links
         return isset($this->links[$name]);
     }
 
-    public function link(string $name): ?Link
+    public function link(string $name): Link
     {
+        if (isset($this->links[$name]) === false) {
+            throw new LinkException("Link with $name rel type cannot be found!");
+        }
+
         return $this->links[$name] ?? null;
     }
 

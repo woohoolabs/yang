@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
+
 final class ResourceObject
 {
     /**
@@ -171,9 +173,16 @@ final class ResourceObject
         return array_key_exists($name, $this->relationships);
     }
 
-    public function relationship(string $name): ?Relationship
+    /**
+     * @throws DocumentException
+     */
+    public function relationship(string $name): Relationship
     {
-        return $this->hasRelationship($name) ? $this->relationships[$name] : null;
+        if ($this->hasRelationship($name) === false) {
+            throw new DocumentException("Relationship with the '$name' name doesn't exist in the Document!");
+        }
+
+        return $this->relationships[$name];
     }
 
     private static function isArrayKey(array $array, string $key): bool

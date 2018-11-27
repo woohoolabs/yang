@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\Tests\JsonApi\Schema;
 
 use PHPUnit\Framework\TestCase;
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\ResourceObject;
 use WoohooLabs\Yang\JsonApi\Schema\ResourceObjects;
 
@@ -92,11 +93,13 @@ class ResourceObjectsTest extends TestCase
     /**
      * @test
      */
-    public function primaryResourceReturnsNull()
+    public function primaryResourceWhenMissing()
     {
         $resourceObjects = $this->createResourceObjectsFromSinglePrimaryData();
 
-        $this->assertNull($resourceObjects->primaryResource());
+        $this->expectException(DocumentException::class);
+
+        $resourceObjects->primaryResource();
     }
 
     /**
@@ -165,7 +168,9 @@ class ResourceObjectsTest extends TestCase
     {
         $resourceObjects = $this->createResourceObjectsFromSinglePrimaryData();
 
-        $this->assertNull($resourceObjects->resource("users", "abcd"));
+        $this->expectException(DocumentException::class);
+
+        $resourceObjects->resource("users", "abcd");
     }
 
     /**
