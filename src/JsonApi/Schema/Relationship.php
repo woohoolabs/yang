@@ -282,10 +282,26 @@ final class Relationship
     }
 
     /**
-     * Get meta information that may be defined next to the resource identifier link.
+     * Get if the requested resource identifier link has any meta information.
      * This occurs when a relationship contains additional data besides the relation's identifiers.
      */
-    public function resourceLinkMeta(string $type, string $id): ?array
+    public function hasResourceLinkMeta(string $type, string $id): bool
+    {
+        foreach ($this->resourceMap as $resourceLink) {
+            if (isset($resourceLink["meta"]) && $resourceLink["type"] === $type && $resourceLink["id"] === $id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Get meta information that may be defined next to the resource identifier link.
+     * This occurs when a relationship contains additional data besides the relation's identifiers.
+     * @throws DocumentException
+     */
+    public function resourceLinkMeta(string $type, string $id): array
     {
         foreach ($this->resourceMap as $resourceLink) {
             if (isset($resourceLink["meta"]) && $resourceLink["type"] === $type && $resourceLink["id"] === $id) {
@@ -293,7 +309,7 @@ final class Relationship
             }
         }
 
-        return null;
+        throw new DocumentException("The relationship resource with '$type' type and '$id' ID doesn't have a meta member!");
     }
 
     private static function isAssociativeArray(array $array): bool

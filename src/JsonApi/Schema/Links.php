@@ -112,7 +112,7 @@ final class Links
     public function link(string $name): Link
     {
         if (isset($this->links[$name]) === false) {
-            throw new LinkException("Link with '$name'' rel type cannot be found!");
+            throw new LinkException("Link with '$name rel type cannot be found!");
         }
 
         return $this->links[$name];
