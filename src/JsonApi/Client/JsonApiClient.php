@@ -9,7 +9,7 @@ use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
 use WoohooLabs\Yang\JsonApi\Serializer\DeserializerInterface;
 use WoohooLabs\Yang\JsonApi\Serializer\JsonDeserializer;
 
-final class JsonApiClient
+class JsonApiClient
 {
     /**
      * @var HttpClient
