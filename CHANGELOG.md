@@ -6,7 +6,7 @@ ADDED:
 
 CHANGED:
 
-- An exception is thrown instead of returning null (__BREAKING__):
+- Make exception handling stricter (__BREAKING__):
     - `JsonApiResponse::document()` throws an exception instead of returning null if the response doesn't contain a document
     - `Document::primaryResource()` throws an exception instead of returning null if the primary resource is missing 
     - `Document::resource()` throws an exception instead of returning null if the resource is missing
@@ -28,6 +28,7 @@ CHANGED:
     - `ResourceObject::relationship()` throws an exception instead of returning null if the relationship can not be found
     - `ResourceObjects::resource()` throws an exception instead of returning null if the requested resource can not be found
     - `ResourceObjects::primaryResources()` throws an exception instead of returning null if the document doesn't have a primary resource
+- Rename `JsonApi` to `JsonApiObject`
 
 REMOVED:
 

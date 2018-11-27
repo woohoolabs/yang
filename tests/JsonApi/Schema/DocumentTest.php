@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Schema\Error;
-use WoohooLabs\Yang\JsonApi\Schema\JsonApi;
+use WoohooLabs\Yang\JsonApi\Schema\JsonApiObject;
 use WoohooLabs\Yang\JsonApi\Schema\Links;
 
 class DocumentTest extends TestCase
@@ -115,7 +115,7 @@ class DocumentTest extends TestCase
 
         $jsonApi = $document->jsonApi();
 
-        $this->assertEquals(new JsonApi("1.0", []), $jsonApi);
+        $this->assertEquals(new JsonApiObject("1.0", []), $jsonApi);
     }
 
     /**

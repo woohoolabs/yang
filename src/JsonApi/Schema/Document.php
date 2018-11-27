@@ -8,7 +8,7 @@ use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 final class Document
 {
     /**
-     * @var JsonApi
+     * @var JsonApiObject
      */
     private $jsonApi;
 
@@ -35,7 +35,7 @@ final class Document
     /**
      * @param Error[] $errors
      */
-    public function __construct(JsonApi $jsonApi, array $meta, Links $links, ResourceObjects $resources, array $errors)
+    public function __construct(JsonApiObject $jsonApi, array $meta, Links $links, ResourceObjects $resources, array $errors)
     {
         $this->jsonApi = $jsonApi;
         $this->meta = $meta;
@@ -44,7 +44,7 @@ final class Document
         $this->errors = $errors;
     }
 
-    public function jsonApi(): JsonApi
+    public function jsonApi(): JsonApiObject
     {
         return $this->jsonApi;
     }
@@ -162,7 +162,7 @@ final class Document
         } else {
             $jsonApi = [];
         }
-        $jsonApiObject = JsonApi::fromArray($jsonApi);
+        $jsonApiObject = JsonApiObject::fromArray($jsonApi);
 
         if (isset($document["meta"]) && is_array($document["meta"])) {
             $meta = $document["meta"];

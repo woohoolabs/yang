@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
-final class JsonApi
+final class JsonApiObject
 {
     /**
      * @var string
@@ -39,7 +39,7 @@ final class JsonApi
     /**
      * @internal
      */
-    public static function fromArray(array $array): JsonApi
+    public static function fromArray(array $array): JsonApiObject
     {
         $version = isset($array["version"]) && is_string($array["version"]) && $array["version"] !== "" ? $array["version"] : "1.0";
         $meta = isset($array["meta"]) && is_array($array["meta"]) ? $array["meta"] : [];

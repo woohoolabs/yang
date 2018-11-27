@@ -224,7 +224,7 @@ $document = $response->document();
 The `Document` class has various useful methods too:
 
 ```php
-// Retrieves the "jsonapi" member as a JsonApi instance
+// Retrieves the "jsonapi" member as a JsonApiObject instance
 $jsonApi = $document->jsonApi();
 
 $jsonApiVersion = $jsonApi->version();
