@@ -137,7 +137,7 @@ final class ResourceObjects
         return new self($data, $included, false);
     }
 
-    function primaryDataToArray(): ?array
+    public function primaryDataToArray(): ?array
     {
         return $this->isSinglePrimaryResource ? $this->primaryResourceToArray() : $this->primaryCollectionToArray();
     }
