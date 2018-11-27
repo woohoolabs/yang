@@ -52,9 +52,6 @@ final class Link
         return new self($href, $meta);
     }
 
-    /**
-     * @internal
-     */
     public function toArray(): array
     {
         $link = ["href" => $this->href];

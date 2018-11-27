@@ -159,9 +159,6 @@ final class ResourceObject
         return new self($type, $id, $meta, $links, $attributes, $relationships);
     }
 
-    /**
-     * @internal
-     */
     public function toArray(): array
     {
         $result = [

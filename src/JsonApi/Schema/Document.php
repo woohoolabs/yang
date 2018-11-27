@@ -201,9 +201,6 @@ final class Document
         return new self($jsonApiObject, $meta, $linksObject, $resources, $errors);
     }
 
-    /**
-     * @internal
-     */
     public function toArray(): array
     {
         $content = [

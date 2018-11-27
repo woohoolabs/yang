@@ -124,27 +124,6 @@ final class ResourceObjects
     /**
      * @internal
      */
-    public function primaryDataToArray(): ?array
-    {
-        return $this->isSinglePrimaryResource ? $this->primaryResourceToArray() : $this->primaryCollectionToArray();
-    }
-
-    /**
-     * @internal
-     */
-    public function includedToArray(): array
-    {
-        $result = [];
-        foreach ($this->includedKeys as $resource) {
-            $result[] = $resource->toArray();
-        }
-
-        return $result;
-    }
-
-    /**
-     * @internal
-     */
     public static function fromSinglePrimaryData(array $data, array $included): ResourceObjects
     {
         return new self($data, $included, true);
@@ -156,6 +135,21 @@ final class ResourceObjects
     public static function fromCollectionPrimaryData(array $data, array $included): ResourceObjects
     {
         return new self($data, $included, false);
+    }
+
+    function primaryDataToArray(): ?array
+    {
+        return $this->isSinglePrimaryResource ? $this->primaryResourceToArray() : $this->primaryCollectionToArray();
+    }
+
+    public function includedToArray(): array
+    {
+        $result = [];
+        foreach ($this->includedKeys as $resource) {
+            $result[] = $resource->toArray();
+        }
+
+        return $result;
     }
 
     private function primaryResourceToArray(): ?array

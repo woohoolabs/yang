@@ -137,9 +137,6 @@ final class Error
         return new self($id, $meta, $links, $status, $code, $title, $detail, $source);
     }
 
-    /**
-     * @internal
-     */
     public function toArray(): array
     {
         $content = [];

@@ -36,6 +36,9 @@ final class JsonApi
         return $this->meta;
     }
 
+    /**
+     * @internal
+     */
     public static function fromArray(array $array): JsonApi
     {
         $version = isset($array["version"]) && is_string($array["version"]) && $array["version"] !== "" ? $array["version"] : "1.0";
@@ -44,9 +47,6 @@ final class JsonApi
         return new self($version, $meta);
     }
 
-    /**
-     * @internal
-     */
     public function toArray(): array
     {
         $result = [];

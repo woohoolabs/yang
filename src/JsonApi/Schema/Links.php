@@ -134,9 +134,6 @@ final class Links
         return new self($linkObjects);
     }
 
-    /**
-     * @internal
-     */
     public function toArray(): array
     {
         $links = [];

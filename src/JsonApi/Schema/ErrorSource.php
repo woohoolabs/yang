@@ -57,9 +57,6 @@ final class ErrorSource
         return new self($pointer, $parameter);
     }
 
-    /**
-     * @internal
-     */
     public function toArray(): array
     {
         $content = [];

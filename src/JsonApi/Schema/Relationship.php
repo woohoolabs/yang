@@ -229,9 +229,6 @@ final class Relationship
         return self::createToManyFromArray($name, $meta, $links, $array["data"], $resources);
     }
 
-    /**
-     * @internal
-     */
     public function toArray(): array
     {
         $result = [];
@@ -257,9 +254,6 @@ final class Relationship
         return $result;
     }
 
-    /**
-     * @internal
-     */
     private static function createEmptyFromArray(
         string $name,
         array $meta,
