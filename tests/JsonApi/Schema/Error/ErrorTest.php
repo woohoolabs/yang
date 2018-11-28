@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\Tests\JsonApi\Schema;
+namespace WoohooLabs\Yang\Tests\JsonApi\Schema\Error;
 
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Schema\Error;
-use WoohooLabs\Yang\JsonApi\Schema\ErrorSource;
-use WoohooLabs\Yang\JsonApi\Schema\Links;
+use WoohooLabs\Yang\JsonApi\Schema\Error\Error;
+use WoohooLabs\Yang\JsonApi\Schema\Error\ErrorSource;
+use WoohooLabs\Yang\JsonApi\Schema\Link\ErrorLinks;
 
 class ErrorTest extends TestCase
 {
@@ -35,6 +35,8 @@ class ErrorTest extends TestCase
             ]
         );
 
+        $array = $error->toArray();
+
         $this->assertSame(
             [
                 "id" => "a",
@@ -55,7 +57,7 @@ class ErrorTest extends TestCase
                     "parameter" => "b",
                 ],
             ],
-            $error->toArray()
+            $array
         );
     }
 
@@ -74,10 +76,9 @@ class ErrorTest extends TestCase
             ]
         );
 
-        $this->assertSame(
-            [],
-            $error->toArray()
-        );
+        $array = $error->toArray();
+
+        $this->assertSame([], $array);
     }
 
     /**
@@ -95,6 +96,8 @@ class ErrorTest extends TestCase
             ]
         );
 
+        $array = $error->toArray();
+
         $this->assertSame(
             [
                 "id" => "0",
@@ -103,7 +106,7 @@ class ErrorTest extends TestCase
                 "title" => "0",
                 "detail" => "0",
             ],
-            $error->toArray()
+            $array
         );
     }
 
@@ -118,7 +121,9 @@ class ErrorTest extends TestCase
             ]
         );
 
-        $this->assertSame("a", $error->id());
+        $id = $error->id();
+
+        $this->assertSame("a", $id);
     }
 
     /**
@@ -134,7 +139,9 @@ class ErrorTest extends TestCase
             ]
         );
 
-        $this->assertTrue($error->hasMeta());
+        $hasMeta = $error->hasMeta();
+
+        $this->assertTrue($hasMeta);
     }
 
     /**
@@ -144,7 +151,9 @@ class ErrorTest extends TestCase
     {
         $error = Error::fromArray([]);
 
-        $this->assertFalse($error->hasMeta());
+        $hasMeta = $error->hasMeta();
+
+        $this->assertFalse($hasMeta);
     }
 
     /**
@@ -160,7 +169,9 @@ class ErrorTest extends TestCase
             ]
         );
 
-        $this->assertSame(["a" => "b"], $error->meta());
+        $meta = $error->meta();
+
+        $this->assertSame(["a" => "b"], $meta);
     }
 
     /**
@@ -176,7 +187,9 @@ class ErrorTest extends TestCase
             ]
         );
 
-        $this->assertTrue($error->hasLinks());
+        $hasLinks = $error->hasLinks();
+
+        $this->assertTrue($hasLinks);
     }
 
     /**
@@ -186,7 +199,9 @@ class ErrorTest extends TestCase
     {
         $error = Error::fromArray([]);
 
-        $this->assertFalse($error->hasLinks());
+        $hasLinks = $error->hasLinks();
+
+        $this->assertFalse($hasLinks);
     }
 
     /**
@@ -196,7 +211,9 @@ class ErrorTest extends TestCase
     {
         $error = Error::fromArray([]);
 
-        $this->assertInstanceOf(Links::class, $error->links());
+        $links = $error->links();
+
+        $this->assertEquals(new ErrorLinks([]), $links);
     }
 
     /**
@@ -206,11 +223,13 @@ class ErrorTest extends TestCase
     {
         $error = Error::fromArray(
             [
-                "status" => "400"
+                "status" => "400",
             ]
         );
 
-        $this->assertSame("400", $error->status());
+        $status = $error->status();
+
+        $this->assertSame("400", $status);
     }
 
     /**
@@ -224,7 +243,9 @@ class ErrorTest extends TestCase
             ]
         );
 
-        $this->assertSame("a", $error->code());
+        $code = $error->code();
+
+        $this->assertSame("a", $code);
     }
 
     /**
@@ -238,7 +259,9 @@ class ErrorTest extends TestCase
             ]
         );
 
-        $this->assertSame("a", $error->title());
+        $title = $error->title();
+
+        $this->assertSame("a", $title);
     }
 
     /**
@@ -252,7 +275,9 @@ class ErrorTest extends TestCase
             ]
         );
 
-        $this->assertSame("a", $error->detail());
+        $detail = $error->detail();
+
+        $this->assertSame("a", $detail);
     }
 
     /**

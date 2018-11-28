@@ -5,7 +5,7 @@ namespace WoohooLabs\Yang\JsonApi\Hydrator;
 
 use stdClass;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
-use WoohooLabs\Yang\JsonApi\Schema\ResourceObject;
+use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
 
 final class ClassHydrator implements HydratorInterface
 {

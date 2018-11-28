@@ -6,9 +6,9 @@ namespace WoohooLabs\Yang\Tests\JsonApi\Schema;
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
-use WoohooLabs\Yang\JsonApi\Schema\Error;
+use WoohooLabs\Yang\JsonApi\Schema\Error\Error;
 use WoohooLabs\Yang\JsonApi\Schema\JsonApiObject;
-use WoohooLabs\Yang\JsonApi\Schema\Links;
+use WoohooLabs\Yang\JsonApi\Schema\Link\Links;
 
 class DocumentTest extends TestCase
 {

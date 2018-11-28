@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\Tests\JsonApi\Schema;
+namespace WoohooLabs\Yang\Tests\JsonApi\Schema\Resource;
 
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-use WoohooLabs\Yang\JsonApi\Schema\Links;
+use WoohooLabs\Yang\JsonApi\Schema\Link\Links;
 use WoohooLabs\Yang\JsonApi\Schema\Relationship;
-use WoohooLabs\Yang\JsonApi\Schema\ResourceObject;
-use WoohooLabs\Yang\JsonApi\Schema\ResourceObjects;
+use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
+use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
 
 class ResourceObjectTest extends TestCase
 {

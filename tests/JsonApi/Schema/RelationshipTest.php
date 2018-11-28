@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
 use PHPUnit\Framework\TestCase;
+use WoohooLabs\Yang\JsonApi\Schema\Link\Links;
+use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
 
 class RelationshipTest extends TestCase
 {

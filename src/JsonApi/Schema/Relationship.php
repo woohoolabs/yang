@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
+use WoohooLabs\Yang\JsonApi\Schema\Link\Links;
+use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
+use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
 
 final class Relationship
 {

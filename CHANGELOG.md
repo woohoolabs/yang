@@ -29,6 +29,7 @@ CHANGED:
     - `ResourceObjects::resource()` throws an exception instead of returning null if the requested resource can not be found
     - `ResourceObjects::primaryResources()` throws an exception instead of returning null if the document doesn't have a primary resource
 - Rename `JsonApi` to `JsonApiObject`
+- Move errors, links, and resources to their own namespace
 
 REMOVED:
 

@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema;
+namespace WoohooLabs\Yang\JsonApi\Schema\Link;
 
 use WoohooLabs\Yang\JsonApi\Exception\LinkException;
 
-final class Links
+final class DocumentLinks
 {
     /**
      * @var Link[]

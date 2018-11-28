@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema;
+namespace WoohooLabs\Yang\JsonApi\Schema\Resource;
 
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 

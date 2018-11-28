@@ -1,9 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema;
+namespace WoohooLabs\Yang\JsonApi\Schema\Resource;
 
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
+use WoohooLabs\Yang\JsonApi\Schema\Link\Links;
+use WoohooLabs\Yang\JsonApi\Schema\Relationship;
 
 final class ResourceObject
 {
