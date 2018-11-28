@@ -18,7 +18,7 @@ final class Error
     private $meta;
 
     /**
-     * @var Links
+     * @var ErrorLinks
      */
     private $links;
 
@@ -50,7 +50,7 @@ final class Error
     public function __construct(
         string $id,
         array $meta,
-        Links $links,
+        ErrorLinks $links,
         string $status,
         string $code,
         string $title,
@@ -87,7 +87,7 @@ final class Error
         return $this->links->hasAnyLinks();
     }
 
-    public function links(): Links
+    public function links(): ErrorLinks
     {
         return $this->links;
     }
@@ -129,7 +129,7 @@ final class Error
     {
         $id = isset($error["id"]) && is_string($error["id"]) ? $error["id"] : "";
         $meta = isset($error["meta"]) && is_array($error["meta"]) ? $error["meta"] : [];
-        $links = Links::fromArray(isset($error["links"]) && is_array($error["links"]) ? $error["links"] : []);
+        $links = ErrorLinks::fromArray(isset($error["links"]) && is_array($error["links"]) ? $error["links"] : []);
         $status = isset($error["status"]) && is_scalar($error["status"]) ? (string) $error["status"] : "";
         $code = isset($error["code"]) && is_string($error["code"]) ? $error["code"] : "";
         $title = isset($error["title"]) && is_string($error["title"]) ? $error["title"] : "";

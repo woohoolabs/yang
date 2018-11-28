@@ -153,7 +153,7 @@ class ResourceObjectsTest extends TestCase
             [
                 [
                     "type" => "users",
-                    "id" => "abcd"
+                    "id" => "abcd",
                 ],
             ]
         );

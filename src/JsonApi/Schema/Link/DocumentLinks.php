@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema\Link;
 
-use WoohooLabs\Yang\JsonApi\Exception\LinkException;
-
-final class DocumentLinks
+final class DocumentLinks extends AbstractLinks
 {
     /**
      * @var Link[]
@@ -15,9 +13,8 @@ final class DocumentLinks
     /**
      * @param Link[] $links
      */
-    public function __construct(array $links)
     {
-        $this->links = $links;
+        parent::__construct($links);
     }
 
     public function hasSelf(): bool
@@ -80,47 +77,10 @@ final class DocumentLinks
         return $this->link("next");
     }
 
-    public function hasAbout(): bool
-    {
-        return $this->hasLink("about");
-    }
-
-    public function about(): Link
-    {
-        return $this->link("about");
-    }
-
-    public function hasLink(string $name): bool
-    {
-        return isset($this->links[$name]);
-    }
-
-    public function link(string $name): Link
-    {
-        if (isset($this->links[$name]) === false) {
-            throw new LinkException("Link with '$name rel type cannot be found!");
-        }
-
-        return $this->links[$name];
-    }
-
-    public function hasAnyLinks(): bool
-    {
-        return empty($this->links) === false;
-    }
-
-    /**
-     * @return Link[]
-     */
-    public function links(): array
-    {
-        return $this->links;
-    }
-
     /**
      * @internal
      */
-    public static function fromArray(array $links): Links
+    public static function fromArray(array $links): DocumentLinks
     {
         $linkObjects = [];
         foreach ($links as $name => $value) {
@@ -131,15 +91,15 @@ final class DocumentLinks
             }
         }
 
-        return new self($linkObjects);
+        return new self($linkObjects, []);
     }
 
     public function toArray(): array
     {
-        $links = [];
+        $links = parent::toArray();
 
-        foreach ($this->links as $rel => $link) {
-            $links[$rel] = $link->toArray();
+        foreach ($this->profiles as $rel => $link) {
+            $links["profile"][$rel] = $link->toArray();
         }
 
         return $links;

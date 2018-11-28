@@ -5,7 +5,7 @@ namespace WoohooLabs\Yang\JsonApi\Schema;
 
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Error\Error;
-use WoohooLabs\Yang\JsonApi\Schema\Link\Links;
+use WoohooLabs\Yang\JsonApi\Schema\Link\DocumentLinks;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
 
@@ -22,7 +22,7 @@ final class Document
     private $meta;
 
     /**
-     * @var Links
+     * @var DocumentLinks
      */
     private $links;
 
@@ -39,7 +39,7 @@ final class Document
     /**
      * @param Error[] $errors
      */
-    public function __construct(JsonApiObject $jsonApi, array $meta, Links $links, ResourceObjects $resources, array $errors)
+    public function __construct(JsonApiObject $jsonApi, array $meta, DocumentLinks $links, ResourceObjects $resources, array $errors)
     {
         $this->jsonApi = $jsonApi;
         $this->meta = $meta;
@@ -68,7 +68,7 @@ final class Document
         return $this->links->hasAnyLinks();
     }
 
-    public function links(): Links
+    public function links(): DocumentLinks
     {
         return $this->links;
     }
@@ -179,7 +179,7 @@ final class Document
         } else {
             $links = [];
         }
-        $linksObject = Links::fromArray($links);
+        $linksObject = DocumentLinks::fromArray($links);
 
         if (isset($document["included"]) && is_array($document["included"])) {
             $included = $document["included"];

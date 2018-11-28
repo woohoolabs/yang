@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-use WoohooLabs\Yang\JsonApi\Schema\Link\Links;
+use WoohooLabs\Yang\JsonApi\Schema\Link\RelationshipLinks;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
 
@@ -26,7 +26,7 @@ final class Relationship
     private $meta;
 
     /**
-     * @var Links
+     * @var RelationshipLinks
      */
     private $links;
 
@@ -43,7 +43,7 @@ final class Relationship
     public function __construct(
         string $name,
         array $meta,
-        Links $links,
+        RelationshipLinks $links,
         array $resourceMap,
         ResourceObjects $resources,
         ?bool $isToOneRelationship = null
@@ -86,7 +86,7 @@ final class Relationship
         return $this->links->hasAnyLinks();
     }
 
-    public function links(): Links
+    public function links(): RelationshipLinks
     {
         return $this->links;
     }
@@ -211,7 +211,7 @@ final class Relationship
     public static function fromArray(string $name, array $array, ResourceObjects $resources): Relationship
     {
         $meta = self::isArrayKey($array, "meta") ? $array["meta"] : [];
-        $links = Links::fromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
+        $links = RelationshipLinks::fromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
 
         // Data member is missing
         if (array_key_exists("data", $array) === false) {
@@ -260,7 +260,7 @@ final class Relationship
     private static function createEmptyFromArray(
         string $name,
         array $meta,
-        Links $links,
+        RelationshipLinks $links,
         ResourceObjects $resources,
         $isToOneRelationship
     ): Relationship {
@@ -270,7 +270,7 @@ final class Relationship
     private static function createToOneFromArray(
         string $name,
         array $meta,
-        Links $links,
+        RelationshipLinks $links,
         array $data,
         ResourceObjects $resources
     ): Relationship {
@@ -295,7 +295,7 @@ final class Relationship
     private static function createToManyFromArray(
         string $name,
         array $meta,
-        Links $links,
+        RelationshipLinks $links,
         array $data,
         ResourceObjects $resources
     ): Relationship {

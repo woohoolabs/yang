@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\JsonApi\Schema;
 
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Schema\Link\Links;
+use WoohooLabs\Yang\JsonApi\Schema\Link\RelationshipLinks;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
 
 class RelationshipTest extends TestCase
@@ -25,6 +25,8 @@ class RelationshipTest extends TestCase
             ]
         );
 
+        $array = $relationship->toArray();
+
         $this->assertSame(
             [
                 "meta" => [
@@ -36,7 +38,7 @@ class RelationshipTest extends TestCase
                     ],
                 ],
             ],
-            $relationship->toArray()
+            $array
         );
     }
 
@@ -57,6 +59,8 @@ class RelationshipTest extends TestCase
             ]
         );
 
+        $array = $relationship->toArray();
+
         $this->assertSame(
             [
                 "meta" => [
@@ -69,7 +73,7 @@ class RelationshipTest extends TestCase
                 ],
                 "data" => null,
             ],
-            $relationship->toArray()
+            $array
         );
     }
 
@@ -90,6 +94,8 @@ class RelationshipTest extends TestCase
             ]
         );
 
+        $array = $relationship->toArray();
+
         $this->assertSame(
             [
                 "meta" => [
@@ -102,7 +108,7 @@ class RelationshipTest extends TestCase
                 ],
                 "data" => [],
             ],
-            $relationship->toArray()
+            $array
         );
     }
 
@@ -126,6 +132,8 @@ class RelationshipTest extends TestCase
             ]
         );
 
+        $array = $relationship->toArray();
+
         $this->assertSame(
             [
                 "meta" => [
@@ -141,7 +149,7 @@ class RelationshipTest extends TestCase
                     "id" => "b",
                 ],
             ],
-            $relationship->toArray()
+            $array
         );
     }
 
@@ -171,6 +179,8 @@ class RelationshipTest extends TestCase
             ]
         );
 
+        $array = $relationship->toArray();
+
         $this->assertSame(
             [
                 "meta" => [
@@ -192,7 +202,7 @@ class RelationshipTest extends TestCase
                     ],
                 ],
             ],
-            $relationship->toArray()
+            $array
         );
     }
 
@@ -203,7 +213,9 @@ class RelationshipTest extends TestCase
     {
         $relationship = $this->createRelationship([], "a");
 
-        $this->assertSame("a", $relationship->name());
+        $name = $relationship->name();
+
+        $this->assertSame("a", $name);
     }
 
     /**
@@ -217,7 +229,9 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertTrue($relationship->isToOneRelationship());
+        $isToOneRelationship = $relationship->isToOneRelationship();
+
+        $this->assertTrue($isToOneRelationship);
     }
 
     /**
@@ -234,7 +248,9 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertTrue($relationship->isToOneRelationship());
+        $isToOneRelationship = $relationship->isToOneRelationship();
+
+        $this->assertTrue($isToOneRelationship);
     }
 
     /**
@@ -248,7 +264,9 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertFalse($relationship->isToOneRelationship());
+        $isToOneRelationship = $relationship->isToOneRelationship();
+
+        $this->assertFalse($isToOneRelationship);
     }
 
     /**
@@ -267,7 +285,9 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertFalse($relationship->isToOneRelationship());
+        $isToOneRelationship = $relationship->isToOneRelationship();
+
+        $this->assertFalse($isToOneRelationship);
     }
 
     /**
@@ -281,7 +301,9 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertTrue($relationship->isToManyRelationship());
+        $isToManyRelationship = $relationship->isToManyRelationship();
+
+        $this->assertTrue($isToManyRelationship);
     }
 
     /**
@@ -300,7 +322,9 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertTrue($relationship->isToManyRelationship());
+        $isToManyRelationship = $relationship->isToManyRelationship();
+
+        $this->assertTrue($isToManyRelationship);
     }
 
     /**
@@ -314,7 +338,9 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertFalse($relationship->isToManyRelationship());
+        $isToManyRelationship = $relationship->isToManyRelationship();
+
+        $this->assertFalse($isToManyRelationship);
     }
 
     /**
@@ -331,7 +357,9 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertFalse($relationship->isToManyRelationship());
+        $isToManyRelationship = $relationship->isToManyRelationship();
+
+        $this->assertFalse($isToManyRelationship);
     }
 
     /**
@@ -347,7 +375,9 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertTrue($relationship->hasMeta());
+        $hasMeta = $relationship->hasMeta();
+
+        $this->assertTrue($hasMeta);
     }
 
     /**
@@ -357,7 +387,9 @@ class RelationshipTest extends TestCase
     {
         $relationship = $this->createRelationship([]);
 
-        $this->assertFalse($relationship->hasMeta());
+        $hasMeta = $relationship->hasMeta();
+
+        $this->assertFalse($hasMeta);
     }
 
     /**
@@ -373,7 +405,9 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertSame(["a" => "b"], $relationship->meta());
+        $meta = $relationship->meta();
+
+        $this->assertSame(["a" => "b"], $meta);
     }
 
     /**
@@ -389,7 +423,9 @@ class RelationshipTest extends TestCase
             ]
         );
 
-        $this->assertTrue($relationship->hasLinks());
+        $hasLinks = $relationship->hasLinks();
+
+        $this->assertTrue($hasLinks);
     }
 
     /**
@@ -399,7 +435,9 @@ class RelationshipTest extends TestCase
     {
         $relationship = $this->createRelationship([]);
 
-        $this->assertFalse($relationship->hasLinks());
+        $hasLinks = $relationship->hasLinks();
+
+        $this->assertFalse($hasLinks);
     }
 
     /**
@@ -409,7 +447,9 @@ class RelationshipTest extends TestCase
     {
         $relationship = $this->createRelationship([]);
 
-        $this->assertInstanceOf(Links::class, $relationship->links());
+        $links = $relationship->links();
+
+        $this->assertEquals(new RelationshipLinks([]), $links);
     }
 
     /**
@@ -428,6 +468,8 @@ class RelationshipTest extends TestCase
             ]
         );
 
+        $resourceLinks = $relationship->resourceLinks();
+
         $this->assertSame(
             [
                 [
@@ -435,7 +477,7 @@ class RelationshipTest extends TestCase
                     "id" => "b",
                 ]
             ],
-            $relationship->resourceLinks()
+            $resourceLinks
         );
     }
 
@@ -453,6 +495,8 @@ class RelationshipTest extends TestCase
             ]
         );
 
+        $resourceLinks = $relationship->resourceLinks();
+
         $this->assertSame(
             [
                 [
@@ -460,7 +504,7 @@ class RelationshipTest extends TestCase
                     "id" => "b",
                 ]
             ],
-            $relationship->resourceLinks()
+            $resourceLinks
         );
     }
 
@@ -480,12 +524,14 @@ class RelationshipTest extends TestCase
             ]
         );
 
+        $firstResourceLink = $relationship->firstResourceLink();
+
         $this->assertSame(
             [
                 "type" => "a",
                 "id" => "b",
             ],
-            $relationship->firstResourceLink()
+            $firstResourceLink
         );
     }
 
@@ -500,17 +546,19 @@ class RelationshipTest extends TestCase
                     [
                         "type" => "a",
                         "id" => "b",
-                    ]
-                ]
+                    ],
+                ],
             ]
         );
+
+        $firstResourceLink = $relationship->firstResourceLink();
 
         $this->assertSame(
             [
                 "type" => "a",
                 "id" => "b",
             ],
-            $relationship->firstResourceLink()
+            $firstResourceLink
         );
     }
 
@@ -521,7 +569,9 @@ class RelationshipTest extends TestCase
     {
         $relationship = $this->createRelationship([]);
 
-        $this->assertNull($relationship->firstResourceLink());
+        $firstResourceLink = $relationship->firstResourceLink();
+
+        $this->assertNull($firstResourceLink);
     }
 
     private function createRelationship(array $relationship, string $name = ""): Relationship

@@ -5,17 +5,17 @@ namespace WoohooLabs\Yang\Tests\JsonApi\Schema\Link;
 
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Exception\LinkException;
+use WoohooLabs\Yang\JsonApi\Schema\Link\DocumentLinks;
 use WoohooLabs\Yang\JsonApi\Schema\Link\Link;
-use WoohooLabs\Yang\JsonApi\Schema\Link\Links;
 
-class LinksTest extends TestCase
+class DocumentLinksTest extends TestCase
 {
     /**
      * @test
      */
     public function createFromArray()
     {
-        $links = Links::fromArray(
+        $links = DocumentLinks::fromArray(
             [
                 "self" => "",
                 "related" => [],
@@ -33,7 +33,7 @@ class LinksTest extends TestCase
      */
     public function toArray()
     {
-        $links = Links::fromArray(
+        $links = DocumentLinks::fromArray(
             [
                 "self" => "",
                 "related" => [],
@@ -51,7 +51,7 @@ class LinksTest extends TestCase
      */
     public function hasSelfIsTrue()
     {
-        $links = Links::fromArray(
+        $links = DocumentLinks::fromArray(
             [
                 "self" => "",
             ]
@@ -67,7 +67,7 @@ class LinksTest extends TestCase
      */
     public function hasSelfIsFalse()
     {
-        $links = Links::fromArray([]);
+        $links = DocumentLinks::fromArray([]);
 
         $hasSelf = $links->hasSelf();
 
@@ -79,7 +79,7 @@ class LinksTest extends TestCase
      */
     public function selfReturnsObject()
     {
-        $links = Links::fromArray(
+        $links = DocumentLinks::fromArray(
             [
                 "self" => [],
             ]
@@ -95,7 +95,7 @@ class LinksTest extends TestCase
      */
     public function selfWhenMissing()
     {
-        $links = Links::fromArray([]);
+        $links = DocumentLinks::fromArray([]);
 
         $this->expectException(LinkException::class);
 
@@ -107,7 +107,7 @@ class LinksTest extends TestCase
      */
     public function hasRelatedIsTrue()
     {
-        $links = Links::fromArray(
+        $links = DocumentLinks::fromArray(
             [
                 "related" => "",
             ]
@@ -123,7 +123,7 @@ class LinksTest extends TestCase
      */
     public function hasRelatedIsFalse()
     {
-        $links = Links::fromArray([]);
+        $links = DocumentLinks::fromArray([]);
 
         $hasRelated = $links->hasRelated();
 
@@ -135,7 +135,7 @@ class LinksTest extends TestCase
      */
     public function relatedReturnsObject()
     {
-        $links = Links::fromArray(
+        $links = DocumentLinks::fromArray(
             [
                 "related" => [],
             ]
@@ -151,7 +151,7 @@ class LinksTest extends TestCase
      */
     public function relatedWhenMissing()
     {
-        $links = Links::fromArray([]);
+        $links = DocumentLinks::fromArray([]);
 
         $this->expectException(LinkException::class);
 
@@ -163,7 +163,7 @@ class LinksTest extends TestCase
      */
     public function hasFirstIsTrue()
     {
-        $links = Links::fromArray(
+        $links = DocumentLinks::fromArray(
             [
                 "first" => "",
             ]
@@ -179,7 +179,7 @@ class LinksTest extends TestCase
      */
     public function hasFirstIsFalse()
     {
-        $links = Links::fromArray([]);
+        $links = DocumentLinks::fromArray([]);
 
         $hasFirst = $links->hasFirst();
 
@@ -191,7 +191,7 @@ class LinksTest extends TestCase
      */
     public function firstReturnsObject()
     {
-        $links = Links::fromArray(
+        $links = DocumentLinks::fromArray(
             [
                 "first" => [],
             ]
@@ -207,7 +207,7 @@ class LinksTest extends TestCase
      */
     public function firstWhenMissing()
     {
-        $links = Links::fromArray([]);
+        $links = DocumentLinks::fromArray([]);
 
         $this->expectException(LinkException::class);
 
@@ -219,7 +219,7 @@ class LinksTest extends TestCase
      */
     public function hasLastIsTrue()
     {
-        $links = Links::fromArray(
+        $links = DocumentLinks::fromArray(
             [
                 "last" => "",
             ]
@@ -235,7 +235,7 @@ class LinksTest extends TestCase
      */
     public function hasLastIsFalse()
     {
-        $links = Links::fromArray([]);
+        $links = DocumentLinks::fromArray([]);
 
         $hasLast = $links->hasLast();
 
@@ -247,7 +247,7 @@ class LinksTest extends TestCase
      */
     public function lastReturnsObject()
     {
-        $links = Links::fromArray(
+        $links = DocumentLinks::fromArray(
             [
                 "last" => [],
             ]
@@ -263,7 +263,7 @@ class LinksTest extends TestCase
      */
     public function lastWhenMissing()
     {
-        $links = Links::fromArray([]);
+        $links = DocumentLinks::fromArray([]);
 
         $this->expectException(LinkException::class);
 
@@ -275,7 +275,7 @@ class LinksTest extends TestCase
      */
     public function hasPrevIsTrue()
     {
-        $links = Links::fromArray(
+        $links = DocumentLinks::fromArray(
             [
                 "prev" => "",
             ]
@@ -291,7 +291,7 @@ class LinksTest extends TestCase
      */
     public function hasPrevIsFalse()
     {
-        $links = Links::fromArray([]);
+        $links = DocumentLinks::fromArray([]);
 
         $hasPrev = $links->hasPrev();
 
@@ -303,7 +303,7 @@ class LinksTest extends TestCase
      */
     public function prevReturnsObject()
     {
-        $links = Links::fromArray(
+        $links = DocumentLinks::fromArray(
             [
                 "prev" => [],
             ]
@@ -319,7 +319,7 @@ class LinksTest extends TestCase
      */
     public function prevWhenMissing()
     {
-        $links = Links::fromArray([]);
+        $links = DocumentLinks::fromArray([]);
 
         $this->expectException(LinkException::class);
 
@@ -331,7 +331,7 @@ class LinksTest extends TestCase
      */
     public function hasNextIsTrue()
     {
-        $links = Links::fromArray(
+        $links = DocumentLinks::fromArray(
             [
                 "next" => "",
             ]
@@ -345,7 +345,7 @@ class LinksTest extends TestCase
      */
     public function hasNextIsFalse()
     {
-        $links = Links::fromArray([]);
+        $links = DocumentLinks::fromArray([]);
 
         $hasNext = $links->hasNext();
 
@@ -357,7 +357,7 @@ class LinksTest extends TestCase
      */
     public function nextReturnsObject()
     {
-        $links = Links::fromArray(
+        $links = DocumentLinks::fromArray(
             [
                 "next" => [],
             ]
@@ -373,150 +373,10 @@ class LinksTest extends TestCase
      */
     public function nextReturnsNull()
     {
-        $links = Links::fromArray([]);
+        $links = DocumentLinks::fromArray([]);
 
         $this->expectException(LinkException::class);
 
         $links->next();
-    }
-
-    /**
-     * @test
-     */
-    public function hasAboutIsTrue()
-    {
-        $links = Links::fromArray(
-            [
-                "about" => "",
-            ]
-        );
-
-        $hasAbout = $links->hasAbout();
-
-        $this->assertTrue($hasAbout);
-    }
-
-    /**
-     * @test
-     */
-    public function hasAboutIsFalse()
-    {
-        $links = Links::fromArray([]);
-
-        $hasAbout = $links->hasAbout();
-
-        $this->assertFalse($hasAbout);
-    }
-
-    /**
-     * @test
-     */
-    public function aboutReturnsObject()
-    {
-        $links = Links::fromArray(
-            [
-                "about" => [],
-            ]
-        );
-
-        $about = $links->about();
-
-        $this->assertEquals(new Link(""), $about);
-    }
-
-    /**
-     * @test
-     */
-    public function aboutWhenMissing()
-    {
-        $links = Links::fromArray([]);
-
-        $this->expectException(LinkException::class);
-
-        $links->about();
-    }
-
-    /**
-     * @test
-     */
-    public function hasLinkIsTrue()
-    {
-        $links = Links::fromArray(
-            [
-                "link" => ""
-            ]
-        );
-
-        $hasLink = $links->hasLink("link");
-
-        $this->assertTrue($hasLink);
-    }
-
-    /**
-     * @test
-     */
-    public function hasLinkIsFalse()
-    {
-        $links = Links::fromArray([]);
-
-        $hasLink = $links->hasLink("link");
-
-        $this->assertFalse($hasLink);
-    }
-
-    /**
-     * @test
-     */
-    public function linkReturnsObject()
-    {
-        $links = Links::fromArray(
-            [
-                "link" => [],
-            ]
-        );
-
-        $link = $links->link("link");
-
-        $this->assertEquals(new Link(""), $link);
-    }
-
-    /**
-     * @test
-     */
-    public function linkWhenMissing()
-    {
-        $links = Links::fromArray([]);
-
-        $this->expectException(LinkException::class);
-
-        $links->link("link");
-    }
-
-    /**
-     * @test
-     */
-    public function hasAnyLinksIsTrue()
-    {
-        $links = Links::fromArray(
-            [
-                "self" => "",
-            ]
-        );
-
-        $hasAnyLinks = $links->hasAnyLinks();
-
-        $this->assertTrue($hasAnyLinks);
-    }
-
-    /**
-     * @test
-     */
-    public function hasAnyLinksIsFalse()
-    {
-        $links = Links::fromArray([]);
-
-        $hasAnyLinks = $links->hasAnyLinks();
-
-        $this->assertFalse($hasAnyLinks);
     }
 }

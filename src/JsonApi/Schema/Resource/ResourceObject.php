@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\JsonApi\Schema\Resource;
 
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-use WoohooLabs\Yang\JsonApi\Schema\Link\Links;
+use WoohooLabs\Yang\JsonApi\Schema\Link\ResourceLinks;
 use WoohooLabs\Yang\JsonApi\Schema\Relationship;
 
 final class ResourceObject
@@ -25,7 +25,7 @@ final class ResourceObject
     private $meta;
 
     /**
-     * @var Links
+     * @var ResourceLinks
      */
     private $links;
 
@@ -46,7 +46,7 @@ final class ResourceObject
         string $type,
         string $id,
         array $meta,
-        Links $links,
+        ResourceLinks $links,
         array $attributes,
         array $relationships
     ) {
@@ -83,7 +83,7 @@ final class ResourceObject
         return $this->links->hasAnyLinks();
     }
 
-    public function links(): Links
+    public function links(): ResourceLinks
     {
         return $this->links;
     }
@@ -144,7 +144,7 @@ final class ResourceObject
         $type = isset($array["type"]) && is_string($array["type"]) ? $array["type"] : "";
         $id = isset($array["id"]) && is_string($array["id"]) ? $array["id"] : "";
         $meta = self::isArrayKey($array, "meta") ? $array["meta"] : [];
-        $links = Links::fromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
+        $links = ResourceLinks::fromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
         $attributes = self::isArrayKey($array, "attributes") ? $array["attributes"] : [];
 
         $relationships = [];

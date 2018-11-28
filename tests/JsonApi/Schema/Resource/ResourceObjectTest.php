@@ -5,7 +5,7 @@ namespace WoohooLabs\Yang\Tests\JsonApi\Schema\Resource;
 
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-use WoohooLabs\Yang\JsonApi\Schema\Link\Links;
+use WoohooLabs\Yang\JsonApi\Schema\Link\ResourceLinks;
 use WoohooLabs\Yang\JsonApi\Schema\Relationship;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
@@ -36,6 +36,8 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
+        $array = $resourceObject->toArray();
+
         $this->assertSame(
             [
                 "type" => "user",
@@ -55,7 +57,7 @@ class ResourceObjectTest extends TestCase
                     "a" => [],
                 ],
             ],
-            $resourceObject->toArray()
+            $array
         );
     }
 
@@ -66,12 +68,14 @@ class ResourceObjectTest extends TestCase
     {
         $resourceObject = $this->createResourceObject([]);
 
+        $array = $resourceObject->toArray();
+
         $this->assertSame(
             [
                 "type" => "",
                 "id" => "",
             ],
-            $resourceObject->toArray()
+            $array
         );
     }
 
@@ -86,7 +90,9 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertSame("abc", $resourceObject->type());
+        $type = $resourceObject->type();
+
+        $this->assertSame("abc", $type);
     }
 
     /**
@@ -100,7 +106,9 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertSame("abc", $resourceObject->id());
+        $id = $resourceObject->id();
+
+        $this->assertSame("abc", $id);
     }
 
     /**
@@ -116,7 +124,9 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertTrue($resourceObject->hasMeta());
+        $hasMeta = $resourceObject->hasMeta();
+
+        $this->assertTrue($hasMeta);
     }
 
     /**
@@ -126,7 +136,9 @@ class ResourceObjectTest extends TestCase
     {
         $resourceObject = $this->createResourceObject([]);
 
-        $this->assertFalse($resourceObject->hasMeta());
+        $hasMeta = $resourceObject->hasMeta();
+
+        $this->assertFalse($hasMeta);
     }
 
     /**
@@ -142,7 +154,9 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertSame(["abc" => "def"], $resourceObject->meta());
+        $meta = $resourceObject->meta();
+
+        $this->assertSame(["abc" => "def"], $meta);
     }
 
     /**
@@ -158,7 +172,9 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertTrue($resourceObject->hasLinks());
+        $hasLinks = $resourceObject->hasLinks();
+
+        $this->assertTrue($hasLinks);
     }
 
     /**
@@ -168,7 +184,9 @@ class ResourceObjectTest extends TestCase
     {
         $resourceObject = $this->createResourceObject([]);
 
-        $this->assertFalse($resourceObject->hasLinks());
+        $hasLinks = $resourceObject->hasLinks();
+
+        $this->assertFalse($hasLinks);
     }
 
     /**
@@ -178,7 +196,9 @@ class ResourceObjectTest extends TestCase
     {
         $resourceObject = $this->createResourceObject([]);
 
-        $this->assertInstanceOf(Links::class, $resourceObject->links());
+        $links = $resourceObject->links();
+
+        $this->assertEquals(new ResourceLinks([]), $links);
     }
 
     /**
@@ -194,7 +214,9 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertSame(["a" => "b"], $resourceObject->attributes());
+        $attributes = $resourceObject->attributes();
+
+        $this->assertSame(["a" => "b"], $attributes);
     }
 
     /**
@@ -211,7 +233,9 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertSame(["id" => "abc", "a" => "b"], $resourceObject->idAndAttributes());
+        $idAndAttributes = $resourceObject->idAndAttributes();
+
+        $this->assertSame(["id" => "abc", "a" => "b"], $idAndAttributes);
     }
 
     /**
@@ -227,7 +251,9 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertTrue($resourceObject->hasAttribute("a"));
+        $hasAttribute = $resourceObject->hasAttribute("a");
+
+        $this->assertTrue($hasAttribute);
     }
 
     /**
@@ -243,7 +269,9 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertTrue($resourceObject->hasAttribute("a"));
+        $hasAttribute = $resourceObject->hasAttribute("a");
+
+        $this->assertTrue($hasAttribute);
     }
 
     /**
@@ -259,7 +287,9 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertFalse($resourceObject->hasAttribute("b"));
+        $hasAttribute = $resourceObject->hasAttribute("b");
+
+        $this->assertFalse($hasAttribute);
     }
 
     /**
@@ -275,7 +305,9 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertSame("b", $resourceObject->attribute("a"));
+        $attribute = $resourceObject->attribute("a");
+
+        $this->assertSame("b", $attribute);
     }
 
     /**
@@ -322,7 +354,9 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertTrue($resourceObject->hasRelationship("a"));
+        $hasRelationship = $resourceObject->hasRelationship("a");
+
+        $this->assertTrue($hasRelationship);
     }
 
     /**
@@ -332,7 +366,9 @@ class ResourceObjectTest extends TestCase
     {
         $resourceObject = $this->createResourceObject([]);
 
-        $this->assertFalse($resourceObject->hasRelationship("a"));
+        $hasRelationship = $resourceObject->hasRelationship("a");
+
+        $this->assertFalse($hasRelationship);
     }
 
     /**
@@ -348,7 +384,9 @@ class ResourceObjectTest extends TestCase
             ]
         );
 
-        $this->assertInstanceOf(Relationship::class, $resourceObject->relationship("a"));
+        $relationship = $resourceObject->relationship("a");
+
+        $this->assertInstanceOf(Relationship::class, $relationship);
     }
 
     /**

@@ -8,7 +8,7 @@ use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Schema\Error\Error;
 use WoohooLabs\Yang\JsonApi\Schema\JsonApiObject;
-use WoohooLabs\Yang\JsonApi\Schema\Link\Links;
+use WoohooLabs\Yang\JsonApi\Schema\Link\DocumentLinks;
 
 class DocumentTest extends TestCase
 {
@@ -205,7 +205,7 @@ class DocumentTest extends TestCase
 
         $links = $document->links();
 
-        $this->assertEquals(new Links([]), $links);
+        $this->assertEquals(new DocumentLinks([], []), $links);
     }
 
     /**

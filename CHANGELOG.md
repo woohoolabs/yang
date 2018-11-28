@@ -27,11 +27,14 @@ CHANGED:
     - `Relationship::resourceLinkMeta()` throws an exception instead of returning null if the relationship doesn't contain a meta member
     - `ResourceObject::relationship()` throws an exception instead of returning null if the relationship can not be found
     - `ResourceObjects::resource()` throws an exception instead of returning null if the requested resource can not be found
-    - `ResourceObjects::primaryResources()` throws an exception instead of returning null if the document doesn't have a primary resource
+    - `ResourceObjects::primaryResources()` throws an exception instead of returning null if the document doesn't have a primary resource 
 - Rename `JsonApi` to `JsonApiObject`
 - Move errors, links, and resources to their own namespace
+- Separate classes for the different types of links are used: `DocumentLinks`, `ResourceLinks`, `RelationshipLinks`, `ErrorLinks` (__BREAKING__)
 
 REMOVED:
+
+- The generic `Link` class (__BREAKING__)
 
 FIXED:
 

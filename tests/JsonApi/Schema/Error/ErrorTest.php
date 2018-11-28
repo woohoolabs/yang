@@ -213,7 +213,7 @@ class ErrorTest extends TestCase
 
         $links = $error->links();
 
-        $this->assertEquals(new ErrorLinks([]), $links);
+        $this->assertEquals(new ErrorLinks([], []), $links);
     }
 
     /**
@@ -287,6 +287,8 @@ class ErrorTest extends TestCase
     {
         $error = Error::fromArray([]);
 
-        $this->assertInstanceOf(ErrorSource::class, $error->source());
+        $source = $error->source();
+
+        $this->assertEquals(new ErrorSource("", ""), $source);
     }
 }
