@@ -60,6 +60,21 @@ class JsonApiRequestBuilder
     private $headers;
 
     /**
+     * @var string[]
+     */
+    private $appliedProfiles;
+
+    /**
+     * @var string[]
+     */
+    private $requestedProfiles;
+
+    /**
+     * @var string[]
+     */
+    private $requiredProfiles;
+
+    /**
      * @var mixed
      */
     private $body;
@@ -80,6 +95,9 @@ class JsonApiRequestBuilder
         $this->path = "";
         $this->queryString = [];
         $this->headers = [];
+        $this->appliedProfiles = [];
+        $this->requestedProfiles = [];
+        $this->requiredProfiles = [];
     }
 
     public function fetch(): JsonApiRequestBuilder
@@ -219,9 +237,9 @@ class JsonApiRequestBuilder
         return $this;
     }
 
-    public function setJsonApiPage(array $paginate): JsonApiRequestBuilder
+    public function setJsonApiPage(array $pagination): JsonApiRequestBuilder
     {
-        $this->setArrayQueryParam("page", $paginate);
+        $this->setArrayQueryParam("page", $pagination);
 
         return $this;
     }
@@ -239,6 +257,40 @@ class JsonApiRequestBuilder
     public function setJsonApiIncludes($includes): JsonApiRequestBuilder
     {
         $this->setListQueryParam("include", $includes);
+
+        return $this;
+    }
+
+    /**
+     * @param array|string $includes
+     */
+    public function addJsonApiAppliedProfile(string $profile): JsonApiRequestBuilder
+    {
+        $this->appliedProfiles[] = $profile;
+
+        return $this;
+    }
+
+    /**
+     * @param array|string $includes
+     */
+    public function addJsonApiRequestedProfile(string $profile): JsonApiRequestBuilder
+    {
+        $this->requestedProfiles[] = $profile;
+
+        return $this;
+    }
+
+    /**
+     * @param array|string $includes
+     */
+    public function addJsonApiRequiredProfile(string $profile): JsonApiRequestBuilder
+    {
+        if (isset($this->queryString["profile"]) === false) {
+            $this->queryString["profile"] = $profile;
+        } else {
+            $this->queryString["profile"] .= " " . $profile;
+        }
 
         return $this;
     }
@@ -271,8 +323,8 @@ class JsonApiRequestBuilder
         $request = $request
             ->withUri($uri)
             ->withProtocolVersion($this->protocolVersion)
-            ->withHeader("accept", "application/vnd.api+json")
-            ->withHeader("content-type", "application/vnd.api+json");
+            ->withHeader("accept", $this->getMediaTypeWithProfiles($this->requestedProfiles))
+            ->withHeader("content-type", $this->getMediaTypeWithProfiles($this->appliedProfiles));
 
         foreach ($this->headers as $name => $value) {
             $request = $request->withHeader($name, $value);
@@ -312,5 +364,16 @@ class JsonApiRequestBuilder
     private function isBlankKey(array $array, string $key): bool
     {
         return array_key_exists($key, $array) === false || (empty($array[$key]) && is_numeric($array[$key]) === false);
+    }
+
+    private function getMediaTypeWithProfiles(array $profiles): string
+    {
+        $result = "application/vnd.api+json";
+
+        if (empty($profiles) === false) {
+            $result .= ';profile="' . implode(" ", $profiles) . '"';
+        }
+
+        return $result;
     }
 }

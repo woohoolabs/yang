@@ -252,6 +252,57 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
+    public function addJsonApiAppliedProfile()
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder
+            ->addJsonApiAppliedProfile("abc")
+            ->addJsonApiAppliedProfile("def");
+
+        $this->assertSame(
+            'application/vnd.api+json;profile="abc def"',
+            $requestBuilder->getRequest()->getHeaderLine("content-type")
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function addJsonApiRequestedProfile()
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder
+            ->addJsonApiRequestedProfile("abc")
+            ->addJsonApiRequestedProfile("def");
+
+        $this->assertSame(
+            'application/vnd.api+json;profile="abc def"',
+            $requestBuilder->getRequest()->getHeaderLine("accept")
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function addJsonApiRequiredProfile()
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder
+            ->addJsonApiRequiredProfile("abc")
+            ->addJsonApiRequiredProfile("def");
+
+        $this->assertSame(
+            'profile=abc def',
+            urldecode($requestBuilder->getRequest()->getUri()->getQuery())
+        );
+    }
+
+    /**
+     * @test
+     */
     public function getRequestWithCorrectAcceptHeader()
     {
         $requestBuilder = $this->createRequestBuilder();
