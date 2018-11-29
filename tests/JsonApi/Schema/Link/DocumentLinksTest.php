@@ -462,7 +462,10 @@ class DocumentLinksTest extends TestCase
         $links = DocumentLinks::fromArray(
             [
                 "profile" => [
-                    "",
+                    "a",
+                    [
+                        "href" => "b",
+                    ],
                 ],
             ]
         );
@@ -471,7 +474,8 @@ class DocumentLinksTest extends TestCase
 
         $this->assertEquals(
             [
-                new ProfileLink(""),
+                new ProfileLink("a"),
+                new ProfileLink("b"),
             ],
             $profiles
         );

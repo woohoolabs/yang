@@ -183,7 +183,10 @@ class ErrorLinksTest extends TestCase
         $links = ErrorLinks::fromArray(
             [
                 "type" => [
-                    "",
+                    "a",
+                    [
+                        "href" => "b",
+                    ],
                 ],
             ]
         );
@@ -192,7 +195,8 @@ class ErrorLinksTest extends TestCase
 
         $this->assertEquals(
             [
-                new Link(""),
+                new Link("a"),
+                new Link("b"),
             ],
             $types
         );

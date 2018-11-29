@@ -6,6 +6,7 @@ namespace WoohooLabs\Yang\Tests\JsonApi\Request;
 use GuzzleHttp\Psr7\Request;
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder;
+use WoohooLabs\Yang\JsonApi\Request\ResourceObject;
 
 class JsonApiRequestBuilderTest extends TestCase
 {
@@ -96,6 +97,18 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
+    public function setUriWhenInvalid()
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder->setUri("host:0");
+
+        $this->assertSame("http://localhost", $requestBuilder->getRequest()->getUri()->__toString());
+    }
+
+    /**
+     * @test
+     */
     public function setUri()
     {
         $requestBuilder = $this->createRequestBuilder();
@@ -115,6 +128,18 @@ class JsonApiRequestBuilderTest extends TestCase
         $requestBuilder->setUri("https://example.com");
 
         $this->assertSame("https://example.com", $requestBuilder->getRequest()->getUri()->__toString());
+    }
+
+    /**
+     * @test
+     */
+    public function setUriWithPort()
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder->setUri("https://example.com:8000");
+
+        $this->assertSame("https://example.com:8000", $requestBuilder->getRequest()->getUri()->__toString());
     }
 
     /**
@@ -198,7 +223,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setJsonApiFields(["a" => ["b", "c"]]);
 
-        $this->assertSame("fields[a]=b,c", rawurldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("fields[a]=b,c", urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
@@ -210,7 +235,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setJsonApiSort(["b", "-c"]);
 
-        $this->assertSame("sort=b,-c", rawurldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("sort=b,-c", urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
@@ -222,7 +247,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setJsonApiPage(["a" => 1, "b" => 100]);
 
-        $this->assertSame("page[a]=1&page[b]=100", rawurldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("page[a]=1&page[b]=100", urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
@@ -234,19 +259,31 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setJsonApiFilter(["a" => "abc"]);
 
-        $this->assertSame("filter[a]=abc", rawurldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("filter[a]=abc", urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
      * @test
      */
-    public function setJsonApiIncludes()
+    public function setJsonApiIncludesWhenArray()
     {
         $requestBuilder = $this->createRequestBuilder();
 
         $requestBuilder->setJsonApiIncludes(["a", "b.c"]);
 
-        $this->assertSame("include=a,b.c", rawurldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("include=a,b.c", urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+    }
+
+    /**
+     * @test
+     */
+    public function setJsonApiIncludesWhenString()
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder->setJsonApiIncludes("a,b.c");
+
+        $this->assertSame("include=a,b.c", urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
@@ -303,11 +340,37 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
+    public function setBodyWhenResourceObject()
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder->setJsonApiBody(new ResourceObject("", ""));
+
+        $this->assertSame('{"data":{"type":""}}', $requestBuilder->getRequest()->getBody()->__toString());
+    }
+
+    /**
+     * @test
+     */
+    public function setBodyWhenArray()
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder->setJsonApiBody([]);
+
+        $this->assertSame("[]", $requestBuilder->getRequest()->getBody()->__toString());
+    }
+
+    /**
+     * @test
+     */
     public function getRequestWithCorrectAcceptHeader()
     {
         $requestBuilder = $this->createRequestBuilder();
 
-        $this->assertSame(["application/vnd.api+json"], $requestBuilder->getRequest()->getHeader("accept"));
+        $accept = $requestBuilder->getRequest()->getHeader("accept");
+
+        $this->assertSame(["application/vnd.api+json"], $accept);
     }
 
     /**
@@ -317,7 +380,9 @@ class JsonApiRequestBuilderTest extends TestCase
     {
         $requestBuilder = $this->createRequestBuilder();
 
-        $this->assertSame(["application/vnd.api+json"], $requestBuilder->getRequest()->getHeader("content-type"));
+        $contentType = $requestBuilder->getRequest()->getHeader("content-type");
+
+        $this->assertSame(["application/vnd.api+json"], $contentType);
     }
 
     private function createRequestBuilder(): JsonApiRequestBuilder

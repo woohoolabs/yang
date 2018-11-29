@@ -15,73 +15,6 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function toArray()
-    {
-        $resourceObject = $this->createResourceObject(
-            [
-                "type" => "user",
-                "id" => "abc",
-                "meta" => [
-                    "a" => "b",
-                ],
-                "links" => [
-                    "a" => "b",
-                ],
-                "attributes" => [
-                    "a" => "b",
-                ],
-                "relationships" => [
-                    "a" => [],
-                ],
-            ]
-        );
-
-        $array = $resourceObject->toArray();
-
-        $this->assertSame(
-            [
-                "type" => "user",
-                "id" => "abc",
-                "meta" => [
-                    "a" => "b",
-                ],
-                "links" => [
-                    "a" => [
-                        "href" => "b",
-                    ],
-                ],
-                "attributes" => [
-                    "a" => "b",
-                ],
-                "relationships" => [
-                    "a" => [],
-                ],
-            ],
-            $array
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function toArrayWhenEmpty()
-    {
-        $resourceObject = $this->createResourceObject([]);
-
-        $array = $resourceObject->toArray();
-
-        $this->assertSame(
-            [
-                "type" => "",
-                "id" => "",
-            ],
-            $array
-        );
-    }
-
-    /**
-     * @test
-     */
     public function type()
     {
         $resourceObject = $this->createResourceObject(
@@ -399,6 +332,96 @@ class ResourceObjectTest extends TestCase
         $this->expectException(DocumentException::class);
 
         $resourceObject->relationship("a");
+    }
+
+    /**
+     * @test
+     */
+    public function relationshipWhenInvalid()
+    {
+        $resourceObject = $this->createResourceObject(
+            [
+                "type" => 1,
+                "id" => 1,
+                "meta" => "",
+                "links" => "",
+                "attributes" => "",
+                "relationships" => [
+                    1 => "",
+                ],
+            ]
+        );
+
+        $this->expectException(DocumentException::class);
+
+        $resourceObject->relationship("1");
+    }
+
+    /**
+     * @test
+     */
+    public function toArray()
+    {
+        $resourceObject = $this->createResourceObject(
+            [
+                "type" => "user",
+                "id" => "abc",
+                "meta" => [
+                    "a" => "b",
+                ],
+                "links" => [
+                    "a" => "b",
+                ],
+                "attributes" => [
+                    "a" => "b",
+                ],
+                "relationships" => [
+                    "a" => [],
+                ],
+            ]
+        );
+
+        $array = $resourceObject->toArray();
+
+        $this->assertSame(
+            [
+                "type" => "user",
+                "id" => "abc",
+                "meta" => [
+                    "a" => "b",
+                ],
+                "links" => [
+                    "a" => [
+                        "href" => "b",
+                    ],
+                ],
+                "attributes" => [
+                    "a" => "b",
+                ],
+                "relationships" => [
+                    "a" => [],
+                ],
+            ],
+            $array
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function toArrayWhenEmpty()
+    {
+        $resourceObject = $this->createResourceObject([]);
+
+        $array = $resourceObject->toArray();
+
+        $this->assertSame(
+            [
+                "type" => "",
+                "id" => "",
+            ],
+            $array
+        );
     }
 
     private function createResourceObject(array $data): ResourceObject
