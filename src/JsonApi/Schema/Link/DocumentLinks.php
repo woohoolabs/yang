@@ -3,18 +3,23 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema\Link;
 
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
+
 final class DocumentLinks extends AbstractLinks
 {
     /**
-     * @var Link[]
+     * @var ProfileLink[]
      */
-    private $links;
+    private $profiles;
 
     /**
      * @param Link[] $links
+     * @param ProfileLink[] $profiles
      */
+    public function __construct(array $links, array $profiles)
     {
         parent::__construct($links);
+        $this->profiles = $profiles;
     }
 
     public function hasSelf(): bool
@@ -77,21 +82,62 @@ final class DocumentLinks extends AbstractLinks
         return $this->link("next");
     }
 
+    public function hasProfile(string $href): bool
+    {
+        return isset($this->profiles[$href]);
+    }
+
+    /**
+     * @throws DocumentException
+     */
+    public function profile(string $href): ProfileLink
+    {
+        if (isset($this->profiles[$href]) === false) {
+            throw new DocumentException("There is no profile link with the '$href' URI!");
+        }
+
+        return $this->profiles[$href];
+    }
+
+    public function hasAnyProfiles(): bool
+    {
+        return empty($this->profiles) === false;
+    }
+
+    /**
+     * @return ProfileLink[]
+     */
+    public function profiles(): array
+    {
+        return array_values($this->profiles);
+    }
+
     /**
      * @internal
      */
     public static function fromArray(array $links): DocumentLinks
     {
         $linkObjects = [];
-        foreach ($links as $name => $value) {
-            if (is_string($value)) {
-                $linkObjects[$name] = Link::createFromString($value);
-            } elseif (is_array($value)) {
-                $linkObjects[$name] = Link::fromArray($value);
+        $profiles = [];
+
+        foreach ($links as $name => $link) {
+            if ($name === "profile") {
+                $profiles = is_array($link) ? self::createProfiles($link) : [];
+                continue;
+            }
+
+            if (is_string($link)) {
+                $linkObjects[$name] = Link::fromString($link);
+                continue;
+            }
+
+            if (is_array($link)) {
+                $linkObjects[$name] = Link::fromArray($link);
+                continue;
             }
         }
 
-        return new self($linkObjects, []);
+        return new self($linkObjects, $profiles);
     }
 
     public function toArray(): array
@@ -103,5 +149,28 @@ final class DocumentLinks extends AbstractLinks
         }
 
         return $links;
+    }
+
+    /**
+     * @return ProfileLink[]
+     */
+    private static function createProfiles(array $profiles): array
+    {
+        $profileLinks = [];
+
+        foreach ($profiles as $link) {
+            if (is_string($link)) {
+                $profileLinks[$link] = ProfileLink::fromString($link);
+                continue;
+            }
+
+            if (is_array($link)) {
+                $profileLink = ProfileLink::fromArray($link);
+                $profileLinks[$profileLink->href()] = $profileLink;
+                continue;
+            }
+        }
+
+        return $profileLinks;
     }
 }

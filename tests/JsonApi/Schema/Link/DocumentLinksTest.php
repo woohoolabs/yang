@@ -4,48 +4,14 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\Tests\JsonApi\Schema\Link;
 
 use PHPUnit\Framework\TestCase;
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Exception\LinkException;
 use WoohooLabs\Yang\JsonApi\Schema\Link\DocumentLinks;
 use WoohooLabs\Yang\JsonApi\Schema\Link\Link;
+use WoohooLabs\Yang\JsonApi\Schema\Link\ProfileLink;
 
 class DocumentLinksTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function createFromArray()
-    {
-        $links = DocumentLinks::fromArray(
-            [
-                "self" => "",
-                "related" => [],
-            ]
-        );
-
-        $linksArray = $links->links();
-
-        $this->assertArrayHasKey("self", $linksArray);
-        $this->assertArrayHasKey("related", $linksArray);
-    }
-
-    /**
-     * @test
-     */
-    public function toArray()
-    {
-        $links = DocumentLinks::fromArray(
-            [
-                "self" => "",
-                "related" => [],
-            ]
-        );
-
-        $linksArray = $links->toArray();
-
-        $this->assertArrayHasKey("self", $linksArray);
-        $this->assertArrayHasKey("related", $linksArray);
-    }
-
     /**
      * @test
      */
@@ -371,12 +337,185 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function nextReturnsNull()
+    public function nextWhenMissing()
     {
         $links = DocumentLinks::fromArray([]);
 
         $this->expectException(LinkException::class);
 
         $links->next();
+    }
+
+    /**
+     * @test
+     */
+    public function hasProfileWhenTrue()
+    {
+        $links = DocumentLinks::fromArray(
+            [
+                "profile" => [
+                    "",
+                ],
+            ]
+        );
+
+        $profile = $links->hasProfile("");
+
+        $this->assertTrue($profile);
+    }
+
+    /**
+     * @test
+     */
+    public function hasProfileWhenFalse()
+    {
+        $links = DocumentLinks::fromArray([]);
+
+        $profile = $links->hasProfile("");
+
+        $this->assertFalse($profile);
+    }
+
+    /**
+     * @test
+     */
+    public function getProfileWhenPresent()
+    {
+        $links = DocumentLinks::fromArray(
+            [
+                "profile" => [
+                    "",
+                ],
+            ]
+        );
+
+        $profile = $links->profile("");
+
+        $this->assertEquals(new ProfileLink(""), $profile);
+    }
+
+    /**
+     * @test
+     */
+    public function getProfileWhenEmpty()
+    {
+        $links = DocumentLinks::fromArray([]);
+
+        $this->expectException(DocumentException::class);
+
+        $links->profile("");
+    }
+
+    /**
+     * @test
+     */
+    public function getProfileWhenMissing()
+    {
+        $links = DocumentLinks::fromArray(
+            [
+                "profile" => [
+                    "",
+                ],
+            ]
+        );
+
+        $this->expectException(DocumentException::class);
+
+        $links->profile("abc");
+    }
+
+    /**
+     * @test
+     */
+    public function hasAnyProfilesWhenTrue()
+    {
+        $links = DocumentLinks::fromArray(
+            [
+                "profile" => [
+                    "",
+                ],
+            ]
+        );
+
+        $hasAnyProfiles = $links->hasAnyProfiles();
+
+        $this->assertTrue($hasAnyProfiles);
+    }
+
+    /**
+     * @test
+     */
+    public function hasAnyProfilesWhenFalse()
+    {
+        $links = DocumentLinks::fromArray([]);
+
+        $hasAnyProfiles = $links->hasAnyProfiles();
+
+        $this->assertFalse($hasAnyProfiles);
+    }
+
+    /**
+     * @test
+     */
+    public function getProfiles()
+    {
+        $links = DocumentLinks::fromArray(
+            [
+                "profile" => [
+                    "",
+                ],
+            ]
+        );
+
+        $profiles = $links->profiles();
+
+        $this->assertEquals(
+            [
+                new ProfileLink(""),
+            ],
+            $profiles
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function fromArray()
+    {
+        $links = DocumentLinks::fromArray(
+            [
+                "self" => "",
+                "related" => [],
+                "profile" => [],
+            ]
+        );
+
+        $linksArray = $links->links();
+
+        $this->assertArrayHasKey("self", $linksArray);
+        $this->assertArrayHasKey("related", $linksArray);
+        $this->assertArrayNotHasKey("profile", $linksArray);
+    }
+
+    /**
+     * @test
+     */
+    public function toArray()
+    {
+        $links = DocumentLinks::fromArray(
+            [
+                "self" => "",
+                "related" => [],
+                "profile" => [
+                    "",
+                ],
+            ]
+        );
+
+        $linksArray = $links->toArray();
+
+        $this->assertArrayHasKey("self", $linksArray);
+        $this->assertArrayHasKey("related", $linksArray);
+        $this->assertArrayHasKey("profile", $linksArray);
     }
 }
