@@ -4,49 +4,13 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\Tests\JsonApi\Schema\Link;
 
 use PHPUnit\Framework\TestCase;
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Exception\LinkException;
 use WoohooLabs\Yang\JsonApi\Schema\Link\ErrorLinks;
 use WoohooLabs\Yang\JsonApi\Schema\Link\Link;
 
 class ErrorLinksTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function createFromArray()
-    {
-        $links = ErrorLinks::fromArray(
-            [
-                "about" => "",
-                "type" => [],
-            ]
-        );
-
-        $linksArray = $links->links();
-        $typesArray = $links->types();
-
-        $this->assertArrayHasKey("about", $linksArray);
-        $this->assertArrayHasKey("type", $typesArray);
-    }
-
-    /**
-     * @test
-     */
-    public function toArray()
-    {
-        $links = ErrorLinks::fromArray(
-            [
-                "about" => "",
-                "type" => [],
-            ]
-        );
-
-        $linksArray = $links->toArray();
-
-        $this->assertArrayHasKey("about", $linksArray);
-        $this->assertArrayHasKey("type", $linksArray);
-    }
-
     /**
      * @test
      */
@@ -106,18 +70,95 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasTypesIsTrue()
+    public function hasTypeWhenTrue()
     {
         $links = ErrorLinks::fromArray(
             [
                 "type" => [
                     "",
+                ],
+            ]
+        );
+
+        $type = $links->hasType("");
+
+        $this->assertTrue($type);
+    }
+
+    /**
+     * @test
+     */
+    public function hasTypeWhenFalse()
+    {
+        $links = ErrorLinks::fromArray([]);
+
+        $type = $links->hasType("");
+
+        $this->assertFalse($type);
+    }
+
+    /**
+     * @test
+     */
+    public function getTypeWhenPresent()
+    {
+        $links = ErrorLinks::fromArray(
+            [
+                "type" => [
                     "",
                 ],
             ]
         );
 
-        $hasAnyTypes = $links->hasTypes();
+        $type = $links->type("");
+
+        $this->assertEquals(new Link(""), $type);
+    }
+
+    /**
+     * @test
+     */
+    public function getTypeWhenEmpty()
+    {
+        $links = ErrorLinks::fromArray([]);
+
+        $this->expectException(DocumentException::class);
+
+        $links->type("");
+    }
+
+    /**
+     * @test
+     */
+    public function getTypeWhenMissing()
+    {
+        $links = ErrorLinks::fromArray(
+            [
+                "type" => [
+                    "",
+                ],
+            ]
+        );
+
+        $this->expectException(DocumentException::class);
+
+        $links->type("abc");
+    }
+
+    /**
+     * @test
+     */
+    public function hasAnyTypesWhenTrue()
+    {
+        $links = ErrorLinks::fromArray(
+            [
+                "type" => [
+                    "",
+                ],
+            ]
+        );
+
+        $hasAnyTypes = $links->hasAnyTypes();
 
         $this->assertTrue($hasAnyTypes);
     }
@@ -125,13 +166,13 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasAnyTypesIsFalse()
+    public function hasAnyTypesWhenFalse()
     {
         $links = ErrorLinks::fromArray([]);
 
-        $hasTypes = $links->hasTypes();
+        $hasAnyTypes = $links->hasAnyTypes();
 
-        $this->assertFalse($hasTypes);
+        $this->assertFalse($hasAnyTypes);
     }
 
     /**
@@ -143,7 +184,6 @@ class ErrorLinksTest extends TestCase
             [
                 "type" => [
                     "",
-                    "",
                 ],
             ]
         );
@@ -153,9 +193,46 @@ class ErrorLinksTest extends TestCase
         $this->assertEquals(
             [
                 new Link(""),
-                new Link("")
             ],
             $types
         );
+    }
+
+    /**
+     * @test
+     */
+    public function fromArray()
+    {
+        $links = ErrorLinks::fromArray(
+            [
+                "about" => "",
+                "type" => [],
+            ]
+        );
+
+        $array = $links->toArray();
+
+        $this->assertArrayHasKey("about", $array);
+        $this->assertArrayNotHasKey("type", $array);
+    }
+
+    /**
+     * @test
+     */
+    public function toArray()
+    {
+        $links = ErrorLinks::fromArray(
+            [
+                "about" => "",
+                "type" => [
+                    "",
+                ],
+            ]
+        );
+
+        $linksArray = $links->toArray();
+
+        $this->assertArrayHasKey("about", $linksArray);
+        $this->assertArrayHasKey("type", $linksArray);
     }
 }

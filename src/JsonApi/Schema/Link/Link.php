@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema\Link;
 
-final class Link
+class Link
 {
     /**
      * @var string
@@ -14,11 +14,6 @@ final class Link
      * @var array
      */
     private $meta;
-
-    public static function createFromString(string $link): Link
-    {
-        return new self($link);
-    }
 
     public function __construct(string $href, array $meta = [])
     {
@@ -43,8 +38,18 @@ final class Link
 
     /**
      * @internal
+     * @return $this
      */
-    public static function fromArray(array $link): Link
+    public static function fromString(string $link)
+    {
+        return new static($link);
+    }
+
+    /**
+     * @internal
+     * @return $this
+     */
+    public static function fromArray(array $link)
     {
         $href = isset($link["href"]) && is_string($link["href"]) ? $link["href"] : "";
         $meta = isset($link["meta"]) && is_array($link["meta"]) ? $link["meta"] : [];

@@ -11,60 +11,6 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
-    public function toArray()
-    {
-        $source = ErrorSource::fromArray(
-            [
-                "pointer" => "a",
-                "parameter" => "b",
-            ]
-        );
-
-        $this->assertSame(
-            [
-                "pointer" => "a",
-                "parameter" => "b",
-            ],
-            $source->toArray()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function toArrayWhenMissing()
-    {
-        $source = ErrorSource::fromArray(
-            []
-        );
-
-        $this->assertSame(
-            [],
-            $source->toArray()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function toArrayWhenEmpty()
-    {
-        $source = ErrorSource::fromArray(
-            [
-                "pointer" => "",
-                "parameter" => "",
-            ]
-        );
-
-        $this->assertSame(
-            [],
-            $source->toArray()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function hasSourceIsTrueForPointer()
     {
         $source = ErrorSource::fromArray(
@@ -194,5 +140,59 @@ class ErrorSourceTest extends TestCase
         $source = ErrorSource::fromArray([]);
 
         $this->assertSame("", $source->parameter());
+    }
+
+    /**
+     * @test
+     */
+    public function toArray()
+    {
+        $source = ErrorSource::fromArray(
+            [
+                "pointer" => "a",
+                "parameter" => "b",
+            ]
+        );
+
+        $this->assertSame(
+            [
+                "pointer" => "a",
+                "parameter" => "b",
+            ],
+            $source->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function toArrayWhenMissing()
+    {
+        $source = ErrorSource::fromArray(
+            []
+        );
+
+        $this->assertSame(
+            [],
+            $source->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function toArrayWhenEmpty()
+    {
+        $source = ErrorSource::fromArray(
+            [
+                "pointer" => "",
+                "parameter" => "",
+            ]
+        );
+
+        $this->assertSame(
+            [],
+            $source->toArray()
+        );
     }
 }

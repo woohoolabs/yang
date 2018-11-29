@@ -11,9 +11,68 @@ class LinkTest extends TestCase
     /**
      * @test
      */
-    public function createFromString()
+    public function href()
     {
-        $link = Link::createFromString("abc");
+        $link = new Link("abc");
+
+        $this->assertSame("abc", $link->href());
+    }
+
+    /**
+     * @test
+     */
+    public function hasMetaWhenTrue()
+    {
+        $link = Link::fromArray(
+            [
+                "href" => "",
+                "meta" => [
+                    "abc" => "def",
+                ],
+            ]
+        );
+
+        $this->assertTrue($link->hasMeta());
+    }
+
+    /**
+     * @test
+     */
+    public function hasMetaWhenFalse()
+    {
+        $link = Link::fromArray(
+            [
+                "href" => "",
+                "meta" => [],
+            ]
+        );
+
+        $this->assertFalse($link->hasMeta());
+    }
+
+    /**
+     * @test
+     */
+    public function meta()
+    {
+        $link = Link::fromArray(
+            [
+                "href" => "",
+                "meta" => [
+                    "abc" => "def",
+                ],
+            ]
+        );
+
+        $this->assertSame(["abc" => "def"], $link->meta());
+    }
+
+    /**
+     * @test
+     */
+    public function fromString()
+    {
+        $link = Link::fromString("abc");
 
         $this->assertSame("abc", $link->href());
         $this->assertFalse($link->hasMeta());
@@ -22,7 +81,7 @@ class LinkTest extends TestCase
     /**
      * @test
      */
-    public function createFromArray()
+    public function fromArray()
     {
         $link = Link::fromArray(
             [
@@ -40,7 +99,7 @@ class LinkTest extends TestCase
     /**
      * @test
      */
-    public function createFromArrayWithWrongTypes()
+    public function fromArrayWithWrongTypes()
     {
         $link = Link::fromArray(
             [
@@ -76,64 +135,5 @@ class LinkTest extends TestCase
             ],
             $link->toArray()
         );
-    }
-
-    /**
-     * @test
-     */
-    public function href()
-    {
-        $link = new Link("abc");
-
-        $this->assertSame("abc", $link->href());
-    }
-
-    /**
-     * @test
-     */
-    public function hasMetaIsTrue()
-    {
-        $link = Link::fromArray(
-            [
-                "href" => "",
-                "meta" => [
-                    "abc" => "def",
-                ],
-            ]
-        );
-
-        $this->assertTrue($link->hasMeta());
-    }
-
-    /**
-     * @test
-     */
-    public function hasMetaIsFalse()
-    {
-        $link = Link::fromArray(
-            [
-                "href" => "",
-                "meta" => [],
-            ]
-        );
-
-        $this->assertFalse($link->hasMeta());
-    }
-
-    /**
-     * @test
-     */
-    public function meta()
-    {
-        $link = Link::fromArray(
-            [
-                "href" => "",
-                "meta" => [
-                    "abc" => "def",
-                ],
-            ]
-        );
-
-        $this->assertSame(["abc" => "def"], $link->meta());
     }
 }

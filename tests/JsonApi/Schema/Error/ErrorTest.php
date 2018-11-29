@@ -13,106 +13,6 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function toArray()
-    {
-        $error = Error::fromArray(
-            [
-                "id" => "a",
-                "meta" => [
-                    "a" => "b",
-                ],
-                "links" => [
-                    "a" => "b",
-                ],
-                "status" => "1",
-                "code" => "a",
-                "title" => "A",
-                "detail" => "B",
-                "source" => [
-                    "pointer" => "a",
-                    "parameter" => "b",
-                ],
-            ]
-        );
-
-        $array = $error->toArray();
-
-        $this->assertSame(
-            [
-                "id" => "a",
-                "meta" => [
-                    "a" => "b",
-                ],
-                "links" => [
-                    "a" => [
-                        "href" => "b",
-                    ],
-                ],
-                "status" => "1",
-                "code" => "a",
-                "title" => "A",
-                "detail" => "B",
-                "source" => [
-                    "pointer" => "a",
-                    "parameter" => "b",
-                ],
-            ],
-            $array
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function toArrayWhenEmpty()
-    {
-        $error = Error::fromArray(
-            [
-                "id" => "",
-                "status" => "",
-                "code" => "",
-                "title" => "",
-                "detail" => "",
-            ]
-        );
-
-        $array = $error->toArray();
-
-        $this->assertSame([], $array);
-    }
-
-    /**
-     * @test
-     */
-    public function toArrayWhenZero()
-    {
-        $error = Error::fromArray(
-            [
-                "id" => "0",
-                "status" => "0",
-                "code" => "0",
-                "title" => "0",
-                "detail" => "0",
-            ]
-        );
-
-        $array = $error->toArray();
-
-        $this->assertSame(
-            [
-                "id" => "0",
-                "status" => "0",
-                "code" => "0",
-                "title" => "0",
-                "detail" => "0",
-            ],
-            $array
-        );
-    }
-
-    /**
-     * @test
-     */
     public function id()
     {
         $error = Error::fromArray(
@@ -291,4 +191,105 @@ class ErrorTest extends TestCase
 
         $this->assertEquals(new ErrorSource("", ""), $source);
     }
+
+    /**
+     * @test
+     */
+    public function toArray()
+    {
+        $error = Error::fromArray(
+            [
+                "id" => "a",
+                "meta" => [
+                    "a" => "b",
+                ],
+                "links" => [
+                    "a" => "b",
+                ],
+                "status" => "1",
+                "code" => "a",
+                "title" => "A",
+                "detail" => "B",
+                "source" => [
+                    "pointer" => "a",
+                    "parameter" => "b",
+                ],
+            ]
+        );
+
+        $array = $error->toArray();
+
+        $this->assertSame(
+            [
+                "id" => "a",
+                "meta" => [
+                    "a" => "b",
+                ],
+                "links" => [
+                    "a" => [
+                        "href" => "b",
+                    ],
+                ],
+                "status" => "1",
+                "code" => "a",
+                "title" => "A",
+                "detail" => "B",
+                "source" => [
+                    "pointer" => "a",
+                    "parameter" => "b",
+                ],
+            ],
+            $array
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function toArrayWhenEmpty()
+    {
+        $error = Error::fromArray(
+            [
+                "id" => "",
+                "status" => "",
+                "code" => "",
+                "title" => "",
+                "detail" => "",
+            ]
+        );
+
+        $array = $error->toArray();
+
+        $this->assertSame([], $array);
+    }
+
+    /**
+     * @test
+     */
+    public function toArrayWhenZero()
+    {
+        $error = Error::fromArray(
+            [
+                "id" => "0",
+                "status" => "0",
+                "code" => "0",
+                "title" => "0",
+                "detail" => "0",
+            ]
+        );
+
+        $array = $error->toArray();
+
+        $this->assertSame(
+            [
+                "id" => "0",
+                "status" => "0",
+                "code" => "0",
+                "title" => "0",
+                "detail" => "0",
+            ],
+            $array
+        );
+    }
+
 }

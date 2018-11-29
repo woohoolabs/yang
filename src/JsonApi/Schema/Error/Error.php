@@ -129,7 +129,10 @@ final class Error
     {
         $id = isset($error["id"]) && is_string($error["id"]) ? $error["id"] : "";
         $meta = isset($error["meta"]) && is_array($error["meta"]) ? $error["meta"] : [];
-        $links = ErrorLinks::fromArray(isset($error["links"]) && is_array($error["links"]) ? $error["links"] : []);
+        $links = ErrorLinks::fromArray(
+            isset($error["links"]) && is_array($error["links"]) ? $error["links"] : [],
+            isset($error["type"]) && is_array($error["type"]) ? $error["type"] : []
+        );
         $status = isset($error["status"]) && is_scalar($error["status"]) ? (string) $error["status"] : "";
         $code = isset($error["code"]) && is_string($error["code"]) ? $error["code"] : "";
         $title = isset($error["title"]) && is_string($error["title"]) ? $error["title"] : "";

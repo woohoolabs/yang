@@ -52,17 +52,16 @@ abstract class AbstractLinks
     }
 
     /**
-     * @internal
      * @return $this
      */
     public static function fromArray(array $links)
     {
         $linkObjects = [];
-        foreach ($links as $name => $value) {
-            if (is_string($value)) {
-                $linkObjects[$name] = Link::createFromString($value);
-            } elseif (is_array($value)) {
-                $linkObjects[$name] = Link::fromArray($value);
+        foreach ($links as $name => $link) {
+            if (is_string($link)) {
+                $linkObjects[$name] = Link::fromString($link);
+            } elseif (is_array($link)) {
+                $linkObjects[$name] = Link::fromArray($link);
             }
         }
 

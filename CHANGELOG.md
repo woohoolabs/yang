@@ -2,6 +2,8 @@
 
 ADDED:
 
+- JSON:API 1.1 related features:
+    - Support for `type` links in errors
 - `Relationship::hasResourceLinkMeta()` to determine if a relationship contains a meta member
 
 CHANGED:

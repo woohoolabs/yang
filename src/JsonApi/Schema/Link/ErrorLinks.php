@@ -3,8 +3,14 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema\Link;
 
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
+
 final class ErrorLinks extends AbstractLinks
 {
+    /**
+     * @var Link[]
+     */
+    private $types;
 
     /**
      * @param Link[] $links
@@ -13,6 +19,7 @@ final class ErrorLinks extends AbstractLinks
     public function __construct(array $links, array $types)
     {
         parent::__construct($links);
+        $this->types = $types;
     }
 
     public function hasAbout(): bool
@@ -25,6 +32,35 @@ final class ErrorLinks extends AbstractLinks
         return $this->link("about");
     }
 
+    public function hasType(string $href): bool
+    {
+        return isset($this->types[$href]);
+    }
+
+    /**
+     * @throws DocumentException
+     */
+    public function type(string $href): Link
+    {
+        if (isset($this->types[$href]) === false) {
+            throw new DocumentException("There is no type link with the '$href' URI!");
+        }
+
+        return $this->types[$href];
+    }
+
+    public function hasAnyTypes(): bool
+    {
+        return empty($this->types) === false;
+    }
+
+    /**
+     * @return Link[]
+     */
+    public function types(): array
+    {
+        return array_values($this->types);
+    }
 
     /**
      * @internal
@@ -32,15 +68,26 @@ final class ErrorLinks extends AbstractLinks
     public static function fromArray(array $links): ErrorLinks
     {
         $linkObjects = [];
-        foreach ($links as $name => $value) {
-            if (is_string($value)) {
-                $linkObjects[$name] = Link::createFromString($value);
-            } elseif (is_array($value)) {
-                $linkObjects[$name] = Link::fromArray($value);
+        $types = [];
+
+        foreach ($links as $name => $link) {
+            if ($name === "type") {
+                $types = is_array($link) ? self::createTypes($link) : [];
+                continue;
+            }
+
+            if (is_string($link)) {
+                $linkObjects[$name] = Link::fromString($link);
+                continue;
+            }
+
+            if (is_array($link)) {
+                $linkObjects[$name] = Link::fromArray($link);
+                continue;
             }
         }
 
-        return new self($linkObjects, []);
+        return new self($linkObjects, $types);
     }
 
     public function toArray(): array
@@ -52,5 +99,25 @@ final class ErrorLinks extends AbstractLinks
         }
 
         return $links;
+    }
+
+    private static function createTypes(array $types): array
+    {
+        $typeLinks = [];
+
+        foreach ($types as $link) {
+            if (is_string($link)) {
+                $typeLinks[$link] = Link::fromString($link);
+                continue;
+            }
+
+            if (is_array($link)) {
+                $profileLink = Link::fromArray($link);
+                $typeLinks[$profileLink->href()] = $profileLink;
+                continue;
+            }
+        }
+
+        return $typeLinks;
     }
 }

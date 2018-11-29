@@ -11,7 +11,7 @@ class JsonApiObjectTest extends TestCase
     /**
      * @test
      */
-    public function createFromArray()
+    public function fromArray()
     {
         $jsonApi = JsonApiObject::fromArray(
             [
@@ -29,7 +29,7 @@ class JsonApiObjectTest extends TestCase
     /**
      * @test
      */
-    public function createFromArrayWhenEmpty()
+    public function fromArrayWhenEmpty()
     {
         $jsonApi = JsonApiObject::fromArray([]);
 

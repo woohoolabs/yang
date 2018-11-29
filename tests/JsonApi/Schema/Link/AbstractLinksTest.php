@@ -13,7 +13,7 @@ class AbstractLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasLinkIsTrue()
+    public function hasLinkWhenTrue()
     {
         $links = DocumentLinks::fromArray(
             [
@@ -29,7 +29,7 @@ class AbstractLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasLinkIsFalse()
+    public function hasLinkWhenFalse()
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -97,7 +97,7 @@ class AbstractLinksTest extends TestCase
     /**
      * @test
      */
-    public function createFromArray()
+    public function fromArray()
     {
         $links = DocumentLinks::fromArray(
             [
