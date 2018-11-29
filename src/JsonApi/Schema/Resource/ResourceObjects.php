@@ -31,7 +31,7 @@ final class ResourceObjects
     {
         $this->isSinglePrimaryResource = $isSinglePrimaryResource;
 
-        if ($this->isSinglePrimaryResource === true) {
+        if ($this->isSinglePrimaryResource) {
             if (empty($data) === false) {
                 $this->addPrimaryResource(ResourceObject::fromArray($data, $this));
             }
@@ -176,12 +176,6 @@ final class ResourceObjects
 
     private function addPrimaryResource(ResourceObject $resource): ResourceObjects
     {
-        $type = $resource->type();
-        $id = $resource->id();
-        if ($this->hasIncludedResource($type, $id) === true) {
-            unset($this->includedKeys["$type.$id"]);
-        }
-
         $this->addResource($this->primaryKeys, $resource);
 
         return $this;

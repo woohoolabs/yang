@@ -17,7 +17,9 @@ class ResourceObjectsTest extends TestCase
     {
         $resourceObjects = $this->createResourceObjectsFromSinglePrimaryData();
 
-        $this->assertTrue($resourceObjects->isSinglePrimaryResource());
+        $isSinglePrimaryResource = $resourceObjects->isSinglePrimaryResource();
+
+        $this->assertTrue($isSinglePrimaryResource);
     }
 
     /**
@@ -27,7 +29,9 @@ class ResourceObjectsTest extends TestCase
     {
         $resourceObjects = $this->createResourceObjectsFromCollectionPrimaryData();
 
-        $this->assertFalse($resourceObjects->isSinglePrimaryResource());
+        $isSinglePrimaryResource = $resourceObjects->isSinglePrimaryResource();
+
+        $this->assertFalse($isSinglePrimaryResource);
     }
 
     /**
@@ -37,7 +41,9 @@ class ResourceObjectsTest extends TestCase
     {
         $resourceObjects = $this->createResourceObjectsFromCollectionPrimaryData();
 
-        $this->assertTrue($resourceObjects->isPrimaryResourceCollection());
+        $isPrimaryResourceCollection = $resourceObjects->isPrimaryResourceCollection();
+
+        $this->assertTrue($isPrimaryResourceCollection);
     }
 
     /**
@@ -47,7 +53,101 @@ class ResourceObjectsTest extends TestCase
     {
         $resourceObjects = $this->createResourceObjectsFromSinglePrimaryData();
 
-        $this->assertFalse($resourceObjects->isPrimaryResourceCollection());
+        $isPrimaryResourceCollection = $resourceObjects->isPrimaryResourceCollection();
+
+        $this->assertFalse($isPrimaryResourceCollection);
+    }
+
+    /**
+     * @test
+     */
+    public function hasResourceIsTrueWhenSinglePrimaryData()
+    {
+        $resourceObjects = $this->createResourceObjectsFromSinglePrimaryData(
+            [
+                "type" => "a",
+                "id" => "1",
+            ]
+        );
+
+        $hasResource = $resourceObjects->hasResource("a", "1");
+
+        $this->assertTrue($hasResource);
+    }
+
+    /**
+     * @test
+     */
+    public function hasResourceIsTrueWhenCollectionPrimaryData()
+    {
+        $resourceObjects = $this->createResourceObjectsFromCollectionPrimaryData(
+            [
+                [
+                    "type" => "a",
+                    "id" => "1",
+                ],
+            ]
+        );
+
+        $hasResource = $resourceObjects->hasResource("a", "1");
+
+        $this->assertTrue($hasResource);
+    }
+
+    /**
+     * @test
+     */
+    public function hasResourceIsTrueWhenIncluded()
+    {
+        $resourceObjects = $this->createResourceObjectsFromCollectionPrimaryData(
+            [],
+            [
+                [
+                    "type" => "a",
+                    "id" => "1",
+                ],
+            ]
+        );
+
+        $hasResource = $resourceObjects->hasResource("a", "1");
+
+        $this->assertTrue($hasResource);
+    }
+
+    /**
+     * @test
+     */
+    public function hasResourceIsFalseWhenSinglePrimaryData()
+    {
+        $resourceObjects = $this->createResourceObjectsFromSinglePrimaryData(
+            [
+                "type" => "a",
+                "id" => "1",
+            ]
+        );
+
+        $hasResource = $resourceObjects->hasResource("b", "2");
+
+        $this->assertFalse($hasResource);
+    }
+
+    /**
+     * @test
+     */
+    public function hasResourceIsFalseWhenCollectionPrimaryData()
+    {
+        $resourceObjects = $this->createResourceObjectsFromCollectionPrimaryData(
+            [
+                [
+                    "type" => "a",
+                    "id" => "1",
+                ],
+            ]
+        );
+
+        $hasResource = $resourceObjects->hasResource("b", "2");
+
+        $this->assertFalse($hasResource);
     }
 
     /**
@@ -62,7 +162,9 @@ class ResourceObjectsTest extends TestCase
             ]
         );
 
-        $this->assertTrue($resourceObjects->hasAnyPrimaryResources());
+        $hasAnyPrimaryResources = $resourceObjects->hasAnyPrimaryResources();
+
+        $this->assertTrue($hasAnyPrimaryResources);
     }
 
     /**
@@ -72,7 +174,9 @@ class ResourceObjectsTest extends TestCase
     {
         $resourceObjects = $this->createResourceObjectsFromSinglePrimaryData();
 
-        $this->assertFalse($resourceObjects->hasAnyPrimaryResources());
+        $hasAnyPrimaryResources = $resourceObjects->hasAnyPrimaryResources();
+
+        $this->assertFalse($hasAnyPrimaryResources);
     }
 
     /**
@@ -87,7 +191,9 @@ class ResourceObjectsTest extends TestCase
             ]
         );
 
-        $this->assertInstanceOf(ResourceObject::class, $resourceObjects->primaryResource());
+        $primaryResource = $resourceObjects->primaryResource();
+
+        $this->assertInstanceOf(ResourceObject::class, $primaryResource);
     }
 
     /**
@@ -116,7 +222,9 @@ class ResourceObjectsTest extends TestCase
             ]
         );
 
-        $this->assertInstanceOf(ResourceObject::class, $resourceObjects->primaryResources()[0]);
+        $resourceObject = $resourceObjects->primaryResources()[0];
+
+        $this->assertInstanceOf(ResourceObject::class, $resourceObject);
     }
 
     /**
@@ -126,7 +234,9 @@ class ResourceObjectsTest extends TestCase
     {
         $resourceObjects = $this->createResourceObjectsFromCollectionPrimaryData();
 
-        $this->assertEmpty($resourceObjects->primaryResources());
+        $primaryResources = $resourceObjects->primaryResources();
+
+        $this->assertEmpty($primaryResources);
     }
 
     /**
@@ -141,7 +251,9 @@ class ResourceObjectsTest extends TestCase
             ]
         );
 
-        $this->assertInstanceOf(ResourceObject::class, $resourceObjects->resource("users", "abcd"));
+        $resourceObject = $resourceObjects->resource("users", "abcd");
+
+        $this->assertInstanceOf(ResourceObject::class, $resourceObject);
     }
 
     /**
@@ -158,7 +270,9 @@ class ResourceObjectsTest extends TestCase
             ]
         );
 
-        $this->assertInstanceOf(ResourceObject::class, $resourceObjects->resource("users", "abcd"));
+        $resourceObject = $resourceObjects->resource("users", "abcd");
+
+        $this->assertInstanceOf(ResourceObject::class, $resourceObject);
     }
 
     /**
@@ -188,7 +302,9 @@ class ResourceObjectsTest extends TestCase
             ]
         );
 
-        $this->assertTrue($resourceObjects->hasAnyIncludedResources());
+        $hasAnyIncludedResources = $resourceObjects->hasAnyIncludedResources();
+
+        $this->assertTrue($hasAnyIncludedResources);
     }
 
     /**
@@ -198,7 +314,9 @@ class ResourceObjectsTest extends TestCase
     {
         $resourceObjects = $this->createResourceObjectsFromSinglePrimaryData();
 
-        $this->assertFalse($resourceObjects->hasAnyIncludedResources());
+        $hasAnyIncludedResources = $resourceObjects->hasAnyIncludedResources();
+
+        $this->assertFalse($hasAnyIncludedResources);
     }
 
     /**
@@ -216,7 +334,9 @@ class ResourceObjectsTest extends TestCase
             ]
         );
 
-        $this->assertTrue($resourceObjects->hasIncludedResource("user", "abcd"));
+        $hasIncludedResources = $resourceObjects->hasIncludedResource("user", "abcd");
+
+        $this->assertTrue($hasIncludedResources);
     }
 
     /**
@@ -226,7 +346,9 @@ class ResourceObjectsTest extends TestCase
     {
         $resourceObjects = $this->createResourceObjectsFromSinglePrimaryData();
 
-        $this->assertFalse($resourceObjects->hasIncludedResource("user", "abcd"));
+        $hasIncludedResources = $resourceObjects->hasIncludedResource("user", "abcd");
+
+        $this->assertFalse($hasIncludedResources);
     }
 
     /**
@@ -244,7 +366,9 @@ class ResourceObjectsTest extends TestCase
             ]
         );
 
-        $this->assertInstanceOf(ResourceObject::class, $resourceObjects->includedResources()[0]);
+        $includedResource = $resourceObjects->includedResources()[0];
+
+        $this->assertInstanceOf(ResourceObject::class, $includedResource);
     }
 
     /**
@@ -254,16 +378,136 @@ class ResourceObjectsTest extends TestCase
     {
         $resourceObjects = $this->createResourceObjectsFromCollectionPrimaryData();
 
-        $this->assertEmpty($resourceObjects->includedResources());
+        $includedResources = $resourceObjects->includedResources();
+
+        $this->assertEmpty($includedResources);
+    }
+
+    /**
+     * @test
+     */
+    public function primaryDataToArrayWhenNoSingleResource()
+    {
+        $resourceObjects = $this->createResourceObjectsFromSinglePrimaryData([]);
+
+        $array = $resourceObjects->primaryDataToArray();
+
+        $this->assertNull($array);
+    }
+
+    /**
+     * @test
+     */
+    public function primaryDataToArrayWhenSingleResource()
+    {
+        $resourceObjects = $this->createResourceObjectsFromSinglePrimaryData(
+            [
+                "type" => "a",
+                "id" => "1",
+            ]
+        );
+
+        $array = $resourceObjects->primaryDataToArray();
+
+        $this->assertSame(
+            [
+                "type" => "a",
+                "id" => "1",
+            ],
+            $array
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function primaryDataToArrayWhenEmptyCollection()
+    {
+        $resourceObjects = $this->createResourceObjectsFromCollectionPrimaryData();
+
+        $array = $resourceObjects->primaryDataToArray();
+
+        $this->assertSame([], $array);
+    }
+
+    /**
+     * @test
+     */
+    public function primaryDataToArrayWhenNotEmptyCollection()
+    {
+        $resourceObjects = $this->createResourceObjectsFromCollectionPrimaryData(
+            [
+                [
+                    "type" => "a",
+                    "id" => "1",
+                ],
+                [
+                    "type" => "a",
+                    "id" => "2",
+                ],
+            ]
+        );
+
+        $array = $resourceObjects->primaryDataToArray();
+
+        $this->assertSame(
+            [
+                [
+                    "type" => "a",
+                    "id" => "1",
+                ],
+                [
+                    "type" => "a",
+                    "id" => "2",
+                ],
+            ],
+            $array
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function includedToArray()
+    {
+        $resourceObjects = $this->createResourceObjectsFromCollectionPrimaryData(
+            [],
+            [
+                [
+                    "type" => "a",
+                    "id" => "1",
+                ],
+                [
+                    "type" => "a",
+                    "id" => "2",
+                ],
+            ]
+        );
+
+        $array = $resourceObjects->includedToArray();
+
+        $this->assertSame(
+            [
+                [
+                    "type" => "a",
+                    "id" => "1",
+                ],
+                [
+                    "type" => "a",
+                    "id" => "2",
+                ],
+            ],
+            $array
+        );
     }
 
     private function createResourceObjectsFromSinglePrimaryData(array $data = [], array $included = []): ResourceObjects
     {
-        return new ResourceObjects($data, $included, true);
+        return ResourceObjects::fromSinglePrimaryData($data, $included);
     }
 
     private function createResourceObjectsFromCollectionPrimaryData(array $data = [], array $included = []): ResourceObjects
     {
-        return new ResourceObjects($data, $included, false);
+        return ResourceObjects::fromCollectionPrimaryData($data, $included);
     }
 }

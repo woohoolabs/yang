@@ -5,7 +5,6 @@ ADDED:
 - JSON:API 1.1 related features:
     - Support for Profiles
     - Support for `type` links in errors
-- `Relationship::hasResourceLinkMeta()` to determine if a relationship contains a meta member
 
 CHANGED:
 
@@ -27,7 +26,6 @@ CHANGED:
     - `Relationship::resource()` throws an exception instead of returning null if the relationship is a to-many
     - `Relationship::resource()` throws an exception instead of returning null if the relationship is a to-many
     - `Relationship::resourceBy()` throws an exception instead of returning null if the relationship is a to-many
-    - `Relationship::resourceLinkMeta()` throws an exception instead of returning null if the relationship doesn't contain a meta member
     - `ResourceObject::relationship()` throws an exception instead of returning null if the relationship can not be found
     - `ResourceObjects::resource()` throws an exception instead of returning null if the requested resource can not be found
     - `ResourceObjects::primaryResources()` throws an exception instead of returning null if the document doesn't have a primary resource

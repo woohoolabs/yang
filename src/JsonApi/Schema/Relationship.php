@@ -131,7 +131,7 @@ final class Relationship
     }
 
     /**
-     * @return ResourceObject[]
+     * @return ResourceObject[][]
      */
     public function resourceMap(): array
     {
@@ -158,12 +158,12 @@ final class Relationship
             );
         }
 
-        $resourceMap = reset($this->resourceMap);
-        if ($resourceMap === false) {
+        $resource = reset($this->resourceMap);
+        if ($resource === false) {
             throw new DocumentException("The relationship with '$this->name' name is empty, therefore it doesn't have a single resource.");
         }
 
-        return $this->resourceBy($resourceMap["type"], $resourceMap["id"]);
+        return $this->resourceBy($resource["type"], $resource["id"]);
     }
 
     /**
@@ -175,24 +175,8 @@ final class Relationship
     }
 
     /**
-     * Get if the requested resource identifier link has any meta information.
-     * This occurs when a relationship contains additional data besides the relation's identifiers.
-     */
-    public function hasResourceLinkMeta(string $type, string $id): bool
-    {
-        foreach ($this->resourceMap as $resourceLink) {
-            if (isset($resourceLink["meta"]) && $resourceLink["type"] === $type && $resourceLink["id"] === $id) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Get meta information that may be defined next to the resource identifier link.
      * This occurs when a relationship contains additional data besides the relation's identifiers.
-     * @throws DocumentException
      */
     public function resourceLinkMeta(string $type, string $id): array
     {
@@ -202,7 +186,7 @@ final class Relationship
             }
         }
 
-        throw new DocumentException("The relationship resource with '$type' type and '$id' ID doesn't have a meta member!");
+        return [];
     }
 
     /**
