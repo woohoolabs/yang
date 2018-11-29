@@ -31,8 +31,8 @@ CHANGED:
     - `ResourceObjects::primaryResources()` throws an exception instead of returning null if the document doesn't have a primary resource
 - Use separate classes for the different types of links: `DocumentLinks`, `ResourceLinks`, `RelationshipLinks`, `ErrorLinks` (__BREAKING__) 
 - `JsonSerializer::serialize()` will throw a `RequestException` instead of `LogicException` if the body is of invalid type (__BREAKING__) 
-- Rename `JsonApi` to `JsonApiObject`
-- Move errors, links, and resources to their own namespace
+- Rename `JsonApi` to `JsonApiObject` (__BREAKING__) 
+- Move errors, links, and resources to their own namespace (__BREAKING__) 
 
 REMOVED:
 
