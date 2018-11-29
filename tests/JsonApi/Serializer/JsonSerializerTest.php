@@ -5,6 +5,7 @@ namespace WoohooLabs\Yang\Tests\JsonApi\Serializer;
 
 use GuzzleHttp\Psr7\Request;
 use PHPUnit\Framework\TestCase;
+use WoohooLabs\Yang\JsonApi\Exception\RequestException;
 use WoohooLabs\Yang\JsonApi\Serializer\JsonSerializer;
 
 class JsonSerializerTest extends TestCase
@@ -12,23 +13,101 @@ class JsonSerializerTest extends TestCase
     /**
      * @test
      */
-    public function serialize()
+    public function serializeWhenRequestIsInitiallyEmpty()
     {
-        $body = [
-            "data" => [
-                "type" => "a",
-                "id" => "1",
-            ]
-        ];
-
-        $response = $this->createRequest($body);
         $serializer = new JsonSerializer();
 
-        $this->assertSame(json_encode($body), $serializer->serialize($response, $body)->getBody()->__toString());
+        $request = $serializer->serialize(
+            $this->createRequest(),
+            [
+                "data" => [
+                    "type" => "a",
+                    "id" => "1",
+                ],
+            ]
+        );
+
+        $this->assertSame(
+            json_encode(
+                [
+                    "data" => [
+                        "type" => "a",
+                        "id" => "1",
+                    ],
+                ]
+            ),
+            $request->getBody()->__toString()
+        );
     }
 
-    private function createRequest(array $body): Request
+    /**
+     * @test
+     */
+    public function serializeWhenRequestInitiallyHasContent()
     {
-        return new Request("", "", [], json_encode($body));
+        $serializer = new JsonSerializer();
+
+        $request = $serializer->serialize(
+            $this->createRequest(["abcd"]),
+            [
+                "data" => [
+                    "type" => "a",
+                    "id" => "1",
+                ],
+            ]
+        );
+
+        $this->assertSame(
+            json_encode(
+                [
+                    "data" => [
+                        "type" => "a",
+                        "id" => "1",
+                    ],
+                ]
+            ),
+            $request->getBody()->__toString()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function serializeWhenString()
+    {
+        $serializer = new JsonSerializer();
+
+        $request = $serializer->serialize($this->createRequest(), "abc");
+
+        $this->assertSame("abc", $request->getBody()->__toString());
+    }
+
+    /**
+     * @test
+     */
+    public function serializeWhenNull()
+    {
+        $serializer = new JsonSerializer();
+
+        $request = $serializer->serialize($this->createRequest(), null);
+
+        $this->assertSame("", $request->getBody()->__toString());
+    }
+
+    /**
+     * @test
+     */
+    public function serializeWhenContentInvalidType()
+    {
+        $serializer = new JsonSerializer();
+
+        $this->expectException(RequestException::class);
+
+        $serializer->serialize($this->createRequest(), 123);
+    }
+
+    private function createRequest(?array $body = null): Request
+    {
+        return new Request("", "", [], $body !== null ? json_encode($body) : null);
     }
 }

@@ -41,7 +41,7 @@ JSON:API clients, while [Woohoo Labs. Yin](https://woohoolabs/yin) is its server
 ### Features
 
 - 100% [PSR-7](https://www.php-fig.org/psr/psr-7/) compatibility
-- 99% [JSON:API 1.0](https://jsonapi.org/) conformance (approximately)
+- 99% [JSON:API 1.1](https://jsonapi.org/) conformance (approximately)
 - Provides a Request Builder to setup JSON:API request more easily
 - Provides easy-to-use HTTP clients via [PSR-18](https://www.php-fig.org/psr/psr-18/) and [HTTPlug](https://github.com/php-http/httplug)
 - Supports [hydrators](#hydration) out-of-the-box in order to easily convert API responses to objects

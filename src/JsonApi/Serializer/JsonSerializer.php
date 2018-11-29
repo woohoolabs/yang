@@ -5,6 +5,7 @@ namespace WoohooLabs\Yang\JsonApi\Serializer;
 
 use LogicException;
 use Psr\Http\Message\RequestInterface;
+use WoohooLabs\Yang\JsonApi\Exception\RequestException;
 
 final class JsonSerializer implements SerializerInterface
 {
@@ -25,21 +26,21 @@ final class JsonSerializer implements SerializerInterface
     }
 
     /**
-     * @param array|string|null $content
-     * @throws LogicException
+     * @param array|string|null $body
+     * @throws RequestException
      */
-    public function serialize(RequestInterface $request, $content): RequestInterface
+    public function serialize(RequestInterface $request, $body): RequestInterface
     {
-        if (is_array($content)) {
-            $content = json_encode($content, $this->options, $this->depth);
-        } elseif ($content !== null && is_string($content) === false) {
-            throw new LogicException("The content of the request can be a string, an array or null!");
+        if (is_array($body)) {
+            $body = json_encode($body, $this->options, $this->depth);
+        } elseif ($body !== null && is_string($body) === false) {
+            throw new RequestException("The request body can only be provided as a string, an array or null!");
         }
 
         if ($request->getBody()->isSeekable()) {
             $request->getBody()->rewind();
         }
-        $request->getBody()->write($content);
+        $request->getBody()->write($body);
 
         return $request;
     }

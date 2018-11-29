@@ -8,7 +8,7 @@ use Psr\Http\Message\RequestInterface;
 interface SerializerInterface
 {
     /**
-     * @param mixed $content
+     * @param mixed $body
      */
-    public function serialize(RequestInterface $request, $content): RequestInterface;
+    public function serialize(RequestInterface $request, $body): RequestInterface;
 }
