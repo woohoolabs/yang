@@ -371,7 +371,7 @@ class JsonApiRequestBuilder
         $result = "application/vnd.api+json";
 
         if (empty($profiles) === false) {
-            $result .= ';profile="' . implode(" ", $profiles) . '"';
+            $result .= ';profile="' . implode(" ", $profiles) . '",application/vnd.api+json';
         }
 
         return $result;
