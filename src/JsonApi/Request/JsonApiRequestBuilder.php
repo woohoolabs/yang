@@ -323,8 +323,8 @@ class JsonApiRequestBuilder
         $request = $request
             ->withUri($uri)
             ->withProtocolVersion($this->protocolVersion)
-            ->withHeader("accept", $this->getMediaTypeWithProfiles($this->requestedProfiles))
-            ->withHeader("content-type", $this->getMediaTypeWithProfiles($this->appliedProfiles));
+            ->withHeader("accept", $this->getMediaTypeWithProfiles($this->requestedProfiles, true))
+            ->withHeader("content-type", $this->getMediaTypeWithProfiles($this->appliedProfiles, false));
 
         foreach ($this->headers as $name => $value) {
             $request = $request->withHeader($name, $value);
@@ -366,12 +366,12 @@ class JsonApiRequestBuilder
         return array_key_exists($key, $array) === false || (empty($array[$key]) && is_numeric($array[$key]) === false);
     }
 
-    private function getMediaTypeWithProfiles(array $profiles): string
+    private function getMediaTypeWithProfiles(array $profiles, bool $compatibility): string
     {
         $result = "application/vnd.api+json";
 
         if (empty($profiles) === false) {
-            $result .= ';profile="' . implode(" ", $profiles) . '",application/vnd.api+json';
+            $result .= ';profile="' . implode(" ", $profiles) . '"' . ($compatibility ? ',application/vnd.api+json' : "");
         }
 
         return $result;

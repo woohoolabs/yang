@@ -278,7 +278,7 @@ class JsonApiRequestBuilderTest extends TestCase
             ->addJsonApiRequestedProfile("def");
 
         $this->assertSame(
-            'application/vnd.api+json;profile="abc def"',
+            'application/vnd.api+json;profile="abc def",application/vnd.api+json',
             $requestBuilder->getRequest()->getHeaderLine("accept")
         );
     }
