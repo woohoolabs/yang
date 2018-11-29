@@ -291,5 +291,4 @@ class ErrorTest extends TestCase
             $array
         );
     }
-
 }
