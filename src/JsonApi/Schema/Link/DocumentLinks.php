@@ -27,6 +27,9 @@ final class DocumentLinks extends AbstractLinks
         return $this->hasLink("self");
     }
 
+    /**
+     * @throws DocumentException
+     */
     public function self(): Link
     {
         return $this->link("self");
@@ -37,6 +40,9 @@ final class DocumentLinks extends AbstractLinks
         return $this->hasLink("related");
     }
 
+    /**
+     * @throws DocumentException
+     */
     public function related(): Link
     {
         return $this->link("related");
@@ -47,6 +53,9 @@ final class DocumentLinks extends AbstractLinks
         return $this->hasLink("first");
     }
 
+    /**
+     * @throws DocumentException
+     */
     public function first(): Link
     {
         return $this->link("first");
@@ -57,6 +66,9 @@ final class DocumentLinks extends AbstractLinks
         return $this->hasLink("last");
     }
 
+    /**
+     * @throws DocumentException
+     */
     public function last(): Link
     {
         return $this->link("last");
@@ -67,6 +79,9 @@ final class DocumentLinks extends AbstractLinks
         return $this->hasLink("prev");
     }
 
+    /**
+     * @throws DocumentException
+     */
     public function prev(): Link
     {
         return $this->link("prev");
@@ -77,6 +92,9 @@ final class DocumentLinks extends AbstractLinks
         return $this->hasLink("next");
     }
 
+    /**
+     * @throws DocumentException
+     */
     public function next(): Link
     {
         return $this->link("next");

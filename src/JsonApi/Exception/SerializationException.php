@@ -5,6 +5,6 @@ namespace WoohooLabs\Yang\JsonApi\Exception;
 
 use Exception;
 
-final class RequestException extends Exception implements JsonApiExceptionInterface
+final class SerializationException extends Exception implements JsonApiExceptionInterface
 {
 }

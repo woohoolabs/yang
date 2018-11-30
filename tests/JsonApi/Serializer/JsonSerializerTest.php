@@ -5,7 +5,7 @@ namespace WoohooLabs\Yang\Tests\JsonApi\Serializer;
 
 use GuzzleHttp\Psr7\Request;
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Exception\RequestException;
+use WoohooLabs\Yang\JsonApi\Exception\SerializationException;
 use WoohooLabs\Yang\JsonApi\Serializer\JsonSerializer;
 
 class JsonSerializerTest extends TestCase
@@ -101,7 +101,7 @@ class JsonSerializerTest extends TestCase
     {
         $serializer = new JsonSerializer();
 
-        $this->expectException(RequestException::class);
+        $this->expectException(SerializationException::class);
 
         $serializer->serialize($this->createRequest(), 123);
     }

@@ -61,10 +61,13 @@ final class ResourceObjects
         return isset($this->resources["$type.$id"]);
     }
 
+    /**
+     * @throws DocumentException
+     */
     public function resource(string $type, string $id): ResourceObject
     {
         if (isset($this->resources["$type.$id"]) === false) {
-            throw new DocumentException("Document doesn't contain any resource with the '$type' type and '$id' ID!");
+            throw new DocumentException("The document doesn't contain any resource with the '$type' type and '$id' ID!");
         }
 
         return $this->resources["$type.$id"];
@@ -89,7 +92,7 @@ final class ResourceObjects
     public function primaryResource(): ResourceObject
     {
         if ($this->hasAnyPrimaryResources() === false) {
-            throw new DocumentException("The document doesn't have a primary resource!");
+            throw new DocumentException("The document doesn't contain any primary resources!");
         }
 
         reset($this->primaryKeys);

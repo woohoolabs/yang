@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema\Link;
 
-use WoohooLabs\Yang\JsonApi\Exception\LinkException;
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 
 abstract class AbstractLinks
 {
@@ -27,12 +27,12 @@ abstract class AbstractLinks
 
     /**
      * @return Link
-     * @throws LinkException
+     * @throws DocumentException
      */
     public function link(string $name)
     {
         if (isset($this->links[$name]) === false) {
-            throw new LinkException("Link with '$name rel type cannot be found!");
+            throw new DocumentException("Link with '$name rel type cannot be found!");
         }
 
         return $this->links[$name];

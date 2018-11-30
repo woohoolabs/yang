@@ -27,6 +27,9 @@ final class ErrorLinks extends AbstractLinks
         return $this->hasLink("about");
     }
 
+    /**
+     * @throws DocumentException
+     */
     public function about(): Link
     {
         return $this->link("about");

@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Serializer;
 
-use LogicException;
 use Psr\Http\Message\RequestInterface;
-use WoohooLabs\Yang\JsonApi\Exception\RequestException;
+use WoohooLabs\Yang\JsonApi\Exception\SerializationException;
 
 final class JsonSerializer implements SerializerInterface
 {
@@ -27,14 +26,14 @@ final class JsonSerializer implements SerializerInterface
 
     /**
      * @param array|string|null $body
-     * @throws RequestException
+     * @throws SerializationException
      */
     public function serialize(RequestInterface $request, $body): RequestInterface
     {
         if (is_array($body)) {
             $body = json_encode($body, $this->options, $this->depth);
         } elseif ($body !== null && is_string($body) === false) {
-            throw new RequestException("The request body can only be provided as a string, an array or null!");
+            throw new SerializationException("The request body can only be provided as a string, an array or null!");
         }
 
         if ($request->getBody()->isSeekable()) {

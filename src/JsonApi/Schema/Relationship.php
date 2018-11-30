@@ -116,7 +116,8 @@ final class Relationship
     {
         if ($this->isToOneRelationship) {
             throw new DocumentException(
-                "The relationship with '$this->name' name is a to-one relationship, therefore it doesn't have multiple resources."
+                "The relationship with '$this->name' name is a to-one relationship, therefore it doesn't have multiple resources. " .
+                "Use the 'Relationship::resource()' method instead."
             );
         }
 
@@ -154,7 +155,8 @@ final class Relationship
     {
         if ($this->isToOneRelationship === false) {
             throw new DocumentException(
-                "The relationship with '$this->name' name is a to-many relationship, therefore it doesn't have a single resource."
+                "The relationship with '$this->name' name is a to-many relationship, therefore it doesn't have a single resource. " .
+                "Use the 'Relationship::resources()' method instead."
             );
         }
 

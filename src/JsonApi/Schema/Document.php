@@ -134,6 +134,7 @@ final class Document
 
     /**
      * @return Error[]
+     * @throws DocumentException
      */
     public function errors(): array
     {
