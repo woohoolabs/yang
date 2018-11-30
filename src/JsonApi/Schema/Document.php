@@ -145,6 +145,11 @@ final class Document
         return $this->errors;
     }
 
+    public function errorCount(): int
+    {
+        return count($this->errors);
+    }
+
     /**
      * @throws DocumentException
      */

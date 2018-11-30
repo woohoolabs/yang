@@ -5,6 +5,7 @@ ADDED:
 - JSON:API 1.1 related features:
     - Support for Profiles
     - Support for `type` links in errors
+- `Document::errorCount()` to easily count errors in the document
 
 CHANGED:
 

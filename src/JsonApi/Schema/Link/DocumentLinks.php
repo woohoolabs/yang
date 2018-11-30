@@ -100,6 +100,19 @@ final class DocumentLinks extends AbstractLinks
         return $this->link("next");
     }
 
+    public function hasAnyProfiles(): bool
+    {
+        return empty($this->profiles) === false;
+    }
+
+    /**
+     * @return ProfileLink[]
+     */
+    public function profiles(): array
+    {
+        return array_values($this->profiles);
+    }
+
     public function hasProfile(string $href): bool
     {
         return isset($this->profiles[$href]);
@@ -115,19 +128,6 @@ final class DocumentLinks extends AbstractLinks
         }
 
         return $this->profiles[$href];
-    }
-
-    public function hasAnyProfiles(): bool
-    {
-        return empty($this->profiles) === false;
-    }
-
-    /**
-     * @return ProfileLink[]
-     */
-    public function profiles(): array
-    {
-        return array_values($this->profiles);
     }
 
     /**

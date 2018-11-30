@@ -459,6 +459,29 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
+    public function errorCount()
+    {
+        $document = $this->createDocument(
+            [
+                "errors" => [
+                    [
+                        "status" => "400",
+                    ],
+                    [
+                        "status" => "400",
+                    ],
+                ],
+            ]
+        );
+
+        $errorCount = $document->errorCount();
+
+        $this->assertEquals(2, $errorCount);
+    }
+
+    /**
+     * @test
+     */
     public function errorReturnsFirstError()
     {
         $document = $this->createDocument(

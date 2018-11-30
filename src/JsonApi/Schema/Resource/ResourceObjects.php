@@ -78,6 +78,11 @@ final class ResourceObjects
         return empty($this->primaryKeys) === false;
     }
 
+    public function hasPrimaryResource(string $type, string $id): bool
+    {
+        return isset($this->primaryKeys["$type.$id"]);
+    }
+
     /**
      * @return ResourceObject[]
      */
@@ -99,11 +104,6 @@ final class ResourceObjects
         $key = key($this->primaryKeys);
 
         return $this->resources[$key];
-    }
-
-    public function hasPrimaryResource(string $type, string $id): bool
-    {
-        return isset($this->primaryKeys["$type.$id"]);
     }
 
     public function hasAnyIncludedResources(): bool

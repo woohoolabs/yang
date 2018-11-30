@@ -40,18 +40,6 @@ final class ErrorLinks extends AbstractLinks
         return isset($this->types[$href]);
     }
 
-    /**
-     * @throws DocumentException
-     */
-    public function type(string $href): Link
-    {
-        if (isset($this->types[$href]) === false) {
-            throw new DocumentException("There is no type link with the '$href' URI!");
-        }
-
-        return $this->types[$href];
-    }
-
     public function hasAnyTypes(): bool
     {
         return empty($this->types) === false;
@@ -63,6 +51,18 @@ final class ErrorLinks extends AbstractLinks
     public function types(): array
     {
         return array_values($this->types);
+    }
+
+    /**
+     * @throws DocumentException
+     */
+    public function type(string $href): Link
+    {
+        if (isset($this->types[$href]) === false) {
+            throw new DocumentException("There is no type link with the '$href' URI!");
+        }
+
+        return $this->types[$href];
     }
 
     /**
