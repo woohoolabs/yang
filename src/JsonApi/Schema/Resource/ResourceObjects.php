@@ -88,6 +88,13 @@ final class ResourceObjects
      */
     public function primaryResources(): array
     {
+        if ($this->isSinglePrimaryResource) {
+            throw new DocumentException(
+                "The document is a single-resource document, therefore it doesn't have multiple resources. " .
+                "Use the 'Document::primaryResource()' method instead."
+            );
+        }
+
         return array_values($this->primaryKeys);
     }
 
@@ -96,6 +103,13 @@ final class ResourceObjects
      */
     public function primaryResource(): ResourceObject
     {
+        if ($this->isSinglePrimaryResource === false) {
+            throw new DocumentException(
+                "The document is a collection document, therefore it doesn't have a single resource. " .
+                "Use the 'Document::primaryResources()' method instead."
+            );
+        }
+
         if ($this->hasAnyPrimaryResources() === false) {
             throw new DocumentException("The document doesn't contain any primary resources!");
         }

@@ -199,6 +199,26 @@ class ResourceObjectsTest extends TestCase
     /**
      * @test
      */
+    public function primaryResourceWhenCollectionDocument()
+    {
+        $resourceObjects = $this->createResourceObjectsFromCollectionPrimaryData(
+            [
+                [
+                    "type" => "",
+                    "id" => "",
+                ],
+            ]
+        );
+
+        $this->expectException(DocumentException::class);
+
+        $resourceObjects->primaryResource();
+
+    }
+
+    /**
+     * @test
+     */
     public function primaryResourceWhenMissing()
     {
         $resourceObjects = $this->createResourceObjectsFromSinglePrimaryData();
@@ -237,6 +257,24 @@ class ResourceObjectsTest extends TestCase
         $primaryResources = $resourceObjects->primaryResources();
 
         $this->assertEmpty($primaryResources);
+    }
+
+    /**
+     * @test
+     */
+    public function primaryResourcesWhenSingleResourceDocument()
+    {
+        $resourceObjects = $this->createResourceObjectsFromSinglePrimaryData(
+            [
+                "type" => "",
+                "id" => "",
+            ]
+        );
+
+        $this->expectException(DocumentException::class);
+
+        $resourceObjects->primaryResources();
+
     }
 
     /**

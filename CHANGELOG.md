@@ -11,29 +11,19 @@ CHANGED:
 
 - Make exception handling stricter (__BREAKING__):
     - `JsonApiResponse::document()` throws an exception instead of returning null if the response doesn't contain a document
-    - `Document::primaryResource()` throws an exception instead of returning null if the primary resource is missing 
+    - `Document::primaryResources()` throws an exception if the document is a single-resource document 
+    - `Document::primaryResource()` throws an exception if the document is a collection document or the primary resource is missing 
     - `Document::resource()` throws an exception instead of returning null if the resource is missing
     - `Document::errors()` throws an exception instead of returning an empty array if the document does not contain any errors
     - `Document::error()` throws an exception instead of returning null if the document does not contain the requested error
-    - `Links::self()` throws an exception instead of returning null if the "self" link can not be found
-    - `Links::related()` throws an exception instead of returning null if the "related" link can not be found
-    - `Links::first()` throws an exception instead of returning null if the "first" link can not be found
-    - `Links::last()` throws an exception instead of returning null if the "last" link can not be found
-    - `Links::prev()` throws an exception instead of returning null if the "prev" link can not be found
-    - `Links::next()` throws an exception instead of returning null if the "next" link can not be found
-    - `Links::about()` throws an exception instead of returning null if the "about" link can not be found
-    - `Links::link()` throws an exception if the link can not be found instead of returning null
     - `Relationship::resources()` throws an exception instead of returning an empty array if the relationship is a to-one
-    - `Relationship::resource()` throws an exception instead of returning null if the relationship is a to-many
-    - `Relationship::resource()` throws an exception instead of returning null if the relationship is a to-many
+    - `Relationship::resource()` throws an exception instead of returning null if the relationship is a to-many or it is empty
     - `Relationship::resourceBy()` throws an exception instead of returning null if the relationship is a to-many
-    - `ResourceObject::relationship()` throws an exception instead of returning null if the relationship can not be found
-    - `ResourceObjects::resource()` throws an exception instead of returning null if the requested resource can not be found
-    - `ResourceObjects::primaryResources()` throws an exception instead of returning null if the document doesn't have a primary resource
-- Use separate classes for the different types of links: `DocumentLinks`, `ResourceLinks`, `RelationshipLinks`, `ErrorLinks` (__BREAKING__) 
-- `JsonSerializer::serialize()` will throw a `RequestException` instead of `LogicException` if the body is of invalid type (__BREAKING__) 
-- Rename `JsonApi` to `JsonApiObject` (__BREAKING__) 
-- Move errors, links, and resources to their own namespace (__BREAKING__) 
+    - `ResourceObject::relationship()` throws an exception instead of returning null if the relationship is missing
+- Use separate classes for the different types of links: `DocumentLinks`, `ResourceLinks`, `RelationshipLinks`, `ErrorLinks` (__BREAKING__)
+- `JsonSerializer::serialize()` will throw a `RequestException` instead of `LogicException` if the body is of invalid type (__BREAKING__)
+- Rename `JsonApi` to `JsonApiObject` (__BREAKING__)
+- Move errors, links, and resources to their own namespace (__BREAKING__)
 
 REMOVED:
 
