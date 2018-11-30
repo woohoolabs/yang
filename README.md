@@ -50,7 +50,7 @@ JSON:API clients, while [Woohoo Labs. Yin](https://woohoolabs/yin) is its server
 
 The only thing you need before getting started is [Composer](https://getcomposer.org).
 
-### Install HTTP client and message implementations:
+### Install an HTTP client and message implementations:
 
 Because Yang requires a HTTP client implementation, you must install one first. You may use [Guzzle 6 Adapter](https://github.com/php-http/guzzle6-adapter)
 or any other library of your preference:
@@ -74,12 +74,12 @@ Yang requires PHP 7.1 at least. You may use Yang 1.2 for PHP 7.0 and 0.9 for PHP
 
 ## Basic Usage
 
-Yang can help you in 3 ways to communicate with JSON:API servers. The following subsections will cover these topics. 
+Yang can help you in three ways to communicate with JSON:API servers. The following subsections will cover these topics. 
 
 ### Request builder
 
-Yang comes with a powerful request builder with which you are able to setup PSR-7 `Request` objects. For this purpose,
-you may use the `JsonApiRequestBuilder` class as it can be seen in the following example.
+Yang comes with a powerful request builder with which you are able to setup PSR-7 `Request` objects in a JSON:API compliant way.
+For this purpose, you may use the `JsonApiRequestBuilder` class as it can be seen in the following example.
 
 ```php
 use GuzzleHttp\Psr7\Request;
@@ -100,31 +100,40 @@ $requestBuilder
 
 // Setup the request with JSON:API specific properties
 $requestBuilder
-    ->setJsonApiFields(                                         // To define sparse fieldset
+    ->setJsonApiFields(                                      // To define sparse fieldset
         [
             "users" => ["first_name", "last_name"],
             "address" => ["country", "city", "postal_code"]
         ]
     )
-    ->setJsonApiIncludes(                                       // To include related resources
+    ->setJsonApiIncludes(                                    // To include related resources
         ["address", "friends"]
     )
-    ->setJsonApiIncludes(                                       // Or you can pass a string instead
+    ->setJsonApiIncludes(                                    // Or you can pass a string instead
         "address,friends"
     )
-    ->setJsonApiSort(                                           // To sort resource collections
+    ->setJsonApiSort(                                        // To sort resource collections
         ["last_name", "first_name"]
     )
-    ->setJsonApiPage(                                           // To paginate the primary data
+    ->setJsonApiPage(                                        // To paginate the primary data
         ["number" => 1, "size" => 100]
     )
-    ->setJsonApiFilter(                                         // To filter the primary data
+    ->setJsonApiFilter(                                      // To filter the primary data
         ["first_name" => "John"]
+    )
+    ->addJsonApiAppliedProfile(                              // To add a profile to the request (JSON:API 1.1 feature)
+        ["https://example.com/profiles/last-modified"]
+    )
+    ->addJsonApiRequestedProfile(                            // To request the server to apply a profile (JSON:API 1.1 feature)
+        ["https://example.com/profiles/last-modified"]
+    )
+    ->addJsonApiRequiredProfile(                             // To require the server to apply a profile (JSON:API 1.1 feature)
+        ["https://example.com/profiles/last-modified"]
     );
 
 // Setup the request body
 $requestBuilder
-    ->setJsonApiBody(                                           // You can pass the content as a JSON string
+    ->setJsonApiBody(                                        // You can pass the content as a JSON string
         '{
            "data": [
              { "type": "user", "id": "1" },
@@ -132,15 +141,15 @@ $requestBuilder
            ]
          }'
     )
-    ->setJsonApiBody(                                           // or you can pass it as an array
+    ->setJsonApiBody(                                        // or you can pass it as an array
         [
             "data" => [
                 ["type" => "user", "id" => 1],
                 ["type" => "user", "id" => 2],
-            ]
+            ],
         ]
     )
-    ->setJsonApiBody(                                           // or as a ResourceObject instance
+    ->setJsonApiBody(                                        // or as a ResourceObject instance
         new ResourceObject("user", 1)
     );
 
@@ -194,10 +203,10 @@ Of course, you can use any available HTTP Clients or create a custom HTTP Client
 
 As soon as you have retrieved the server response, you can start querying it. Yang uses the PSR-7 compatible
 `JsonApiResponse` class for this purpose. If you used a HTTP client introduced above, you will automatically
-get an object of this type, otherwise you have to take care of instantiating it with the right dependencies.
+get an object of this type, otherwise you have to take care of instantiating it with the right dependencies:
 
 ```php
-// Instantiate a JSON:API response from a PSR-7 response with the default deserializer
+// Instantiate a JSON:API response object from a PSR-7 response object with the default deserializer
 $response = new JsonApiResponse($psr7Response);
 ```
 
@@ -205,23 +214,23 @@ The `JsonApiResponse` class - above the ones defined by PSR-7 - has some methods
 responses easier:
 
 ```php
-// Checks if the response contains a JSON:API Document
-$hasDocument = $response->hasDocument();
-
-// Checks if the response doesn't contain errors
+// Checks if the response doesn't contain any errors
 $isSuccessful = $response->isSuccessful();
 
-// Checks if the response has the status codes listed below and doesn't contain an "errors" member
+// Checks if the response doesn't contain any errors, and has the status codes listed below
 $isSuccessful = $response->isSuccessful([200, 202]);
 
 // The same as the isSuccessful() method, but also ensures the response contains a document
 $isSuccessfulDocument = $response->isSuccessfulDocument();
 
+// Checks if the response contains a JSON:API document
+$hasDocument = $response->hasDocument();
+
 // Retrieves and deserializes the JSON:API document in the response body
 $document = $response->document();
 ```
 
-The `Document` class has various useful methods too:
+The `Document` class has various methods too:
 
 ```php
 // Retrieves the "jsonapi" member as a JsonApiObject instance
@@ -236,51 +245,147 @@ $hasMeta = $document->hasMeta();
 // Retrieves the "meta" member as an array
 $meta = $document->meta();
 
-// Checks if the document has a "links" member
+// Checks if the document has any links
 $hasLinks = $document->hasLinks();
 
-// Retrieves the "links" member as a Links instance
+// Retrieves the "links" member as a DocumentLinks object
 $links = $document->links();
 
-$selfLink = $links->self();         // Returns a Link instance or null
-$firstLink = $links->first();       // Returns a Link instance or null
-$nextLink = $links->link("next");   // Returns a Link instance or null
-
-// Checks if the document has errors
+// Checks if the document has any errors
 $hasErrors = $document->hasErrors();
 
-// Retrieves the "errors" member as an array of Error instances
+// Counts the number of errors in the document
+$errorCount = $document->errorCount();
+
+// Retrieves the "errors" member as an array of Error objects
 $errors = $document->errors();
 
-// Retrieves the first error as an Error instance or null
+// Retrieves the first error as an Error object or throws an exception if it is missing
 $firstError = $document->error(0);
 
-// Checks if the document contains a single resource as the primary data
+// Checks if the document contains a single resource as its primary data
 $isSingleResourceDocument = $document->isSingleResourceDocument();
 
-// Checks if the document contains a collection of resources as the primary data
+// Checks if the document contains a collection of resources as its primary data
 $isResourceCollectionDocument = $document->isResourceCollectionDocument();
 
 // Checks if the document contains any primary data
 $hasPrimaryData = $document->hasAnyPrimaryResources();
 
-// Returns the primary resource as a ResourceObject instance or null if it is a collection document
+// Returns the primary resource as a ResourceObject instance if the document is a single-resource document
+// or throws an exception otherwise or when the document is empty
 $primaryResource = $document->primaryResource();
 
-// Returns the primary resources as an array of ResourceObject instances or null if it is a single resource document
+// Returns the primary resources as an array of ResourceObject instances if the document is a collection document
+// or throws an exception otherwise
 $primaryResources = $document->primaryResources();
 
 // Checks if there are any included resources in the document
 $hasIncludedResources = $document->hasAnyIncludedResources();
 
 // Checks if there is a specific included resource in the document
-$isUserIncluded = $document->hasIncludedResource("user", "abcdefg");
+$isUserIncluded = $document->hasIncludedResource("user", "1234");
 
 // Retrieves all the included resources as an array of ResourceObject instances
 $includedResources = $document->includedResources();
 ```
 
-The `ResourceObject` class has useful methods too: 
+The `DocumentLinks` class features the following methods:
+
+```php
+// Checks if the "self" link is present
+$hasSelf = $links->hasSelf();
+
+// Returns the "self" link as a Link object or throws an exception if it is missing
+$selfLink = $links->self();
+
+// Checks if the "related" link is present
+$hasRelated = $links->hasRelated();
+
+// Returns the "related" link as a Link object or throws an exception if it is missing
+$relatedLink = $links->related();
+
+// Checks if the "first" link is present
+$hasFirst = $links->hasFirst();
+
+// Returns the "first" link as a Link object or throws an exception if it is missing
+$firstLink = $links->first();
+
+// Checks if the "last" link is present
+$hasLast = $links->hasLast();
+
+// Returns the "last" link as a Link object or throws an exception if it is missing
+$lastLink = $links->last();
+
+// Checks if the "prev" link is present
+$hasPrev = $links->hasPrev();
+
+// Returns the "prev" link as a Link object or throws an exception if it is missing
+$prevLink = $links->prev();
+
+// Checks if the "next" link is present
+$hasNext = $links->hasNext();
+
+// Returns the "next" link as a Link object or throws an exception if it is missing
+$nextLink = $links->next();
+
+// Checks if a specific link is present
+$hasLink = $links->hasLink("next");
+
+// Returns a specific link as a Link object or throws an exception if it is missing
+$lLink = $links->link("next");
+
+// Checks if the there is any profile defined
+$hasProfiles = $links->hasAnyProfiles();
+
+// Retrieves the profiles as an array of ProfileLink objects
+$profiles = $links->profiles();
+
+// Checks if there is a specific profile defined
+$hasProfile = $links->hasProfile("https://example.com/profiles/last-modified");
+
+// Retrieves a specific profile as a ProfileLink object
+$profile = $links->profile("https://example.com/profiles/last-modified");
+```
+
+The `Error` class has the following methods:
+
+```php
+// Returns the "id" member of the error
+$id = $firstError->id();
+
+// Checks if the error has the "meta" member
+$hasMeta = $firstError->hasMeta();
+
+// Retrieves the "meta" member as an array
+$meta = $firstError->meta();
+
+// Checks if the error has any links
+$hasLinks = $firstError->hasLinks();
+
+// Retrieves the "links" member as an ErrorLinks object
+$links = $firstError->links();
+
+// Returns the "status" member
+$status = $firstError->status();
+
+// Returns the "code" member
+$code = $firstError->code();
+
+// Returns the "title" member
+$title = $firstError->title();
+
+// Returns the "detail" member
+$detail = $firstError->detail();
+
+// Checks if the error has the "source" member
+$hasSource = $firstError->hasSource();
+
+// Returns the "source" member as an ErrorSource object
+$source = $firstError->source();
+```
+
+The `ResourceObject` class has the following methods:
 
 ```php
 // Returns the type of the resource
@@ -295,10 +400,10 @@ $hasMeta = $primaryResource->hasMeta();
 // Returns the "meta" member as an array
 $meta = $primaryResource->meta();
 
-// Checks if the resource has links
+// Checks if the resource has any links
 $hasLinks = $primaryResource->hasLinks();
 
-// Returns the "links" member as a Links instance
+// Returns the "links" member as a ResourceLinks object
 $links = $primaryResource->links();
 
 // Returns the attributes of the resource as an array
@@ -307,59 +412,62 @@ $attributes = $primaryResource->attributes();
 // Returns the ID and attributes of the resource as an array
 $idAndAttributes = $primaryResource->idAndAttributes();
 
-// Checks if the resource has an attribute
+// Checks if the resource has a specific attribute
 $hasFirstName = $primaryResource->hasAttribute("first_name");
 
 // Returns an attribute of the resource or null if it is missing
 $firstName = $primaryResource->attribute("first_name");
 
-// Returns all relationships of the resource
+// Returns an attribute of the resource or the default value if it is missing
+$lastName = $primaryResource->attribute("last_name", "");
+
+// Returns all relationships of the resource as an array of Relationship objects
 $relationships = $primaryResource->relationships();
 
-// Checks if the resource has a relationship
+// Checks if the resource has a specific relationship
 $hasAddress = $primaryResource->hasRelationship("address");
 
-// Returns a relationship of the resource or null if it is missing
-$address = $primaryResource->relationship("address");
+// Returns a relationship of the resource as a Relationship object or throws an exception if it is missing
+$relationship = $primaryResource->relationship("address");
 ```
 The `Relationship` object supports the following methods:
 
 ```php
 // Checks if it is a to-one relationship
-$isToOneRelationship = $address->isToOneRelationship(); 
+$isToOneRelationship = $relationship->isToOneRelationship(); 
 
-// Checks if it is a to-many relationship 
-$isToManyRelationship = $address->isToManyRelationship();
+// Checks if it is a to-many relationship
+$isToManyRelationship = $relationship->isToManyRelationship();
 
 // Returns the name of the relationship
-$name = $address->name();
+$name = $relationship->name();
 
 // Checks if the relationship has the "meta" member
-$hasMeta = $address->hasMeta();
+$hasMeta = $relationship->hasMeta();
 
 // Returns the "meta" member of the relationship as an array
-$meta = $address->meta();
+$meta = $relationship->meta();
 
-// Returns the "links" member of the relationship as a Links instance
-$links = $address->links();
+// Returns the "links" member of the relationship as a RelationshipLinks object
+$links = $relationship->links();
 
-// Returns the resource linkage as an array of a to-one relationship
+// Returns the first resource linkage of the relationship as an array (e.g.: ["type" => "address", "id" => "123"])
 // or null if there isn't any related data
-$resourceLinkage = $address->resourceLink();
+$resourceLinkage = $relationship->firstResourceLink();
  
-// Returns the resource linkage as an array of a to-many relationship
-$resourceLinkage = $address->resourceLinks();
+// Returns the resource linkage as an array of array (e.g.: [["type" => "address", "id" => "123"]])
+$resourceLinkage = $relationship->resourceLinks();
 
-// Checks if the resource object is included
-$isIncluded = $address->isIncluded("address", "abcd");
+// Checks if a specific resource object is included
+$isIncluded = $relationship->isIncluded("address", "abcd");
 
 // Returns the resource object of a to-one relationship as a `ResourceObject` instance
-// if the relationship is included, or null otherwise
-$resource = $address->resource();
+// or throws an exception otherwise or when the relationship is empty
+$resource = $relationship->resource();
 
 // Returns the resource objects of a to-many relationship as an array of `ResourceObject` instances
-// if the relationship is included, or null otherwise
-$resources = $address->resources();
+// or throws an exception otherwise
+$resources = $relationship->resources();
 ```
 
 ### Hydration
@@ -442,14 +550,14 @@ it returns an array with only one `stdClass` if the document has a single primar
 
 ### Custom serialization
 
-Sometimes you might need to be tricky, and customly serialize a request body. For example if you dispatch a server
-request internally (within the original request), then you can send the request body as an array thanks to this
-feature - so you don't need to serialize at client-side and then deserialize at server-size. If you use Woohoo Labs. Yin
-and a [custom deserializer](https://github.com/woohoolabs/yin/#custom-deserialization) at server-side, then this is an
-easy task to do.
+Sometimes you might need to be tricky to serialize the request body in a custom way. For example, if you
+dispatch a server request internally (within the original request), then you can send the request body as an array thanks
+to this feature - so you don't need to serialize at client-side and then deserialize at server-size. If you use
+Woohoo Labs. Yin and a [custom deserializer](https://github.com/woohoolabs/yin/#custom-deserialization) at server-side,
+then this is an easy task to do.
 
 At client-side, if you use Yang with the [Request Builder](#request-builder), then you only have to pass a second
-constructor argument to it like below:
+constructor argument to it like below to take advantage of custom serialization:
 
 ```php
 // Instantiate a PSR-7 request
@@ -466,14 +574,14 @@ You only have to make sure that your custom serializer implements the `Serialize
 
 ### Custom deserialization
 
-Sometimes you might need to be tricky, and customly deserialize a server response. For example if you dispatch a server
-request internally (within the original request), then you can receive the response body as an array thanks to this
-feature - so you don't need to serialize at server-side and then deserialize at client-size. If you use Woohoo Labs. Yin
-and a [custom serializer](https://github.com/woohoolabs/yin/#custom-serialization) at server-side, then this is an easy
-task to do.
+Sometimes you might need to be tricky to deserialize a server response in a custom way. For example, if you
+dispatch a server request internally (within the original request), then you can receive the response body as an array thanks
+to this feature - so you don't need to serialize at server-side and then deserialize at client-size. If you use
+Woohoo Labs. Yin and a [custom serializer](https://github.com/woohoolabs/yin/#custom-serialization) at server-side,
+then this is an easy task to do.
 
 At client-side, if you use Yang with the default [HTTP Clients](#http-clients) then you only have to pass a second
-constructor argument to them like below:
+constructor argument to them like below to take advantage of custom deserialization:
 
 ```php
 use Http\Adapter\Guzzle6\Client;
