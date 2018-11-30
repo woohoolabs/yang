@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\Tests\JsonApi\Schema\Link;
 
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Exception\LinkException;
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Link\DocumentLinks;
 use WoohooLabs\Yang\JsonApi\Schema\Link\Link;
 
@@ -45,7 +45,7 @@ class AbstractLinksTest extends TestCase
     {
         $links = DocumentLinks::fromArray([]);
 
-        $this->expectException(LinkException::class);
+        $this->expectException(DocumentException::class);
 
         $links->link("link");
     }

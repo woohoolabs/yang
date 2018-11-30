@@ -5,7 +5,6 @@ namespace WoohooLabs\Yang\Tests\JsonApi\Schema\Link;
 
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-use WoohooLabs\Yang\JsonApi\Exception\LinkException;
 use WoohooLabs\Yang\JsonApi\Schema\Link\DocumentLinks;
 use WoohooLabs\Yang\JsonApi\Schema\Link\Link;
 use WoohooLabs\Yang\JsonApi\Schema\Link\ProfileLink;
@@ -63,7 +62,7 @@ class DocumentLinksTest extends TestCase
     {
         $links = DocumentLinks::fromArray([]);
 
-        $this->expectException(LinkException::class);
+        $this->expectException(DocumentException::class);
 
         $links->self();
     }
@@ -119,7 +118,7 @@ class DocumentLinksTest extends TestCase
     {
         $links = DocumentLinks::fromArray([]);
 
-        $this->expectException(LinkException::class);
+        $this->expectException(DocumentException::class);
 
         $links->related();
     }
@@ -175,7 +174,7 @@ class DocumentLinksTest extends TestCase
     {
         $links = DocumentLinks::fromArray([]);
 
-        $this->expectException(LinkException::class);
+        $this->expectException(DocumentException::class);
 
         $links->first();
     }
@@ -231,7 +230,7 @@ class DocumentLinksTest extends TestCase
     {
         $links = DocumentLinks::fromArray([]);
 
-        $this->expectException(LinkException::class);
+        $this->expectException(DocumentException::class);
 
         $links->last();
     }
@@ -287,7 +286,7 @@ class DocumentLinksTest extends TestCase
     {
         $links = DocumentLinks::fromArray([]);
 
-        $this->expectException(LinkException::class);
+        $this->expectException(DocumentException::class);
 
         $links->prev();
     }
@@ -341,7 +340,7 @@ class DocumentLinksTest extends TestCase
     {
         $links = DocumentLinks::fromArray([]);
 
-        $this->expectException(LinkException::class);
+        $this->expectException(DocumentException::class);
 
         $links->next();
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\Tests\JsonApi\Schema\Link;
 
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Exception\LinkException;
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Link\Link;
 use WoohooLabs\Yang\JsonApi\Schema\Link\RelationshipLinks;
 
@@ -61,7 +61,7 @@ class RelationshipLinksTest extends TestCase
     {
         $links = RelationshipLinks::fromArray([]);
 
-        $this->expectException(LinkException::class);
+        $this->expectException(DocumentException::class);
 
         $links->self();
     }
@@ -117,7 +117,7 @@ class RelationshipLinksTest extends TestCase
     {
         $links = RelationshipLinks::fromArray([]);
 
-        $this->expectException(LinkException::class);
+        $this->expectException(DocumentException::class);
 
         $links->related();
     }
