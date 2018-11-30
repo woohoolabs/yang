@@ -213,7 +213,6 @@ class ResourceObjectsTest extends TestCase
         $this->expectException(DocumentException::class);
 
         $resourceObjects->primaryResource();
-
     }
 
     /**
@@ -274,7 +273,6 @@ class ResourceObjectsTest extends TestCase
         $this->expectException(DocumentException::class);
 
         $resourceObjects->primaryResources();
-
     }
 
     /**

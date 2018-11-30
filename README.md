@@ -333,7 +333,7 @@ $nextLink = $links->next();
 $hasLink = $links->hasLink("next");
 
 // Returns a specific link as a Link object or throws an exception if it is missing
-$lLink = $links->link("next");
+$link = $links->link("next");
 
 // Checks if the there is any profile defined
 $hasProfiles = $links->hasAnyProfiles();
