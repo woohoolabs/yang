@@ -6,6 +6,7 @@ ADDED:
     - Support for Profiles
     - Support for `type` links in errors
 - `Document::errorCount()` to easily count errors in the document
+- Support for defining default value when using the `ResourceObject::attribute()` method
 
 CHANGED:
 

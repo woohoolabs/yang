@@ -246,6 +246,22 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
+    public function attributeReturnsDefaultValue()
+    {
+        $resourceObject = $this->createResourceObject(
+            [
+                "attributes" => [],
+            ]
+        );
+
+        $attribute = $resourceObject->attribute("a", "b");
+
+        $this->assertSame("b", $attribute);
+    }
+
+    /**
+     * @test
+     */
     public function relationships()
     {
         $resourceObject = $this->createResourceObject(

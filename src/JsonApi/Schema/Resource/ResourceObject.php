@@ -104,11 +104,11 @@ final class ResourceObject
     }
 
     /**
-     * @return mixed|null
+     * @return mixed
      */
-    public function attribute(string $name)
+    public function attribute(string $name, $default = null)
     {
-        return $this->hasAttribute($name) ? $this->attributes[$name] : null;
+        return $this->hasAttribute($name) ? $this->attributes[$name] : $default;
     }
 
     /**
