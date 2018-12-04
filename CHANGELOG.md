@@ -20,14 +20,18 @@ CHANGED:
     - `Relationship::resource()` throws an exception instead of returning null if the relationship is a to-many or empty
     - `Relationship::resourceBy()` throws an exception instead of returning null if the requested resource is missing
     - `ResourceObject::relationship()` throws an exception instead of returning null if the requested relationship is missing
-- Use separate classes for the different types of links: `DocumentLinks`, `ResourceLinks`, `RelationshipLinks`, `ErrorLinks` (__BREAKING__)
-- `JsonSerializer::serialize()` will throw a `RequestException` instead of `LogicException` if the body is of invalid type (__BREAKING__)
-- Move errors, links, and resources to their own namespace: (__BREAKING__)
+- Move errors, links, and resources to their own namespace (__BREAKING__):
     - `WoohooLabs\Yang\JsonApi\Schema\Error` to `WoohooLabs\Yang\JsonApi\Schema\Error\Error`
     - `WoohooLabs\Yang\JsonApi\Schema\ErrorSource` to `WoohooLabs\Yang\JsonApi\Schema\Error\ErrorSource`
     - `WoohooLabs\Yang\JsonApi\Schema\Link` to `WoohooLabs\Yang\JsonApi\Schema\Link\Link`
     - `WoohooLabs\Yang\JsonApi\Schema\ResourceObjects` to `WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects`
     - `WoohooLabs\Yang\JsonApi\Schema\ResourceObject` to `WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject`
+- Return separate classes instead of `Links` for the different types of links (__BREAKING__):
+    - `DocumentLinks`  when using `Document::links()`
+    - `ResourceLinks` when using `ResourceObject::links()`
+    - `RelationshipLinks` when using `Relationship::links()`
+    - `ErrorLinks` when using `Error::links()`
+- `JsonSerializer::serialize()` will throw a `RequestException` instead of `LogicException` if the body is of invalid type (__BREAKING__)
 - Rename `JsonApi` to `JsonApiObject` (__BREAKING__)
 
 REMOVED:
