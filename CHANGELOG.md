@@ -2,6 +2,16 @@
 
 ADDED:
 
+CHANGED:
+
+REMOVED:
+
+FIXED:
+
+## 2.0.0-beta1 - 2018-12-04
+
+ADDED:
+
 - JSON:API 1.1 related features:
     - Support for Profiles
     - Support for `type` links in errors
