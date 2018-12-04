@@ -28,7 +28,7 @@ class JsonApiResponseTest extends TestCase
      */
     public function hasDocumentIsTrue()
     {
-        $response = $this->createResponse(null, [], []);
+        $response = $this->createResponse(200, [], []);
 
         $document = $response->hasDocument();
 
@@ -52,7 +52,7 @@ class JsonApiResponseTest extends TestCase
      */
     public function documentWhenNotEmpty()
     {
-        $response = $this->createResponse(null, [], []);
+        $response = $this->createResponse(200, [], []);
 
         $document = $response->document();
 
@@ -164,8 +164,8 @@ class JsonApiResponseTest extends TestCase
         $this->assertFalse($isSuccessfulDocument);
     }
 
-    private function createResponse($statusCode = null, array $headers = [], array $body = null): JsonApiResponse
+    private function createResponse(int $statusCode = 200, array $headers = [], array $body = null): JsonApiResponse
     {
-        return new JsonApiResponse(new Response($statusCode ? $statusCode : null, $headers, json_encode($body)));
+        return new JsonApiResponse(new Response($statusCode, $headers, json_encode($body)));
     }
 }
