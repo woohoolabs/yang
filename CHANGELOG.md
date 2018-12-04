@@ -10,17 +10,16 @@ ADDED:
 
 CHANGED:
 
-- Make exception handling stricter (__BREAKING__):
+- Improve type-safety by eliminating `null` return values (__BREAKING__):
     - `JsonApiResponse::document()` throws an exception instead of returning null if the response doesn't contain a document
-    - `Document::primaryResources()` throws an exception if the document is a single-resource document 
-    - `Document::primaryResource()` throws an exception if the document is a collection document or the primary resource is missing 
-    - `Document::resource()` throws an exception instead of returning null if the resource is missing
-    - `Document::errors()` throws an exception instead of returning an empty array if the document does not contain any errors
+    - `Document::primaryResources()` throws an exception if the document is a single-resource or error document 
+    - `Document::primaryResource()` throws an exception if the document is a collection or error document or the primary resource is missing 
+    - `Document::resource()` throws an exception instead of returning null if the requested resource is missing
     - `Document::error()` throws an exception instead of returning null if the document does not contain the requested error
     - `Relationship::resources()` throws an exception instead of returning an empty array if the relationship is a to-one
-    - `Relationship::resource()` throws an exception instead of returning null if the relationship is a to-many or it is empty
-    - `Relationship::resourceBy()` throws an exception instead of returning null if the relationship is a to-many
-    - `ResourceObject::relationship()` throws an exception instead of returning null if the relationship is missing
+    - `Relationship::resource()` throws an exception instead of returning null if the relationship is a to-many or empty
+    - `Relationship::resourceBy()` throws an exception instead of returning null if the requested resource is missing
+    - `ResourceObject::relationship()` throws an exception instead of returning null if the requested relationship is missing
 - Use separate classes for the different types of links: `DocumentLinks`, `ResourceLinks`, `RelationshipLinks`, `ErrorLinks` (__BREAKING__)
 - `JsonSerializer::serialize()` will throw a `RequestException` instead of `LogicException` if the body is of invalid type (__BREAKING__)
 - Rename `JsonApi` to `JsonApiObject` (__BREAKING__)
