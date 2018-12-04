@@ -134,12 +134,11 @@ final class Document
 
     /**
      * @return Error[]
-     * @throws DocumentException
      */
     public function errors(): array
     {
         if (empty($this->errors)) {
-            throw new DocumentException("The document doesn't contain any errors!");
+            return [];
         }
 
         return $this->errors;

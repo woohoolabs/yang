@@ -451,9 +451,9 @@ class DocumentTest extends TestCase
     {
         $document = $this->createDocument();
 
-        $this->expectException(DocumentException::class);
+        $errors = $document->errors();
 
-        $document->errors();
+        $this->assertEmpty($errors);
     }
 
     /**

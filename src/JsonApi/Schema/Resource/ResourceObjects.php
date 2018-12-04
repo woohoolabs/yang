@@ -90,7 +90,7 @@ final class ResourceObjects
     {
         if ($this->isSinglePrimaryResource) {
             throw new DocumentException(
-                "The document is a single-resource document, therefore it doesn't have multiple resources. " .
+                "The document is a single-resource or error document, therefore it doesn't have multiple resources. " .
                 "Use the 'Document::primaryResource()' method instead."
             );
         }
@@ -105,7 +105,7 @@ final class ResourceObjects
     {
         if ($this->isSinglePrimaryResource === false) {
             throw new DocumentException(
-                "The document is a collection document, therefore it doesn't have a single resource. " .
+                "The document is a collection or error document, therefore it doesn't have a single resource. " .
                 "Use the 'Document::primaryResources()' method instead."
             );
         }
