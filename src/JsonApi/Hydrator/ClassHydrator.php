@@ -10,7 +10,7 @@ use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
 final class ClassHydrator implements HydratorInterface
 {
     /**
-     * @return array|stdClass
+     * @return stdClass[]|stdClass
      */
     public function hydrate(Document $document)
     {
@@ -38,6 +38,9 @@ final class ClassHydrator implements HydratorInterface
         return $this->hydratePrimaryResource($document);
     }
 
+    /**
+     * @return stdClass[]
+     */
     public function hydrateCollection(Document $document): iterable
     {
         if ($document->hasAnyPrimaryResources() === false) {
