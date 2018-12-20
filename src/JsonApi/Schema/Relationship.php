@@ -7,6 +7,13 @@ use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Link\RelationshipLinks;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
+use function array_filter;
+use function array_key_exists;
+use function array_keys;
+use function count;
+use function is_array;
+use function is_numeric;
+use function reset;
 
 final class Relationship
 {
@@ -268,7 +275,7 @@ final class Relationship
                 [
                     "type" => $data["type"],
                     "id" => $data["id"],
-                ]
+                ],
             ];
             if (empty($data["meta"]) === false) {
                 $resourceMap[0]["meta"] = $data["meta"];

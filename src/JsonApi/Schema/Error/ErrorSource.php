@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema\Error;
 
+use function is_string;
+
 final class ErrorSource
 {
     /**

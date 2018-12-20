@@ -8,6 +8,8 @@ use WoohooLabs\Yang\JsonApi\Exception\ResponseException;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Serializer\DeserializerInterface;
 use WoohooLabs\Yang\JsonApi\Serializer\JsonDeserializer;
+use function in_array;
+use function is_array;
 
 class JsonApiResponse extends AbstractResponse
 {

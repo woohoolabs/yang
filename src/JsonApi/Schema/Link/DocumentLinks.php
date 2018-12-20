@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\JsonApi\Schema\Link;
 
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
+use function array_values;
+use function is_array;
+use function is_string;
 
 final class DocumentLinks extends AbstractLinks
 {

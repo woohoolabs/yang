@@ -6,6 +6,13 @@ namespace WoohooLabs\Yang\JsonApi\Request;
 use Psr\Http\Message\RequestInterface;
 use WoohooLabs\Yang\JsonApi\Serializer\JsonSerializer;
 use WoohooLabs\Yang\JsonApi\Serializer\SerializerInterface;
+use function array_key_exists;
+use function http_build_query;
+use function implode;
+use function is_array;
+use function is_numeric;
+use function parse_str;
+use function parse_url;
 
 class JsonApiRequestBuilder
 {
