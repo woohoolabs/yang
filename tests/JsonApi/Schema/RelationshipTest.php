@@ -267,8 +267,8 @@ class RelationshipTest extends TestCase
                     [
                         "type" => "a",
                         "id" => "b",
-                    ]
-                ]
+                    ],
+                ],
             ]
         );
 
@@ -279,7 +279,7 @@ class RelationshipTest extends TestCase
                 [
                     "type" => "a",
                     "id" => "b",
-                ]
+                ],
             ],
             $resourceLinks
         );
@@ -295,7 +295,7 @@ class RelationshipTest extends TestCase
                 "data" => [
                     "type" => "a",
                     "id" => "b",
-                ]
+                ],
             ]
         );
 
@@ -306,7 +306,7 @@ class RelationshipTest extends TestCase
                 [
                     "type" => "a",
                     "id" => "b",
-                ]
+                ],
             ],
             $resourceLinks
         );
@@ -323,8 +323,8 @@ class RelationshipTest extends TestCase
                     [
                         "type" => "a",
                         "id" => "b",
-                    ]
-                ]
+                    ],
+                ],
             ]
         );
 

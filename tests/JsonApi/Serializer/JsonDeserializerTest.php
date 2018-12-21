@@ -6,6 +6,7 @@ namespace WoohooLabs\Yang\Tests\JsonApi\Serializer;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Serializer\JsonDeserializer;
+use function json_encode;
 
 class JsonDeserializerTest extends TestCase
 {
@@ -18,7 +19,7 @@ class JsonDeserializerTest extends TestCase
             "data" => [
                 "type" => "a",
                 "id" => "1",
-            ]
+            ],
         ];
 
         $response = $this->createResponse($body);

@@ -7,6 +7,7 @@ use GuzzleHttp\Psr7\Request;
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder;
 use WoohooLabs\Yang\JsonApi\Request\ResourceObject;
+use function urldecode;
 
 class JsonApiRequestBuilderTest extends TestCase
 {

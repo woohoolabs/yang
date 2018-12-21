@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Exception\ResponseException;
 use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
+use function json_encode;
 
 class JsonApiResponseTest extends TestCase
 {
@@ -70,7 +71,6 @@ class JsonApiResponseTest extends TestCase
 
         $this->assertTrue($isSuccessful);
     }
-
 
     /**
      * @test
@@ -164,7 +164,7 @@ class JsonApiResponseTest extends TestCase
         $this->assertFalse($isSuccessfulDocument);
     }
 
-    private function createResponse(int $statusCode = 200, array $headers = [], array $body = null): JsonApiResponse
+    private function createResponse(int $statusCode = 200, array $headers = [], ?array $body = null): JsonApiResponse
     {
         return new JsonApiResponse(new Response($statusCode, $headers, json_encode($body)));
     }

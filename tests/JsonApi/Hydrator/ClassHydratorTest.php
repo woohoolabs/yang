@@ -23,7 +23,7 @@ class ClassHydratorTest extends TestCase
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrate($document);
 
-        $this->assertEquals(new \stdClass(), $object);
+        $this->assertEquals(new stdClass(), $object);
     }
 
     /**

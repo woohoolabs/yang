@@ -180,7 +180,7 @@ class ResourceObjectTest extends TestCase
             [
                 "attributes" => [
                     "a" => "b",
-                ]
+                ],
             ]
         );
 
@@ -198,7 +198,7 @@ class ResourceObjectTest extends TestCase
             [
                 "attributes" => [
                     "a" => null,
-                ]
+                ],
             ]
         );
 
@@ -216,7 +216,7 @@ class ResourceObjectTest extends TestCase
             [
                 "attributes" => [
                     "a" => "b",
-                ]
+                ],
             ]
         );
 

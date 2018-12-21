@@ -31,7 +31,7 @@ class DocumentTest extends TestCase
             [
                 "jsonapi" => [
                     "version" => "1.0",
-                ]
+                ],
             ],
             $array
         );
@@ -48,26 +48,26 @@ class DocumentTest extends TestCase
                     "version" => "1.0",
                 ],
                 "meta" => [
-                    "a" => "b"
+                    "a" => "b",
                 ],
                 "links" => [
-                    "self" => "https://example.com/api/users/abcd"
+                    "self" => "https://example.com/api/users/abcd",
                 ],
                 "data" => [
                     "type" => "user",
-                    "id" => "abcd"
+                    "id" => "abcd",
                 ],
                 "errors" => [
                     [
-                        "status" => "401"
-                    ]
+                        "status" => "401",
+                    ],
                 ],
                 "included" => [
                     [
                         "type" => "user",
-                        "id" => "efgh"
-                    ]
-                ]
+                        "id" => "efgh",
+                    ],
+                ],
             ]
         );
 
@@ -274,7 +274,7 @@ class DocumentTest extends TestCase
                 "data" => [
                     [
                         "type" => "",
-                        "id" => ""
+                        "id" => "",
                     ],
                 ],
             ]
