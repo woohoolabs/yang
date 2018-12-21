@@ -23,7 +23,7 @@
         "phpunit/phpunit": "^7.0.0",
         "php-http/guzzle6-adapter": "^2.0.0",
         "squizlabs/php_codesniffer": "^3.4.0",
-        "woohoolabs/coding-standard": "dev-master as 1.0.0"
+        "woohoolabs/coding-standard": "^1.0.0"
     },
     "suggest": {
         "php-http/guzzle6-adapter": "Allows to use Guzzle 6 as the HTTP client implementation"

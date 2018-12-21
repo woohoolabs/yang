@@ -4,6 +4,8 @@ ADDED:
 
 CHANGED:
 
+- Apply the Woohoo Labs. Coding Standard
+
 REMOVED:
 
 FIXED:

@@ -21,9 +21,7 @@ test:
 	docker-compose up
 
 cs:
-	docker-compose run --rm yang-php /var/www/vendor/bin/phpcs \
-	    --standard=/var/www/phpcs.xml
+	docker-compose run --rm yang-php /var/www/vendor/bin/phpcs --standard=/var/www/phpcs.xml
 
 cs-fix:
-	docker-compose run --rm yang-php /var/www/vendor/bin/phpcbf \
-	    --standard=/var/www/phpcs.xml
+	docker-compose run --rm yang-php /var/www/vendor/bin/phpcbf --standard=/var/www/phpcs.xml
