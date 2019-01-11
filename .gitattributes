@@ -2,6 +2,7 @@
 
 /examples export-ignore
 /tests export-ignore
+
 .coveralls.yml export-ignore
 .editorconfig export-ignore
 .gitattributes export-ignore
@@ -9,6 +10,12 @@
 .prettyci.composer.json export-ignore
 .scrutinizer.yml export-ignore
 .travis.yml export-ignore
+
+CODE_OF_CONDUCT.md export-ignore
+CONTRIBUTING.md export-ignore
+SUPPORT.md export-ignore
+
 Makefile export-ignore
 phpcs.xml export-ignore
+phpstan.neon export-ignore
 phpunit.xml.dist export-ignore
