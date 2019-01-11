@@ -10,7 +10,7 @@ use function reset;
 
 final class ResourceObjects
 {
-    /*
+    /**
      * @var bool
      */
     private $isSinglePrimaryResource;

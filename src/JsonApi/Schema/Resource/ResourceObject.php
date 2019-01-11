@@ -108,6 +108,7 @@ final class ResourceObject
     }
 
     /**
+     * @param mixed $default
      * @return mixed
      */
     public function attribute(string $name, $default = null)

@@ -121,7 +121,7 @@ final class Relationship
      */
     public function resources(): array
     {
-        if ($this->isToOneRelationship) {
+        if ($this->isToOneRelationship === true) {
             throw new DocumentException(
                 "The relationship with '$this->name' name is a to-one relationship, therefore it doesn't have multiple resources. " .
                 "Use the 'Relationship::resource()' method instead."
@@ -255,7 +255,7 @@ final class Relationship
         array $meta,
         RelationshipLinks $links,
         ResourceObjects $resources,
-        $isToOneRelationship
+        ?bool $isToOneRelationship
     ): Relationship {
         return new Relationship($name, $meta, $links, [], $resources, $isToOneRelationship);
     }

@@ -268,9 +268,6 @@ class JsonApiRequestBuilder
         return $this;
     }
 
-    /**
-     * @param array|string $includes
-     */
     public function addJsonApiAppliedProfile(string $profile): JsonApiRequestBuilder
     {
         $this->appliedProfiles[] = $profile;
@@ -278,9 +275,6 @@ class JsonApiRequestBuilder
         return $this;
     }
 
-    /**
-     * @param array|string $includes
-     */
     public function addJsonApiRequestedProfile(string $profile): JsonApiRequestBuilder
     {
         $this->requestedProfiles[] = $profile;
@@ -288,9 +282,6 @@ class JsonApiRequestBuilder
         return $this;
     }
 
-    /**
-     * @param array|string $includes
-     */
     public function addJsonApiRequiredProfile(string $profile): JsonApiRequestBuilder
     {
         if (isset($this->queryString["profile"]) === false) {

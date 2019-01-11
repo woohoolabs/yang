@@ -26,9 +26,8 @@ final class ProfileLink extends Link
 
     /**
      * @internal
-     * @return $this
      */
-    public static function fromArray(array $link)
+    public static function fromArray(array $link): ProfileLink
     {
         $href = isset($link["href"]) && is_string($link["href"]) ? $link["href"] : "";
         $meta = isset($link["meta"]) && is_array($link["meta"]) ? $link["meta"] : [];

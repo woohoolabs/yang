@@ -43,6 +43,9 @@ abstract class AbstractResponse implements ResponseInterface
         return $this->response->getHeaders();
     }
 
+    /**
+     * @param string $name
+     */
     public function hasHeader($name): bool
     {
         return $this->response->hasHeader($name);

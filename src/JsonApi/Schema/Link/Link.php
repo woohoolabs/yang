@@ -41,7 +41,7 @@ class Link
 
     /**
      * @internal
-     * @return $this
+     * @return static
      */
     public static function fromString(string $link)
     {
@@ -50,14 +50,14 @@ class Link
 
     /**
      * @internal
-     * @return $this
+     * @return static
      */
     public static function fromArray(array $link)
     {
         $href = isset($link["href"]) && is_string($link["href"]) ? $link["href"] : "";
         $meta = isset($link["meta"]) && is_array($link["meta"]) ? $link["meta"] : [];
 
-        return new self($href, $meta);
+        return new static($href, $meta);
     }
 
     public function toArray(): array

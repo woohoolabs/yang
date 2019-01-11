@@ -54,7 +54,7 @@ abstract class AbstractLinks
     }
 
     /**
-     * @return $this
+     * @return static
      */
     public static function fromArray(array $links)
     {

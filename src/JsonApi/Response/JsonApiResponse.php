@@ -32,7 +32,7 @@ class JsonApiResponse extends AbstractResponse
     public function hasDocument(): bool
     {
         if ($this->document === false) {
-            $this->setDocument();
+            $this->document = $this->createDocument();
         }
 
         return $this->document !== null;
@@ -44,7 +44,7 @@ class JsonApiResponse extends AbstractResponse
     public function document(): Document
     {
         if ($this->document === false) {
-            $this->setDocument();
+            $this->document = $this->createDocument();
         }
 
         if ($this->document === null) {
@@ -68,15 +68,14 @@ class JsonApiResponse extends AbstractResponse
         return $this->isSuccessful($allowedStatusCodes) && $this->hasDocument();
     }
 
-    private function setDocument(): void
+    private function createDocument(): ?Document
     {
         $content = $this->deserializer->deserialize($this->response);
 
         if (is_array($content) === false) {
-            $this->document = null;
-            return;
+            return null;
         }
 
-        $this->document = Document::fromArray($content);
+        return Document::fromArray($content);
     }
 }

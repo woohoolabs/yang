@@ -42,7 +42,7 @@ final class JsonSerializer implements SerializerInterface
         if ($request->getBody()->isSeekable()) {
             $request->getBody()->rewind();
         }
-        $request->getBody()->write($body);
+        $request->getBody()->write((string) $body);
 
         return $request;
     }
