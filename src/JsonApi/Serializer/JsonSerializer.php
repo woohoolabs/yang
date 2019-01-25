@@ -28,7 +28,7 @@ final class JsonSerializer implements SerializerInterface
     }
 
     /**
-     * @param array|string|null $body
+     * @param mixed $body
      * @throws SerializationException
      */
     public function serialize(RequestInterface $request, $body): RequestInterface

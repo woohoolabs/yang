@@ -164,7 +164,7 @@ class JsonApiRequestBuilder
         }
 
         if ($this->isBlankKey($parsedUri, "port") === false) {
-            $this->port = (int) $parsedUri["port"];
+            $this->port = $parsedUri["port"];
         }
 
         if ($this->isBlankKey($parsedUri, "host") === false) {
