@@ -36,7 +36,7 @@
 [reached 1.0 on 29th May 2015](https://www.programmableweb.com/news/new-json-api-specification-aims-to-speed-api-development/2015/06/10)
 and we also believe it is a big day for RESTful APIs as this specification makes APIs more robust and future-proof
 than they have ever been. Woohoo Labs. Yang (named after Yin-Yang) was born to bring efficiency and elegance to your
-JSON:API clients, while [Woohoo Labs. Yin](https://woohoolabs/yin) is its server-side counterpart.
+JSON:API clients, while [Woohoo Labs. Yin](https://github.com/woohoolabs/yin) is its server-side counterpart.
 
 ### Features
 
