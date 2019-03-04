@@ -19,7 +19,7 @@ ADDED:
 CHANGED:
 
 - Improve type-safety by eliminating `null` return values (__BREAKING CHANGE__):
-    - `JsonApiResponse::document()` throws an exception instead of returning null if the response doesn't contain a document
+    - `JsonApiResponse::document()` throws an exception instead of returning null if the response doesn't contain a document.
     - `Document::primaryResources()` throws an exception if the document is a single-resource or error document 
     - `Document::primaryResource()` throws an exception if the document is a collection or error document or the primary resource is missing 
     - `Document::resource()` throws an exception instead of returning null if the requested resource is missing
@@ -34,7 +34,7 @@ CHANGED:
     - `WoohooLabs\Yang\JsonApi\Schema\Link` to `WoohooLabs\Yang\JsonApi\Schema\Link\Link`
     - `WoohooLabs\Yang\JsonApi\Schema\ResourceObjects` to `WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects`
     - `WoohooLabs\Yang\JsonApi\Schema\ResourceObject` to `WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject`
-- Return separate classes instead of `Links` for the different types of links (__BREAKING CHANGE__):
+- Return separate classes instead of a general `Links` for the different types of links (__BREAKING CHANGE__):
     - `DocumentLinks` when using `Document::links()`
     - `ResourceLinks` when using `ResourceObject::links()`
     - `RelationshipLinks` when using `Relationship::links()`
@@ -78,7 +78,7 @@ CHANGED:
     - `WoohooLabs\Yang\JsonApi\Schema\Link` to `WoohooLabs\Yang\JsonApi\Schema\Link\Link`
     - `WoohooLabs\Yang\JsonApi\Schema\ResourceObjects` to `WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects`
     - `WoohooLabs\Yang\JsonApi\Schema\ResourceObject` to `WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject`
-- Return separate classes instead of `Links` for the different types of links (__BREAKING CHANGE__):
+- Return separate classes instead of a general `Links` for the different types of links (__BREAKING CHANGE__):
     - `DocumentLinks` when using `Document::links()`
     - `ResourceLinks` when using `ResourceObject::links()`
     - `RelationshipLinks` when using `Relationship::links()`
