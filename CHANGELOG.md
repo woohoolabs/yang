@@ -18,7 +18,7 @@ ADDED:
 
 CHANGED:
 
-- Improve type-safety by eliminating `null` return values (__BREAKING__):
+- Improve type-safety by eliminating `null` return values (__BREAKING CHANGE__):
     - `JsonApiResponse::document()` throws an exception instead of returning null if the response doesn't contain a document
     - `Document::primaryResources()` throws an exception if the document is a single-resource or error document 
     - `Document::primaryResource()` throws an exception if the document is a collection or error document or the primary resource is missing 
@@ -28,23 +28,23 @@ CHANGED:
     - `Relationship::resource()` throws an exception instead of returning null if the relationship is a to-many or empty
     - `Relationship::resourceBy()` throws an exception instead of returning null if the requested resource is missing
     - `ResourceObject::relationship()` throws an exception instead of returning null if the requested relationship is missing
-- Move errors, links, and resources to their own namespace (__BREAKING__):
+- Move errors, links, and resources to their own namespace (__BREAKING CHANGE__):
     - `WoohooLabs\Yang\JsonApi\Schema\Error` to `WoohooLabs\Yang\JsonApi\Schema\Error\Error`
     - `WoohooLabs\Yang\JsonApi\Schema\ErrorSource` to `WoohooLabs\Yang\JsonApi\Schema\Error\ErrorSource`
     - `WoohooLabs\Yang\JsonApi\Schema\Link` to `WoohooLabs\Yang\JsonApi\Schema\Link\Link`
     - `WoohooLabs\Yang\JsonApi\Schema\ResourceObjects` to `WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects`
     - `WoohooLabs\Yang\JsonApi\Schema\ResourceObject` to `WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject`
-- Return separate classes instead of `Links` for the different types of links (__BREAKING__):
+- Return separate classes instead of `Links` for the different types of links (__BREAKING CHANGE__):
     - `DocumentLinks` when using `Document::links()`
     - `ResourceLinks` when using `ResourceObject::links()`
     - `RelationshipLinks` when using `Relationship::links()`
     - `ErrorLinks` when using `Error::links()`
-- `JsonSerializer::serialize()` will throw a `RequestException` instead of `LogicException` if the body is of invalid type (__BREAKING__)
-- Rename `JsonApi` to `JsonApiObject` (__BREAKING__)
+- `JsonSerializer::serialize()` will throw a `RequestException` instead of `LogicException` if the body is of invalid type (__BREAKING CHANGE__)
+- Rename `JsonApi` to `JsonApiObject` (__BREAKING CHANGE__)
 
 REMOVED:
 
-- The generic `Link` class (__BREAKING__)
+- The generic `Link` class (__BREAKING CHANGE__)
 
 FIXED:
 
@@ -62,7 +62,7 @@ ADDED:
 
 CHANGED:
 
-- Improve type-safety by eliminating `null` return values (__BREAKING__):
+- Improve type-safety by eliminating `null` return values (__BREAKING CHANGE__):
     - `JsonApiResponse::document()` throws an exception instead of returning null if the response doesn't contain a document
     - `Document::primaryResources()` throws an exception if the document is a single-resource or error document 
     - `Document::primaryResource()` throws an exception if the document is a collection or error document or the primary resource is missing 
@@ -72,23 +72,23 @@ CHANGED:
     - `Relationship::resource()` throws an exception instead of returning null if the relationship is a to-many or empty
     - `Relationship::resourceBy()` throws an exception instead of returning null if the requested resource is missing
     - `ResourceObject::relationship()` throws an exception instead of returning null if the requested relationship is missing
-- Move errors, links, and resources to their own namespace (__BREAKING__):
+- Move errors, links, and resources to their own namespace (__BREAKING CHANGE__):
     - `WoohooLabs\Yang\JsonApi\Schema\Error` to `WoohooLabs\Yang\JsonApi\Schema\Error\Error`
     - `WoohooLabs\Yang\JsonApi\Schema\ErrorSource` to `WoohooLabs\Yang\JsonApi\Schema\Error\ErrorSource`
     - `WoohooLabs\Yang\JsonApi\Schema\Link` to `WoohooLabs\Yang\JsonApi\Schema\Link\Link`
     - `WoohooLabs\Yang\JsonApi\Schema\ResourceObjects` to `WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects`
     - `WoohooLabs\Yang\JsonApi\Schema\ResourceObject` to `WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject`
-- Return separate classes instead of `Links` for the different types of links (__BREAKING__):
+- Return separate classes instead of `Links` for the different types of links (__BREAKING CHANGE__):
     - `DocumentLinks` when using `Document::links()`
     - `ResourceLinks` when using `ResourceObject::links()`
     - `RelationshipLinks` when using `Relationship::links()`
     - `ErrorLinks` when using `Error::links()`
-- `JsonSerializer::serialize()` will throw a `RequestException` instead of `LogicException` if the body is of invalid type (__BREAKING__)
-- Rename `JsonApi` to `JsonApiObject` (__BREAKING__)
+- `JsonSerializer::serialize()` will throw a `RequestException` instead of `LogicException` if the body is of invalid type (__BREAKING CHANGE__)
+- Rename `JsonApi` to `JsonApiObject` (__BREAKING CHANGE__)
 
 REMOVED:
 
-- The generic `Link` class (__BREAKING__)
+- The generic `Link` class (__BREAKING CHANGE__)
 
 FIXED:
 
