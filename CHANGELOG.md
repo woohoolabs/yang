@@ -1,3 +1,13 @@
+## 2.1.0 - unreleased
+
+ADDED:
+
+CHANGED:
+
+REMOVED:
+
+FIXED:
+
 ## 2.0.0 - 2019-03-04
 
 ### Changes since beta1:
@@ -41,6 +51,7 @@ CHANGED:
     - `ErrorLinks` when using `Error::links()`
 - `JsonSerializer::serialize()` will throw a `RequestException` instead of `LogicException` if the body is of invalid type (__BREAKING CHANGE__)
 - Rename `JsonApi` to `JsonApiObject` (__BREAKING CHANGE__)
+- Apply the Woohoo Labs. Coding Standard
 
 REMOVED:
 
