@@ -459,7 +459,7 @@ $resourceLinkage = $relationship->firstResourceLink();
 $resourceLinkage = $relationship->resourceLinks();
 
 // Checks if a specific resource object is included
-$isIncluded = $relationship->isIncluded("address", "abcd");
+$isIncluded = $relationship->hasIncludedResource("address", "abcd");
 
 // Returns the resource object of a to-one relationship as a `ResourceObject` instance
 // or throws an exception otherwise or when the relationship is empty
