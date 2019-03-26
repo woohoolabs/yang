@@ -41,7 +41,19 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function getType()
+    public function type()
+    {
+        $resource = new ResourceObject("a");
+
+        $type = $resource->type();
+
+        $this->assertSame("a", $type);
+    }
+
+    /**
+     * @test
+     */
+    public function typeToArray()
     {
         $resource = new ResourceObject("a");
 
@@ -58,7 +70,38 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function getId()
+    public function setType()
+    {
+        $resource = new ResourceObject("");
+
+        $resource->setType("a");
+
+        $this->assertSame(
+            [
+                "data" => [
+                    "type" => "a",
+                ],
+            ],
+            $resource->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function id()
+    {
+        $resource = new ResourceObject("", "1");
+
+        $id = $resource->id();
+
+        $this->assertSame("1", $id);
+    }
+
+    /**
+     * @test
+     */
+    public function idToArray()
     {
         $resource = new ResourceObject("", "0");
 
@@ -70,6 +113,44 @@ class ResourceObjectTest extends TestCase
                 ],
             ],
             $resource->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setId()
+    {
+        $resource = new ResourceObject("");
+
+        $resource->setId("0");
+
+        $this->assertSame(
+            [
+                "data" => [
+                    "type" => "",
+                    "id" => "0",
+                ],
+            ],
+            $resource->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function attributes()
+    {
+        $resource = new ResourceObject("", "");
+        $resource
+            ->setAttributes(["a" => "b", "c" => "d"]);
+
+        $this->assertSame(
+            [
+                "a" => "b",
+                "c" => "d",
+            ],
+            $resource->attributes()
         );
     }
 
@@ -117,6 +198,25 @@ class ResourceObjectTest extends TestCase
                 ],
             ],
             $resource->toArray()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function relationships()
+    {
+        $resource = new ResourceObject("", "");
+        $resource
+            ->setToOneRelationship("a", ToOneRelationship::create("", ""))
+            ->setToManyRelationship("b", ToManyRelationship::create());
+
+        $this->assertEquals(
+            [
+                "a" => ToOneRelationship::create("", ""),
+                "b" => ToManyRelationship::create(),
+            ],
+            $resource->relationships()
         );
     }
 

@@ -2,6 +2,9 @@
 
 ADDED:
 
+- New accessor and mutator methods for `WoohooLabs\Yang\JsonApi\Request\ResourceObject`: `id()`, `setId()`, `type()`, `setType()`,
+`attributes()`, `relationships()`
+
 CHANGED:
 
 REMOVED:

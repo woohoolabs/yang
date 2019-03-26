@@ -38,6 +38,35 @@ class ResourceObject
         $this->relationships = [];
     }
 
+    public function type(): string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): ResourceObject
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function id(): string
+    {
+        return $this->id;
+    }
+
+    public function setId(string $id): ResourceObject
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function attributes(): array
+    {
+        return $this->attributes;
+    }
+
     public function setAttributes(array $attributes): ResourceObject
     {
         $this->attributes = $attributes;
@@ -53,6 +82,14 @@ class ResourceObject
         $this->attributes[$name] = $value;
 
         return $this;
+    }
+
+    /**
+     * @return RelationshipInterface[]
+     */
+    public function relationships(): array
+    {
+        return $this->relationships;
     }
 
     public function setToOneRelationship(string $name, ToOneRelationship $relationship): ResourceObject
