@@ -2,10 +2,16 @@
 
 ADDED:
 
-- New accessor and mutator methods for `WoohooLabs\Yang\JsonApi\Request\ResourceObject`: `id()`, `setId()`, `type()`, `setType()`,
+- [#13](https://github.com/woohoolabs/yang/issues/13): `DocumentHydratorInterface` and `ClassDocumentHydrator` in order to fix some issues with the `HydratorInterface` and `ClassHydrator`
+- [#12](https://github.com/woohoolabs/yang/issues/13): New accessor and mutator methods for `WoohooLabs\Yang\JsonApi\Request\ResourceObject`: `id()`, `setId()`, `type()`, `setType()`,
 `attributes()`, `relationships()`
 
 CHANGED:
+
+DEPRECATED:
+
+- `HydratorInterface`: use the `DocumentHydratorInterface` instead
+- `ClassHydrator`: use the `ClassDocumentHydrator` instead
 
 REMOVED:
 

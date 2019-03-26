@@ -504,16 +504,16 @@ foreach ($dogResource->relationship("owners")->resources() as $ownerResource) {
 }
 ```
 
-This is the situation when using a hydrator can help you. Currently, Yang has only one hydrator, the `ClassHydrator` which - if the
+This is the situation when using a hydrator can help you. Currently, Yang has only one hydrator, the `ClassDocumentHydrator` which - if the
 response was successful - maps the specified document to an `stdClass` along with all the resource attributes and relationships.
-It means that errors, links, meta data won't be present in the returned object! However, relationships are very easy to
+It means that errors, links, meta data won't be present in the returned object. However, relationships are very easy to
 access now.
 
-Let's use the document from the last example for demonstrating the power of hydrators: 
+Let's use the document from the last example for demonstrating the power of hydrators:
 
 ```php
-$hydrator = new ClassHydrator();
-$dog = $hydrator->hydrate($response->document());
+$hydrator = new ClassDocumentHydrator();
+$dog = $hydrator->hydrateSingleResource($response->document());
 ```
 
 That's all you need to do in order to create the same `$dog` object as in the first example! Now, you can display its properties:
@@ -531,20 +531,27 @@ foreach ($dog->owners as $owner) {
 }
 ```
 
-> Note: The method `ClassHydrator::hydrate()` returns an empty `stdClass` if the document doesn't have any primary data,
-it returns an `stdClass` if the document has a single primary resource, and it returns an array of `stdObject`s if the
-document contains multiple primary resources.
+> Note: The method `ClassDocumentHydrator::hydrateSingleResource()` returns an empty `stdClass` if the document doesn't
+have any primary data or if the primary data is a collection. Otherwise - when the primary data is a single resource -
+an `stdObject` along with all the attributes and relationships is returned.
 
-You may also use the `ClassHydrator::hydrateCollection()` method for retrieving many dogs:
+Additionally, you may use the `ClassHydrator::hydrateCollection()` method for retrieving many dogs:
 
 ```php
-$hydrator = new ClassHydrator();
+$hydrator = new ClassDocumentHydrator();
 $dogs = $hydrator->hydrateCollection($response->document());
 ```
 
-> Note: The method `ClassHydrator::hydrateCollection()` returns an empty array if the document doesn't have any primary data,
-it returns an array with only one `stdClass` if the document has a single primary resource, and it returns an array of
-`stdObject`s if the document contains multiple primary resources.
+> Note: The method `ClassHydrator::hydrateCollection()` returns an empty array if the document doesn't have any primary data
+or when the primary data is a single resource. Otherwise - when the primary data is a collection of resources - an array
+of `stdObject`s along with all the attributes and relationship is returned.
+
+Furthermore, there is a `hydrate()` method available for you when you don't care if the primary data is a single resource
+or a collection of resources.
+
+> Note: The method `ClassDocumentHydrator::hydrate()` returns an empty array if the document doesn't have any primary data.
+It returns an array containing a single `stdClass` if the primary data is a single resource. Otherwise - the primary data
+is a collection of resources - an array of `stdObject`s is returned.
 
 ## Advanced Usage
 

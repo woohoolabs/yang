@@ -7,28 +7,25 @@ use stdClass;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
 
-/**
- * @deprecated Use the ClassDocumentHydrator instead.
- */
-final class ClassHydrator implements HydratorInterface
+final class ClassDocumentHydrator implements DocumentHydratorInterface
 {
     /**
-     * @return stdClass[]|stdClass
+     * @return stdClass[]
      */
-    public function hydrate(Document $document)
+    public function hydrate(Document $document): iterable
     {
         if ($document->hasAnyPrimaryResources() === false) {
-            return new stdClass();
+            return [];
         }
 
         if ($document->isSingleResourceDocument()) {
-            return $this->hydratePrimaryResource($document);
+            return [$this->hydratePrimaryResource($document)];
         }
 
         return $this->hydratePrimaryResources($document);
     }
 
-    public function hydrateObject(Document $document): stdClass
+    public function hydrateSingleResource(Document $document): stdClass
     {
         if ($document->isSingleResourceDocument() === false) {
             return new stdClass();
@@ -51,7 +48,7 @@ final class ClassHydrator implements HydratorInterface
         }
 
         if ($document->isSingleResourceDocument()) {
-            return [$this->hydratePrimaryResource($document)];
+            return [];
         }
 
         return $this->hydratePrimaryResources($document);

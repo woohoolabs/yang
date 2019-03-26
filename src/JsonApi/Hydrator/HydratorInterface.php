@@ -5,6 +5,9 @@ namespace WoohooLabs\Yang\JsonApi\Hydrator;
 
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 
+/**
+ * @deprecated Use the DocumentHydratorInterface instead.
+ */
 interface HydratorInterface
 {
     /**
