@@ -5,7 +5,7 @@ namespace WoohooLabs\Yang\JsonApi\Hydrator;
 
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 
-interface DocumentHydratorInterface
+interface DocumentHydratorInterface extends HydratorInterface
 {
     /**
      * Hydrates a document into an array/list of items regardless if the primary data is a single resource or a
@@ -21,11 +21,4 @@ interface DocumentHydratorInterface
      * @return mixed
      */
     public function hydrateSingleResource(Document $document);
-
-    /**
-     * Hydrates a document when its primary data is a collection of resources.
-     *
-     * @return iterable<mixed>
-     */
-    public function hydrateCollection(Document $document): iterable;
 }
