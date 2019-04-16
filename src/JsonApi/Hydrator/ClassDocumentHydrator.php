@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\JsonApi\Hydrator;
 
 use stdClass;
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
 
@@ -25,14 +26,22 @@ final class ClassDocumentHydrator implements DocumentHydratorInterface
         return $this->hydratePrimaryResources($document);
     }
 
+    /**
+     * @throws DocumentException when the document is empty or it has a collection as primary data.
+     */
     public function hydrateSingleResource(Document $document): stdClass
     {
         if ($document->isSingleResourceDocument() === false) {
-            return new stdClass();
+            throw new DocumentException(
+                "The document is a collection document, therefore it doesn't have a single resource. " .
+                "Use the 'ClassDocumentHydrator::hydrateCollection()' method instead."
+            );
         }
 
         if ($document->hasAnyPrimaryResources() === false) {
-            return new stdClass();
+            throw new DocumentException(
+                "The document doesn't have any primary data."
+            );
         }
 
         return $this->hydratePrimaryResource($document);
@@ -40,14 +49,18 @@ final class ClassDocumentHydrator implements DocumentHydratorInterface
 
     /**
      * @return stdClass[]
+     * @throws DocumentException when the document has a single resource as primary data.
      */
     public function hydrateCollection(Document $document): iterable
     {
-        if ($document->hasAnyPrimaryResources() === false) {
-            return [];
+        if ($document->isSingleResourceDocument()) {
+            throw new DocumentException(
+                "The document is a single-resource document, therefore it doesn't have multiple resources. " .
+                "Use the 'ClassDocumentHydrator::hydrateSingleResource()' method instead."
+            );
         }
 
-        if ($document->isSingleResourceDocument()) {
+        if ($document->hasAnyPrimaryResources() === false) {
             return [];
         }
 

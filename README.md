@@ -512,6 +512,12 @@ access now.
 Let's use the document from the last example for demonstrating the power of hydrators:
 
 ```php
+// Check if hydration is possible
+if ($document->isSingleResourceDocument()) {
+    return;
+}
+
+// Hydrate the document to an stdClass
 $hydrator = new ClassDocumentHydrator();
 $dog = $hydrator->hydrateSingleResource($response->document());
 ```
@@ -531,26 +537,32 @@ foreach ($dog->owners as $owner) {
 }
 ```
 
-> Note: The method `ClassDocumentHydrator::hydrateSingleResource()` returns an empty `stdClass` if the document doesn't
+> Note: The method `ClassDocumentHydrator::hydrateSingleResource()` throws `DocumentException` when the document doesn't
 have any primary data or if the primary data is a collection. Otherwise - when the primary data is a single resource -
 an `stdObject` along with all the attributes and relationships is returned.
 
 Additionally, you may use the `ClassHydrator::hydrateCollection()` method for retrieving many dogs:
 
 ```php
+// Check if hydration is possible
+if ($document->hasAnyPrimaryResources() === false) {
+    return;
+}
+
+// Hydrate the document to an array of stdClass
 $hydrator = new ClassDocumentHydrator();
 $dogs = $hydrator->hydrateCollection($response->document());
 ```
 
-> Note: The method `ClassHydrator::hydrateCollection()` returns an empty array if the document doesn't have any primary data
-or when the primary data is a single resource. Otherwise - when the primary data is a collection of resources - an array
-of `stdObject`s along with all the attributes and relationship is returned.
+> Note: The method `ClassHydrator::hydrateCollection()` throws `DocumentException` when the primary data is a single resource.
+Otherwise - when the primary data is a collection of resources - an array of `stdObject`s along with all the attributes and
+relationship is returned.
 
 Furthermore, there is a `hydrate()` method available for you when you don't care if the primary data is a single resource
 or a collection of resources.
 
-> Note: The method `ClassDocumentHydrator::hydrate()` returns an empty array if the document doesn't have any primary data.
-It returns an array containing a single `stdClass` if the primary data is a single resource. Otherwise - the primary data
+> Note: The method `ClassDocumentHydrator::hydrate()` returns an empty array when the document doesn't have any primary data.
+It returns an array containing a single `stdClass` if the primary data is a single resource. Otherwise - when the primary data
 is a collection of resources - an array of `stdObject`s is returned.
 
 ## Advanced Usage

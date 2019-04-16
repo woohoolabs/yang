@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\Tests\JsonApi\Hydrator;
 
 use PHPUnit\Framework\TestCase;
-use stdClass;
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Hydrator\ClassDocumentHydrator;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 
@@ -381,15 +381,14 @@ class ClassDocumentHydratorTest extends TestCase
      */
     public function hydrateSingleResourceWhenCollectionEmpty()
     {
-        $document = [
+        $document = Document::fromArray([
             "data" => [],
-        ];
+        ]);
 
-        $document = Document::fromArray($document);
+        $this->expectException(DocumentException::class);
+
         $hydrator = new ClassDocumentHydrator();
-        $object = $hydrator->hydrateSingleResource($document);
-
-        $this->assertEquals(new stdClass(), $object);
+        $hydrator->hydrateSingleResource($document);
     }
 
     /**
@@ -397,20 +396,19 @@ class ClassDocumentHydratorTest extends TestCase
      */
     public function hydrateSingleResourceWhenCollection()
     {
-        $document = [
+        $document = Document::fromArray([
             "data" => [
                 [
                     "type" => "a",
                     "id" => "1",
                 ],
             ],
-        ];
+        ]);
 
-        $document = Document::fromArray($document);
+        $this->expectException(DocumentException::class);
+
         $hydrator = new ClassDocumentHydrator();
-        $object = $hydrator->hydrateSingleResource($document);
-
-        $this->assertEquals(new stdClass(), $object);
+        $hydrator->hydrateSingleResource($document);
     }
 
     /**
@@ -418,15 +416,14 @@ class ClassDocumentHydratorTest extends TestCase
      */
     public function hydrateSingleResourceWhenSingleResourceEmpty()
     {
-        $document = [
+        $document = Document::fromArray([
             "data" => null,
-        ];
+        ]);
 
-        $document = Document::fromArray($document);
+        $this->expectException(DocumentException::class);
+
         $hydrator = new ClassDocumentHydrator();
-        $object = $hydrator->hydrateSingleResource($document);
-
-        $this->assertEquals(new stdClass(), $object);
+        $hydrator->hydrateSingleResource($document);
     }
 
     /**
@@ -454,11 +451,10 @@ class ClassDocumentHydratorTest extends TestCase
      */
     public function hydrateCollectionWhenEmpty()
     {
-        $document = [
+        $document = Document::fromArray([
             "data" => [],
-        ];
+        ]);
 
-        $document = Document::fromArray($document);
         $hydrator = new ClassDocumentHydrator();
         $collection = $hydrator->hydrateCollection($document);
 
@@ -470,15 +466,14 @@ class ClassDocumentHydratorTest extends TestCase
      */
     public function hydrateCollectionWhenEmptySingleResource()
     {
-        $document = [
+        $document = Document::fromArray([
             "data" => null,
-        ];
+        ]);
 
-        $document = Document::fromArray($document);
+        $this->expectException(DocumentException::class);
+
         $hydrator = new ClassDocumentHydrator();
-        $collection = $hydrator->hydrateCollection($document);
-
-        $this->assertCount(0, $collection);
+        $hydrator->hydrateCollection($document);
     }
 
     /**
@@ -486,18 +481,17 @@ class ClassDocumentHydratorTest extends TestCase
      */
     public function hydrateCollectionWhenSingleResource()
     {
-        $document = [
+        $document = Document::fromArray([
             "data" => [
                 "type" => "a",
                 "id" => "1",
             ],
-        ];
+        ]);
 
-        $document = Document::fromArray($document);
+        $this->expectException(DocumentException::class);
+
         $hydrator = new ClassDocumentHydrator();
-        $collection = $hydrator->hydrateCollection($document);
-
-        $this->assertSame([], $collection);
+        $hydrator->hydrateCollection($document);
     }
 
     /**
