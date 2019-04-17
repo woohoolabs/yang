@@ -513,7 +513,7 @@ Let's use the document from the last example for demonstrating the power of hydr
 
 ```php
 // Check if hydration is possible
-if ($document->isSingleResourceDocument()) {
+if ($document->hasAnyPrimaryResources() === false) {
     return;
 }
 
@@ -545,7 +545,7 @@ Additionally, you may use the `ClassHydrator::hydrateCollection()` method for re
 
 ```php
 // Check if hydration is possible
-if ($document->hasAnyPrimaryResources() === false) {
+if ($document->isSingleResourceDocument()) {
     return;
 }
 
