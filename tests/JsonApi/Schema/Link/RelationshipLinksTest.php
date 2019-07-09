@@ -13,7 +13,7 @@ class RelationshipLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasSelfIsTrue()
+    public function hasSelfIsTrue(): void
     {
         $links = RelationshipLinks::fromArray(
             [
@@ -29,7 +29,7 @@ class RelationshipLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasSelfIsFalse()
+    public function hasSelfIsFalse(): void
     {
         $links = RelationshipLinks::fromArray([]);
 
@@ -41,7 +41,7 @@ class RelationshipLinksTest extends TestCase
     /**
      * @test
      */
-    public function selfReturnsObject()
+    public function selfReturnsObject(): void
     {
         $links = RelationshipLinks::fromArray(
             [
@@ -57,7 +57,7 @@ class RelationshipLinksTest extends TestCase
     /**
      * @test
      */
-    public function selfWhenMissing()
+    public function selfWhenMissing(): void
     {
         $links = RelationshipLinks::fromArray([]);
 
@@ -69,7 +69,7 @@ class RelationshipLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasRelatedIsTrue()
+    public function hasRelatedIsTrue(): void
     {
         $links = RelationshipLinks::fromArray(
             [
@@ -85,7 +85,7 @@ class RelationshipLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasRelatedIsFalse()
+    public function hasRelatedIsFalse(): void
     {
         $links = RelationshipLinks::fromArray([]);
 
@@ -97,7 +97,7 @@ class RelationshipLinksTest extends TestCase
     /**
      * @test
      */
-    public function relatedReturnsObject()
+    public function relatedReturnsObject(): void
     {
         $links = RelationshipLinks::fromArray(
             [
@@ -113,7 +113,7 @@ class RelationshipLinksTest extends TestCase
     /**
      * @test
      */
-    public function relatedWhenMissing()
+    public function relatedWhenMissing(): void
     {
         $links = RelationshipLinks::fromArray([]);
 

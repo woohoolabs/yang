@@ -13,7 +13,7 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasAboutIsTrue()
+    public function hasAboutIsTrue(): void
     {
         $links = ErrorLinks::fromArray(
             [
@@ -29,7 +29,7 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasAboutIsFalse()
+    public function hasAboutIsFalse(): void
     {
         $links = ErrorLinks::fromArray([]);
 
@@ -41,7 +41,7 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function aboutReturnsObject()
+    public function aboutReturnsObject(): void
     {
         $links = ErrorLinks::fromArray(
             [
@@ -57,7 +57,7 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function aboutWhenMissing()
+    public function aboutWhenMissing(): void
     {
         $links = ErrorLinks::fromArray([]);
 
@@ -69,7 +69,7 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasTypeWhenTrue()
+    public function hasTypeWhenTrue(): void
     {
         $links = ErrorLinks::fromArray(
             [
@@ -87,7 +87,7 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasTypeWhenFalse()
+    public function hasTypeWhenFalse(): void
     {
         $links = ErrorLinks::fromArray([]);
 
@@ -99,7 +99,7 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function getTypeWhenPresent()
+    public function getTypeWhenPresent(): void
     {
         $links = ErrorLinks::fromArray(
             [
@@ -117,7 +117,7 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function getTypeWhenEmpty()
+    public function getTypeWhenEmpty(): void
     {
         $links = ErrorLinks::fromArray([]);
 
@@ -129,7 +129,7 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function getTypeWhenMissing()
+    public function getTypeWhenMissing(): void
     {
         $links = ErrorLinks::fromArray(
             [
@@ -147,7 +147,7 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasAnyTypesWhenTrue()
+    public function hasAnyTypesWhenTrue(): void
     {
         $links = ErrorLinks::fromArray(
             [
@@ -165,7 +165,7 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasAnyTypesWhenFalse()
+    public function hasAnyTypesWhenFalse(): void
     {
         $links = ErrorLinks::fromArray([]);
 
@@ -177,7 +177,7 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function getTypes()
+    public function getTypes(): void
     {
         $links = ErrorLinks::fromArray(
             [
@@ -204,7 +204,7 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function fromArray()
+    public function fromArray(): void
     {
         $links = ErrorLinks::fromArray(
             [
@@ -222,7 +222,7 @@ class ErrorLinksTest extends TestCase
     /**
      * @test
      */
-    public function toArray()
+    public function toArray(): void
     {
         $links = ErrorLinks::fromArray(
             [

@@ -14,7 +14,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasSelfIsTrue()
+    public function hasSelfIsTrue(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -30,7 +30,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasSelfIsFalse()
+    public function hasSelfIsFalse(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -42,7 +42,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function selfReturnsObject()
+    public function selfReturnsObject(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -58,7 +58,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function selfWhenMissing()
+    public function selfWhenMissing(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -70,7 +70,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasRelatedIsTrue()
+    public function hasRelatedIsTrue(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -86,7 +86,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasRelatedIsFalse()
+    public function hasRelatedIsFalse(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -98,7 +98,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function relatedReturnsObject()
+    public function relatedReturnsObject(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -114,7 +114,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function relatedWhenMissing()
+    public function relatedWhenMissing(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -126,7 +126,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasFirstIsTrue()
+    public function hasFirstIsTrue(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -142,7 +142,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasFirstIsFalse()
+    public function hasFirstIsFalse(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -154,7 +154,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function firstReturnsObject()
+    public function firstReturnsObject(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -170,7 +170,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function firstWhenMissing()
+    public function firstWhenMissing(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -182,7 +182,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasLastIsTrue()
+    public function hasLastIsTrue(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -198,7 +198,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasLastIsFalse()
+    public function hasLastIsFalse(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -210,7 +210,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function lastReturnsObject()
+    public function lastReturnsObject(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -226,7 +226,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function lastWhenMissing()
+    public function lastWhenMissing(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -238,7 +238,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasPrevIsTrue()
+    public function hasPrevIsTrue(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -254,7 +254,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasPrevIsFalse()
+    public function hasPrevIsFalse(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -266,7 +266,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function prevReturnsObject()
+    public function prevReturnsObject(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -282,7 +282,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function prevWhenMissing()
+    public function prevWhenMissing(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -294,7 +294,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasNextIsTrue()
+    public function hasNextIsTrue(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -308,7 +308,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasNextIsFalse()
+    public function hasNextIsFalse(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -320,7 +320,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function nextReturnsObject()
+    public function nextReturnsObject(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -336,7 +336,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function nextWhenMissing()
+    public function nextWhenMissing(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -348,7 +348,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasProfileWhenTrue()
+    public function hasProfileWhenTrue(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -366,7 +366,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasProfileWhenFalse()
+    public function hasProfileWhenFalse(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -378,7 +378,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function getProfileWhenPresent()
+    public function getProfileWhenPresent(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -396,7 +396,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function getProfileWhenEmpty()
+    public function getProfileWhenEmpty(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -408,7 +408,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function getProfileWhenMissing()
+    public function getProfileWhenMissing(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -426,7 +426,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasAnyProfilesWhenTrue()
+    public function hasAnyProfilesWhenTrue(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -444,7 +444,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasAnyProfilesWhenFalse()
+    public function hasAnyProfilesWhenFalse(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -456,7 +456,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function getProfiles()
+    public function getProfiles(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -483,7 +483,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function fromArray()
+    public function fromArray(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -503,7 +503,7 @@ class DocumentLinksTest extends TestCase
     /**
      * @test
      */
-    public function toArray()
+    public function toArray(): void
     {
         $links = DocumentLinks::fromArray(
             [

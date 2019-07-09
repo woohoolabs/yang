@@ -11,7 +11,7 @@ class ProfileLinkTest extends TestCase
     /**
      * @test
      */
-    public function aliasesWhenEmpty()
+    public function aliasesWhenEmpty(): void
     {
         $link = new ProfileLink("", [], []);
 
@@ -21,7 +21,7 @@ class ProfileLinkTest extends TestCase
     /**
      * @test
      */
-    public function aliasesWhenNotEmpty()
+    public function aliasesWhenNotEmpty(): void
     {
         $link = new ProfileLink("", [], ["a" => "abc"]);
 
@@ -31,7 +31,7 @@ class ProfileLinkTest extends TestCase
     /**
      * @test
      */
-    public function fromString()
+    public function fromString(): void
     {
         $link = ProfileLink::fromString("abc");
 
@@ -43,7 +43,7 @@ class ProfileLinkTest extends TestCase
     /**
      * @test
      */
-    public function fromArray()
+    public function fromArray(): void
     {
         $link = ProfileLink::fromArray(
             [
@@ -65,7 +65,7 @@ class ProfileLinkTest extends TestCase
     /**
      * @test
      */
-    public function fromArrayWithWrongTypes()
+    public function fromArrayWithWrongTypes(): void
     {
         $link = ProfileLink::fromArray(
             [
@@ -83,7 +83,7 @@ class ProfileLinkTest extends TestCase
     /**
      * @test
      */
-    public function toArray()
+    public function toArray(): void
     {
         $link = ProfileLink::fromArray(
             [

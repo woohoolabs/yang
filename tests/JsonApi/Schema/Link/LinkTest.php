@@ -11,7 +11,7 @@ class LinkTest extends TestCase
     /**
      * @test
      */
-    public function href()
+    public function href(): void
     {
         $link = new Link("abc");
 
@@ -21,7 +21,7 @@ class LinkTest extends TestCase
     /**
      * @test
      */
-    public function hasMetaWhenTrue()
+    public function hasMetaWhenTrue(): void
     {
         $link = Link::fromArray(
             [
@@ -38,7 +38,7 @@ class LinkTest extends TestCase
     /**
      * @test
      */
-    public function hasMetaWhenFalse()
+    public function hasMetaWhenFalse(): void
     {
         $link = Link::fromArray(
             [
@@ -53,7 +53,7 @@ class LinkTest extends TestCase
     /**
      * @test
      */
-    public function meta()
+    public function meta(): void
     {
         $link = Link::fromArray(
             [
@@ -70,7 +70,7 @@ class LinkTest extends TestCase
     /**
      * @test
      */
-    public function fromString()
+    public function fromString(): void
     {
         $link = Link::fromString("abc");
 
@@ -81,7 +81,7 @@ class LinkTest extends TestCase
     /**
      * @test
      */
-    public function fromArray()
+    public function fromArray(): void
     {
         $link = Link::fromArray(
             [
@@ -99,7 +99,7 @@ class LinkTest extends TestCase
     /**
      * @test
      */
-    public function fromArrayWithWrongTypes()
+    public function fromArrayWithWrongTypes(): void
     {
         $link = Link::fromArray(
             [
@@ -115,7 +115,7 @@ class LinkTest extends TestCase
     /**
      * @test
      */
-    public function toArray()
+    public function toArray(): void
     {
         $link = Link::fromArray(
             [

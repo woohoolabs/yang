@@ -1,11 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema;
+namespace WoohooLabs\Yang\Tests\JsonApi\Schema;
 
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Link\RelationshipLinks;
+use WoohooLabs\Yang\JsonApi\Schema\Relationship;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
 
 class RelationshipTest extends TestCase
@@ -13,7 +14,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function name()
+    public function name(): void
     {
         $relationship = $this->createRelationship([], "a");
 
@@ -25,7 +26,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function isToOneRelationshipIsTrueWhenEmpty()
+    public function isToOneRelationshipIsTrueWhenEmpty(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -41,7 +42,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function isToOneRelationshipIsTrue()
+    public function isToOneRelationshipIsTrue(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -60,7 +61,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function isToOneRelationshipIsFalseWhenEmpty()
+    public function isToOneRelationshipIsFalseWhenEmpty(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -76,7 +77,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function isToOneRelationshipIsFalse()
+    public function isToOneRelationshipIsFalse(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -97,7 +98,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function isToManyRelationshipIsTrueWhenEmpty()
+    public function isToManyRelationshipIsTrueWhenEmpty(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -113,7 +114,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function isToManyRelationshipIsTrue()
+    public function isToManyRelationshipIsTrue(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -134,7 +135,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function isToManyRelationshipIsFalseWhenEmpty()
+    public function isToManyRelationshipIsFalseWhenEmpty(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -150,7 +151,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function isToManyRelationshipIsFalse()
+    public function isToManyRelationshipIsFalse(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -169,7 +170,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function hasMetaIsTrue()
+    public function hasMetaIsTrue(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -187,7 +188,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function hasMetaIsFalse()
+    public function hasMetaIsFalse(): void
     {
         $relationship = $this->createRelationship([]);
 
@@ -199,7 +200,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function meta()
+    public function meta(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -217,7 +218,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function hasLinksIsTrue()
+    public function hasLinksIsTrue(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -235,7 +236,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function hasLinksIsFalse()
+    public function hasLinksIsFalse(): void
     {
         $relationship = $this->createRelationship([]);
 
@@ -247,7 +248,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function linksReturnsObject()
+    public function linksReturnsObject(): void
     {
         $relationship = $this->createRelationship([]);
 
@@ -259,7 +260,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function resourceLinksForToManyRelationship()
+    public function resourceLinksForToManyRelationship(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -288,7 +289,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function resourceLinksForToOneRelationship()
+    public function resourceLinksForToOneRelationship(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -315,7 +316,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function firstResourceLinkForToManyRelationship()
+    public function firstResourceLinkForToManyRelationship(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -342,7 +343,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function firstResourceLinkForToOneRelationship()
+    public function firstResourceLinkForToOneRelationship(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -369,7 +370,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function firstResourceLinkWhenEmpty()
+    public function firstResourceLinkWhenEmpty(): void
     {
         $relationship = $this->createRelationship([]);
 
@@ -381,7 +382,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function hasIncludedResourceWhenFalse()
+    public function hasIncludedResourceWhenFalse(): void
     {
         $relationship = $this->createRelationship([]);
 
@@ -393,7 +394,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function resourcesWhenToOneRelationship()
+    public function resourcesWhenToOneRelationship(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -412,7 +413,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function resourcesWhenToManyRelationship()
+    public function resourcesWhenToManyRelationship(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -452,7 +453,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function resourceMap()
+    public function resourceMap(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -492,7 +493,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function resourceWhenToOneRelationship()
+    public function resourceWhenToOneRelationship(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -524,7 +525,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function resourceWhenEmptyToOneRelationship()
+    public function resourceWhenEmptyToOneRelationship(): void
     {
         $relationship = $this->createRelationship([]);
 
@@ -536,7 +537,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function resourceWhenToManyRelationship()
+    public function resourceWhenToManyRelationship(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -568,7 +569,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function resourceBy()
+    public function resourceBy(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -606,7 +607,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function resourceByWhenMissing()
+    public function resourceByWhenMissing(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -638,7 +639,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function resourceLinkMetaWhenToOne()
+    public function resourceLinkMetaWhenToOne(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -665,7 +666,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function resourceLinkMetaWhenToMany()
+    public function resourceLinkMetaWhenToMany(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -694,7 +695,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function resourceLinkMetaWhenEmpty()
+    public function resourceLinkMetaWhenEmpty(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -715,7 +716,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function resourceLinkMetaWhenMissing()
+    public function resourceLinkMetaWhenMissing(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -734,7 +735,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function toArrayWhenDataIsMissing()
+    public function toArrayWhenDataIsMissing(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -767,7 +768,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function toArrayWhenDataIsEmptyToOne()
+    public function toArrayWhenDataIsEmptyToOne(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -802,7 +803,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function toArrayWhenDataIsEmptyToMany()
+    public function toArrayWhenDataIsEmptyToMany(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -837,7 +838,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function toArrayWhenDataIsToOne()
+    public function toArrayWhenDataIsToOne(): void
     {
         $relationship = $this->createRelationship(
             [
@@ -878,7 +879,7 @@ class RelationshipTest extends TestCase
     /**
      * @test
      */
-    public function toArrayWhenDataIsToMany()
+    public function toArrayWhenDataIsToMany(): void
     {
         $relationship = $this->createRelationship(
             [

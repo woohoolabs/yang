@@ -6,7 +6,6 @@ namespace WoohooLabs\Yang\Tests\JsonApi\Schema;
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
-use WoohooLabs\Yang\JsonApi\Schema\Error\Error;
 use WoohooLabs\Yang\JsonApi\Schema\JsonApiObject;
 use WoohooLabs\Yang\JsonApi\Schema\Link\DocumentLinks;
 
@@ -15,7 +14,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function toArrayWhenEmpty()
+    public function toArrayWhenEmpty(): void
     {
         $document = $this->createDocument(
             [
@@ -40,7 +39,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function toArray()
+    public function toArray(): void
     {
         $document = $this->createDocument(
             [
@@ -109,7 +108,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function jsonApiReturnsObject()
+    public function jsonApiReturnsObject(): void
     {
         $document = $this->createDocument([]);
 
@@ -121,7 +120,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function hasMetaIsTrue()
+    public function hasMetaIsTrue(): void
     {
         $document = $this->createDocument(
             [
@@ -139,7 +138,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function hasMetaIsFalse()
+    public function hasMetaIsFalse(): void
     {
         $document = $this->createDocument([]);
 
@@ -151,7 +150,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function metaReturnsMetaObject()
+    public function metaReturnsMetaObject(): void
     {
         $document = $this->createDocument(
             [
@@ -169,7 +168,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function hasLinksIsTrue()
+    public function hasLinksIsTrue(): void
     {
         $document = $this->createDocument(
             [
@@ -187,7 +186,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function hasLinksIsFalse()
+    public function hasLinksIsFalse(): void
     {
         $document = $this->createDocument([]);
 
@@ -199,7 +198,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function linksReturnsObject()
+    public function linksReturnsObject(): void
     {
         $document = $this->createDocument([]);
 
@@ -211,7 +210,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function isSingleResourceDocumentIsTrue()
+    public function isSingleResourceDocumentIsTrue(): void
     {
         $document = $this->createDocument(
             [
@@ -230,7 +229,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function isSingleResourceDocumentIsTrueWhenNull()
+    public function isSingleResourceDocumentIsTrueWhenNull(): void
     {
         $document = $this->createDocument(
             [
@@ -246,7 +245,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function isSingleResourceDocumentIsFalse()
+    public function isSingleResourceDocumentIsFalse(): void
     {
         $document = $this->createDocument(
             [
@@ -267,7 +266,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function isResourceCollectionDocumentIsTrue()
+    public function isResourceCollectionDocumentIsTrue(): void
     {
         $document = $this->createDocument(
             [
@@ -288,7 +287,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function isResourceCollectionDocumentIsTrueWhenEmpty()
+    public function isResourceCollectionDocumentIsTrueWhenEmpty(): void
     {
         $document = $this->createDocument(
             [
@@ -304,7 +303,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function isResourceCollectionDocumentIsFalse()
+    public function isResourceCollectionDocumentIsFalse(): void
     {
         $document = $this->createDocument(
             [
@@ -323,7 +322,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function hasAnyPrimaryResourcesIsTrueWhenHasSinglePrimaryData()
+    public function hasAnyPrimaryResourcesIsTrueWhenHasSinglePrimaryData(): void
     {
         $document = $this->createDocument(
             [
@@ -342,7 +341,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function hasAnyPrimaryResourcesIsFalseWhenNull()
+    public function hasAnyPrimaryResourcesIsFalseWhenNull(): void
     {
         $document = $this->createDocument(
             [
@@ -358,7 +357,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function hasAnyPrimaryResourcesIsTrueWhenHasCollectionPrimaryData()
+    public function hasAnyPrimaryResourcesIsTrueWhenHasCollectionPrimaryData(): void
     {
         $document = $this->createDocument(
             [
@@ -379,7 +378,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function hasAnyPrimaryResourcesIsFalseWhenEmpty()
+    public function hasAnyPrimaryResourcesIsFalseWhenEmpty(): void
     {
         $document = $this->createDocument(
             [
@@ -395,7 +394,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function hasErrorsIsTrue()
+    public function hasErrorsIsTrue(): void
     {
         $document = $this->createDocument(
             [
@@ -415,7 +414,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function hasErrorsIsFalse()
+    public function hasErrorsIsFalse(): void
     {
         $document = $this->createDocument();
 
@@ -427,7 +426,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function errorsReturnsErrorArray()
+    public function errorsReturnsErrorArray(): void
     {
         $document = $this->createDocument(
             [
@@ -441,13 +440,13 @@ class DocumentTest extends TestCase
 
         $error = $document->errors()[0];
 
-        $this->assertInstanceOf(Error::class, $error);
+        $this->assertSame("400", $error->status());
     }
 
     /**
      * @test
      */
-    public function errorsReturnsEmptyArray()
+    public function errorsReturnsEmptyArray(): void
     {
         $document = $this->createDocument();
 
@@ -459,7 +458,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function errorCount()
+    public function errorCount(): void
     {
         $document = $this->createDocument(
             [
@@ -482,7 +481,7 @@ class DocumentTest extends TestCase
     /**
      * @test
      */
-    public function errorReturnsFirstError()
+    public function errorReturnsFirstError(): void
     {
         $document = $this->createDocument(
             [
@@ -496,13 +495,13 @@ class DocumentTest extends TestCase
 
         $error = $document->error(0);
 
-        $this->assertInstanceOf(Error::class, $error);
+        $this->assertSame("400", $error->status());
     }
 
     /**
      * @test
      */
-    public function errorReturnsNull()
+    public function errorReturnsNull(): void
     {
         $document = $this->createDocument();
 

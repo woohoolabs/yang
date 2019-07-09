@@ -7,7 +7,6 @@ use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Exception\ResponseException;
 use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
-use WoohooLabs\Yang\JsonApi\Schema\Document;
 use function json_encode;
 
 class JsonApiResponseTest extends TestCase
@@ -15,7 +14,7 @@ class JsonApiResponseTest extends TestCase
     /**
      * @test
      */
-    public function hasDocumentIsFalse()
+    public function hasDocumentIsFalse(): void
     {
         $response = $this->createResponse();
 
@@ -27,7 +26,7 @@ class JsonApiResponseTest extends TestCase
     /**
      * @test
      */
-    public function hasDocumentIsTrue()
+    public function hasDocumentIsTrue(): void
     {
         $response = $this->createResponse(200, [], []);
 
@@ -39,7 +38,7 @@ class JsonApiResponseTest extends TestCase
     /**
      * @test
      */
-    public function documentWhenEmpty()
+    public function documentWhenEmpty(): void
     {
         $response = $this->createResponse();
 
@@ -51,19 +50,19 @@ class JsonApiResponseTest extends TestCase
     /**
      * @test
      */
-    public function documentWhenNotEmpty()
+    public function documentWhenNotEmpty(): void
     {
         $response = $this->createResponse(200, [], []);
 
-        $document = $response->document();
+        $response->document();
 
-        $this->assertInstanceOf(Document::class, $document);
+        $this->addToAssertionCount(1);
     }
 
     /**
      * @test
      */
-    public function isSuccessfulIsTrue()
+    public function isSuccessfulIsTrue(): void
     {
         $response = $this->createResponse();
 
@@ -75,7 +74,7 @@ class JsonApiResponseTest extends TestCase
     /**
      * @test
      */
-    public function isSuccessfulWithStatusCodesIsTrue()
+    public function isSuccessfulWithStatusCodesIsTrue(): void
     {
         $response = $this->createResponse(200);
 
@@ -87,7 +86,7 @@ class JsonApiResponseTest extends TestCase
     /**
      * @test
      */
-    public function isSuccessfulWithStatusCodesIsFalseWhenDocumentContainsErrors()
+    public function isSuccessfulWithStatusCodesIsFalseWhenDocumentContainsErrors(): void
     {
         $response = $this->createResponse(
             400,
@@ -109,7 +108,7 @@ class JsonApiResponseTest extends TestCase
     /**
      * @test
      */
-    public function isSuccessfulIsFalse()
+    public function isSuccessfulIsFalse(): void
     {
         $response = $this->createResponse(
             400,
@@ -131,7 +130,7 @@ class JsonApiResponseTest extends TestCase
     /**
      * @test
      */
-    public function isSuccessfulDocumentIsTrue()
+    public function isSuccessfulDocumentIsTrue(): void
     {
         $response = $this->createResponse(200, [], []);
 
@@ -143,7 +142,7 @@ class JsonApiResponseTest extends TestCase
     /**
      * @test
      */
-    public function isSuccessfulDocumentIsFalse()
+    public function isSuccessfulDocumentIsFalse(): void
     {
         $response = $this->createResponse(400, [], []);
 
@@ -155,7 +154,7 @@ class JsonApiResponseTest extends TestCase
     /**
      * @test
      */
-    public function isSuccessfulDocumentIsFalseBecauseItDoesNotContainADocument()
+    public function isSuccessfulDocumentIsFalseBecauseItDoesNotContainADocument(): void
     {
         $response = $this->createResponse(200);
 
@@ -166,6 +165,8 @@ class JsonApiResponseTest extends TestCase
 
     private function createResponse(int $statusCode = 200, array $headers = [], ?array $body = null): JsonApiResponse
     {
-        return new JsonApiResponse(new Response($statusCode, $headers, json_encode($body)));
+        $data = json_encode($body) ?: null;
+
+        return new JsonApiResponse(new Response($statusCode, $headers, $data));
     }
 }

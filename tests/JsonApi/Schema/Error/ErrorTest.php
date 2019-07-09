@@ -13,7 +13,7 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function id()
+    public function id(): void
     {
         $error = Error::fromArray(
             [
@@ -29,7 +29,7 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function hasMetaIsTrue()
+    public function hasMetaIsTrue(): void
     {
         $error = Error::fromArray(
             [
@@ -47,7 +47,7 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function hasMetaIsFalse()
+    public function hasMetaIsFalse(): void
     {
         $error = Error::fromArray([]);
 
@@ -59,7 +59,7 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function meta()
+    public function meta(): void
     {
         $error = Error::fromArray(
             [
@@ -77,7 +77,7 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function hasLinksIsTrue()
+    public function hasLinksIsTrue(): void
     {
         $error = Error::fromArray(
             [
@@ -95,7 +95,7 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function hasLinksIsFalse()
+    public function hasLinksIsFalse(): void
     {
         $error = Error::fromArray([]);
 
@@ -107,7 +107,7 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function linksReturnsObject()
+    public function linksReturnsObject(): void
     {
         $error = Error::fromArray([]);
 
@@ -119,7 +119,7 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function status()
+    public function status(): void
     {
         $error = Error::fromArray(
             [
@@ -135,7 +135,7 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function code()
+    public function code(): void
     {
         $error = Error::fromArray(
             [
@@ -151,7 +151,7 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function title()
+    public function title(): void
     {
         $error = Error::fromArray(
             [
@@ -167,7 +167,7 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function detail()
+    public function detail(): void
     {
         $error = Error::fromArray(
             [
@@ -183,7 +183,7 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function sourceReturnsObject()
+    public function sourceReturnsObject(): void
     {
         $error = Error::fromArray([]);
 
@@ -195,7 +195,7 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function toArray()
+    public function toArray(): void
     {
         $error = Error::fromArray(
             [
@@ -246,7 +246,7 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function toArrayWhenEmpty()
+    public function toArrayWhenEmpty(): void
     {
         $error = Error::fromArray(
             [
@@ -266,7 +266,7 @@ class ErrorTest extends TestCase
     /**
      * @test
      */
-    public function toArrayWhenZero()
+    public function toArrayWhenZero(): void
     {
         $error = Error::fromArray(
             [

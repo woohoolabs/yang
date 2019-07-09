@@ -13,7 +13,7 @@ class AbstractLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasLinkWhenTrue()
+    public function hasLinkWhenTrue(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -29,7 +29,7 @@ class AbstractLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasLinkWhenFalse()
+    public function hasLinkWhenFalse(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -41,7 +41,7 @@ class AbstractLinksTest extends TestCase
     /**
      * @test
      */
-    public function linkWhenMissing()
+    public function linkWhenMissing(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -53,7 +53,7 @@ class AbstractLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasAnyLinksIsTrue()
+    public function hasAnyLinksIsTrue(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -69,7 +69,7 @@ class AbstractLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasAnyLinksIsFalse()
+    public function hasAnyLinksIsFalse(): void
     {
         $links = DocumentLinks::fromArray([]);
 
@@ -81,7 +81,7 @@ class AbstractLinksTest extends TestCase
     /**
      * @test
      */
-    public function links()
+    public function links(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -97,7 +97,7 @@ class AbstractLinksTest extends TestCase
     /**
      * @test
      */
-    public function fromArray()
+    public function fromArray(): void
     {
         $links = DocumentLinks::fromArray(
             [
@@ -115,7 +115,7 @@ class AbstractLinksTest extends TestCase
     /**
      * @test
      */
-    public function toArray()
+    public function toArray(): void
     {
         $links = DocumentLinks::fromArray(
             [

@@ -6,7 +6,6 @@ namespace WoohooLabs\Yang\Tests\JsonApi\Schema\Resource;
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Link\ResourceLinks;
-use WoohooLabs\Yang\JsonApi\Schema\Relationship;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
 
@@ -15,7 +14,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function type()
+    public function type(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -31,7 +30,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function id()
+    public function id(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -47,7 +46,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function hasMetaIsTrue()
+    public function hasMetaIsTrue(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -65,7 +64,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function hasMetaIsFalse()
+    public function hasMetaIsFalse(): void
     {
         $resourceObject = $this->createResourceObject([]);
 
@@ -77,7 +76,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function meta()
+    public function meta(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -95,7 +94,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function hasLinksIsTrue()
+    public function hasLinksIsTrue(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -113,7 +112,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function hasLinksIsFalse()
+    public function hasLinksIsFalse(): void
     {
         $resourceObject = $this->createResourceObject([]);
 
@@ -125,7 +124,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function linksReturnsObject()
+    public function linksReturnsObject(): void
     {
         $resourceObject = $this->createResourceObject([]);
 
@@ -137,7 +136,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function attributes()
+    public function attributes(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -155,7 +154,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function idAndAttributes()
+    public function idAndAttributes(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -174,7 +173,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function hasAttributeIsTrue()
+    public function hasAttributeIsTrue(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -192,7 +191,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function hasAttributeIsTrueWhenNull()
+    public function hasAttributeIsTrueWhenNull(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -210,7 +209,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function hasAttributeIsFalse()
+    public function hasAttributeIsFalse(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -228,7 +227,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function attributeReturnsValue()
+    public function attributeReturnsValue(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -246,7 +245,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function attributeReturnsDefaultValue()
+    public function attributeReturnsDefaultValue(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -262,7 +261,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function relationships()
+    public function relationships(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -286,14 +285,14 @@ class ResourceObjectTest extends TestCase
         $relationships = $resourceObject->relationships();
 
         $this->assertCount(2, $relationships);
-        $this->assertInstanceOf(Relationship::class, $relationships["a"]);
-        $this->assertInstanceOf(Relationship::class, $relationships["b"]);
+        $this->assertSame(["type" => "a", "id" => "1"], $relationships["a"]->firstResourceLink());
+        $this->assertSame(["type" => "a", "id" => "1"], $relationships["b"]->firstResourceLink());
     }
 
     /**
      * @test
      */
-    public function hasRelationshipIsTrue()
+    public function hasRelationshipIsTrue(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -311,7 +310,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function hasRelationshipIsFalse()
+    public function hasRelationshipIsFalse(): void
     {
         $resourceObject = $this->createResourceObject([]);
 
@@ -323,7 +322,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function relationshipReturnsObject()
+    public function relationshipReturnsObject(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -335,13 +334,13 @@ class ResourceObjectTest extends TestCase
 
         $relationship = $resourceObject->relationship("a");
 
-        $this->assertInstanceOf(Relationship::class, $relationship);
+        $this->assertSame("a", $relationship->name());
     }
 
     /**
      * @test
      */
-    public function relationshipWhenMissing()
+    public function relationshipWhenMissing(): void
     {
         $resourceObject = $this->createResourceObject([]);
 
@@ -353,7 +352,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function relationshipWhenInvalid()
+    public function relationshipWhenInvalid(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -376,7 +375,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function toArray()
+    public function toArray(): void
     {
         $resourceObject = $this->createResourceObject(
             [
@@ -425,7 +424,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function toArrayWhenEmpty()
+    public function toArrayWhenEmpty(): void
     {
         $resourceObject = $this->createResourceObject([]);
 

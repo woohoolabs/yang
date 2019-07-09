@@ -11,7 +11,7 @@ class JsonApiObjectTest extends TestCase
     /**
      * @test
      */
-    public function fromArray()
+    public function fromArray(): void
     {
         $jsonApi = JsonApiObject::fromArray(
             [
@@ -29,7 +29,7 @@ class JsonApiObjectTest extends TestCase
     /**
      * @test
      */
-    public function fromArrayWhenEmpty()
+    public function fromArrayWhenEmpty(): void
     {
         $jsonApi = JsonApiObject::fromArray([]);
 
@@ -40,7 +40,7 @@ class JsonApiObjectTest extends TestCase
     /**
      * @test
      */
-    public function toArray()
+    public function toArray(): void
     {
         $jsonApi = JsonApiObject::fromArray(
             [
@@ -65,7 +65,7 @@ class JsonApiObjectTest extends TestCase
     /**
      * @test
      */
-    public function version()
+    public function version(): void
     {
         $jsonApi = JsonApiObject::fromArray(
             [
@@ -79,7 +79,7 @@ class JsonApiObjectTest extends TestCase
     /**
      * @test
      */
-    public function versionWhenNotString()
+    public function versionWhenNotString(): void
     {
         $jsonApi = JsonApiObject::fromArray(
             [
@@ -93,7 +93,7 @@ class JsonApiObjectTest extends TestCase
     /**
      * @test
      */
-    public function versionWhenZero()
+    public function versionWhenZero(): void
     {
         $jsonApi = JsonApiObject::fromArray(
             [
@@ -107,7 +107,7 @@ class JsonApiObjectTest extends TestCase
     /**
      * @test
      */
-    public function versionWhenEmpty()
+    public function versionWhenEmpty(): void
     {
         $jsonApi = JsonApiObject::fromArray(
             [
@@ -121,7 +121,7 @@ class JsonApiObjectTest extends TestCase
     /**
      * @test
      */
-    public function hasMetaIsTrue()
+    public function hasMetaIsTrue(): void
     {
         $jsonApi = JsonApiObject::fromArray(
             [
@@ -135,7 +135,7 @@ class JsonApiObjectTest extends TestCase
     /**
      * @test
      */
-    public function hasMetaIsFalse()
+    public function hasMetaIsFalse(): void
     {
         $jsonApi = JsonApiObject::fromArray([]);
 
@@ -145,7 +145,7 @@ class JsonApiObjectTest extends TestCase
     /**
      * @test
      */
-    public function meta()
+    public function meta(): void
     {
         $jsonApi = JsonApiObject::fromArray(
             [

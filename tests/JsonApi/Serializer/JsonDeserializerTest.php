@@ -13,7 +13,7 @@ class JsonDeserializerTest extends TestCase
     /**
      * @test
      */
-    public function deserialize()
+    public function deserialize(): void
     {
         $body = [
             "data" => [
@@ -30,6 +30,8 @@ class JsonDeserializerTest extends TestCase
 
     private function createResponse(array $body): Response
     {
-        return new Response(200, [], json_encode($body));
+        $data = json_encode($body) ?: null;
+
+        return new Response(200, [], $data);
     }
 }

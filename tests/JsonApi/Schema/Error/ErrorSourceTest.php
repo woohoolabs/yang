@@ -11,7 +11,7 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
-    public function hasSourceIsTrueForPointer()
+    public function hasSourceIsTrueForPointer(): void
     {
         $source = ErrorSource::fromArray(
             [
@@ -25,7 +25,7 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
-    public function hasSourceIsTrueForParameter()
+    public function hasSourceIsTrueForParameter(): void
     {
         $source = ErrorSource::fromArray(
             [
@@ -39,7 +39,7 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
-    public function hasSourceIsFalse()
+    public function hasSourceIsFalse(): void
     {
         $source = ErrorSource::fromArray([]);
 
@@ -49,7 +49,7 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
-    public function hasPointerIsTrue()
+    public function hasPointerIsTrue(): void
     {
         $source = ErrorSource::fromArray(
             [
@@ -63,7 +63,7 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
-    public function hasPointerIsFalse()
+    public function hasPointerIsFalse(): void
     {
         $source = ErrorSource::fromArray([]);
 
@@ -73,7 +73,7 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
-    public function pointer()
+    public function pointer(): void
     {
         $source = ErrorSource::fromArray(
             [
@@ -87,7 +87,7 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
-    public function pointerWhenEmpty()
+    public function pointerWhenEmpty(): void
     {
         $source = ErrorSource::fromArray([]);
 
@@ -97,7 +97,7 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
-    public function hasParameterIsTrue()
+    public function hasParameterIsTrue(): void
     {
         $source = ErrorSource::fromArray(
             [
@@ -111,7 +111,7 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
-    public function hasParameterIsFalse()
+    public function hasParameterIsFalse(): void
     {
         $source = ErrorSource::fromArray([]);
 
@@ -121,7 +121,7 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
-    public function parameter()
+    public function parameter(): void
     {
         $source = ErrorSource::fromArray(
             [
@@ -135,7 +135,7 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
-    public function parameterWhenEmpty()
+    public function parameterWhenEmpty(): void
     {
         $source = ErrorSource::fromArray([]);
 
@@ -145,7 +145,7 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
-    public function toArray()
+    public function toArray(): void
     {
         $source = ErrorSource::fromArray(
             [
@@ -166,7 +166,7 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
-    public function toArrayWhenMissing()
+    public function toArrayWhenMissing(): void
     {
         $source = ErrorSource::fromArray(
             []
@@ -181,7 +181,7 @@ class ErrorSourceTest extends TestCase
     /**
      * @test
      */
-    public function toArrayWhenEmpty()
+    public function toArrayWhenEmpty(): void
     {
         $source = ErrorSource::fromArray(
             [

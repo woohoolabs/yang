@@ -14,7 +14,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function fetch()
+    public function fetch(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -26,7 +26,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function create()
+    public function create(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -38,7 +38,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function update()
+    public function update(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -50,7 +50,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function delete()
+    public function delete(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -62,7 +62,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setProtocolVersion()
+    public function setProtocolVersion(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -74,7 +74,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function http()
+    public function http(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -86,7 +86,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function https()
+    public function https(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -98,7 +98,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setUriWhenInvalid()
+    public function setUriWhenInvalid(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -110,7 +110,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setUri()
+    public function setUri(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -122,7 +122,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setUriWithoutPath()
+    public function setUriWithoutPath(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -134,7 +134,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setUriWithPort()
+    public function setUriWithPort(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -146,7 +146,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setUriWithQueryParamAsZero()
+    public function setUriWithQueryParamAsZero(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -158,7 +158,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setUriHost()
+    public function setUriHost(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -170,7 +170,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setUriPort()
+    public function setUriPort(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -182,7 +182,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setUriPath()
+    public function setUriPath(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -194,7 +194,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setUriQueryParamWithZeroValue()
+    public function setUriQueryParamWithZeroValue(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -206,7 +206,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setHeader()
+    public function setHeader(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -218,7 +218,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setJsonApiFields()
+    public function setJsonApiFields(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -230,7 +230,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setJsonApiSort()
+    public function setJsonApiSort(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -242,7 +242,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setJsonApiPage()
+    public function setJsonApiPage(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -254,7 +254,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setJsonApiFilter()
+    public function setJsonApiFilter(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -266,7 +266,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setJsonApiIncludesWhenArray()
+    public function setJsonApiIncludesWhenArray(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -278,7 +278,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setJsonApiIncludesWhenString()
+    public function setJsonApiIncludesWhenString(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -290,7 +290,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function addJsonApiAppliedProfile()
+    public function addJsonApiAppliedProfile(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -307,7 +307,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function addJsonApiRequestedProfile()
+    public function addJsonApiRequestedProfile(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -324,7 +324,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function addJsonApiRequiredProfile()
+    public function addJsonApiRequiredProfile(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -341,7 +341,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setBodyWhenResourceObject()
+    public function setBodyWhenResourceObject(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -353,7 +353,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setBodyWhenArray()
+    public function setBodyWhenArray(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -365,7 +365,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function getRequestWithCorrectAcceptHeader()
+    public function getRequestWithCorrectAcceptHeader(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -377,7 +377,7 @@ class JsonApiRequestBuilderTest extends TestCase
     /**
      * @test
      */
-    public function getRequestWithCorrectContentTypeHeader()
+    public function getRequestWithCorrectContentTypeHeader(): void
     {
         $requestBuilder = $this->createRequestBuilder();
 
@@ -388,6 +388,6 @@ class JsonApiRequestBuilderTest extends TestCase
 
     private function createRequestBuilder(): JsonApiRequestBuilder
     {
-        return new JsonApiRequestBuilder(new Request("", ""));
+        return new JsonApiRequestBuilder(new Request("GET", ""));
     }
 }

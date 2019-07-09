@@ -14,7 +14,7 @@ class JsonSerializerTest extends TestCase
     /**
      * @test
      */
-    public function serializeWhenRequestIsInitiallyEmpty()
+    public function serializeWhenRequestIsInitiallyEmpty(): void
     {
         $serializer = new JsonSerializer();
 
@@ -44,7 +44,7 @@ class JsonSerializerTest extends TestCase
     /**
      * @test
      */
-    public function serializeWhenRequestInitiallyHasContent()
+    public function serializeWhenRequestInitiallyHasContent(): void
     {
         $serializer = new JsonSerializer();
 
@@ -74,7 +74,7 @@ class JsonSerializerTest extends TestCase
     /**
      * @test
      */
-    public function serializeWhenString()
+    public function serializeWhenString(): void
     {
         $serializer = new JsonSerializer();
 
@@ -86,7 +86,7 @@ class JsonSerializerTest extends TestCase
     /**
      * @test
      */
-    public function serializeWhenNull()
+    public function serializeWhenNull(): void
     {
         $serializer = new JsonSerializer();
 
@@ -98,7 +98,7 @@ class JsonSerializerTest extends TestCase
     /**
      * @test
      */
-    public function serializeWhenContentInvalidType()
+    public function serializeWhenContentInvalidType(): void
     {
         $serializer = new JsonSerializer();
 
@@ -109,6 +109,11 @@ class JsonSerializerTest extends TestCase
 
     private function createRequest(?array $body = null): Request
     {
-        return new Request("", "", [], $body !== null ? json_encode($body) : null);
+        $data = null;
+        if ($body !== null) {
+            $data = json_encode($body) ?: null;
+        }
+
+        return new Request("GET", "", [], $data);
     }
 }

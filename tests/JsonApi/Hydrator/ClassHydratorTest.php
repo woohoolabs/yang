@@ -13,7 +13,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function doNotHydrateErrorDocument()
+    public function doNotHydrateErrorDocument(): void
     {
         $document = [
             "errors" => [],
@@ -29,7 +29,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateObjectWithTypeAndId()
+    public function hydrateObjectWithTypeAndId(): void
     {
         $document = [
             "data" => [
@@ -49,7 +49,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateObjectWithAttributes()
+    public function hydrateObjectWithAttributes(): void
     {
         $document = [
             "data" => [
@@ -73,7 +73,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateObjectsWithAttributes()
+    public function hydrateObjectsWithAttributes(): void
     {
         $document = [
             "data" => [
@@ -117,7 +117,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateObjectWithNotIncludedToOneRelationship()
+    public function hydrateObjectWithNotIncludedToOneRelationship(): void
     {
         $document = [
             "data" => [
@@ -142,7 +142,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateObjectWithIncludedToOneRelationship()
+    public function hydrateObjectWithIncludedToOneRelationship(): void
     {
         $document = [
             "data" => [
@@ -182,7 +182,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateObjectWithToManyRelationship()
+    public function hydrateObjectWithToManyRelationship(): void
     {
         $document = [
             "data" => [
@@ -247,7 +247,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateObjectWithNestedRelationships()
+    public function hydrateObjectWithNestedRelationships(): void
     {
         $document = [
             "data" => [
@@ -302,7 +302,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateObjectWithRecursiveRelationships()
+    public function hydrateObjectWithRecursiveRelationships(): void
     {
         $document = [
             "data" => [
@@ -367,7 +367,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateObjectWhenCollectionEmpty()
+    public function hydrateObjectWhenCollectionEmpty(): void
     {
         $document = [
             "data" => [],
@@ -383,7 +383,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateObjectWhenCollection()
+    public function hydrateObjectWhenCollection(): void
     {
         $document = [
             "data" => [
@@ -404,7 +404,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateObjectWhenSingleResourceEmpty()
+    public function hydrateObjectWhenSingleResourceEmpty(): void
     {
         $document = [
             "data" => null,
@@ -420,7 +420,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateObjectWhenSingleResource()
+    public function hydrateObjectWhenSingleResource(): void
     {
         $document = [
             "data" => [
@@ -440,7 +440,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateCollectionWhenEmpty()
+    public function hydrateCollectionWhenEmpty(): void
     {
         $document = [
             "data" => [],
@@ -456,7 +456,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateCollectionEmptySingleResource()
+    public function hydrateCollectionEmptySingleResource(): void
     {
         $document = [
             "data" => null,
@@ -472,7 +472,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateCollectionSingleResource()
+    public function hydrateCollectionSingleResource(): void
     {
         $document = [
             "data" => [
@@ -493,7 +493,7 @@ class ClassHydratorTest extends TestCase
     /**
      * @test
      */
-    public function hydrateCollectionMultipleResources()
+    public function hydrateCollectionMultipleResources(): void
     {
         $document = [
             "data" => [

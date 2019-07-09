@@ -11,17 +11,7 @@ class ToManyRelationshipTest extends TestCase
     /**
      * @test
      */
-    public function create()
-    {
-        $relationship = ToManyRelationship::create();
-
-        $this->assertInstanceOf(ToManyRelationship::class, $relationship);
-    }
-
-    /**
-     * @test
-     */
-    public function toArrayWithOneItemWithoutMeta()
+    public function toArrayWithOneItemWithoutMeta(): void
     {
         $relationship = ToManyRelationship::create();
         $relationship->addResourceIdentifier("a", "1");
@@ -42,7 +32,7 @@ class ToManyRelationshipTest extends TestCase
     /**
      * @test
      */
-    public function toArrayWithMultipleItemsAndMeta()
+    public function toArrayWithMultipleItemsAndMeta(): void
     {
         $relationship = ToManyRelationship::create();
         $relationship

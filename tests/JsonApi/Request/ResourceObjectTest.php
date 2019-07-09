@@ -13,19 +13,9 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function create()
+    public function toArray(): void
     {
-        $resource = ResourceObject::create("", "");
-
-        $this->assertInstanceOf(ResourceObject::class, $resource);
-    }
-
-    /**
-     * @test
-     */
-    public function toArray()
-    {
-        $resource = new ResourceObject("a", "0");
+        $resource = ResourceObject::create("a", "0");
 
         $this->assertSame(
             [
@@ -41,7 +31,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function type()
+    public function type(): void
     {
         $resource = new ResourceObject("a");
 
@@ -53,7 +43,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function typeToArray()
+    public function typeToArray(): void
     {
         $resource = new ResourceObject("a");
 
@@ -70,7 +60,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function setType()
+    public function setType(): void
     {
         $resource = new ResourceObject("");
 
@@ -89,7 +79,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function id()
+    public function id(): void
     {
         $resource = new ResourceObject("", "1");
 
@@ -101,7 +91,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function idToArray()
+    public function idToArray(): void
     {
         $resource = new ResourceObject("", "0");
 
@@ -119,7 +109,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function setId()
+    public function setId(): void
     {
         $resource = new ResourceObject("");
 
@@ -139,7 +129,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function attributes()
+    public function attributes(): void
     {
         $resource = new ResourceObject("", "");
         $resource
@@ -157,7 +147,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function setAttributes()
+    public function setAttributes(): void
     {
         $resource = new ResourceObject("", "");
         $resource
@@ -180,7 +170,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function setAttribute()
+    public function setAttribute(): void
     {
         $resource = new ResourceObject("", "");
         $resource
@@ -204,7 +194,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function relationships()
+    public function relationships(): void
     {
         $resource = new ResourceObject("", "");
         $resource
@@ -223,7 +213,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function setToOneRelationship()
+    public function setToOneRelationship(): void
     {
         $resource = new ResourceObject("", "");
         $resource
@@ -250,7 +240,7 @@ class ResourceObjectTest extends TestCase
     /**
      * @test
      */
-    public function setToManyRelationship()
+    public function setToManyRelationship(): void
     {
         $resource = new ResourceObject("", "");
         $resource

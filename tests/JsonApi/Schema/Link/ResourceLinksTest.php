@@ -13,7 +13,7 @@ class ResourceLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasSelfIsTrue()
+    public function hasSelfIsTrue(): void
     {
         $links = ResourceLinks::fromArray(
             [
@@ -29,7 +29,7 @@ class ResourceLinksTest extends TestCase
     /**
      * @test
      */
-    public function hasSelfIsFalse()
+    public function hasSelfIsFalse(): void
     {
         $links = ResourceLinks::fromArray([]);
 
@@ -41,7 +41,7 @@ class ResourceLinksTest extends TestCase
     /**
      * @test
      */
-    public function selfReturnsObject()
+    public function selfReturnsObject(): void
     {
         $links = ResourceLinks::fromArray(
             [
@@ -57,7 +57,7 @@ class ResourceLinksTest extends TestCase
     /**
      * @test
      */
-    public function selfWhenMissing()
+    public function selfWhenMissing(): void
     {
         $links = ResourceLinks::fromArray([]);
 

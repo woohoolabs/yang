@@ -13,7 +13,7 @@ class AbstractResponseTest extends TestCase
     /**
      * @test
      */
-    public function getProtocolVersion()
+    public function getProtocolVersion(): void
     {
         $response = $this->createResponse(200);
 
@@ -23,7 +23,7 @@ class AbstractResponseTest extends TestCase
     /**
      * @test
      */
-    public function withProtocolVersion()
+    public function withProtocolVersion(): void
     {
         $response = $this->createResponse(200);
 
@@ -36,7 +36,7 @@ class AbstractResponseTest extends TestCase
     /**
      * @test
      */
-    public function getHeaders()
+    public function getHeaders(): void
     {
         $response = $this->createResponse(200, ["A" => "B"]);
 
@@ -46,7 +46,7 @@ class AbstractResponseTest extends TestCase
     /**
      * @test
      */
-    public function getHeader()
+    public function getHeader(): void
     {
         $response = $this->createResponse(200, ["A" => "B"]);
 
@@ -56,7 +56,7 @@ class AbstractResponseTest extends TestCase
     /**
      * @test
      */
-    public function getHeaderLine()
+    public function getHeaderLine(): void
     {
         $response = $this->createResponse(200, ["A" => "B"]);
 
@@ -66,7 +66,7 @@ class AbstractResponseTest extends TestCase
     /**
      * @test
      */
-    public function hasHeaderIsTrue()
+    public function hasHeaderIsTrue(): void
     {
         $response = $this->createResponse(200, ["A" => "B"]);
 
@@ -76,7 +76,7 @@ class AbstractResponseTest extends TestCase
     /**
      * @test
      */
-    public function hasHeaderIsFalse()
+    public function hasHeaderIsFalse(): void
     {
         $response = $this->createResponse(200);
 
@@ -86,7 +86,7 @@ class AbstractResponseTest extends TestCase
     /**
      * @test
      */
-    public function withHeader()
+    public function withHeader(): void
     {
         $response = $this->createResponse(200);
 
@@ -99,7 +99,7 @@ class AbstractResponseTest extends TestCase
     /**
      * @test
      */
-    public function withAddedHeader()
+    public function withAddedHeader(): void
     {
         $response = $this->createResponse(200, ["A" => "B"]);
 
@@ -112,7 +112,7 @@ class AbstractResponseTest extends TestCase
     /**
      * @test
      */
-    public function withoutHeader()
+    public function withoutHeader(): void
     {
         $response = $this->createResponse(200, ["A" => "B"]);
 
@@ -125,7 +125,7 @@ class AbstractResponseTest extends TestCase
     /**
      * @test
      */
-    public function getStatusCode()
+    public function getStatusCode(): void
     {
         $response = $this->createResponse(201);
 
@@ -135,7 +135,7 @@ class AbstractResponseTest extends TestCase
     /**
      * @test
      */
-    public function withStatusCode()
+    public function withStatusCode(): void
     {
         $response = $this->createResponse(200);
 
@@ -148,7 +148,7 @@ class AbstractResponseTest extends TestCase
     /**
      * @test
      */
-    public function getBody()
+    public function getBody(): void
     {
         $response = $this->createResponse(200, [], ["meta" => ["a" => "b"]]);
 
@@ -158,15 +158,17 @@ class AbstractResponseTest extends TestCase
     /**
      * @test
      */
-    public function getReasonPhrase()
+    public function getReasonPhrase(): void
     {
         $response = $this->createResponse(200);
 
         $this->assertSame("OK", $response->getReasonPhrase());
     }
 
-    private function createResponse($statusCode = null, array $headers = [], ?array $body = null): JsonApiResponse
+    private function createResponse(int $statusCode = 200, array $headers = [], ?array $body = null): JsonApiResponse
     {
-        return new JsonApiResponse(new Response($statusCode ? $statusCode : null, $headers, json_encode($body)));
+        $data = json_encode($body) ?: null;
+
+        return new JsonApiResponse(new Response($statusCode, $headers, $data));
     }
 }

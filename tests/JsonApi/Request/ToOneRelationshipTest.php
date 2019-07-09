@@ -11,17 +11,7 @@ class ToOneRelationshipTest extends TestCase
     /**
      * @test
      */
-    public function create()
-    {
-        $relationship = ToOneRelationship::create("", "");
-
-        $this->assertInstanceOf(ToOneRelationship::class, $relationship);
-    }
-
-    /**
-     * @test
-     */
-    public function toArrayWithoutMeta()
+    public function toArrayWithoutMeta(): void
     {
         $relationship = ToOneRelationship::create("a", "1");
 
@@ -39,7 +29,7 @@ class ToOneRelationshipTest extends TestCase
     /**
      * @test
      */
-    public function toArrayWithMeta()
+    public function toArrayWithMeta(): void
     {
         $relationship = ToOneRelationship::create("a", "1", ["x" => "y"]);
 

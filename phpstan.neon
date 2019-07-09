@@ -6,6 +6,13 @@ parameters:
         - '#^Return type \(WoohooLabs\\Yang\\JsonApi\\Schema\\Link\\DocumentLinks\) of method .*$#'
         - '#^Return type \(WoohooLabs\\Yang\\JsonApi\\Schema\\Link\\ErrorLinks\) of method .*$#'
         - '#^Return type \(WoohooLabs\\Yang\\JsonApi\\Schema\\Link\\ProfileLink\) of method .*$#'
+        - '#^Dynamic call to static method PHPUnit\\Framework\\.*$#'
+        -
+            message: '#^.*$#'
+            path: '%currentWorkingDirectory%/tests/JsonApi/Hydrator/ClassHydratorTest'
 
 includes:
-	- vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
