@@ -9,7 +9,7 @@ use WoohooLabs\Yang\JsonApi\Client\JsonApiClient;
 use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder;
 
 // Create request
-$requestBuilder = new JsonApiRequestBuilder(new Request("", ""));
+$requestBuilder = new JsonApiRequestBuilder(new Request("GET", ""));
 $request = $requestBuilder
     ->fetch()
     ->setUri("https://example.com/api/index.php?example=book&id=1")
