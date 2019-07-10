@@ -83,10 +83,10 @@ For this purpose, you may use the `JsonApiRequestBuilder` class as it can be see
 
 ```php
 use GuzzleHttp\Psr7\Request;
-use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder
+use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder;
 
-// Instantiate an empty PSR-7 request
-$request = new Request("", "")
+// Instantiate an empty PSR-7 request, note that the default HTTP method must be provided
+$request = new Request('GET', '');
 
 // Instantiate the request builder
 $requestBuilder = new JsonApiRequestBuilder($request);
@@ -161,7 +161,7 @@ If you do not want to use the built-in Request Builder, you can freely setup any
 in order to proceed with the next steps:
 
 ```php
-$request = new Request("", "");
+$request = new Request('GET', '');
 $request = $request
     ->withProtocolVersion("1.1")
     ->withUri(new Uri("https://example.com/api/users?fields[users]=first_name,last_name"))
