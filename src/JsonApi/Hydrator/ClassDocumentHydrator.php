@@ -11,6 +11,17 @@ use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
 final class ClassDocumentHydrator implements DocumentHydratorInterface
 {
     /**
+     * Optional mapping of resourceType => FullyQualifiedClassName to be used during hydration of Resources.
+     *
+     * Note that:
+     *  - used classes should be specializations of the \stdClass class.
+     *  - in case no entry is set for a certain resource, \stdClass will be used
+     *
+     * @var array
+     */
+    private $resourceTypeToClassNameMapping = [];
+
+    /**
      * @return stdClass[]
      */
     public function hydrate(Document $document): iterable
@@ -67,6 +78,16 @@ final class ClassDocumentHydrator implements DocumentHydratorInterface
         return $this->hydratePrimaryResources($document);
     }
 
+    public function setResourceTypeToClassNameMapping(array $resourceTypeToClassNameMapping) : void
+    {
+        $this->resourceTypeToClassNameMapping = $resourceTypeToClassNameMapping;
+    }
+
+    private function getApplicableClassNameForResourceType(string $resourceType): string
+    {
+        return $this->resourceTypeToClassNameMapping[$resourceType] ?? stdClass::class;
+    }
+
     private function hydratePrimaryResources(Document $document): array
     {
         $result = [];
@@ -91,8 +112,9 @@ final class ClassDocumentHydrator implements DocumentHydratorInterface
      */
     private function hydrateResource(ResourceObject $resource, Document $document, array &$resourceMap): stdClass
     {
-        // Fill basic attributes of the resource
-        $result = new stdClass();
+        // Fill basic attributes of the instance of the applicable class
+        $className = $this->getApplicableClassNameForResourceType($resource->type());
+        $result = new $className();
         $result->type = $resource->type();
         $result->id = $resource->id();
         foreach ($resource->attributes() as $attribute => $value) {
