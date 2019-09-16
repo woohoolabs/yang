@@ -2,7 +2,12 @@
 
 ADDED:
 
+- `AbstractClassDocumentHydrator` as a base class for custom hydrators
+
 CHANGED:
+
+- Increased minimum PHP version requirement to 7.2
+- `ClassDocumentHydrator` is no longer a `final` class 
 
 DEPRECATED:
 

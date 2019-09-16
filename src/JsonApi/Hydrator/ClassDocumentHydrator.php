@@ -4,142 +4,57 @@ declare(strict_types=1);
 namespace WoohooLabs\Yang\JsonApi\Hydrator;
 
 use stdClass;
-use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
+use WoohooLabs\Yang\JsonApi\Schema\Relationship;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
 
-final class ClassDocumentHydrator implements DocumentHydratorInterface
+class ClassDocumentHydrator extends AbstractClassDocumentHydrator
 {
     /**
      * @return stdClass[]
      */
     public function hydrate(Document $document): iterable
     {
-        if ($document->hasAnyPrimaryResources() === false) {
-            return [];
-        }
-
-        if ($document->isSingleResourceDocument()) {
-            return [$this->hydratePrimaryResource($document)];
-        }
-
-        return $this->hydratePrimaryResources($document);
-    }
-
-    /**
-     * @throws DocumentException when the document is empty or it has a collection as primary data.
-     */
-    public function hydrateSingleResource(Document $document): stdClass
-    {
-        if ($document->isSingleResourceDocument() === false) {
-            throw new DocumentException(
-                "The document is a collection document, therefore it doesn't have a single resource. " .
-                "Use the 'ClassDocumentHydrator::hydrateCollection()' method instead."
-            );
-        }
-
-        if ($document->hasAnyPrimaryResources() === false) {
-            throw new DocumentException(
-                "The document doesn't have any primary data."
-            );
-        }
-
-        return $this->hydratePrimaryResource($document);
+        return parent::hydrate($document);
     }
 
     /**
      * @return stdClass[]
-     * @throws DocumentException when the document has a single resource as primary data.
      */
     public function hydrateCollection(Document $document): iterable
     {
-        if ($document->isSingleResourceDocument()) {
-            throw new DocumentException(
-                "The document is a single-resource document, therefore it doesn't have multiple resources. " .
-                "Use the 'ClassDocumentHydrator::hydrateSingleResource()' method instead."
-            );
-        }
-
-        if ($document->hasAnyPrimaryResources() === false) {
-            return [];
-        }
-
-        return $this->hydratePrimaryResources($document);
+        return parent::hydrateCollection($document);
     }
 
-    private function hydratePrimaryResources(Document $document): array
+    public function hydrateSingleResource(Document $document): stdClass
     {
-        $result = [];
-        $resourceMap = [];
-
-        foreach ($document->primaryResources() as $primaryResource) {
-            $result[] = $this->hydrateResource($primaryResource, $document, $resourceMap);
-        }
-
-        return $result;
+        return parent::hydrateSingleResource($document);
     }
 
-    private function hydratePrimaryResource(Document $document): stdClass
+    protected function createObject(ResourceObject $resource): object
     {
-        $resourceMap = [];
-
-        return $this->hydrateResource($document->primaryResource(), $document, $resourceMap);
+        return new stdClass();
     }
 
-    /**
-     * @param stdClass[] $resourceMap
-     */
-    private function hydrateResource(ResourceObject $resource, Document $document, array &$resourceMap): stdClass
+    protected function hydrateResourceAttributes(object $result, ResourceObject $resource): object
     {
-        // Fill basic attributes of the resource
-        $result = new stdClass();
         $result->type = $resource->type();
         $result->id = $resource->id();
         foreach ($resource->attributes() as $attribute => $value) {
             $result->{$attribute} = $value;
         }
 
-        //Save resource to the identity map
-        $this->saveObjectToMap($result, $resourceMap);
-
-        //Fill relationships
-        foreach ($resource->relationships() as $name => $relationship) {
-            foreach ($relationship->resourceLinks() as $link) {
-                $object = $this->getObjectFromMap($link["type"], $link["id"], $resourceMap);
-
-                if ($object === null && $document->hasIncludedResource($link["type"], $link["id"])) {
-                    $relatedResource = $document->resource($link["type"], $link["id"]);
-                    $object = $this->hydrateResource($relatedResource, $document, $resourceMap);
-                }
-
-                if ($object === null) {
-                    continue;
-                }
-
-                if ($relationship->isToOneRelationship()) {
-                    $result->{$name} = $object;
-                } else {
-                    $result->{$name}[] = $object;
-                }
-            }
-        }
-
         return $result;
     }
 
-    /**
-     * @param stdClass[] $resourceMap
-     */
-    private function getObjectFromMap(string $type, string $id, array $resourceMap): ?stdClass
+    protected function hydrateResourceRelationship(object $result, Relationship $relationship, string $name, object $object): object
     {
-        return $resourceMap[$type . "-" . $id] ?? null;
-    }
+        if ($relationship->isToOneRelationship()) {
+            $result->{$name} = $object;
+        } else {
+            $result->{$name}[] = $object;
+        }
 
-    /**
-     * @param stdClass[] $resourceMap
-     */
-    private function saveObjectToMap(stdClass $object, array &$resourceMap): void
-    {
-        $resourceMap[$object->type . "-" . $object->id] = $object;
+        return $result;
     }
 }
