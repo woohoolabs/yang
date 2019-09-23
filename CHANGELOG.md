@@ -1,4 +1,16 @@
-## 2.2.0 - unreleased
+## 2.3.0 - unreleased
+
+ADDED:
+
+CHANGED:
+
+DEPRECATED:
+
+REMOVED:
+
+FIXED:
+
+## 2.2.0 - 2019-09-23
 
 ADDED:
 
@@ -7,13 +19,7 @@ ADDED:
 CHANGED:
 
 - Increased minimum PHP version requirement to 7.2
-- `ClassDocumentHydrator` is no longer a `final` class 
-
-DEPRECATED:
-
-REMOVED:
-
-FIXED:
+- `ClassDocumentHydrator` is no longer a `final` class
 
 ## 2.1.0 - 2019-04-17
 
