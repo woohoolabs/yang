@@ -11,7 +11,9 @@ parameters:
             path: '%currentWorkingDirectory%/src/JsonApi/Hydrator/ClassDocumentHydrator'
         -
             message: '#^Access to an undefined property object::.*$#'
-            path: '%currentWorkingDirectory%/src/JsonApi/Hydrator/ClassDocumentHydrator'
+            paths:
+                - '%currentWorkingDirectory%/src/JsonApi/Hydrator/ClassDocumentHydrator'
+                - '%currentWorkingDirectory%/tests/JsonApi/Hydrator/ClassDocumentHydratorTest'
         -
             message: '#^Variable property access on object\.$#'
             path: '%currentWorkingDirectory%/src/JsonApi/Hydrator/ClassDocumentHydrator'
