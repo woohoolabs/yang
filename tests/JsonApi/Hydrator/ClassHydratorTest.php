@@ -42,8 +42,8 @@ class ClassHydratorTest extends TestCase
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrate($document);
 
-        $this->assertAttributeSame("a", "type", $object);
-        $this->assertAttributeSame("1", "id", $object);
+        $this->assertSame("a", $object->type);
+        $this->assertSame("1", $object->id);
     }
 
     /**
@@ -65,9 +65,9 @@ class ClassHydratorTest extends TestCase
         $hydrator = new ClassHydrator();
         $object = $hydrator->hydrate($document);
 
-        $this->assertAttributeSame("A", "a", $object);
-        $this->assertAttributeSame("B", "b", $object);
-        $this->assertAttributeSame("C", "c", $object);
+        $this->assertSame("A", $object->a);
+        $this->assertSame("B", $object->b);
+        $this->assertSame("C", $object->c);
     }
 
     /**
@@ -103,15 +103,15 @@ class ClassHydratorTest extends TestCase
         $objects = $hydrator->hydrate($document);
 
         $this->assertCount(2, $objects);
-        $this->assertAttributeSame("1", "id", $objects[0]);
-        $this->assertAttributeSame("A", "a", $objects[0]);
-        $this->assertAttributeSame("B", "b", $objects[0]);
-        $this->assertAttributeSame("C", "c", $objects[0]);
+        $this->assertSame("1", $objects[0]->id);
+        $this->assertSame("A", $objects[0]->a);
+        $this->assertSame("B", $objects[0]->b);
+        $this->assertSame("C", $objects[0]->c);
 
-        $this->assertAttributeSame("0", "id", $objects[1]);
-        $this->assertAttributeSame("D", "a", $objects[1]);
-        $this->assertAttributeSame("E", "b", $objects[1]);
-        $this->assertAttributeSame("F", "c", $objects[1]);
+        $this->assertSame("0", $objects[1]->id);
+        $this->assertSame("D", $objects[1]->a);
+        $this->assertSame("E", $objects[1]->b);
+        $this->assertSame("F", $objects[1]->c);
     }
 
     /**
@@ -174,9 +174,9 @@ class ClassHydratorTest extends TestCase
         $object = $hydrator->hydrate($document);
 
         $this->assertObjectHasAttribute("x", $object);
-        $this->assertAttributeSame("b", "type", $object->x);
-        $this->assertAttributeSame("0", "id", $object->x);
-        $this->assertAttributeSame("A", "a", $object->x);
+        $this->assertSame("b", $object->x->type);
+        $this->assertSame("0", $object->x->id);
+        $this->assertSame("A", $object->x->a);
     }
 
     /**
@@ -233,15 +233,15 @@ class ClassHydratorTest extends TestCase
 
         $this->assertCount(2, $object->x);
 
-        $this->assertAttributeSame("b", "type", $object->x[0]);
-        $this->assertAttributeSame("1", "id", $object->x[0]);
-        $this->assertAttributeSame("A", "a", $object->x[0]);
-        $this->assertAttributeSame("B", "b", $object->x[0]);
+        $this->assertSame("b", $object->x[0]->type);
+        $this->assertSame("1", $object->x[0]->id);
+        $this->assertSame("A", $object->x[0]->a);
+        $this->assertSame("B", $object->x[0]->b);
 
-        $this->assertAttributeSame("b", "type", $object->x[1]);
-        $this->assertAttributeSame("2", "id", $object->x[1]);
-        $this->assertAttributeSame("C", "a", $object->x[1]);
-        $this->assertAttributeSame("D", "b", $object->x[1]);
+        $this->assertSame("b", $object->x[1]->type);
+        $this->assertSame("2", $object->x[1]->id);
+        $this->assertSame("C", $object->x[1]->a);
+        $this->assertSame("D", $object->x[1]->b);
     }
 
     /**
@@ -293,10 +293,10 @@ class ClassHydratorTest extends TestCase
         $this->assertObjectHasAttribute("x", $object);
         $this->assertObjectHasAttribute("y", $object->x);
 
-        $this->assertAttributeSame("b", "type", $object->x->y);
-        $this->assertAttributeSame("2", "id", $object->x->y);
-        $this->assertAttributeSame("C", "a", $object->x->y);
-        $this->assertAttributeSame("D", "b", $object->x->y);
+        $this->assertSame("b", $object->x->y->type);
+        $this->assertSame("2", $object->x->y->id);
+        $this->assertSame("C", $object->x->y->a);
+        $this->assertSame("D", $object->x->y->b);
     }
 
     /**
@@ -358,10 +358,10 @@ class ClassHydratorTest extends TestCase
         $this->assertObjectHasAttribute("z", $object->x->y);
         $this->assertSame($object, $object->x->y->z);
 
-        $this->assertAttributeSame("a", "type", $object->x->y->z);
-        $this->assertAttributeSame("1", "id", $object->x->y->z);
-        $this->assertAttributeSame("A", "a", $object->x->y->z);
-        $this->assertAttributeSame("B", "b", $object->x->y->z);
+        $this->assertSame("a", $object->x->y->z->type);
+        $this->assertSame("1", $object->x->y->z->id);
+        $this->assertSame("A", $object->x->y->z->a);
+        $this->assertSame("B", $object->x->y->z->b);
     }
 
     /**
@@ -486,8 +486,8 @@ class ClassHydratorTest extends TestCase
         $collection = $hydrator->hydrateCollection($document);
 
         $this->assertCount(1, $collection);
-        $this->assertAttributeSame("a", "type", $collection[0]);
-        $this->assertAttributeSame("1", "id", $collection[0]);
+        $this->assertSame("a", $collection[0]->type);
+        $this->assertSame("1", $collection[0]->id);
     }
 
     /**
@@ -513,9 +513,9 @@ class ClassHydratorTest extends TestCase
         $collection = $hydrator->hydrateCollection($document);
 
         $this->assertCount(2, $collection);
-        $this->assertAttributeSame("a", "type", $collection[0]);
-        $this->assertAttributeSame("1", "id", $collection[0]);
-        $this->assertAttributeSame("a", "type", $collection[1]);
-        $this->assertAttributeSame("2", "id", $collection[1]);
+        $this->assertSame("a", $collection[0]->type);
+        $this->assertSame("1", $collection[0]->id);
+        $this->assertSame("a", $collection[1]->type);
+        $this->assertSame("2", $collection[1]->id);
     }
 }
