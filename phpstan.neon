@@ -7,9 +7,6 @@ parameters:
         - '#^Return type \(WoohooLabs\\Yang\\JsonApi\\Schema\\Link\\ErrorLinks\) of method .*$#'
         - '#^Return type \(WoohooLabs\\Yang\\JsonApi\\Schema\\Link\\ProfileLink\) of method .*$#'
         -
-            message: '#^Method WoohooLabs\\Yang\\JsonApi\\Hydrator\\ClassDocumentHydrator::hydrate.* should return.*$#'
-            path: '%currentWorkingDirectory%/src/JsonApi/Hydrator/ClassDocumentHydrator'
-        -
             message: '#^Access to an undefined property object::.*$#'
             paths:
                 - '%currentWorkingDirectory%/src/JsonApi/Hydrator/ClassDocumentHydrator'

@@ -11,7 +11,7 @@ use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
 class ClassDocumentHydrator extends AbstractClassDocumentHydrator
 {
     /**
-     * @return stdClass[]
+     * @return object[]
      */
     public function hydrate(Document $document): iterable
     {
@@ -19,7 +19,7 @@ class ClassDocumentHydrator extends AbstractClassDocumentHydrator
     }
 
     /**
-     * @return stdClass[]
+     * @return object[]
      */
     public function hydrateCollection(Document $document): iterable
     {
