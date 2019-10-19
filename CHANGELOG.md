@@ -10,6 +10,12 @@ REMOVED:
 
 FIXED:
 
+## 2.2.1 - 2019-10-19
+
+FIXED:
+
+- `ClassDocumentHydrator::hydrateSingleResource()` returns an `object` instead of `stdClass`
+
 ## 2.2.0 - 2019-09-23
 
 ADDED:
