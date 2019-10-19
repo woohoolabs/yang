@@ -26,7 +26,7 @@ class ClassDocumentHydrator extends AbstractClassDocumentHydrator
         return parent::hydrateCollection($document);
     }
 
-    public function hydrateSingleResource(Document $document): stdClass
+    public function hydrateSingleResource(Document $document): object
     {
         return parent::hydrateSingleResource($document);
     }
