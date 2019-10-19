@@ -19,4 +19,18 @@ final class ResourceLinks extends AbstractLinks
     {
         return $this->link("self");
     }
+
+    public static function fromArray(array $links): ResourceLinks
+    {
+        $linkObjects = [];
+        foreach ($links as $name => $link) {
+            if (is_string($link)) {
+                $linkObjects[$name] = Link::fromString($link);
+            } elseif (is_array($link)) {
+                $linkObjects[$name] = Link::fromArray($link);
+            }
+        }
+
+        return new self($linkObjects);
+    }
 }
