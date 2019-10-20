@@ -1,10 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema\Link;
-
-use function is_array;
-use function is_string;
 
 abstract class AbstractLink
 {

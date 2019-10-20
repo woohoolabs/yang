@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema\Resource;
@@ -6,6 +7,7 @@ namespace WoohooLabs\Yang\JsonApi\Schema\Resource;
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Link\ResourceLinks;
 use WoohooLabs\Yang\JsonApi\Schema\Relationship;
+
 use function array_key_exists;
 use function array_merge;
 use function is_array;

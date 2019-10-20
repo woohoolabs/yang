@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Response;
@@ -8,6 +9,7 @@ use WoohooLabs\Yang\JsonApi\Exception\ResponseException;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Serializer\DeserializerInterface;
 use WoohooLabs\Yang\JsonApi\Serializer\JsonDeserializer;
+
 use function in_array;
 use function is_array;
 

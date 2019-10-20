@@ -1,11 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Schema\Link;
 
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-use function is_array;
-use function is_string;
 
 abstract class AbstractLinks
 {

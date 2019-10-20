@@ -1,10 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Serializer;
 
 use Psr\Http\Message\RequestInterface;
 use WoohooLabs\Yang\JsonApi\Exception\SerializationException;
+
 use function is_array;
 use function is_string;
 use function json_encode;

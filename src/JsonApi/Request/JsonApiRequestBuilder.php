@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Request;
@@ -6,6 +7,7 @@ namespace WoohooLabs\Yang\JsonApi\Request;
 use Psr\Http\Message\RequestInterface;
 use WoohooLabs\Yang\JsonApi\Serializer\JsonSerializer;
 use WoohooLabs\Yang\JsonApi\Serializer\SerializerInterface;
+
 use function array_key_exists;
 use function http_build_query;
 use function implode;

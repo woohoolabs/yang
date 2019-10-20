@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace WoohooLabs\Yang\Tests\JsonApi\Serializer;
@@ -7,6 +8,7 @@ use GuzzleHttp\Psr7\Request;
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Exception\SerializationException;
 use WoohooLabs\Yang\JsonApi\Serializer\JsonSerializer;
+
 use function json_encode;
 
 class JsonSerializerTest extends TestCase

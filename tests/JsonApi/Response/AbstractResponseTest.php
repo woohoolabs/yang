@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace WoohooLabs\Yang\Tests\JsonApi\Response;
@@ -6,6 +7,7 @@ namespace WoohooLabs\Yang\Tests\JsonApi\Response;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
+
 use function json_encode;
 
 class AbstractResponseTest extends TestCase

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace WoohooLabs\Yang\Tests\JsonApi\Hydrator;
@@ -8,6 +9,7 @@ use stdClass;
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Hydrator\ClassDocumentHydrator;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
+
 use function end;
 use function reset;
 
