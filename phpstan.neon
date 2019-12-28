@@ -1,6 +1,8 @@
 parameters:
     bootstrap: vendor/autoload.php
+    checkMissingIterableValueType: false
     ignoreErrors:
+        - '#^Short ternary operator is not allowed\..*$#'
         - '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
         - '#^Offset .* does not exist on array.*$#'
         -
