@@ -1,12 +1,12 @@
 # Woohoo Labs. Yang
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Latest Version on Packagist][ico-version]][link-version]
 [![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
+[![Build Status][ico-build]][link-build]
+[![Coverage Status][ico-coverage]][link-coverage]
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
-[![Gitter][ico-gitter]][link-gitter]
+[![Gitter][ico-support]][link-support]
 
 **Woohoo Labs. Yang is a PHP framework which helps you to communicate with JSON:API servers more easily.**
 
@@ -669,17 +669,17 @@ The MIT License (MIT). Please see the [License File](LICENSE.md) for more inform
 
 [ico-version]: https://img.shields.io/packagist/v/woohoolabs/yang.svg
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg
-[ico-travis]: https://img.shields.io/travis/woohoolabs/yang/master.svg
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/woohoolabs/yang.svg
+[ico-build]: https://img.shields.io/github/workflow/status/woohoolabs/yang/Continuous%20Integration
+[ico-coverage]: https://img.shields.io/codecov/c/github/woohoolabs/yang
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/woohoolabs/yang.svg
 [ico-downloads]: https://img.shields.io/packagist/dt/woohoolabs/yang.svg
-[ico-gitter]: https://badges.gitter.im/woohoolabs/yang.svg
+[ico-support]: https://badges.gitter.im/woohoolabs/yang.svg
 
-[link-packagist]: https://packagist.org/packages/woohoolabs/yang
-[link-travis]: https://travis-ci.org/woohoolabs/yang
-[link-scrutinizer]: https://scrutinizer-ci.com/g/woohoolabs/yang/code-structure
+[link-version]: https://packagist.org/packages/woohoolabs/yang
+[link-build]: https://github.com/woohoolabs/yang/actions
+[link-coverage]: https://codecov.io/gh/woohoolabs/yang
 [link-code-quality]: https://scrutinizer-ci.com/g/woohoolabs/yang
 [link-downloads]: https://packagist.org/packages/woohoolabs/yang
 [link-author]: https://github.com/kocsismate
 [link-contributors]: ../../contributors
-[link-gitter]: https://gitter.im/woohoolabs/yang?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
+[link-support]: https://gitter.im/woohoolabs/yang?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
