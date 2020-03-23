@@ -12,6 +12,16 @@ use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
 class ClassDocumentHydrator extends AbstractClassDocumentHydrator
 {
     /**
+     * @var AttributeHydratorInterface
+     */
+    private $attributeHydrator;
+
+    public function __construct(?AttributeHydratorInterface $attributeHydrator = null)
+    {
+        $this->attributeHydrator = $attributeHydrator ?? new AttributeHydrator();
+    }
+
+    /**
      * @return object[]
      */
     public function hydrate(Document $document): iterable
@@ -39,13 +49,7 @@ class ClassDocumentHydrator extends AbstractClassDocumentHydrator
 
     protected function hydrateResourceAttributes(object $result, ResourceObject $resource): object
     {
-        $result->type = $resource->type();
-        $result->id = $resource->id();
-        foreach ($resource->attributes() as $attribute => $value) {
-            $result->{$attribute} = $value;
-        }
-
-        return $result;
+        return $this->attributeHydrator->hydrateResourceAttributes($result, $resource);
     }
 
     protected function hydrateResourceRelationship(object $result, Relationship $relationship, string $name, object $object): object
