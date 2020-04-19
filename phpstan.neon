@@ -8,11 +8,13 @@ parameters:
         -
             message: '#^Access to an undefined property object::.*$#'
             paths:
-                - '%currentWorkingDirectory%/src/JsonApi/Hydrator/ClassDocumentHydrator'
+                - '%currentWorkingDirectory%/src/JsonApi/Hydrator/AttributeHydrator'
                 - '%currentWorkingDirectory%/tests/JsonApi/Hydrator/ClassDocumentHydratorTest'
         -
             message: '#^Variable property access on object\.$#'
-            path: '%currentWorkingDirectory%/src/JsonApi/Hydrator/ClassDocumentHydrator'
+            paths:
+                - '%currentWorkingDirectory%/src/JsonApi/Hydrator/AttributeHydrator'
+                - '%currentWorkingDirectory%/src/JsonApi/Hydrator/ClassDocumentHydrator'
         - '#^Dynamic call to static method PHPUnit\\Framework\\.*$#'
         -
             message: '#^.*$#'
