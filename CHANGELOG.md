@@ -1,4 +1,4 @@
-## 2.3.0 - unreleased
+## 2.4.0 - unreleased
 
 ADDED:
 
@@ -9,6 +9,12 @@ DEPRECATED:
 REMOVED:
 
 FIXED:
+
+## 2.3.0 - 2020-04-24
+
+CHANGED:
+
+- [#28](https://github.com/woohoolabs/yang/issues/28): Introduce `AttributeHydratorInterface`
 
 ## 2.2.1 - 2019-10-20
 
