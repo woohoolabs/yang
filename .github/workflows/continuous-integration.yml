@@ -105,12 +105,6 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@master
 
-      - name: "Install PHP 7.4"
-        run: |
-          sudo add-apt-repository ppa:ondrej/php
-          sudo apt-get update
-          sudo apt-get install php7.4-xdebug
-
       - name: "Cache dependencies"
         uses: actions/cache@v1
         id: cache
