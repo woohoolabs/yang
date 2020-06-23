@@ -10,6 +10,13 @@ REMOVED:
 
 FIXED:
 
+## 2.3.1 - unreleased
+
+ADDED:
+
+- Support for PHP 8
+- Support for PHPUnit 9
+
 ## 2.3.0 - 2020-04-24
 
 CHANGED:
