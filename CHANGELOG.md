@@ -10,7 +10,7 @@ REMOVED:
 
 FIXED:
 
-## 2.3.1 - unreleased
+## 2.3.1 - 2020-06-23
 
 ADDED:
 
