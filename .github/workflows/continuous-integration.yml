@@ -14,6 +14,13 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@master
 
+      - name: "Install PHP 7.4"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+          extensions: mbstring, xml
+          tools: composer
+
       - name: "Cache dependencies"
         uses: actions/cache@v1
         id: cache
@@ -27,7 +34,7 @@ jobs:
         run: php7.4 $(which composer) validate --strict
 
       - name: "Install dependencies with composer"
-        run: php7.4 $(which composer) install --no-interaction --no-progress --no-suggest
+        run: php7.4 $(which composer) install --no-interaction --no-progress
 
       - name: "Run PHP CodeSniffer"
         run: php7.4 vendor/bin/phpcs --standard=phpcs.xml
@@ -41,6 +48,13 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@master
 
+      - name: "Install PHP 7.4"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+          extensions: mbstring, xml
+          tools: composer
+
       - name: "Cache dependencies"
         uses: actions/cache@v1
         id: cache
@@ -51,7 +65,7 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: "Install dependencies with composer"
-        run: php7.4 $(which composer) install --no-interaction --no-progress --no-suggest --no-plugins
+        run: php7.4 $(which composer) install --no-interaction --no-progress --no-plugins
 
       - name: "Run phpstan/phpstan"
         run: php7.4 vendor/bin/phpstan analyse --level 8 src tests
@@ -64,9 +78,10 @@ jobs:
     strategy:
       matrix:
         php-binary:
-          - php7.4
-          - php7.3
-          - php7.2
+          - "7.2"
+          - "7.3"
+          - "7.4"
+          - "8.0"
 
         dependencies:
           - lowest
@@ -75,6 +90,14 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@master
+
+      - name: "Install PHP ${{ matrix.php-version }}"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring, xml
+          coverage: xdebug
+          tools: composer
 
       - name: "Cache dependencies"
         uses: actions/cache@v1
@@ -87,14 +110,14 @@ jobs:
 
       - name: "Install lowest dependencies with composer"
         if: matrix.dependencies == 'lowest'
-        run: ${{ matrix.php-binary }} $(which composer) update --no-interaction --no-progress --no-suggest --no-plugins --prefer-lowest
+        run: php${{ matrix.php-version }} $(which composer) update --no-interaction --no-progress --no-plugins --prefer-lowest --ignore-platform-reqs
 
       - name: "Install highest dependencies with composer"
         if: matrix.dependencies == 'highest'
-        run: ${{ matrix.php-binary }} $(which composer) update --no-interaction --no-progress --no-suggest --no-plugins
+        run: php${{ matrix.php-version }} $(which composer) update --no-interaction --no-progress --no-plugins --ignore-platform-reqs
 
       - name: "Run unit tests"
-        run: ${{ matrix.php-binary }} vendor/bin/phpunit
+        run: ${{ matrix.php-version }} vendor/bin/phpunit
 
   code-coverage:
     name: "Code Coverage"
@@ -104,6 +127,13 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@master
+
+      - name: "Install PHP 7.4"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+          extensions: mbstring, xml
+          tools: composer
 
       - name: "Cache dependencies"
         uses: actions/cache@v1
@@ -115,7 +145,7 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: "Install dependencies with composer"
-        run: php7.4 $(which composer) install --no-interaction --no-progress --no-suggest --no-plugins
+        run: php7.4 $(which composer) install --no-interaction --no-progress --no-plugins
 
       - name: "Dump Xdebug filter with phpunit/phpunit"
         run: php7.4 vendor/bin/phpunit --dump-xdebug-filter=.build/phpunit/xdebug-filter.php
