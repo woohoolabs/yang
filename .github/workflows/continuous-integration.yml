@@ -117,7 +117,7 @@ jobs:
         run: php${{ matrix.php-version }} $(which composer) update --no-interaction --no-progress --no-plugins --ignore-platform-reqs
 
       - name: "Run unit tests"
-        run: ${{ matrix.php-version }} vendor/bin/phpunit
+        run: php${{ matrix.php-version }} vendor/bin/phpunit
 
   code-coverage:
     name: "Code Coverage"
