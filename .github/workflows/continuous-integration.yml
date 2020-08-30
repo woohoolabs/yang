@@ -132,6 +132,7 @@ jobs:
         with:
           php-version: "7.4"
           extensions: mbstring, xml
+          coverage: xdebug
           tools: composer
 
       - name: "Cache dependencies"
