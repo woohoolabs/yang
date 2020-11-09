@@ -104,7 +104,7 @@ class JsonApiRequestBuilderTest extends TestCase
     {
         $requestBuilder = $this->createRequestBuilder();
 
-        $requestBuilder->setUri("#:host:");
+        $requestBuilder->setUri("//:");
 
         $this->assertSame("http://localhost", $requestBuilder->getRequest()->getUri()->__toString());
     }
