@@ -9,6 +9,7 @@ use WoohooLabs\Yang\JsonApi\Serializer\JsonSerializer;
 use WoohooLabs\Yang\JsonApi\Serializer\SerializerInterface;
 
 use function array_key_exists;
+use function array_merge;
 use function http_build_query;
 use function implode;
 use function is_array;
@@ -253,8 +254,13 @@ class JsonApiRequestBuilder
         return $this;
     }
 
-    public function setJsonApiFilter(array $filter): JsonApiRequestBuilder
+    public function setJsonApiFilter(array $filter, bool $raw = false): JsonApiRequestBuilder
     {
+        if ($raw === true) {
+            $this->queryString['filter'] = $filter;
+            return $this;
+        }
+
         $this->setArrayQueryParam("filter", $filter);
 
         return $this;

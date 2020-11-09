@@ -8,7 +8,6 @@ use GuzzleHttp\Psr7\Request;
 use PHPUnit\Framework\TestCase;
 use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder;
 use WoohooLabs\Yang\JsonApi\Request\ResourceObject;
-
 use function urldecode;
 
 class JsonApiRequestBuilderTest extends TestCase
@@ -263,6 +262,56 @@ class JsonApiRequestBuilderTest extends TestCase
         $requestBuilder->setJsonApiFilter(["a" => "abc"]);
 
         $this->assertSame("filter[a]=abc", urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+    }
+
+    /**
+     * @test
+     */
+    public function setJsonApiFilterWithArrayValue(): void
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder->setJsonApiFilter(["a" => ["abc", "xyz"]]);
+
+        $this->assertSame("filter[a]=abc,xyz", urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+    }
+
+    /**
+     * @test
+     */
+    public function setJsonApiFilterWithRawArrayValue(): void
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder->setJsonApiFilter(["a" => ["abc", "xyz"]], true);
+
+        $this->assertSame(
+            "filter[a][0]=abc&filter[a][1]=xyz", urldecode($requestBuilder->getRequest()->getUri()->getQuery())
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setJsonApiFilterWithRawNestedArrayValue():void
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder->setJsonApiFilter(
+            [
+                "a" => 123,
+                "b" => ['lt' => 50, 'gt' => 5],
+                "or" => ["c" => ["like" => "foo", "eq" => "bar"]],
+                "d" => ["in" => [3, 4]]
+            ],
+            true
+        );
+
+        $this->assertSame(
+            "filter[a]=123&filter[b][lt]=50&filter[b][gt]=5&filter[or][c][like]=foo"
+            ."&filter[or][c][eq]=bar&filter[d][in][0]=3&filter[d][in][1]=4",
+            urldecode($requestBuilder->getRequest()->getUri()->getQuery())
+        );
     }
 
     /**
