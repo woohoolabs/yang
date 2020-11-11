@@ -350,8 +350,8 @@ class JsonApiRequestBuilder
         $result = "application/vnd.api+json";
 
         if (empty($profiles) === false) {
-            $result .= ';profile="' . implode(" ", $profiles) . '"' . ($compatibility ? ',application/vnd.api+json'
-                    : "");
+            $result .= ';profile="' . implode(" ", $profiles) . '"'
+                    . ($compatibility ? ',application/vnd.api+json' : "");
         }
 
         return $result;
