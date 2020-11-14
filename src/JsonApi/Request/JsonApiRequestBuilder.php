@@ -18,74 +18,46 @@ use function parse_url;
 
 class JsonApiRequestBuilder
 {
-    /**
-     * @var RequestInterface
-     */
+    /** @var RequestInterface */
     private $request;
 
-    /**
-     * @var SerializerInterface
-     */
+    /** @var SerializerInterface */
     private $serializer;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $method;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $protocolVersion;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $scheme;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $host;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $port;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $path;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $queryString;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $headers;
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $appliedProfiles;
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $requestedProfiles;
 
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     private $requiredProfiles;
 
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     private $body;
 
     public function __construct(RequestInterface $request, ?SerializerInterface $serializer = null)
@@ -260,6 +232,13 @@ class JsonApiRequestBuilder
         return $this;
     }
 
+    public function setJsonApiFilterRaw(array $filter): JsonApiRequestBuilder
+    {
+        $this->queryString['filter'] = $filter;
+
+        return $this;
+    }
+
     /**
      * @param array|string $includes
      */
@@ -371,7 +350,8 @@ class JsonApiRequestBuilder
         $result = "application/vnd.api+json";
 
         if (empty($profiles) === false) {
-            $result .= ';profile="' . implode(" ", $profiles) . '"' . ($compatibility ? ',application/vnd.api+json' : "");
+            $result .= ';profile="' . implode(" ", $profiles) . '"'
+                    . ($compatibility ? ',application/vnd.api+json' : "");
         }
 
         return $result;

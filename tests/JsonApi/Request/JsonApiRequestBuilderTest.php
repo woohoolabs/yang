@@ -104,7 +104,7 @@ class JsonApiRequestBuilderTest extends TestCase
     {
         $requestBuilder = $this->createRequestBuilder();
 
-        $requestBuilder->setUri("host:0");
+        $requestBuilder->setUri("//:");
 
         $this->assertSame("http://localhost", $requestBuilder->getRequest()->getUri()->__toString());
     }
@@ -263,6 +263,59 @@ class JsonApiRequestBuilderTest extends TestCase
         $requestBuilder->setJsonApiFilter(["a" => "abc"]);
 
         $this->assertSame("filter[a]=abc", urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+    }
+
+    /**
+     * @test
+     */
+    public function setJsonApiFilterWithArrayValue(): void
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder->setJsonApiFilter(["a" => ["abc", "xyz"]]);
+
+        $this->assertSame(
+            "filter[a]=abc,xyz",
+            urldecode($requestBuilder->getRequest()->getUri()->getQuery())
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setJsonApiFilterRawWithArrayValue(): void
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder->setJsonApiFilterRaw(["a" => ["abc", "xyz"]]);
+
+        $this->assertSame(
+            "filter[a][0]=abc&filter[a][1]=xyz",
+            urldecode($requestBuilder->getRequest()->getUri()->getQuery())
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setJsonApiFilterRawWithNestedArrayValue(): void
+    {
+        $requestBuilder = $this->createRequestBuilder();
+
+        $requestBuilder->setJsonApiFilterRaw(
+            [
+                "a" => 123,
+                "b" => ['lt' => 50, 'gt' => 5],
+                "or" => ["c" => ["like" => "foo", "eq" => "bar"]],
+                "d" => ["in" => [3, 4]],
+            ]
+        );
+
+        $this->assertSame(
+            "filter[a]=123&filter[b][lt]=50&filter[b][gt]=5&filter[or][c][like]=foo"
+            . "&filter[or][c][eq]=bar&filter[d][in][0]=3&filter[d][in][1]=4",
+            urldecode($requestBuilder->getRequest()->getUri()->getQuery())
+        );
     }
 
     /**
