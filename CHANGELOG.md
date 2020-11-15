@@ -10,6 +10,12 @@ REMOVED:
 
 FIXED:
 
+## 2.3.2 - 2020-11-15
+
+ADDED:
+
+- [#31](https://github.com/woohoolabs/yang/pull/31): Allow to set the `filter` query parameter directly
+
 ## 2.3.1 - 2020-06-23
 
 ADDED:
@@ -75,8 +81,8 @@ CHANGED:
 
 - Improve type-safety by eliminating `null` return values (__BREAKING CHANGE__):
     - `JsonApiResponse::document()` throws an exception instead of returning null if the response doesn't contain a document.
-    - `Document::primaryResources()` throws an exception if the document is a single-resource or error document 
-    - `Document::primaryResource()` throws an exception if the document is a collection or error document or the primary resource is missing 
+    - `Document::primaryResources()` throws an exception if the document is a single-resource or error document
+    - `Document::primaryResource()` throws an exception if the document is a collection or error document or the primary resource is missing
     - `Document::resource()` throws an exception instead of returning null if the requested resource is missing
     - `Document::error()` throws an exception instead of returning null if the document does not contain the requested error
     - `Relationship::resources()` throws an exception instead of returning an empty array if the relationship is a to-one
@@ -120,8 +126,8 @@ CHANGED:
 
 - Improve type-safety by eliminating `null` return values (__BREAKING CHANGE__):
     - `JsonApiResponse::document()` throws an exception instead of returning null if the response doesn't contain a document
-    - `Document::primaryResources()` throws an exception if the document is a single-resource or error document 
-    - `Document::primaryResource()` throws an exception if the document is a collection or error document or the primary resource is missing 
+    - `Document::primaryResources()` throws an exception if the document is a single-resource or error document
+    - `Document::primaryResource()` throws an exception if the document is a collection or error document or the primary resource is missing
     - `Document::resource()` throws an exception instead of returning null if the requested resource is missing
     - `Document::error()` throws an exception instead of returning null if the document does not contain the requested error
     - `Relationship::resources()` throws an exception instead of returning an empty array if the relationship is a to-one
@@ -298,8 +304,8 @@ FIXED:
 - `JsonApiRequestBuilder::update()` will now set the request method to "PATCH" instead of "UPDATE"
 - Error objects are correctly listed under the "errors" member when using `Document::toArray()`
 - Correctly transforming "included" member when using `Document::toArray()`
-- `ResourceObjects::isSingleResourceDocument()` `Document::isResourceDocument()` returned wrong value when "data" member was null 
-- `ResourceObjects::hasAnyPrimaryResources()` returned wrong value when "data" member was null 
+- `ResourceObjects::isSingleResourceDocument()` `Document::isResourceDocument()` returned wrong value when "data" member was null
+- `ResourceObjects::hasAnyPrimaryResources()` returned wrong value when "data" member was null
 
 ## 0.6.0 - 2016-12-18
 
