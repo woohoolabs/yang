@@ -12,10 +12,8 @@ use function is_string;
 
 final class DocumentLinks extends AbstractLinks
 {
-    /**
-     * @var ProfileLink[]
-     */
-    private $profiles;
+    /** @var ProfileLink[] */
+    private array $profiles;
 
     /**
      * @param Link[] $links

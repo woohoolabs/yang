@@ -4,7 +4,7 @@ declare(strict_types=1);
 require "../vendor/autoload.php";
 
 use GuzzleHttp\Psr7\Request;
-use Http\Adapter\Guzzle6\Client as GuzzleClient;
+use Http\Adapter\Guzzle7\Client;
 use WoohooLabs\Yang\JsonApi\Client\JsonApiClient;
 use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder;
 
@@ -18,7 +18,7 @@ $request = $requestBuilder
     ->getRequest();
 
 // Create an HTTP Client
-$guzzleClient = GuzzleClient::createWithConfig([]);
+$guzzleClient = Client::createWithConfig([]);
 $client = new JsonApiClient($guzzleClient);
 
 // Retrieve response

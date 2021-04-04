@@ -17,30 +17,12 @@ use function is_array;
 
 final class Document
 {
-    /**
-     * @var JsonApiObject
-     */
-    private $jsonApi;
-
-    /**
-     * @var array
-     */
-    private $meta;
-
-    /**
-     * @var DocumentLinks
-     */
-    private $links;
-
-    /**
-     * @var ResourceObjects
-     */
-    private $resources;
-
-    /**
-     * @var Error[]
-     */
-    private $errors;
+    private JsonApiObject $jsonApi;
+    private array $meta;
+    private DocumentLinks $links;
+    private ResourceObjects $resources;
+    /** @var Error[] */
+    private array $errors;
 
     /**
      * @param Error[] $errors

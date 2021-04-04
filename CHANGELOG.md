@@ -1,12 +1,18 @@
-## 2.4.0 - unreleased
+## 3.0.0 - unreleased
 
 ADDED:
 
 CHANGED:
 
+- Increased minimum PHP version requirement to 7.4
+- PSR-18 is used instead of HTTPlug
+
 DEPRECATED:
 
 REMOVED:
+
+- The deprecated ClassHydrator has been removed
+- The deprecated HydratorInterface has been removed
 
 FIXED:
 
