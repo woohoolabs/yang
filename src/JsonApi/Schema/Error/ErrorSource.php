@@ -8,15 +8,8 @@ use function is_string;
 
 final class ErrorSource
 {
-    /**
-     * @var string
-     */
-    private $pointer;
-
-    /**
-     * @var string
-     */
-    private $parameter;
+    private string $pointer;
+    private string $parameter;
 
     public function __construct(string $pointer, string $parameter)
     {

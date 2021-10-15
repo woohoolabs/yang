@@ -10,10 +10,7 @@ use Psr\Http\Message\RequestInterface;
 
 class JsonApiAsyncClient
 {
-    /**
-     * @var HttpAsyncClient
-     */
-    private $client;
+    private HttpAsyncClient $client;
 
     public function __construct(HttpAsyncClient $client)
     {

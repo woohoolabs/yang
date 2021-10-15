@@ -52,11 +52,11 @@ The only thing you need before getting started is [Composer](https://getcomposer
 
 ### Install an HTTP client and message implementations:
 
-Because Yang requires a HTTP client implementation, you must install one first. You may use [Guzzle 6 Adapter](https://github.com/php-http/guzzle6-adapter)
+Because Yang requires a HTTP client implementation, you must install one first. You may use [Guzzle 7 Adapter](https://github.com/php-http/guzzle7-adapter)
 or any other library of your preference:
 
 ```bash
-$ composer require php-http/guzzle6-adapter
+$ composer require php-http/guzzle7-adapter
 ```
 
 ### Install Yang:
@@ -70,11 +70,11 @@ $ composer require woohoolabs/yang
 > Note: The tests and examples won't be downloaded by default. You have to use `composer require woohoolabs/yang --prefer-source`
 or clone the repository if you need them.
 
-Yang requires PHP 7.2 at least. You may use Yang 2.1 for PHP 7.1.
+Yang requires PHP 7.4 at least. You may use Yang 2.3 for PHP 7.2.
 
 ## Basic Usage
 
-Yang can help you in three ways to communicate with JSON:API servers. The following subsections will cover these topics. 
+Yang can help you in three ways to communicate with JSON:API servers. The following subsections will cover these topics.
 
 ### Request builder
 
@@ -171,7 +171,7 @@ $request = $request
 
 ### HTTP clients
 
-The library comes with support for [PSR-18](https://www.php-fig.org/psr/psr-18/) and [HTTPlug](https://github.com/php-http/httplug), 
+The library comes with support for [PSR-18](https://www.php-fig.org/psr/psr-18/) and [HTTPlug](https://github.com/php-http/httplug),
 so you can choose how you want to send your requests. If you installed the `php-http/guzzle6-adapter` package, then you
 will be able to use Guzzle to do so:
 
@@ -434,7 +434,7 @@ The `Relationship` object supports the following methods:
 
 ```php
 // Checks if it is a to-one relationship
-$isToOneRelationship = $relationship->isToOneRelationship(); 
+$isToOneRelationship = $relationship->isToOneRelationship();
 
 // Checks if it is a to-many relationship
 $isToManyRelationship = $relationship->isToManyRelationship();
@@ -454,7 +454,7 @@ $links = $relationship->links();
 // Returns the first resource linkage of the relationship as an array (e.g.: ["type" => "address", "id" => "123"])
 // or null if there isn't any related data
 $resourceLinkage = $relationship->firstResourceLink();
- 
+
 // Returns the resource linkage as an array of array (e.g.: [["type" => "address", "id" => "123"]])
 $resourceLinkage = $relationship->resourceLinks();
 
@@ -494,7 +494,7 @@ $dog->breed = $dogResource->relationship("breed")->resource()->attribute("name")
 foreach ($dogResource->relationship("owners")->resources() as $ownerResource) {
     $owner = new stdClass();
     $owner->name = $ownerResource->attribute("name");
-    
+
     $addressResource = $ownerResource->relationship("address")->resource();
     $owner->address = new stdClass();
     $owner->address->city = $addressResource->attribute("city");
@@ -603,7 +603,7 @@ At client-side, if you use Yang with the default [HTTP Clients](#http-clients) t
 constructor argument to them like below to take advantage of custom deserialization:
 
 ```php
-use Http\Adapter\Guzzle6\Client;
+use Http\Adapter\Guzzle7\Client;
 
 // Instantiate the Guzzle HTTP Client
 $guzzleClient = Client::createWithConfig([]);

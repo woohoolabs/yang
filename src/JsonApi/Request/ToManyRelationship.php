@@ -6,10 +6,7 @@ namespace WoohooLabs\Yang\JsonApi\Request;
 
 final class ToManyRelationship implements RelationshipInterface
 {
-    /**
-     * @var array
-     */
-    private $resourceIdentifiers = [];
+    private array $resourceIdentifiers = [];
 
     public static function create(): ToManyRelationship
     {

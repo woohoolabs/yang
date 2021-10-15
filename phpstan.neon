@@ -17,9 +17,6 @@ parameters:
                 - '%currentWorkingDirectory%/src/JsonApi/Hydrator/AttributeHydrator'
                 - '%currentWorkingDirectory%/src/JsonApi/Hydrator/ClassDocumentHydrator'
         - '#^Dynamic call to static method PHPUnit\\Framework\\.*$#'
-        -
-            message: '#^.*$#'
-            path: '%currentWorkingDirectory%/tests/JsonApi/Hydrator/ClassHydratorTest'
 
 includes:
     - vendor/phpstan/phpstan/conf/bleedingEdge.neon

@@ -7,7 +7,7 @@ namespace WoohooLabs\Yang\JsonApi\Hydrator;
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 
-interface DocumentHydratorInterface extends HydratorInterface
+interface DocumentHydratorInterface
 {
     /**
      * Hydrates a document into an array/list of items regardless if the primary data is a single resource or a

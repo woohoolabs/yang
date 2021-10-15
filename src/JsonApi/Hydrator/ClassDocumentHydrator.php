@@ -11,10 +11,7 @@ use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
 
 class ClassDocumentHydrator extends AbstractClassDocumentHydrator
 {
-    /**
-     * @var AttributeHydratorInterface
-     */
-    private $attributeHydrator;
+    private AttributeHydratorInterface $attributeHydrator;
 
     public function __construct(?AttributeHydratorInterface $attributeHydrator = null)
     {

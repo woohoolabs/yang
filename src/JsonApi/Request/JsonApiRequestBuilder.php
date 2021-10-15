@@ -18,45 +18,20 @@ use function parse_url;
 
 class JsonApiRequestBuilder
 {
-    /** @var RequestInterface */
-    private $request;
-
-    /** @var SerializerInterface */
-    private $serializer;
-
-    /** @var string */
-    private $method;
-
-    /** @var string */
-    private $protocolVersion;
-
-    /** @var string */
-    private $scheme;
-
-    /** @var string */
-    private $host;
-
-    /** @var int */
-    private $port;
-
-    /** @var string */
-    private $path;
-
-    /** @var array */
-    private $queryString;
-
-    /** @var array */
-    private $headers;
-
+    private RequestInterface $request;
+    private SerializerInterface $serializer;
+    private string $method;
+    private string $protocolVersion;
+    private string $scheme;
+    private string $host;
+    private ?int $port;
+    private string $path;
+    private array $queryString;
+    private array $headers;
     /** @var string[] */
-    private $appliedProfiles;
-
+    private array $appliedProfiles;
     /** @var string[] */
-    private $requestedProfiles;
-
-    /** @var string[] */
-    private $requiredProfiles;
-
+    private array $requestedProfiles;
     /** @var mixed */
     private $body;
 
@@ -73,12 +48,12 @@ class JsonApiRequestBuilder
         $this->protocolVersion = "";
         $this->scheme = "http";
         $this->host = "";
+        $this->port = null;
         $this->path = "";
         $this->queryString = [];
         $this->headers = [];
         $this->appliedProfiles = [];
         $this->requestedProfiles = [];
-        $this->requiredProfiles = [];
     }
 
     public function fetch(): JsonApiRequestBuilder

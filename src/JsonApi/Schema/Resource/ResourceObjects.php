@@ -12,25 +12,13 @@ use function reset;
 
 final class ResourceObjects
 {
-    /**
-     * @var bool
-     */
-    private $isSinglePrimaryResource;
-
-    /**
-     * @var ResourceObject[]
-     */
-    private $resources = [];
-
-    /**
-     * @var ResourceObject[]
-     */
-    private $primaryKeys = [];
-
-    /**
-     * @var ResourceObject[]
-     */
-    private $includedKeys = [];
+    private bool $isSinglePrimaryResource;
+    /** @var ResourceObject[] */
+    private array $resources = [];
+    /** @var ResourceObject[] */
+    private array $primaryKeys = [];
+    /** @var ResourceObject[] */
+    private array $includedKeys = [];
 
     public function __construct(array $data, array $included, bool $isSinglePrimaryResource)
     {

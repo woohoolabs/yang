@@ -12,45 +12,14 @@ use function is_string;
 
 final class Error
 {
-    /**
-     * @var string
-     */
-    private $id;
-
-    /**
-     * @var array
-     */
-    private $meta;
-
-    /**
-     * @var ErrorLinks
-     */
-    private $links;
-
-    /**
-     * @var string
-     */
-    private $status;
-
-    /**
-     * @var string
-     */
-    private $code;
-
-    /**
-     * @var string
-     */
-    private $title;
-
-    /**
-     * @var string
-     */
-    private $detail;
-
-    /**
-     * @var ErrorSource
-     */
-    private $source;
+    private string $id;
+    private array $meta;
+    private ErrorLinks $links;
+    private string $status;
+    private string $code;
+    private string $title;
+    private string $detail;
+    private ErrorSource $source;
 
     public function __construct(
         string $id,

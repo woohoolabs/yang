@@ -9,10 +9,7 @@ use function is_string;
 
 final class ProfileLink extends AbstractLink
 {
-    /**
-     * @var array
-     */
-    private $aliases;
+    private array $aliases;
 
     public function __construct(string $href, array $meta = [], array $aliases = [])
     {
