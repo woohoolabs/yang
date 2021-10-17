@@ -10,7 +10,7 @@ use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
 use WoohooLabs\Yang\JsonApi\Serializer\DeserializerInterface;
 use WoohooLabs\Yang\JsonApi\Serializer\JsonDeserializer;
 
-class JsonApiClient
+class JsonApiClient implements ClientInterface
 {
     private ClientInterface $client;
     private DeserializerInterface $deserializer;
