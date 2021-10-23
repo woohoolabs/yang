@@ -2,6 +2,8 @@
 
 ADDED:
 
+- [#34](https://github.com/woohoolabs/yang/pull/34): `JsonApiClient` implements PSR-18's `ClientInterface`
+
 CHANGED:
 
 - Increased minimum PHP version requirement to 7.4
