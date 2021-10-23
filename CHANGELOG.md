@@ -2,6 +2,18 @@
 
 ADDED:
 
+CHANGED:
+
+DEPRECATED:
+
+REMOVED:
+
+FIXED:
+
+## 3.0.0-beta1 - 2021-10-23
+
+ADDED:
+
 - [#34](https://github.com/woohoolabs/yang/pull/34): `JsonApiClient` implements PSR-18's `ClientInterface`
 
 CHANGED:
@@ -9,14 +21,10 @@ CHANGED:
 - Increased minimum PHP version requirement to 7.4
 - PSR-18 is used instead of HTTPlug
 
-DEPRECATED:
-
 REMOVED:
 
 - The deprecated ClassHydrator has been removed
 - The deprecated HydratorInterface has been removed
-
-FIXED:
 
 ## 2.3.2 - 2020-11-15
 
