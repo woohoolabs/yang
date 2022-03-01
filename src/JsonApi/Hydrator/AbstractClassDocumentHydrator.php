@@ -8,6 +8,7 @@ use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Schema\Relationship;
 use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
+use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
 
 abstract class AbstractClassDocumentHydrator implements DocumentHydratorInterface
 {
