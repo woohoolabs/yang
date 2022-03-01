@@ -1,7 +1,7 @@
 {
     "name": "bahaaalhagar/yang",
     "description": "Woohoo Labs. Yang",
-    "type": "library",
+    "type": "package",
     "keywords": ["Woohoo Labs.", "Yang", "JSON API", "PSR-7", "PSR-18"],
     "license": "MIT",
     "authors": [
