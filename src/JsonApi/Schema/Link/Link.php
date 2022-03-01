@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema\Link;
-
-use function is_array;
-use function is_string;
+namespace BahaaAlhagar\Yang\JsonApi\Schema\Link;
 
 final class Link extends AbstractLink
 {
@@ -22,8 +19,8 @@ final class Link extends AbstractLink
      */
     public static function fromArray(array $link): Link
     {
-        $href = isset($link["href"]) && is_string($link["href"]) ? $link["href"] : "";
-        $meta = isset($link["meta"]) && is_array($link["meta"]) ? $link["meta"] : [];
+        $href = isset($link["href"]) && \is_string($link["href"]) ? $link["href"] : "";
+        $meta = isset($link["meta"]) && \is_array($link["meta"]) ? $link["meta"] : [];
 
         return new Link($href, $meta);
     }

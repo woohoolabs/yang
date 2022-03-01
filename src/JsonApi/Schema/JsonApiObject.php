@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema;
-
-use function is_array;
-use function is_string;
+namespace BahaaAlhagar\Yang\JsonApi\Schema;
 
 final class JsonApiObject
 {
@@ -45,8 +42,8 @@ final class JsonApiObject
      */
     public static function fromArray(array $array): JsonApiObject
     {
-        $version = isset($array["version"]) && is_string($array["version"]) && $array["version"] !== "" ? $array["version"] : "1.0";
-        $meta = isset($array["meta"]) && is_array($array["meta"]) ? $array["meta"] : [];
+        $version = isset($array["version"]) && \is_string($array["version"]) && $array["version"] !== "" ? $array["version"] : "1.0";
+        $meta = isset($array["meta"]) && \is_array($array["meta"]) ? $array["meta"] : [];
 
         return new self($version, $meta);
     }

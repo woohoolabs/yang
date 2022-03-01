@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Hydrator;
+namespace BahaaAlhagar\Yang\JsonApi\Hydrator;
 
-use WoohooLabs\Yang\JsonApi\Schema\Document;
+use BahaaAlhagar\Yang\JsonApi\Schema\Document;
 
 /**
  * @deprecated Use the DocumentHydratorInterface instead.

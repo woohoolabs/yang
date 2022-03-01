@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Serializer;
+namespace BahaaAlhagar\Yang\JsonApi\Serializer;
 
 use Psr\Http\Message\ResponseInterface;
-
-use function json_decode;
 
 final class JsonDeserializer implements DeserializerInterface
 {
@@ -31,6 +29,6 @@ final class JsonDeserializer implements DeserializerInterface
      */
     public function deserialize(ResponseInterface $response)
     {
-        return json_decode($response->getBody()->__toString(), true, $this->depth, $this->options);
+        return \json_decode($response->getBody()->__toString(), true, $this->depth, $this->options);
     }
 }

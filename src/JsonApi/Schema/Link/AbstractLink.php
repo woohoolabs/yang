@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema\Link;
+namespace BahaaAlhagar\Yang\JsonApi\Schema\Link;
 
 abstract class AbstractLink
 {

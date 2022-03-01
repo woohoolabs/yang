@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Response;
+namespace BahaaAlhagar\Yang\JsonApi\Response;
 
-use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractResponse implements ResponseInterface
 {

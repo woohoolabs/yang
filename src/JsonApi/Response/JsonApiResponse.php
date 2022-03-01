@@ -2,16 +2,13 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Response;
+namespace BahaaAlhagar\Yang\JsonApi\Response;
 
 use Psr\Http\Message\ResponseInterface;
-use WoohooLabs\Yang\JsonApi\Exception\ResponseException;
-use WoohooLabs\Yang\JsonApi\Schema\Document;
-use WoohooLabs\Yang\JsonApi\Serializer\DeserializerInterface;
-use WoohooLabs\Yang\JsonApi\Serializer\JsonDeserializer;
-
-use function in_array;
-use function is_array;
+use BahaaAlhagar\Yang\JsonApi\Schema\Document;
+use BahaaAlhagar\Yang\JsonApi\Exception\ResponseException;
+use BahaaAlhagar\Yang\JsonApi\Serializer\JsonDeserializer;
+use BahaaAlhagar\Yang\JsonApi\Serializer\DeserializerInterface;
 
 class JsonApiResponse extends AbstractResponse
 {
@@ -58,7 +55,7 @@ class JsonApiResponse extends AbstractResponse
 
     public function isSuccessful(array $successfulStatusCodes = []): bool
     {
-        $isStatusCodeSuccessful = empty($successfulStatusCodes) || in_array($this->getStatusCode(), $successfulStatusCodes, true);
+        $isStatusCodeSuccessful = empty($successfulStatusCodes) || \in_array($this->getStatusCode(), $successfulStatusCodes, true);
 
         $hasNoErrors = $this->hasDocument() === false || $this->document()->hasErrors() === false;
 
@@ -74,7 +71,7 @@ class JsonApiResponse extends AbstractResponse
     {
         $content = $this->deserializer->deserialize($this->response);
 
-        if (is_array($content) === false) {
+        if (\is_array($content) === false) {
             return null;
         }
 

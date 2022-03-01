@@ -2,19 +2,11 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Request;
+namespace BahaaAlhagar\Yang\JsonApi\Request;
 
 use Psr\Http\Message\RequestInterface;
-use WoohooLabs\Yang\JsonApi\Serializer\JsonSerializer;
-use WoohooLabs\Yang\JsonApi\Serializer\SerializerInterface;
-
-use function array_key_exists;
-use function http_build_query;
-use function implode;
-use function is_array;
-use function is_numeric;
-use function parse_str;
-use function parse_url;
+use BahaaAlhagar\Yang\JsonApi\Serializer\JsonSerializer;
+use BahaaAlhagar\Yang\JsonApi\Serializer\SerializerInterface;
 
 class JsonApiRequestBuilder
 {
@@ -127,7 +119,7 @@ class JsonApiRequestBuilder
 
     public function setUri(string $uri): JsonApiRequestBuilder
     {
-        $parsedUri = parse_url($uri);
+        $parsedUri = \parse_url($uri);
 
         if ($parsedUri === false) {
             return $this;
@@ -150,7 +142,7 @@ class JsonApiRequestBuilder
         }
 
         if ($this->isBlankKey($parsedUri, "query") === false) {
-            parse_str($parsedUri["query"], $this->queryString);
+            \parse_str($parsedUri["query"], $this->queryString);
         }
 
         return $this;
@@ -314,14 +306,14 @@ class JsonApiRequestBuilder
 
     private function getQueryString(): string
     {
-        return http_build_query($this->queryString);
+        return \http_build_query($this->queryString);
     }
 
     private function setArrayQueryParam(string $name, array $queryParam): void
     {
         foreach ($queryParam as $key => $value) {
-            if (is_array($value)) {
-                $this->queryString[$name][$key] = implode(",", $value);
+            if (\is_array($value)) {
+                $this->queryString[$name][$key] = \implode(",", $value);
             } else {
                 $this->queryString[$name][$key] = $value;
             }
@@ -333,8 +325,8 @@ class JsonApiRequestBuilder
      */
     private function setListQueryParam(string $name, $queryParam): void
     {
-        if (is_array($queryParam)) {
-            $this->queryString[$name] = implode(",", $queryParam);
+        if (\is_array($queryParam)) {
+            $this->queryString[$name] = \implode(",", $queryParam);
         } else {
             $this->queryString[$name] = $queryParam;
         }
@@ -342,7 +334,7 @@ class JsonApiRequestBuilder
 
     private function isBlankKey(array $array, string $key): bool
     {
-        return array_key_exists($key, $array) === false || (empty($array[$key]) && is_numeric($array[$key]) === false);
+        return \array_key_exists($key, $array) === false || (empty($array[$key]) && \is_numeric($array[$key]) === false);
     }
 
     private function getMediaTypeWithProfiles(array $profiles, bool $compatibility): string
@@ -350,7 +342,7 @@ class JsonApiRequestBuilder
         $result = "application/vnd.api+json";
 
         if (empty($profiles) === false) {
-            $result .= ';profile="' . implode(" ", $profiles) . '"'
+            $result .= ';profile="' . \implode(" ", $profiles) . '"'
                     . ($compatibility ? ',application/vnd.api+json' : "");
         }
 

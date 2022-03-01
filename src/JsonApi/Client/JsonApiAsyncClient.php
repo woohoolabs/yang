@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Client;
+namespace BahaaAlhagar\Yang\JsonApi\Client;
 
-use Http\Client\HttpAsyncClient;
 use Http\Promise\Promise;
+use Http\Client\HttpAsyncClient;
 use Psr\Http\Message\RequestInterface;
 
 class JsonApiAsyncClient

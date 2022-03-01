@@ -2,20 +2,12 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema;
+namespace BahaaAlhagar\Yang\JsonApi\Schema;
 
-use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-use WoohooLabs\Yang\JsonApi\Schema\Link\RelationshipLinks;
-use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
-use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
-
-use function array_filter;
-use function array_key_exists;
-use function array_keys;
-use function count;
-use function is_array;
-use function is_numeric;
-use function reset;
+use BahaaAlhagar\Yang\JsonApi\Exception\DocumentException;
+use BahaaAlhagar\Yang\JsonApi\Schema\Link\RelationshipLinks;
+use BahaaAlhagar\Yang\JsonApi\Schema\Resource\ResourceObject;
+use BahaaAlhagar\Yang\JsonApi\Schema\Resource\ResourceObjects;
 
 final class Relationship
 {
@@ -107,7 +99,7 @@ final class Relationship
 
     public function firstResourceLink(): ?array
     {
-        $link = reset($this->resourceMap);
+        $link = \reset($this->resourceMap);
 
         return $link === false ? null : $link;
     }
@@ -131,6 +123,7 @@ final class Relationship
         }
 
         $resources = [];
+
         foreach ($this->resourceMap as $resourceLink) {
             if ($this->hasIncludedResource($resourceLink["type"], $resourceLink["id"])) {
                 $resources[] = $this->resourceBy($resourceLink["type"], $resourceLink["id"]);
@@ -146,9 +139,11 @@ final class Relationship
     public function resourceMap(): array
     {
         $resources = [];
+
         foreach ($this->resourceMap as $resourceLink) {
             $type = $resourceLink["type"];
             $id = $resourceLink["id"];
+
             if ($this->hasIncludedResource($type, $id)) {
                 $resources[$type][$id] = $this->resourceBy($type, $id);
             }
@@ -169,7 +164,8 @@ final class Relationship
             );
         }
 
-        $resource = reset($this->resourceMap);
+        $resource = \reset($this->resourceMap);
+
         if ($resource === false) {
             throw new DocumentException("The relationship with '$this->name' name is empty, therefore it doesn't have a single resource.");
         }
@@ -209,7 +205,7 @@ final class Relationship
         $links = RelationshipLinks::fromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
 
         // Data member is missing
-        if (array_key_exists("data", $array) === false) {
+        if (\array_key_exists("data", $array) === false) {
             return self::createEmptyFromArray($name, $meta, $links, $resources, null);
         }
 
@@ -246,7 +242,7 @@ final class Relationship
         if (empty($this->resourceMap)) {
             $result["data"] = $this->isToOneRelationship ? null : [];
         } else {
-            $result["data"] = $this->isToOneRelationship ? reset($this->resourceMap) : $this->resourceMap;
+            $result["data"] = $this->isToOneRelationship ? \reset($this->resourceMap) : $this->resourceMap;
         }
 
         return $result;
@@ -279,6 +275,7 @@ final class Relationship
                     "id" => $data["id"],
                 ],
             ];
+
             if (empty($data["meta"]) === false) {
                 $resourceMap[0]["meta"] = $data["meta"];
             }
@@ -303,6 +300,7 @@ final class Relationship
                     "type" => $item["type"],
                     "id" => $item["id"],
                 ];
+
                 if (empty($item["meta"]) === false) {
                     $resource["meta"] = $item["meta"];
                 }
@@ -315,16 +313,16 @@ final class Relationship
 
     private static function isAssociativeArray(array $array): bool
     {
-        return (bool) count(array_filter(array_keys($array), "is_string"));
+        return (bool) \count(\array_filter(\array_keys($array), "is_string"));
     }
 
     private static function isArrayKey(array $array, string $key): bool
     {
-        return isset($array[$key]) && is_array($array[$key]);
+        return isset($array[$key]) && \is_array($array[$key]);
     }
 
     private static function isBlankKey(array $array, string $key): bool
     {
-        return array_key_exists($key, $array) === false || (empty($array[$key]) && is_numeric($array[$key]) === false);
+        return \array_key_exists($key, $array) === false || (empty($array[$key]) && \is_numeric($array[$key]) === false);
     }
 }

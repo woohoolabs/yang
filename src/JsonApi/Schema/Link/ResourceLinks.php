@@ -2,12 +2,9 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema\Link;
+namespace BahaaAlhagar\Yang\JsonApi\Schema\Link;
 
-use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-
-use function is_array;
-use function is_string;
+use BahaaAlhagar\Yang\JsonApi\Exception\DocumentException;
 
 final class ResourceLinks extends AbstractLinks
 {
@@ -27,10 +24,11 @@ final class ResourceLinks extends AbstractLinks
     public static function fromArray(array $links): ResourceLinks
     {
         $linkObjects = [];
+
         foreach ($links as $name => $link) {
-            if (is_string($link)) {
+            if (\is_string($link)) {
                 $linkObjects[$name] = Link::fromString($link);
-            } elseif (is_array($link)) {
+            } elseif (\is_array($link)) {
                 $linkObjects[$name] = Link::fromArray($link);
             }
         }

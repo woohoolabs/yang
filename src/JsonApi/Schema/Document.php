@@ -2,18 +2,13 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema;
+namespace BahaaAlhagar\Yang\JsonApi\Schema;
 
-use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-use WoohooLabs\Yang\JsonApi\Schema\Error\Error;
-use WoohooLabs\Yang\JsonApi\Schema\Link\DocumentLinks;
-use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
-use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
-
-use function array_filter;
-use function array_keys;
-use function count;
-use function is_array;
+use BahaaAlhagar\Yang\JsonApi\Schema\Error\Error;
+use BahaaAlhagar\Yang\JsonApi\Schema\Link\DocumentLinks;
+use BahaaAlhagar\Yang\JsonApi\Exception\DocumentException;
+use BahaaAlhagar\Yang\JsonApi\Schema\Resource\ResourceObject;
+use BahaaAlhagar\Yang\JsonApi\Schema\Resource\ResourceObjects;
 
 final class Document
 {
@@ -152,7 +147,7 @@ final class Document
 
     public function errorCount(): int
     {
-        return count($this->errors);
+        return \count($this->errors);
     }
 
     /**
@@ -172,42 +167,43 @@ final class Document
      */
     public static function fromArray(array $document): Document
     {
-        if (isset($document["jsonapi"]) && is_array($document["jsonapi"])) {
+        if (isset($document["jsonapi"]) && \is_array($document["jsonapi"])) {
             $jsonApi = $document["jsonapi"];
         } else {
             $jsonApi = [];
         }
         $jsonApiObject = JsonApiObject::fromArray($jsonApi);
 
-        if (isset($document["meta"]) && is_array($document["meta"])) {
+        if (isset($document["meta"]) && \is_array($document["meta"])) {
             $meta = $document["meta"];
         } else {
             $meta = [];
         }
 
-        if (isset($document["links"]) && is_array($document["links"])) {
+        if (isset($document["links"]) && \is_array($document["links"])) {
             $links = $document["links"];
         } else {
             $links = [];
         }
         $linksObject = DocumentLinks::fromArray($links);
 
-        if (isset($document["included"]) && is_array($document["included"])) {
+        if (isset($document["included"]) && \is_array($document["included"])) {
             $included = $document["included"];
         } else {
             $included = [];
         }
 
-        if (isset($document["data"]) && is_array($document["data"])) {
+        if (isset($document["data"]) && \is_array($document["data"])) {
             $resources = new ResourceObjects($document["data"], $included, self::isAssociativeArray($document["data"]));
         } else {
             $resources = ResourceObjects::fromSinglePrimaryData([], $included);
         }
 
         $errors = [];
-        if (isset($document["errors"]) && is_array($document["errors"])) {
+
+        if (isset($document["errors"]) && \is_array($document["errors"])) {
             foreach ($document["errors"] as $error) {
-                if (is_array($error)) {
+                if (\is_array($error)) {
                     $errors[] = Error::fromArray($error);
                 }
             }
@@ -236,6 +232,7 @@ final class Document
 
         if ($this->hasErrors()) {
             $errors = [];
+
             foreach ($this->errors as $error) {
                 $errors[] = $error->toArray();
             }
@@ -251,6 +248,6 @@ final class Document
 
     private static function isAssociativeArray(array $array): bool
     {
-        return (bool) count(array_filter(array_keys($array), "is_string"));
+        return (bool) \count(\array_filter(\array_keys($array), "is_string"));
     }
 }

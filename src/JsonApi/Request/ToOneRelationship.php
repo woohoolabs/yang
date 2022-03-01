@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Request;
+namespace BahaaAlhagar\Yang\JsonApi\Request;
 
 final class ToOneRelationship implements RelationshipInterface
 {

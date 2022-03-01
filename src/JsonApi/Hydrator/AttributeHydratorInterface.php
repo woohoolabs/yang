@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Hydrator;
+namespace BahaaAlhagar\Yang\JsonApi\Hydrator;
 
-use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
+use BahaaAlhagar\Yang\JsonApi\Schema\Resource\ResourceObject;
 
 interface AttributeHydratorInterface
 {

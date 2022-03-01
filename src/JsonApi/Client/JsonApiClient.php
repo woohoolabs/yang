@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Client;
+namespace BahaaAlhagar\Yang\JsonApi\Client;
 
 use Http\Client\HttpClient;
 use Psr\Http\Message\RequestInterface;
-use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
-use WoohooLabs\Yang\JsonApi\Serializer\DeserializerInterface;
-use WoohooLabs\Yang\JsonApi\Serializer\JsonDeserializer;
+use BahaaAlhagar\Yang\JsonApi\Response\JsonApiResponse;
+use BahaaAlhagar\Yang\JsonApi\Serializer\JsonDeserializer;
+use BahaaAlhagar\Yang\JsonApi\Serializer\DeserializerInterface;
 
 class JsonApiClient
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Hydrator;
+namespace BahaaAlhagar\Yang\JsonApi\Hydrator;
 
 use stdClass;
-use WoohooLabs\Yang\JsonApi\Schema\Document;
-use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
+use BahaaAlhagar\Yang\JsonApi\Schema\Document;
+use BahaaAlhagar\Yang\JsonApi\Schema\Resource\ResourceObject;
 
 /**
  * @deprecated Use the ClassDocumentHydrator instead.
@@ -86,6 +86,7 @@ final class ClassHydrator implements HydratorInterface
         $result = new stdClass();
         $result->type = $resource->type();
         $result->id = $resource->id();
+
         foreach ($resource->attributes() as $attribute => $value) {
             $result->{$attribute} = $value;
         }

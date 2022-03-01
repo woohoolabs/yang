@@ -2,13 +2,9 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema\Resource;
+namespace BahaaAlhagar\Yang\JsonApi\Schema\Resource;
 
-use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-
-use function array_values;
-use function key;
-use function reset;
+use BahaaAlhagar\Yang\JsonApi\Exception\DocumentException;
 
 final class ResourceObjects
 {
@@ -100,7 +96,7 @@ final class ResourceObjects
             );
         }
 
-        return array_values($this->primaryKeys);
+        return \array_values($this->primaryKeys);
     }
 
     /**
@@ -119,8 +115,8 @@ final class ResourceObjects
             throw new DocumentException("The document doesn't contain any primary resources!");
         }
 
-        reset($this->primaryKeys);
-        $key = key($this->primaryKeys);
+        \reset($this->primaryKeys);
+        $key = \key($this->primaryKeys);
 
         return $this->resources[$key];
     }
@@ -140,7 +136,7 @@ final class ResourceObjects
      */
     public function includedResources(): array
     {
-        return array_values($this->includedKeys);
+        return \array_values($this->includedKeys);
     }
 
     /**
@@ -167,6 +163,7 @@ final class ResourceObjects
     public function includedToArray(): array
     {
         $result = [];
+
         foreach ($this->includedKeys as $resource) {
             $result[] = $resource->toArray();
         }
@@ -180,8 +177,8 @@ final class ResourceObjects
             return null;
         }
 
-        reset($this->primaryKeys);
-        $key = key($this->primaryKeys);
+        \reset($this->primaryKeys);
+        $key = \key($this->primaryKeys);
 
         return $this->resources[$key]->toArray();
     }
@@ -189,6 +186,7 @@ final class ResourceObjects
     private function primaryCollectionToArray(): array
     {
         $result = [];
+
         foreach ($this->primaryKeys as $resource) {
             $result[] = $resource->toArray();
         }

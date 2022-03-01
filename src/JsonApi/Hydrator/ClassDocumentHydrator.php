@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Hydrator;
+namespace BahaaAlhagar\Yang\JsonApi\Hydrator;
 
 use stdClass;
-use WoohooLabs\Yang\JsonApi\Schema\Document;
-use WoohooLabs\Yang\JsonApi\Schema\Relationship;
-use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
+use BahaaAlhagar\Yang\JsonApi\Schema\Document;
+use BahaaAlhagar\Yang\JsonApi\Schema\Relationship;
+use BahaaAlhagar\Yang\JsonApi\Schema\Resource\ResourceObject;
 
 class ClassDocumentHydrator extends AbstractClassDocumentHydrator
 {

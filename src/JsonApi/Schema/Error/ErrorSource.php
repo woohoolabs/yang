@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema\Error;
-
-use function is_string;
+namespace BahaaAlhagar\Yang\JsonApi\Schema\Error;
 
 final class ErrorSource
 {
@@ -54,8 +52,8 @@ final class ErrorSource
      */
     public static function fromArray(array $source): ErrorSource
     {
-        $pointer = isset($source["pointer"]) && is_string($source["pointer"]) ? $source["pointer"] : "";
-        $parameter = isset($source["parameter"]) && is_string($source["parameter"]) ? $source["parameter"] : "";
+        $pointer = isset($source["pointer"]) && \is_string($source["pointer"]) ? $source["pointer"] : "";
+        $parameter = isset($source["parameter"]) && \is_string($source["parameter"]) ? $source["parameter"] : "";
 
         return new self($pointer, $parameter);
     }

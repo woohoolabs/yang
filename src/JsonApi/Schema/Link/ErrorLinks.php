@@ -2,13 +2,9 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema\Link;
+namespace BahaaAlhagar\Yang\JsonApi\Schema\Link;
 
-use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-
-use function array_values;
-use function is_array;
-use function is_string;
+use BahaaAlhagar\Yang\JsonApi\Exception\DocumentException;
 
 final class ErrorLinks extends AbstractLinks
 {
@@ -55,7 +51,7 @@ final class ErrorLinks extends AbstractLinks
      */
     public function types(): array
     {
-        return array_values($this->types);
+        return \array_values($this->types);
     }
 
     /**
@@ -80,17 +76,20 @@ final class ErrorLinks extends AbstractLinks
 
         foreach ($links as $name => $link) {
             if ($name === "type") {
-                $types = is_array($link) ? self::createTypes($link) : [];
+                $types = \is_array($link) ? self::createTypes($link) : [];
+
                 continue;
             }
 
-            if (is_string($link)) {
+            if (\is_string($link)) {
                 $linkObjects[$name] = Link::fromString($link);
+
                 continue;
             }
 
-            if (is_array($link)) {
+            if (\is_array($link)) {
                 $linkObjects[$name] = Link::fromArray($link);
+
                 continue;
             }
         }
@@ -114,14 +113,16 @@ final class ErrorLinks extends AbstractLinks
         $typeLinks = [];
 
         foreach ($types as $link) {
-            if (is_string($link)) {
+            if (\is_string($link)) {
                 $typeLinks[$link] = Link::fromString($link);
+
                 continue;
             }
 
-            if (is_array($link)) {
+            if (\is_array($link)) {
                 $profileLink = Link::fromArray($link);
                 $typeLinks[$profileLink->href()] = $profileLink;
+
                 continue;
             }
         }

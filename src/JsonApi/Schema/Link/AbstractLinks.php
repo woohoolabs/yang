@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema\Link;
+namespace BahaaAlhagar\Yang\JsonApi\Schema\Link;
 
-use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
+use BahaaAlhagar\Yang\JsonApi\Exception\DocumentException;
 
 abstract class AbstractLinks
 {

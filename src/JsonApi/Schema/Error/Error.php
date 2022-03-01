@@ -2,13 +2,9 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema\Error;
+namespace BahaaAlhagar\Yang\JsonApi\Schema\Error;
 
-use WoohooLabs\Yang\JsonApi\Schema\Link\ErrorLinks;
-
-use function is_array;
-use function is_scalar;
-use function is_string;
+use BahaaAlhagar\Yang\JsonApi\Schema\Link\ErrorLinks;
 
 final class Error
 {
@@ -132,14 +128,14 @@ final class Error
      */
     public static function fromArray(array $error): Error
     {
-        $id = isset($error["id"]) && is_string($error["id"]) ? $error["id"] : "";
-        $meta = isset($error["meta"]) && is_array($error["meta"]) ? $error["meta"] : [];
-        $links = ErrorLinks::fromArray(isset($error["links"]) && is_array($error["links"]) ? $error["links"] : []);
-        $status = isset($error["status"]) && is_scalar($error["status"]) ? (string) $error["status"] : "";
-        $code = isset($error["code"]) && is_string($error["code"]) ? $error["code"] : "";
-        $title = isset($error["title"]) && is_string($error["title"]) ? $error["title"] : "";
-        $detail = isset($error["detail"]) && is_string($error["detail"]) ? $error["detail"] : "";
-        $source = ErrorSource::fromArray(isset($error["source"]) && is_array($error["source"]) ? $error["source"] : []);
+        $id = isset($error["id"]) && \is_string($error["id"]) ? $error["id"] : "";
+        $meta = isset($error["meta"]) && \is_array($error["meta"]) ? $error["meta"] : [];
+        $links = ErrorLinks::fromArray(isset($error["links"]) && \is_array($error["links"]) ? $error["links"] : []);
+        $status = isset($error["status"]) && \is_scalar($error["status"]) ? (string) $error["status"] : "";
+        $code = isset($error["code"]) && \is_string($error["code"]) ? $error["code"] : "";
+        $title = isset($error["title"]) && \is_string($error["title"]) ? $error["title"] : "";
+        $detail = isset($error["detail"]) && \is_string($error["detail"]) ? $error["detail"] : "";
+        $source = ErrorSource::fromArray(isset($error["source"]) && \is_array($error["source"]) ? $error["source"] : []);
 
         return new self($id, $meta, $links, $status, $code, $title, $detail, $source);
     }

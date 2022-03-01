@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Hydrator;
+namespace BahaaAlhagar\Yang\JsonApi\Hydrator;
 
-use WoohooLabs\Yang\JsonApi\Schema\Document;
-use WoohooLabs\Yang\JsonApi\Schema\Relationship;
-use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
-use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
+use BahaaAlhagar\Yang\JsonApi\Schema\Document;
+use BahaaAlhagar\Yang\JsonApi\Schema\Relationship;
+use BahaaAlhagar\Yang\JsonApi\Exception\DocumentException;
+use BahaaAlhagar\Yang\JsonApi\Schema\Resource\ResourceObject;
+use BahaaAlhagar\Yang\JsonApi\Schema\Resource\ResourceObjects;
 
 abstract class AbstractClassDocumentHydrator implements DocumentHydratorInterface
 {

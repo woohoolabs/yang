@@ -1,5 +1,5 @@
 {
-    "name": "woohoolabs/yang",
+    "name": "bahaaalhagar/yang",
     "description": "Woohoo Labs. Yang",
     "type": "library",
     "keywords": ["Woohoo Labs.", "Yang", "JSON API", "PSR-7", "PSR-18"],
@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "WoohooLabs\\Yang\\": "src/"
+            "BahaaAlhagar\\Yang\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "WoohooLabs\\Yang\\Tests\\": "tests/",
-            "WoohooLabs\\Yang\\Examples\\": "examples/"
+            "BahaaAlhagar\\Yang\\Tests\\": "tests/",
+            "BahaaAlhagar\\Yang\\Examples\\": "examples/"
         }
     },
     "scripts": {

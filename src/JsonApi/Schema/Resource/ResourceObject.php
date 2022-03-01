@@ -2,16 +2,11 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\JsonApi\Schema\Resource;
+namespace BahaaAlhagar\Yang\JsonApi\Schema\Resource;
 
-use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-use WoohooLabs\Yang\JsonApi\Schema\Link\ResourceLinks;
-use WoohooLabs\Yang\JsonApi\Schema\Relationship;
-
-use function array_key_exists;
-use function array_merge;
-use function is_array;
-use function is_string;
+use BahaaAlhagar\Yang\JsonApi\Schema\Relationship;
+use BahaaAlhagar\Yang\JsonApi\Schema\Link\ResourceLinks;
+use BahaaAlhagar\Yang\JsonApi\Exception\DocumentException;
 
 final class ResourceObject
 {
@@ -101,12 +96,12 @@ final class ResourceObject
 
     public function idAndAttributes(): array
     {
-        return array_merge(["id" => $this->id()], $this->attributes());
+        return \array_merge(["id" => $this->id()], $this->attributes());
     }
 
     public function hasAttribute(string $name): bool
     {
-        return array_key_exists($name, $this->attributes);
+        return \array_key_exists($name, $this->attributes);
     }
 
     /**
@@ -128,7 +123,7 @@ final class ResourceObject
 
     public function hasRelationship(string $name): bool
     {
-        return array_key_exists($name, $this->relationships);
+        return \array_key_exists($name, $this->relationships);
     }
 
     /**
@@ -148,16 +143,17 @@ final class ResourceObject
      */
     public static function fromArray(array $array, ResourceObjects $resources): ResourceObject
     {
-        $type = isset($array["type"]) && is_string($array["type"]) ? $array["type"] : "";
-        $id = isset($array["id"]) && is_string($array["id"]) ? $array["id"] : "";
+        $type = isset($array["type"]) && \is_string($array["type"]) ? $array["type"] : "";
+        $id = isset($array["id"]) && \is_string($array["id"]) ? $array["id"] : "";
         $meta = self::isArrayKey($array, "meta") ? $array["meta"] : [];
         $links = ResourceLinks::fromArray(self::isArrayKey($array, "links") ? $array["links"] : []);
         $attributes = self::isArrayKey($array, "attributes") ? $array["attributes"] : [];
 
         $relationships = [];
+
         if (self::isArrayKey($array, "relationships")) {
             foreach ($array["relationships"] as $name => $relationship) {
-                if (is_string($name) === false || is_array($relationship) === false) {
+                if (\is_string($name) === false || \is_array($relationship) === false) {
                     continue;
                 }
 
@@ -189,6 +185,7 @@ final class ResourceObject
 
         if (empty($this->relationships) === false) {
             $result["relationships"] = [];
+
             foreach ($this->relationships as $name => $relationship) {
                 $result["relationships"][$name] = $relationship->toArray();
             }
@@ -199,6 +196,6 @@ final class ResourceObject
 
     private static function isArrayKey(array $array, string $key): bool
     {
-        return isset($array[$key]) && is_array($array[$key]);
+        return isset($array[$key]) && \is_array($array[$key]);
     }
 }
