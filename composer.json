@@ -30,13 +30,13 @@
     },
     "autoload": {
         "psr-4": {
-            "BahaaAlhagar\\Yang\\": "src/"
+            "BahaaAlhagar\\Yang\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "BahaaAlhagar\\Yang\\Tests\\": "tests/",
-            "BahaaAlhagar\\Yang\\Examples\\": "examples/"
+            "BahaaAlhagar\\Yang\\Tests\\": "tests",
+            "BahaaAlhagar\\Yang\\Examples\\": "examples"
         }
     },
     "scripts": {
