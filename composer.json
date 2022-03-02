@@ -1,7 +1,6 @@
 {
     "name": "bahaaalhagar/yang",
     "description": "Woohoo Labs. Yang",
-    "type": "package",
     "keywords": ["Woohoo Labs.", "Yang", "JSON API", "PSR-7", "PSR-18"],
     "license": "MIT",
     "authors": [
@@ -10,10 +9,6 @@
             "email": "kocsismate@woohoolabs.com"
         }
     ],
-    "support": {
-        "issues": "https://github.com/woohoolabs/yang/issues",
-        "source": "https://github.com/woohoolabs/yang"
-    },
     "require": {
         "php": "^7.2.0||^8.0.0",
         "php-http/httplug": "^1.0.0|^2.0.0",
@@ -52,5 +47,8 @@
     },
     "config": {
         "sort-packages": true
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+
 }
