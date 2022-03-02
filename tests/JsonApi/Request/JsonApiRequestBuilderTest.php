@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\Tests\JsonApi\Request;
+namespace BahaaAlhagar\Yang\Tests\JsonApi\Request;
 
 use GuzzleHttp\Psr7\Request;
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder;
-use WoohooLabs\Yang\JsonApi\Request\ResourceObject;
-
-use function urldecode;
+use BahaaAlhagar\Yang\JsonApi\Request\ResourceObject;
+use BahaaAlhagar\Yang\JsonApi\Request\JsonApiRequestBuilder;
 
 class JsonApiRequestBuilderTest extends TestCase
 {
@@ -226,7 +224,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setJsonApiFields(["a" => ["b", "c"]]);
 
-        $this->assertSame("fields[a]=b,c", urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("fields[a]=b,c", \urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
@@ -238,7 +236,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setJsonApiSort(["b", "-c"]);
 
-        $this->assertSame("sort=b,-c", urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("sort=b,-c", \urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
@@ -250,7 +248,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setJsonApiPage(["a" => 1, "b" => 100]);
 
-        $this->assertSame("page[a]=1&page[b]=100", urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("page[a]=1&page[b]=100", \urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
@@ -262,7 +260,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setJsonApiFilter(["a" => "abc"]);
 
-        $this->assertSame("filter[a]=abc", urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("filter[a]=abc", \urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
@@ -276,7 +274,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $this->assertSame(
             "filter[a]=abc,xyz",
-            urldecode($requestBuilder->getRequest()->getUri()->getQuery())
+            \urldecode($requestBuilder->getRequest()->getUri()->getQuery())
         );
     }
 
@@ -291,7 +289,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $this->assertSame(
             "filter[a][0]=abc&filter[a][1]=xyz",
-            urldecode($requestBuilder->getRequest()->getUri()->getQuery())
+            \urldecode($requestBuilder->getRequest()->getUri()->getQuery())
         );
     }
 
@@ -314,7 +312,7 @@ class JsonApiRequestBuilderTest extends TestCase
         $this->assertSame(
             "filter[a]=123&filter[b][lt]=50&filter[b][gt]=5&filter[or][c][like]=foo"
             . "&filter[or][c][eq]=bar&filter[d][in][0]=3&filter[d][in][1]=4",
-            urldecode($requestBuilder->getRequest()->getUri()->getQuery())
+            \urldecode($requestBuilder->getRequest()->getUri()->getQuery())
         );
     }
 
@@ -327,7 +325,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setJsonApiIncludes(["a", "b.c"]);
 
-        $this->assertSame("include=a,b.c", urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("include=a,b.c", \urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
@@ -339,7 +337,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $requestBuilder->setJsonApiIncludes("a,b.c");
 
-        $this->assertSame("include=a,b.c", urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
+        $this->assertSame("include=a,b.c", \urldecode($requestBuilder->getRequest()->getUri()->getQuery()));
     }
 
     /**
@@ -389,7 +387,7 @@ class JsonApiRequestBuilderTest extends TestCase
 
         $this->assertSame(
             'profile=abc def',
-            urldecode($requestBuilder->getRequest()->getUri()->getQuery())
+            \urldecode($requestBuilder->getRequest()->getUri()->getQuery())
         );
     }
 

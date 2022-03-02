@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\Tests\JsonApi\Request;
+namespace BahaaAlhagar\Yang\Tests\JsonApi\Request;
 
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Request\ToOneRelationship;
+use BahaaAlhagar\Yang\JsonApi\Request\ToOneRelationship;
 
 class ToOneRelationshipTest extends TestCase
 {

@@ -83,7 +83,7 @@ For this purpose, you may use the `JsonApiRequestBuilder` class as it can be see
 
 ```php
 use GuzzleHttp\Psr7\Request;
-use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder;
+use BahaaAlhagar\Yang\JsonApi\Request\JsonApiRequestBuilder;
 
 // Instantiate an empty PSR-7 request, note that the default HTTP method must be provided
 $request = new Request('GET', '');

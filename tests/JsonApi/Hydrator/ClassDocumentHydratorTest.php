@@ -2,16 +2,13 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\Tests\JsonApi\Hydrator;
+namespace BahaaAlhagar\Yang\Tests\JsonApi\Hydrator;
 
-use PHPUnit\Framework\TestCase;
 use stdClass;
-use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-use WoohooLabs\Yang\JsonApi\Hydrator\ClassDocumentHydrator;
-use WoohooLabs\Yang\JsonApi\Schema\Document;
-
-use function end;
-use function reset;
+use PHPUnit\Framework\TestCase;
+use BahaaAlhagar\Yang\JsonApi\Schema\Document;
+use BahaaAlhagar\Yang\JsonApi\Exception\DocumentException;
+use BahaaAlhagar\Yang\JsonApi\Hydrator\ClassDocumentHydrator;
 
 class ClassDocumentHydratorTest extends TestCase
 {
@@ -46,7 +43,7 @@ class ClassDocumentHydratorTest extends TestCase
         $document = Document::fromArray($document);
         $hydrator = new ClassDocumentHydrator();
         $objects = (array) $hydrator->hydrate($document);
-        $object = reset($objects) ?: new stdClass();
+        $object = \reset($objects) ?: new stdClass();
 
         $this->assertCount(1, $objects);
 
@@ -72,7 +69,7 @@ class ClassDocumentHydratorTest extends TestCase
         $document = Document::fromArray($document);
         $hydrator = new ClassDocumentHydrator();
         $objects = (array) $hydrator->hydrate($document);
-        $object = reset($objects) ?: new stdClass();
+        $object = \reset($objects) ?: new stdClass();
 
         $this->assertCount(1, $objects);
 
@@ -112,8 +109,8 @@ class ClassDocumentHydratorTest extends TestCase
         $document = Document::fromArray($document);
         $hydrator = new ClassDocumentHydrator();
         $objects = (array) $hydrator->hydrate($document);
-        $object1 = reset($objects) ?: new stdClass();
-        $object2 = end($objects) ?: new stdClass();
+        $object1 = \reset($objects) ?: new stdClass();
+        $object2 = \end($objects) ?: new stdClass();
 
         $this->assertCount(2, $objects);
 
@@ -149,7 +146,7 @@ class ClassDocumentHydratorTest extends TestCase
         $document = Document::fromArray($document);
         $hydrator = new ClassDocumentHydrator();
         $objects = (array) $hydrator->hydrate($document);
-        $object = reset($objects) ?: new stdClass();
+        $object = \reset($objects) ?: new stdClass();
 
         $this->assertCount(1, $objects);
         $this->assertObjectNotHasAttribute("x", $object);
@@ -188,7 +185,7 @@ class ClassDocumentHydratorTest extends TestCase
         $document = Document::fromArray($document);
         $hydrator = new ClassDocumentHydrator();
         $objects = (array) $hydrator->hydrate($document);
-        $object = reset($objects) ?: new stdClass();
+        $object = \reset($objects) ?: new stdClass();
 
         $this->assertCount(1, $objects);
         $this->assertObjectHasAttribute("x", $object);
@@ -248,7 +245,7 @@ class ClassDocumentHydratorTest extends TestCase
         $document = Document::fromArray($document);
         $hydrator = new ClassDocumentHydrator();
         $objects = (array) $hydrator->hydrate($document);
-        $object = reset($objects) ?: new stdClass();
+        $object = \reset($objects) ?: new stdClass();
 
         $this->assertCount(1, $objects);
         $this->assertCount(2, $object->x);
@@ -309,7 +306,7 @@ class ClassDocumentHydratorTest extends TestCase
         $document = Document::fromArray($document);
         $hydrator = new ClassDocumentHydrator();
         $objects = (array) $hydrator->hydrate($document);
-        $object = reset($objects) ?: new stdClass();
+        $object = \reset($objects) ?: new stdClass();
 
         $this->assertCount(1, $objects);
 
@@ -375,7 +372,7 @@ class ClassDocumentHydratorTest extends TestCase
         $document = Document::fromArray($document);
         $hydrator = new ClassDocumentHydrator();
         $objects = (array) $hydrator->hydrate($document);
-        $object = reset($objects) ?: new stdClass();
+        $object = \reset($objects) ?: new stdClass();
 
         $this->assertCount(1, $objects);
 
@@ -529,8 +526,8 @@ class ClassDocumentHydratorTest extends TestCase
         $document = Document::fromArray($document);
         $hydrator = new ClassDocumentHydrator();
         $collection = (array) $hydrator->hydrateCollection($document);
-        $object1 = reset($collection) ?: new stdClass();
-        $object2 = end($collection) ?: new stdClass();
+        $object1 = \reset($collection) ?: new stdClass();
+        $object2 = \end($collection) ?: new stdClass();
 
         $this->assertCount(2, $collection);
         $this->assertSame("a", $object1->type);

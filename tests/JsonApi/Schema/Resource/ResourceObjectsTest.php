@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\Tests\JsonApi\Schema\Resource;
+namespace BahaaAlhagar\Yang\Tests\JsonApi\Schema\Resource;
 
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
+use BahaaAlhagar\Yang\JsonApi\Exception\DocumentException;
+use BahaaAlhagar\Yang\JsonApi\Schema\Resource\ResourceObjects;
 
 class ResourceObjectsTest extends TestCase
 {

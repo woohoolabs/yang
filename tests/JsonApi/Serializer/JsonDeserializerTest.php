@@ -2,13 +2,11 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\Tests\JsonApi\Serializer;
+namespace BahaaAlhagar\Yang\Tests\JsonApi\Serializer;
 
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Serializer\JsonDeserializer;
-
-use function json_encode;
+use BahaaAlhagar\Yang\JsonApi\Serializer\JsonDeserializer;
 
 class JsonDeserializerTest extends TestCase
 {
@@ -32,7 +30,7 @@ class JsonDeserializerTest extends TestCase
 
     private function createResponse(array $body): Response
     {
-        $data = json_encode($body) ?: null;
+        $data = \json_encode($body) ?: null;
 
         return new Response(200, [], $data);
     }

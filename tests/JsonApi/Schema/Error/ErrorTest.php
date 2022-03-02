@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\Tests\JsonApi\Schema\Error;
+namespace BahaaAlhagar\Yang\Tests\JsonApi\Schema\Error;
 
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Schema\Error\Error;
-use WoohooLabs\Yang\JsonApi\Schema\Error\ErrorSource;
-use WoohooLabs\Yang\JsonApi\Schema\Link\ErrorLinks;
+use BahaaAlhagar\Yang\JsonApi\Schema\Error\Error;
+use BahaaAlhagar\Yang\JsonApi\Schema\Link\ErrorLinks;
+use BahaaAlhagar\Yang\JsonApi\Schema\Error\ErrorSource;
 
 class ErrorTest extends TestCase
 {

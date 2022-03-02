@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\Tests\JsonApi\Schema;
+namespace BahaaAlhagar\Yang\Tests\JsonApi\Schema;
 
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-use WoohooLabs\Yang\JsonApi\Schema\Document;
-use WoohooLabs\Yang\JsonApi\Schema\JsonApiObject;
-use WoohooLabs\Yang\JsonApi\Schema\Link\DocumentLinks;
+use BahaaAlhagar\Yang\JsonApi\Schema\Document;
+use BahaaAlhagar\Yang\JsonApi\Schema\JsonApiObject;
+use BahaaAlhagar\Yang\JsonApi\Schema\Link\DocumentLinks;
+use BahaaAlhagar\Yang\JsonApi\Exception\DocumentException;
 
 class DocumentTest extends TestCase
 {

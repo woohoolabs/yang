@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\Tests\JsonApi\Serializer;
+namespace BahaaAlhagar\Yang\Tests\JsonApi\Serializer;
 
 use GuzzleHttp\Psr7\Request;
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Exception\SerializationException;
-use WoohooLabs\Yang\JsonApi\Serializer\JsonSerializer;
-
-use function json_encode;
+use BahaaAlhagar\Yang\JsonApi\Serializer\JsonSerializer;
+use BahaaAlhagar\Yang\JsonApi\Exception\SerializationException;
 
 class JsonSerializerTest extends TestCase
 {
@@ -31,7 +29,7 @@ class JsonSerializerTest extends TestCase
         );
 
         $this->assertSame(
-            json_encode(
+            \json_encode(
                 [
                     "data" => [
                         "type" => "a",
@@ -61,7 +59,7 @@ class JsonSerializerTest extends TestCase
         );
 
         $this->assertSame(
-            json_encode(
+            \json_encode(
                 [
                     "data" => [
                         "type" => "a",
@@ -112,8 +110,9 @@ class JsonSerializerTest extends TestCase
     private function createRequest(?array $body = null): Request
     {
         $data = null;
+
         if ($body !== null) {
-            $data = json_encode($body) ?: null;
+            $data = \json_encode($body) ?: null;
         }
 
         return new Request("GET", "", [], $data);

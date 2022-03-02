@@ -2,13 +2,11 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\Tests\JsonApi\Response;
+namespace BahaaAlhagar\Yang\Tests\JsonApi\Response;
 
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Response\JsonApiResponse;
-
-use function json_encode;
+use BahaaAlhagar\Yang\JsonApi\Response\JsonApiResponse;
 
 class AbstractResponseTest extends TestCase
 {
@@ -169,7 +167,7 @@ class AbstractResponseTest extends TestCase
 
     private function createResponse(int $statusCode = 200, array $headers = [], ?array $body = null): JsonApiResponse
     {
-        $data = json_encode($body) ?: null;
+        $data = \json_encode($body) ?: null;
 
         return new JsonApiResponse(new Response($statusCode, $headers, $data));
     }

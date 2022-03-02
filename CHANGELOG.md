@@ -51,7 +51,7 @@ CHANGED:
 ADDED:
 
 - [#13](https://github.com/woohoolabs/yang/issues/13): `DocumentHydratorInterface` and `ClassDocumentHydrator` in order to fix some issues with the `HydratorInterface` and `ClassHydrator`
-- [#15](https://github.com/woohoolabs/yang/issues/15): New accessor and mutator methods for `WoohooLabs\Yang\JsonApi\Request\ResourceObject`: `id()`, `setId()`, `type()`, `setType()`,
+- [#15](https://github.com/woohoolabs/yang/issues/15): New accessor and mutator methods for `BahaaAlhagar\Yang\JsonApi\Request\ResourceObject`: `id()`, `setId()`, `type()`, `setType()`,
 `attributes()`, `relationships()`
 
 DEPRECATED:
@@ -90,11 +90,11 @@ CHANGED:
     - `Relationship::resourceBy()` throws an exception instead of returning null if the requested resource is missing
     - `ResourceObject::relationship()` throws an exception instead of returning null if the requested relationship is missing
 - Move errors, links, and resources to their own namespace (__BREAKING CHANGE__):
-    - `WoohooLabs\Yang\JsonApi\Schema\Error` to `WoohooLabs\Yang\JsonApi\Schema\Error\Error`
-    - `WoohooLabs\Yang\JsonApi\Schema\ErrorSource` to `WoohooLabs\Yang\JsonApi\Schema\Error\ErrorSource`
-    - `WoohooLabs\Yang\JsonApi\Schema\Link` to `WoohooLabs\Yang\JsonApi\Schema\Link\Link`
-    - `WoohooLabs\Yang\JsonApi\Schema\ResourceObjects` to `WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects`
-    - `WoohooLabs\Yang\JsonApi\Schema\ResourceObject` to `WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject`
+    - `BahaaAlhagar\Yang\JsonApi\Schema\Error` to `BahaaAlhagar\Yang\JsonApi\Schema\Error\Error`
+    - `BahaaAlhagar\Yang\JsonApi\Schema\ErrorSource` to `BahaaAlhagar\Yang\JsonApi\Schema\Error\ErrorSource`
+    - `BahaaAlhagar\Yang\JsonApi\Schema\Link` to `BahaaAlhagar\Yang\JsonApi\Schema\Link\Link`
+    - `BahaaAlhagar\Yang\JsonApi\Schema\ResourceObjects` to `BahaaAlhagar\Yang\JsonApi\Schema\Resource\ResourceObjects`
+    - `BahaaAlhagar\Yang\JsonApi\Schema\ResourceObject` to `BahaaAlhagar\Yang\JsonApi\Schema\Resource\ResourceObject`
 - Return separate classes instead of a general `Links` for the different types of links (__BREAKING CHANGE__):
     - `DocumentLinks` when using `Document::links()`
     - `ResourceLinks` when using `ResourceObject::links()`
@@ -135,11 +135,11 @@ CHANGED:
     - `Relationship::resourceBy()` throws an exception instead of returning null if the requested resource is missing
     - `ResourceObject::relationship()` throws an exception instead of returning null if the requested relationship is missing
 - Move errors, links, and resources to their own namespace (__BREAKING CHANGE__):
-    - `WoohooLabs\Yang\JsonApi\Schema\Error` to `WoohooLabs\Yang\JsonApi\Schema\Error\Error`
-    - `WoohooLabs\Yang\JsonApi\Schema\ErrorSource` to `WoohooLabs\Yang\JsonApi\Schema\Error\ErrorSource`
-    - `WoohooLabs\Yang\JsonApi\Schema\Link` to `WoohooLabs\Yang\JsonApi\Schema\Link\Link`
-    - `WoohooLabs\Yang\JsonApi\Schema\ResourceObjects` to `WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects`
-    - `WoohooLabs\Yang\JsonApi\Schema\ResourceObject` to `WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject`
+    - `BahaaAlhagar\Yang\JsonApi\Schema\Error` to `BahaaAlhagar\Yang\JsonApi\Schema\Error\Error`
+    - `BahaaAlhagar\Yang\JsonApi\Schema\ErrorSource` to `BahaaAlhagar\Yang\JsonApi\Schema\Error\ErrorSource`
+    - `BahaaAlhagar\Yang\JsonApi\Schema\Link` to `BahaaAlhagar\Yang\JsonApi\Schema\Link\Link`
+    - `BahaaAlhagar\Yang\JsonApi\Schema\ResourceObjects` to `BahaaAlhagar\Yang\JsonApi\Schema\Resource\ResourceObjects`
+    - `BahaaAlhagar\Yang\JsonApi\Schema\ResourceObject` to `BahaaAlhagar\Yang\JsonApi\Schema\Resource\ResourceObject`
 - Return separate classes instead of a general `Links` for the different types of links (__BREAKING CHANGE__):
     - `DocumentLinks` when using `Document::links()`
     - `ResourceLinks` when using `ResourceObject::links()`

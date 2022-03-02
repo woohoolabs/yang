@@ -5,8 +5,8 @@ require "../vendor/autoload.php";
 
 use GuzzleHttp\Psr7\Request;
 use Http\Adapter\Guzzle6\Client as GuzzleClient;
-use WoohooLabs\Yang\JsonApi\Client\JsonApiClient;
-use WoohooLabs\Yang\JsonApi\Request\JsonApiRequestBuilder;
+use BahaaAlhagar\Yang\JsonApi\Client\JsonApiClient;
+use BahaaAlhagar\Yang\JsonApi\Request\JsonApiRequestBuilder;
 
 // Create request
 $requestBuilder = new JsonApiRequestBuilder(new Request("GET", ""));

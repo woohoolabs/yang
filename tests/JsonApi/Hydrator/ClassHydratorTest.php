@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\Tests\JsonApi\Hydrator;
+namespace BahaaAlhagar\Yang\Tests\JsonApi\Hydrator;
 
-use PHPUnit\Framework\TestCase;
 use stdClass;
-use WoohooLabs\Yang\JsonApi\Hydrator\ClassHydrator;
-use WoohooLabs\Yang\JsonApi\Schema\Document;
+use PHPUnit\Framework\TestCase;
+use BahaaAlhagar\Yang\JsonApi\Schema\Document;
+use BahaaAlhagar\Yang\JsonApi\Hydrator\ClassHydrator;
 
 class ClassHydratorTest extends TestCase
 {

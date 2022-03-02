@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\Tests\JsonApi\Hydrator;
+namespace BahaaAlhagar\Yang\Tests\JsonApi\Hydrator;
 
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Hydrator\ClassDocumentHydrator;
-use WoohooLabs\Yang\JsonApi\Hydrator\DocumentHydratorInterface;
-use WoohooLabs\Yang\JsonApi\Schema\Document;
-use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
+use BahaaAlhagar\Yang\JsonApi\Schema\Document;
+use BahaaAlhagar\Yang\JsonApi\Hydrator\ClassDocumentHydrator;
+use BahaaAlhagar\Yang\JsonApi\Schema\Resource\ResourceObject;
+use BahaaAlhagar\Yang\JsonApi\Hydrator\DocumentHydratorInterface;
 
 class CustomHydratorTest extends TestCase
 {
@@ -34,7 +34,7 @@ class CustomHydratorTest extends TestCase
 
     private function getCustomHydrator(): DocumentHydratorInterface
     {
-        $hydrator = new class extends ClassDocumentHydrator{
+        $hydrator = new class extends ClassDocumentHydrator {
             protected function createObject(ResourceObject $resource): object
             {
                 $anonymousClass = new class {

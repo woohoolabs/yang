@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace WoohooLabs\Yang\Tests\JsonApi\Schema\Link;
+namespace BahaaAlhagar\Yang\Tests\JsonApi\Schema\Link;
 
 use PHPUnit\Framework\TestCase;
-use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
-use WoohooLabs\Yang\JsonApi\Schema\Link\DocumentLinks;
-use WoohooLabs\Yang\JsonApi\Schema\Link\Link;
+use BahaaAlhagar\Yang\JsonApi\Schema\Link\Link;
+use BahaaAlhagar\Yang\JsonApi\Schema\Link\DocumentLinks;
+use BahaaAlhagar\Yang\JsonApi\Exception\DocumentException;
 
 class AbstractLinksTest extends TestCase
 {
