@@ -5,7 +5,7 @@ parameters:
     ignoreErrors:
         - '#^Short ternary operator is not allowed\..*$#'
         - '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
-        - '#^Offset .* does not exist on array.*$#'
+        - '#no value type specified in iterable type array\.$#'
         -
             message: '#^Access to an undefined property object::.*$#'
             paths:
