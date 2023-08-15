@@ -16,11 +16,7 @@ class JsonApiClient
      * @var ClientInterface
      */
     private $client;
-
-    /**
-     * @var DeserializerInterface
-     */
-    private $deserializer;
+    private DeserializerInterface $deserializer;
 
     public function __construct(ClientInterface $client, ?DeserializerInterface $deserializer = null)
     {

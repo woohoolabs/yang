@@ -8,10 +8,8 @@ use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 
 abstract class AbstractLinks
 {
-    /**
-     * @var Link[]
-     */
-    protected $links;
+    /** @param array<string, Link> $links */
+    protected array $links;
 
     /**
      * @param Link[] $links

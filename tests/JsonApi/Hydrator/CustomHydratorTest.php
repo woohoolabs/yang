@@ -28,6 +28,7 @@ class CustomHydratorTest extends TestCase
         $hydrator = $this->getCustomHydrator();
         $object = $hydrator->hydrateSingleResource($document);
 
+        assert($object instanceof \stdClass);
         $this->assertEquals("a", $object->type);
         $this->assertEquals("1", $object->id);
     }
@@ -38,6 +39,9 @@ class CustomHydratorTest extends TestCase
             protected function createObject(ResourceObject $resource): object
             {
                 $anonymousClass = new class {
+                    public string $id;
+                    public string $type;
+
                     //class is empty on purpose
                 };
 

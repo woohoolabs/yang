@@ -19,36 +19,18 @@ use function reset;
 
 final class Relationship
 {
-    /**
-     * @var bool|null
-     */
-    private $isToOneRelationship;
+    private ?bool $isToOneRelationship;
+    private string $name;
+    /** @var array<int|string, mixed> */
+    private array $meta;
+    private RelationshipLinks $links;
+    private array $resourceMap;
+    private ResourceObjects $resources;
 
     /**
-     * @var string
+     * @param array<int|string, mixed> $meta
+     * @param array<int, array<string, mixed>> $resourceMap
      */
-    private $name;
-
-    /**
-     * @var array
-     */
-    private $meta;
-
-    /**
-     * @var RelationshipLinks
-     */
-    private $links;
-
-    /**
-     * @var array
-     */
-    private $resourceMap = [];
-
-    /**
-     * @var ResourceObjects
-     */
-    private $resources;
-
     public function __construct(
         string $name,
         array $meta,

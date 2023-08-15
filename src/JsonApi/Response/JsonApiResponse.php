@@ -15,14 +15,9 @@ use function is_array;
 
 class JsonApiResponse extends AbstractResponse
 {
-    /**
-     * @var DeserializerInterface
-     */
-    private $deserializer;
+    private DeserializerInterface $deserializer;
 
-    /**
-     * @var Document|false|null
-     */
+    /** @var Document|false|null */
     private $document = false;
 
     public function __construct(ResponseInterface $response, ?DeserializerInterface $deserializer = null)

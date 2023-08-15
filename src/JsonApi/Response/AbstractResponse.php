@@ -9,10 +9,7 @@ use Psr\Http\Message\StreamInterface;
 
 abstract class AbstractResponse implements ResponseInterface
 {
-    /**
-     * @var ResponseInterface
-     */
-    protected $response;
+    protected ResponseInterface $response;
 
     public function __construct(ResponseInterface $response)
     {
@@ -28,7 +25,7 @@ abstract class AbstractResponse implements ResponseInterface
      * @param string $version
      * @return $this
      */
-    public function withProtocolVersion($version)
+    public function withProtocolVersion($version): ResponseInterface
     {
         $response = clone $this;
         $response->response = $this->response->withProtocolVersion($version);
@@ -74,7 +71,7 @@ abstract class AbstractResponse implements ResponseInterface
      * @param string|string[] $value
      * @return $this
      */
-    public function withHeader($name, $value)
+    public function withHeader($name, $value): ResponseInterface
     {
         $response = clone $this;
         $response->response = $this->response->withHeader($name, $value);
@@ -87,7 +84,7 @@ abstract class AbstractResponse implements ResponseInterface
      * @param string|string[] $value
      * @return $this
      */
-    public function withAddedHeader($name, $value)
+    public function withAddedHeader($name, $value): ResponseInterface
     {
         $response = clone $this;
         $response->response = $this->response->withAddedHeader($name, $value);
@@ -99,7 +96,7 @@ abstract class AbstractResponse implements ResponseInterface
      * @param string $name
      * @return $this
      */
-    public function withoutHeader($name)
+    public function withoutHeader($name): ResponseInterface
     {
         $response = clone $this;
         $response->response = $this->response->withoutHeader($name);
@@ -115,7 +112,7 @@ abstract class AbstractResponse implements ResponseInterface
     /**
      * @return $this
      */
-    public function withBody(StreamInterface $body)
+    public function withBody(StreamInterface $body): ResponseInterface
     {
         $response = clone $this;
         $response->response = $this->response->withBody($body);
@@ -133,7 +130,7 @@ abstract class AbstractResponse implements ResponseInterface
      * @param string $reasonPhrase
      * @return $this
      */
-    public function withStatus($code, $reasonPhrase = "")
+    public function withStatus($code, $reasonPhrase = ""): ResponseInterface
     {
         $response = clone $this;
         $response->response = $this->response->withStatus($code, $reasonPhrase);

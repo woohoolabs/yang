@@ -18,45 +18,20 @@ use function parse_url;
 
 class JsonApiRequestBuilder
 {
-    /** @var RequestInterface */
-    private $request;
-
-    /** @var SerializerInterface */
-    private $serializer;
-
-    /** @var string */
-    private $method;
-
-    /** @var string */
-    private $protocolVersion;
-
-    /** @var string */
-    private $scheme;
-
-    /** @var string */
-    private $host;
-
-    /** @var int */
-    private $port;
-
-    /** @var string */
-    private $path;
-
-    /** @var array */
-    private $queryString;
-
-    /** @var array */
-    private $headers;
-
+    private RequestInterface $request;
+    private SerializerInterface $serializer;
+    private string $method;
+    private string $protocolVersion;
+    private string $scheme;
+    private string $host;
+    private ?int $port;
+    private string $path;
+    private array $queryString;
+    private array $headers;
     /** @var string[] */
-    private $appliedProfiles;
-
+    private array $appliedProfiles;
     /** @var string[] */
-    private $requestedProfiles;
-
-    /** @var string[] */
-    private $requiredProfiles;
-
+    private array $requestedProfiles;
     /** @var mixed */
     private $body;
 
@@ -73,12 +48,12 @@ class JsonApiRequestBuilder
         $this->protocolVersion = "";
         $this->scheme = "http";
         $this->host = "";
+        $this->port = null;
         $this->path = "";
         $this->queryString = [];
         $this->headers = [];
         $this->appliedProfiles = [];
         $this->requestedProfiles = [];
-        $this->requiredProfiles = [];
     }
 
     public function fetch(): JsonApiRequestBuilder
@@ -134,23 +109,23 @@ class JsonApiRequestBuilder
         }
 
         if ($this->isBlankKey($parsedUri, "scheme") === false) {
-            $this->scheme = $parsedUri["scheme"];
+            $this->scheme = $parsedUri["scheme"] ?? "";
         }
 
         if ($this->isBlankKey($parsedUri, "port") === false) {
-            $this->port = $parsedUri["port"];
+            $this->port = $parsedUri["port"] ?? null;
         }
 
         if ($this->isBlankKey($parsedUri, "host") === false) {
-            $this->host = $parsedUri["host"];
+            $this->host = $parsedUri["host"] ?? "";
         }
 
         if ($this->isBlankKey($parsedUri, "path") === false) {
-            $this->path = $parsedUri["path"];
+            $this->path = $parsedUri["path"] ?? "";
         }
 
         if ($this->isBlankKey($parsedUri, "query") === false) {
-            parse_str($parsedUri["query"], $this->queryString);
+            parse_str($parsedUri["query"] ?? "", $this->queryString);
         }
 
         return $this;
@@ -170,7 +145,7 @@ class JsonApiRequestBuilder
         return $this;
     }
 
-    public function setUriPort(int $port): JsonApiRequestBuilder
+    public function setUriPort(?int $port): JsonApiRequestBuilder
     {
         $this->port = $port;
 
@@ -185,7 +160,7 @@ class JsonApiRequestBuilder
     }
 
     /**
-     * @param string|array $value
+     * @param string|array<int|string, mixed> $value
      */
     public function setUriQueryParam(string $name, $value): JsonApiRequestBuilder
     {

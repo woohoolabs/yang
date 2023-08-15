@@ -12,10 +12,8 @@ use function is_string;
 
 final class ErrorLinks extends AbstractLinks
 {
-    /**
-     * @var Link[]
-     */
-    private $types;
+    /** @var array<string, Link> */
+    private array $types;
 
     /**
      * @param Link[] $links

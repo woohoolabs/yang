@@ -10,16 +10,13 @@ use function json_decode;
 
 final class JsonDeserializer implements DeserializerInterface
 {
-    /**
-     * @var int
-     */
-    private $options;
+    private int $options;
+    /** @var int<1, max> */
+    private int $depth;
 
     /**
-     * @var int
+     * @param int<1, max> $depth
      */
-    private $depth;
-
     public function __construct(int $options = 0, int $depth = 512)
     {
         $this->options = $options;

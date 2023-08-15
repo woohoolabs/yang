@@ -15,36 +15,17 @@ use function is_string;
 
 final class ResourceObject
 {
-    /**
-     * @var string
-     */
-    private $type;
+    private string $type;
+    private string $id;
+    /** @var array<int|string, mixed> */
+    private array $meta;
+    private ResourceLinks $links;
+    /** @var array<string, mixed> */
+    private array $attributes;
+    /** @var array<string, Relationship> */
+    private array $relationships;
 
     /**
-     * @var string
-     */
-    private $id;
-
-    /**
-     * @var array
-     */
-    private $meta;
-
-    /**
-     * @var ResourceLinks
-     */
-    private $links;
-
-    /**
-     * @var array
-     */
-    private $attributes;
-
-    /**
-     * @var Relationship[]
-     */
-    private $relationships;
-
     /**
      * @param Relationship[] $relationships
      */

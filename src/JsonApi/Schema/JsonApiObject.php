@@ -9,15 +9,9 @@ use function is_string;
 
 final class JsonApiObject
 {
-    /**
-     * @var string
-     */
-    private $version;
-
-    /**
-     * @var array
-     */
-    private $meta;
+    private string $version;
+    /** @var array<int|string, mixed> */
+    private array $meta;
 
     public function __construct(string $version, array $meta)
     {

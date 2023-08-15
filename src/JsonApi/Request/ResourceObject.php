@@ -6,25 +6,12 @@ namespace WoohooLabs\Yang\JsonApi\Request;
 
 class ResourceObject
 {
-    /**
-     * @var string
-     */
-    private $type;
-
-    /**
-     * @var string
-     */
-    private $id;
-
-    /**
-     * @var array
-     */
-    private $attributes;
-
-    /**
-     * @var RelationshipInterface[]
-     */
-    private $relationships;
+    private string $type;
+    private string $id;
+    /** @var array<string, mixed> */
+    private array $attributes;
+    /** @var array<string, RelationshipInterface> */
+    private array $relationships;
 
     public static function create(string $type, string $id = ""): ResourceObject
     {
