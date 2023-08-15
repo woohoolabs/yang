@@ -25,10 +25,7 @@ final class ResourceObject
     /** @var array<string, Relationship> */
     private array $relationships;
 
-    /**
-    /**
-     * @param Relationship[] $relationships
-     */
+    /** @param Relationship[] $relationships */
     public function __construct(
         string $type,
         string $id,

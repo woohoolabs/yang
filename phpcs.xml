@@ -30,9 +30,9 @@
     <!-- Require presence of declare(strict_types=1) -->
     <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
         <properties>
-            <property name="newlinesCountBetweenOpenTagAndDeclare" value="2"/>
+            <property name="linesCountBeforeDeclare" value="1"/>
             <property name="spacesCountAroundEqualsSign" value="0"/>
-            <property name="newlinesCountAfterDeclare" value="2"/>
+            <property name="linesCountAfterDeclare" value="1"/>
         </properties>
     </rule>
 </ruleset>

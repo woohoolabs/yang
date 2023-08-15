@@ -12,10 +12,7 @@ use WoohooLabs\Yang\JsonApi\Serializer\JsonDeserializer;
 
 class JsonApiClient
 {
-    /**
-     * @var ClientInterface
-     */
-    private $client;
+    private ClientInterface $client;
     private DeserializerInterface $deserializer;
 
     public function __construct(ClientInterface $client, ?DeserializerInterface $deserializer = null)
