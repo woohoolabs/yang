@@ -109,23 +109,23 @@ class JsonApiRequestBuilder
         }
 
         if ($this->isBlankKey($parsedUri, "scheme") === false) {
-            $this->scheme = $parsedUri["scheme"];
+            $this->scheme = $parsedUri["scheme"] ?? "";
         }
 
         if ($this->isBlankKey($parsedUri, "port") === false) {
-            $this->port = $parsedUri["port"];
+            $this->port = $parsedUri["port"] ?? null;
         }
 
         if ($this->isBlankKey($parsedUri, "host") === false) {
-            $this->host = $parsedUri["host"];
+            $this->host = $parsedUri["host"] ?? "";
         }
 
         if ($this->isBlankKey($parsedUri, "path") === false) {
-            $this->path = $parsedUri["path"];
+            $this->path = $parsedUri["path"] ?? "";
         }
 
         if ($this->isBlankKey($parsedUri, "query") === false) {
-            parse_str($parsedUri["query"], $this->queryString);
+            parse_str($parsedUri["query"] ?? "", $this->queryString);
         }
 
         return $this;
@@ -145,7 +145,7 @@ class JsonApiRequestBuilder
         return $this;
     }
 
-    public function setUriPort(int $port): JsonApiRequestBuilder
+    public function setUriPort(?int $port): JsonApiRequestBuilder
     {
         $this->port = $port;
 
@@ -160,7 +160,7 @@ class JsonApiRequestBuilder
     }
 
     /**
-     * @param string|array $value
+     * @param string|array<int|string, mixed> $value
      */
     public function setUriQueryParam(string $name, $value): JsonApiRequestBuilder
     {

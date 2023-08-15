@@ -17,15 +17,15 @@ final class ResourceObject
 {
     private string $type;
     private string $id;
+    /** @var array<int|string, mixed> */
     private array $meta;
     private ResourceLinks $links;
+    /** @var array<string, mixed> */
     private array $attributes;
-    /** @var Relationship[] */
+    /** @var array<string, Relationship> */
     private array $relationships;
 
-    /**
-     * @param Relationship[] $relationships
-     */
+    /** @param Relationship[] $relationships */
     public function __construct(
         string $type,
         string $id,

@@ -21,11 +21,16 @@ final class Relationship
 {
     private ?bool $isToOneRelationship;
     private string $name;
+    /** @var array<int|string, mixed> */
     private array $meta;
     private RelationshipLinks $links;
-    private array $resourceMap = [];
+    private array $resourceMap;
     private ResourceObjects $resources;
 
+    /**
+     * @param array<int|string, mixed> $meta
+     * @param array<int, array<string, mixed>> $resourceMap
+     */
     public function __construct(
         string $name,
         array $meta,

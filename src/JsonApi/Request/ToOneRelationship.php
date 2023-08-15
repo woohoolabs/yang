@@ -8,6 +8,7 @@ final class ToOneRelationship implements RelationshipInterface
 {
     private string $type;
     private string $id;
+    /** @var array<int|string, mixed> */
     private array $meta;
 
     public static function create(string $type, string $id, array $meta = []): ToOneRelationship

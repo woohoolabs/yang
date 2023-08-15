@@ -15,7 +15,7 @@ test:  ## Run PHPUnit for the unit tests
 	docker-compose run --rm --no-deps yang-php /bin/bash -c "cd /var/www && ./vendor/bin/phpunit $(if $(TEST),$(TEST),)"
 
 phpstan: ## Run PHPStan to perform static analysis
-	docker-compose run --rm --no-deps yang-php /bin/bash -c "cd /var/www && ./vendor/bin/phpstan analyse --level 8 src tests"
+	docker-compose run --rm --no-deps yang-php /bin/bash -c "cd /var/www && ./vendor/bin/phpstan analyse --level max src tests"
 
 cs: ## Run PHP CodeSniffer to detect issues with coding style
 	docker-compose run --rm --no-deps yang-php /var/www/vendor/bin/phpcs --standard=/var/www/phpcs.xml

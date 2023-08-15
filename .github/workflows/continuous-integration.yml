@@ -14,10 +14,10 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@master
 
-      - name: "Install PHP 8.0"
+      - name: "Install PHP 8.2"
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.0"
+          php-version: "8.2"
           extensions: mbstring, xml
           coverage: none
           tools: composer:v2
@@ -51,10 +51,10 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@master
 
-      - name: "Install PHP 8.0"
+      - name: "Install PHP 8.2"
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.0"
+          php-version: "8.2"
           extensions: mbstring, xml
           coverage: none
           tools: composer:v2
@@ -74,7 +74,7 @@ jobs:
         run: composer install --no-interaction --no-progress --no-plugins
 
       - name: "Run phpstan/phpstan"
-        run: vendor/bin/phpstan analyse --level 8 src tests
+        run: php vendor/bin/phpstan analyse --level max src tests
 
   tests:
     name: "Tests"
@@ -87,6 +87,7 @@ jobs:
           - "7.4"
           - "8.0"
           - "8.1"
+          - "8.2"
 
         dependencies:
           - lowest
@@ -134,10 +135,10 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@master
 
-      - name: "Install PHP 8.0"
+      - name: "Install PHP 8.2"
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.0"
+          php-version: "8.2"
           extensions: mbstring, xml
           coverage: xdebug:v3
           tools: composer:v2

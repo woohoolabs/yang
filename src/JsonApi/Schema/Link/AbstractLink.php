@@ -7,6 +7,7 @@ namespace WoohooLabs\Yang\JsonApi\Schema\Link;
 abstract class AbstractLink
 {
     private string $href;
+    /** @var array<int|string, mixed> */
     private array $meta;
 
     public function __construct(string $href, array $meta = [])

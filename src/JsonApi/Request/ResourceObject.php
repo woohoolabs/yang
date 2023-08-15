@@ -8,8 +8,9 @@ class ResourceObject
 {
     private string $type;
     private string $id;
+    /** @var array<string, mixed> */
     private array $attributes;
-    /** @var RelationshipInterface[] */
+    /** @var array<string, RelationshipInterface> */
     private array $relationships;
 
     public static function create(string $type, string $id = ""): ResourceObject

@@ -53,10 +53,7 @@ abstract class AbstractClassDocumentHydrator implements DocumentHydratorInterfac
         return $this->hydratePrimaryResources($document);
     }
 
-    /**
-     * @return object
-     */
-    public function hydrateSingleResource(Document $document)
+    public function hydrateSingleResource(Document $document): object
     {
         if ($document->isSingleResourceDocument() === false) {
             throw new DocumentException(

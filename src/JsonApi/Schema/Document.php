@@ -18,15 +18,14 @@ use function is_array;
 final class Document
 {
     private JsonApiObject $jsonApi;
+    /** @var array<int|string, mixed> */
     private array $meta;
     private DocumentLinks $links;
     private ResourceObjects $resources;
-    /** @var Error[] */
+    /** @var array<int, Error> */
     private array $errors;
 
-    /**
-     * @param Error[] $errors
-     */
+    /** @param array<int, Error> $errors */
     public function __construct(JsonApiObject $jsonApi, array $meta, DocumentLinks $links, ResourceObjects $resources, array $errors)
     {
         $this->jsonApi = $jsonApi;
