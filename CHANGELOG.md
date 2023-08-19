@@ -1,14 +1,13 @@
-## 3.0.0 - unreleased
-
-ADDED:
+## 3.0.0-rc1 - 2023-08-19
 
 CHANGED:
 
-DEPRECATED:
+- [#33](https://github.com/woohoolabs/yang/pull/33): Use `Psr\Http\Client\ClientInterface` as type
+- Declare nearly all property types
 
 REMOVED:
 
-FIXED:
+- Support for php-http/httplug v1
 
 ## 3.0.0-beta1 - 2021-10-23
 
