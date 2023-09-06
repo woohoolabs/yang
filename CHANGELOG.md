@@ -1,3 +1,21 @@
+## 3.0.0 - 2023-09-06
+
+ADDED:
+- Support for PSR-18
+
+CHANGED:
+
+- Increased minimum PHP version requirement to 7.4
+- Declare nearly all property types
+- [#34](https://github.com/woohoolabs/yang/pull/34): `JsonApiClient` implements PSR-18's `ClientInterface`
+- [#33](https://github.com/woohoolabs/yang/pull/33): Use `Psr\Http\Client\ClientInterface` as type
+
+REMOVED:
+
+- Support for php-http/httplug v1
+- The deprecated ClassHydrator
+- The deprecated HydratorInterface
+
 ## 3.0.0-rc1 - 2023-08-19
 
 CHANGED:
