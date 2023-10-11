@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace WoohooLabs\Yang\JsonApi\Hydrator;
 
-use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Document;
 use WoohooLabs\Yang\JsonApi\Schema\Relationship;
+use WoohooLabs\Yang\JsonApi\Exception\DocumentException;
 use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObject;
+use WoohooLabs\Yang\JsonApi\Schema\Resource\ResourceObjects;
 
 abstract class AbstractClassDocumentHydrator implements DocumentHydratorInterface
 {
@@ -115,7 +116,11 @@ abstract class AbstractClassDocumentHydrator implements DocumentHydratorInterfac
                 }
 
                 if ($object === null) {
-                    continue;
+                    if (isset($link["type"], $link["id"])) {
+                        $relatedResource = ResourceObject::fromArray($link, new ResourceObjects([], [], $relationship->isToOneRelationship()));
+
+                        $object = $this->hydrateResource($relatedResource, $document, $resourceMap);
+                    }
                 }
 
                 $result = $this->hydrateResourceRelationship($result, $relationship, $name, $object);
